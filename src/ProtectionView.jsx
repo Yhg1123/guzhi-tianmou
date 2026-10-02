@@ -1,0 +1,19 @@
+import { useMemo } from "react";
+import { Download, ShieldCheck, CircleAlert, MapPin } from "lucide-react";
+import { HeritageMap } from "./HeritageMap.jsx";
+import { containingAreas, investigationBuffer } from "./geodata.js";
+import { download } from "./project.js";
+
+export function ProtectionView({ sites, selectedSite, project, onSelectSite, radius, setRadius, onData, onNote }) {
+  const referenceArea = useMemo(() => investigationBuffer(selectedSite, radius), [selectedSite, radius]);
+  const boundaries = containingAreas(selectedSite, project.datasets.boundaries);
+  const hazards = containingAreas(selectedSite, project.datasets.hazards);
+  return <div className="page-scroll protection-page"><div className="page-title"><div><span className="eyebrow">CONSERVATION</span><h1>保护评估</h1></div><button className="button" disabled={!selectedSite} onClick={() => download("保护核查-记录.json", { site: selectedSite, sources: project.sources, boundaries, exposureAreas: hazards, referenceArea, note: project.notes[selectedSite.id] || "", generatedAt: new Date().toISOString(), limitations: "仅核查点位是否落入已导入范围，不代表遗址本体相交结果或法定审批结论。" })}><Download size={16} />导出核查记录</button></div>
+    <div className="notice warning"><CircleAlert size={17} />点位级初筛 · 调查参考区不是法定保护范围，未落入已导入影响区也不代表安全。</div>
+    <div className="protection-grid"><section className="protection-map"><HeritageMap sites={sites} selectedSite={selectedSite} boundaries={project.datasets.boundaries} hazards={project.datasets.hazards} referenceArea={referenceArea} layers={{ points: true, boundaries: true, hazards: true }} onSelectSite={onSelectSite} /><div className="map-legend"><span><i className="legend-dot green" />保护范围</span><span><i className="legend-dot amber" />影响区</span><span><i className="legend-dot blue" />调查参考区</span></div></section><aside className="protection-inspector"><div className="inspector-heading"><ShieldCheck size={20} /><h2>保护核查</h2></div><label className="field">当前遗址<select value={selectedSite?.id || ""} onChange={(e) => onSelectSite(e.target.value)} aria-label="保护核查遗址">{sites.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}</select></label>
+      <div className="check-result"><span>正式保护范围</span><strong>{!selectedSite ? "无选中遗址" : boundaries === null ? "尚未导入范围" : boundaries.length ? `点位落入 ${boundaries.length} 个范围` : "点位未落入已导入范围"}</strong>{boundaries?.map((name, i) => <small key={i}>{name}</small>)}</div><div className="check-result"><span>灾害 / 建设影响区</span><strong className={hazards?.length ? "warning-text" : ""}>{!selectedSite ? "无选中遗址" : hazards === null ? "尚未导入影响区" : hazards.length ? `点位落入 ${hazards.length} 个影响区` : "点位未落入已导入影响区"}</strong>{hazards?.map((name, i) => <small key={i}>{name}</small>)}</div>
+      <button className="text-button" onClick={onData}>管理边界与影响区 <MapPin size={15} /></button><div className="radius-control"><label htmlFor="radius">调查参考半径<strong>{radius.toLocaleString()} m</strong></label><input id="radius" type="range" min="50" max="2000" step="50" value={radius} onChange={(e) => setRadius(Number(e.target.value))} /><div><small>50 m</small><small>2,000 m</small></div><button className="button full-width" disabled={!referenceArea} onClick={() => download("调查参考区-非法定边界.geojson", { type: "FeatureCollection", features: [referenceArea] })}><Download size={15} />导出参考范围</button></div>
+    </aside></div>
+    <section className="section two-column"><div><h2>现场核查笔记</h2><textarea maxLength={5000} disabled={!selectedSite} aria-label="现场核查笔记" placeholder="记录点位精度、现场变化、数据疑点与待核验事项…" value={project.notes[selectedSite?.id] || ""} onChange={(e) => onNote(selectedSite.id, e.target.value)} /><small className="muted">随项目保存在此设备 · {selectedSite?.name || "未选中遗址"}</small></div><div><h2>证据边界</h2><ul className="plain-list"><li>点位判断不能代替遗址本体边界的相交分析。</li><li>风险等级需以相应主管部门发布的数据和技术依据为准。</li><li>三维影像用于记录现状；尺寸与形变监测需控制点、尺度标定和精度检验。</li></ul></div></section>
+  </div>;
+}

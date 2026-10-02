@@ -1,0 +1,23 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "示例遗址 A（虚构）",
+        "period": "示例时期",
+        "site_type": "示例类型",
+        "location": "仅用于测试导入",
+        "source": "虚构测试记录",
+        "is_demo": true,
+        "elevation_m": 420,
+        "slope_deg": 3.5,
+        "aspect_deg": 180,
+        "tpi": 8.2,
+        "terrain_source": "虚构地形值，仅用于验证字段；实际使用需填写DEM来源、分辨率、垂直基准和TPI邻域",
+        "precision_m": null
+      },
+      "geometry": { "type": "Point", "coordinates": [108.95, 34.28] }
+    }
+  ]
+}

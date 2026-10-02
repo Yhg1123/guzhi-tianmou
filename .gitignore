@@ -1,0 +1,30 @@
+node_modules/
+dist/
+coverage/
+.vite/
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Local verification artifacts and design handoff exports
+qa/
+figma-handoff/
+design-comparison.png
+implementation-desktop.png
+design-qa.md
+
+# User-imported reconstruction assets
+*.splat
+*.ksplat
+*.ply
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log

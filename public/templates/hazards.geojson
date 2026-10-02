@@ -1,0 +1,4 @@
+{
+  "type": "FeatureCollection",
+  "features": [{ "type": "Feature", "properties": { "name": "虚构影响区（格式模板）", "category": "格式示例，不代表真实灾害", "source": "虚构测试数据" }, "geometry": { "type": "Polygon", "coordinates": [[[108.945, 34.275], [108.955, 34.275], [108.955, 34.285], [108.945, 34.285], [108.945, 34.275]]] } }]
+}

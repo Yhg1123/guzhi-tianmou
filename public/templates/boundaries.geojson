@@ -1,0 +1,4 @@
+{
+  "type": "FeatureCollection",
+  "features": [{ "type": "Feature", "properties": { "name": "虚构保护范围（格式模板，非法定边界）", "category": "格式示例", "source": "虚构测试数据" }, "geometry": { "type": "Polygon", "coordinates": [[[108.94, 34.27], [108.96, 34.27], [108.96, 34.29], [108.94, 34.29], [108.94, 34.27]]] } }]
+}

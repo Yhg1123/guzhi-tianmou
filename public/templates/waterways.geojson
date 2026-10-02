@@ -1,0 +1,13 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "示例水线（虚构）" },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [[108.90, 34.29], [109.00, 34.29]]
+      }
+    }
+  ]
+}

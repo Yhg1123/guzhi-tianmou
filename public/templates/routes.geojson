@@ -1,0 +1,4 @@
+{
+  "type": "FeatureCollection",
+  "features": [{ "type": "Feature", "properties": { "name": "虚构古道（格式模板）", "period": "示例时期" }, "geometry": { "type": "LineString", "coordinates": [[108.94, 34.27], [108.96, 34.28], [108.97, 34.30]] } }]
+}
