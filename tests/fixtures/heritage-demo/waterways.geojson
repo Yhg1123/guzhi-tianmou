@@ -1,0 +1,28 @@
+{
+  "type": "FeatureCollection",
+  "name": "SYNTHETIC-TEST-ONLY",
+  "fixture_notice": "仅用于软件测试的虚构数据：名称、位置、时期、地形值、范围、图片和模型均不对应真实遗址或调查，不可用于研究结论、法定保护判断或摄影测量。",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "DEMO-WATER",
+      "properties": {
+        "name": "【虚构】同期水系样本",
+        "period": "虚构时期甲"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            109.995,
+            34.98
+          ],
+          [
+            109.995,
+            35.04
+          ]
+        ]
+      }
+    }
+  ]
+}

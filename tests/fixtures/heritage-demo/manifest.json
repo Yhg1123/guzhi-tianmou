@@ -1,0 +1,81 @@
+{
+  "notice": "仅用于软件测试的虚构数据：名称、位置、时期、地形值、范围、图片和模型均不对应真实遗址或调查，不可用于研究结论、法定保护判断或摄影测量。",
+  "model": {
+    "records": 256,
+    "bytes": 8192,
+    "geometryEvidence": "Standard fixture byte-center decoding + inspectModelGeometry; NOT Gaussian renderer/parser integration",
+    "source": "src/sampleSplat.js#createSampleSplat",
+    "seed": "deterministic equidistant record subset"
+  },
+  "photos": "The three PNGs are synthetic file-picker assets only. Backups retain their metadata, not image originals.",
+  "files": {
+    "sites-initial.geojson": {
+      "bytes": 2200,
+      "sha256": "813051b23f34cddcfec2a78cc3720566c079316b84223b5a0c127be5c0368c21"
+    },
+    "sites-addition.geojson": {
+      "bytes": 901,
+      "sha256": "f55c2b51bb4e3d30a052839782f945858106e51d0fbcef9f4e9eafa7873f240d"
+    },
+    "sites-reordered-corrected.geojson": {
+      "bytes": 2797,
+      "sha256": "e289d5b954cf0c38eaa72a32b854548bf600edd17de22cad0d5569c34f2aa997"
+    },
+    "sites-duplicate-ids.geojson": {
+      "bytes": 1565,
+      "sha256": "251ac94dbb9c6b13b10b661e828747ee6067bb4834c7993fbf4070c5423f25fd"
+    },
+    "sites-invalid-coordinates.geojson": {
+      "bytes": 1476,
+      "sha256": "9135b98c99695402830d0c7c3870bd7430775d976715cd84073dde06c7ca1f89"
+    },
+    "sites-mixed-invalid.geojson": {
+      "bytes": 2058,
+      "sha256": "f8d91edcd6d01b0c2027eff0029389ed3349aa4235d66c314123f27dc6967c94"
+    },
+    "waterways.geojson": {
+      "bytes": 713,
+      "sha256": "873c9e6f55630ab416da9b51d4adb3dfaa40bfff482463ef97741a59eb21536a"
+    },
+    "routes.geojson": {
+      "bytes": 713,
+      "sha256": "a728c14624a4135ee6aea1eff79860778bec74c7c8c1a848531b3869e69fbafe"
+    },
+    "boundaries.geojson": {
+      "bytes": 1211,
+      "sha256": "1690be080c4041111cf1523db32d5b136f9389945e6460cef6ca16d94e8a2ac0"
+    },
+    "hazards.geojson": {
+      "bytes": 1224,
+      "sha256": "bdb0c87d12fa8bc950d759bb38e6a9de0d236779f4fe0b7ed7d5140f9350f10c"
+    },
+    "sources.json": {
+      "bytes": 2386,
+      "sha256": "434da7dc4c32734b321590d0a6c2b36cd73f824f933eb72894ebdee19d0a9de7"
+    },
+    "synthetic-calibration.splat": {
+      "bytes": 8192,
+      "sha256": "081ff8b00f23688e0ad622849ee40e43fc39be656ca213914d89e97a29759339"
+    },
+    "FAKE-NOT-A-PHOTO-01.png": {
+      "bytes": 185,
+      "sha256": "a259fe9377c5b4dbe08f14a2d407a7085ccdcc1c6feb22daf10e0815ca993491"
+    },
+    "FAKE-NOT-A-PHOTO-02.png": {
+      "bytes": 183,
+      "sha256": "ada894f01826511c7384ea034261e82eb423bb19c19b8204f3e2aa02c95ee226"
+    },
+    "FAKE-NOT-A-PHOTO-03.png": {
+      "bytes": 184,
+      "sha256": "691f0f83c3ed2a6c1278b4cd3ca242e00f129cfc9970e885edd50b6223c9c780"
+    },
+    "fake-photo-metadata.json": {
+      "bytes": 833,
+      "sha256": "968f9b74f8777e3a24d26033e8a8d5703b4f3f0b0c4c7d6f57c5ba4e5e107315"
+    },
+    "demo-full.heritage": {
+      "bytes": 15352,
+      "sha256": "6b2bea91352bc6cb62befdbbb0c6efd43f49bec19ea3677d4d2bb38e4b53c557"
+    }
+  }
+}

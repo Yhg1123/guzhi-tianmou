@@ -1,0 +1,47 @@
+{
+  "sites": {
+    "name": "sites-initial.geojson",
+    "count": 3,
+    "timing": "unknown",
+    "period": "虚构时期甲",
+    "citation": "仅用于软件测试的虚构数据：名称、位置、时期、地形值、范围、图片和模型均不对应真实遗址或调查，不可用于研究结论、法定保护判断或摄影测量。",
+    "importedAt": "2026-10-02T00:00:00.000Z",
+    "sha256": "813051b23f34cddcfec2a78cc3720566c079316b84223b5a0c127be5c0368c21"
+  },
+  "waterways": {
+    "name": "waterways.geojson",
+    "count": 1,
+    "timing": "historical",
+    "period": "虚构时期甲",
+    "citation": "仅用于软件测试的虚构数据：名称、位置、时期、地形值、范围、图片和模型均不对应真实遗址或调查，不可用于研究结论、法定保护判断或摄影测量。",
+    "importedAt": "2026-10-02T00:00:00.000Z",
+    "sha256": "873c9e6f55630ab416da9b51d4adb3dfaa40bfff482463ef97741a59eb21536a"
+  },
+  "routes": {
+    "name": "routes.geojson",
+    "count": 1,
+    "timing": "historical",
+    "period": "虚构时期甲",
+    "citation": "仅用于软件测试的虚构数据：名称、位置、时期、地形值、范围、图片和模型均不对应真实遗址或调查，不可用于研究结论、法定保护判断或摄影测量。",
+    "importedAt": "2026-10-02T00:00:00.000Z",
+    "sha256": "a728c14624a4135ee6aea1eff79860778bec74c7c8c1a848531b3869e69fbafe"
+  },
+  "boundaries": {
+    "name": "boundaries.geojson",
+    "count": 1,
+    "timing": "present",
+    "period": "虚构时期甲",
+    "citation": "仅用于软件测试的虚构数据：名称、位置、时期、地形值、范围、图片和模型均不对应真实遗址或调查，不可用于研究结论、法定保护判断或摄影测量。",
+    "importedAt": "2026-10-02T00:00:00.000Z",
+    "sha256": "1690be080c4041111cf1523db32d5b136f9389945e6460cef6ca16d94e8a2ac0"
+  },
+  "hazards": {
+    "name": "hazards.geojson",
+    "count": 1,
+    "timing": "present",
+    "period": "虚构时期甲",
+    "citation": "仅用于软件测试的虚构数据：名称、位置、时期、地形值、范围、图片和模型均不对应真实遗址或调查，不可用于研究结论、法定保护判断或摄影测量。",
+    "importedAt": "2026-10-02T00:00:00.000Z",
+    "sha256": "bdb0c87d12fa8bc950d759bb38e6a9de0d236779f4fe0b7ed7d5140f9350f10c"
+  }
+}

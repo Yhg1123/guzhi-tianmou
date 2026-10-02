@@ -1,0 +1,28 @@
+{
+  "photos": [
+    {
+      "name": "FAKE-NOT-A-PHOTO-01.png",
+      "size": 185,
+      "modifiedAt": "2026-10-02T00:00:00.000Z"
+    },
+    {
+      "name": "FAKE-NOT-A-PHOTO-02.png",
+      "size": 183,
+      "modifiedAt": "2026-10-02T00:00:00.000Z"
+    },
+    {
+      "name": "FAKE-NOT-A-PHOTO-03.png",
+      "size": 184,
+      "modifiedAt": "2026-10-02T00:00:00.000Z"
+    }
+  ],
+  "checks": {
+    "permission": false,
+    "coverage": false,
+    "scale": false
+  },
+  "fixtureNotice": "仅用于软件测试的虚构数据：名称、位置、时期、地形值、范围、图片和模型均不对应真实遗址或调查，不可用于研究结论、法定保护判断或摄影测量。",
+  "imageKind": "16 × 16 synthetic pixel patterns; not photography",
+  "originalFilesStoredInBackup": false,
+  "photogrammetryUsable": false
+}

@@ -110,7 +110,7 @@ export function parseGeoJson(text, kind) {
       vertices += coordinates.length;
       features.push({
         type: "Feature",
-        id: `${feature.id ?? index}-${partIndex}`,
+        id: geometry.type === "LineString" ? String(feature.id ?? index) : `${feature.id ?? index}-${partIndex}`,
         properties: {
           name: property(properties, ["name", "名称"], kind === "waterways" ? "未命名水系" : "未命名线路"),
           period: property(properties, ["period", "时期"], "未填写"),

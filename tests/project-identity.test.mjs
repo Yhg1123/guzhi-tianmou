@@ -96,3 +96,8 @@ test('site and project identity limits match archive storage limits',()=>{
  const invalid=projectApi.emptyProject(); invalid.archiveId={bad:'namespace'};
  assert.throws(()=>projectApi.ensureProjectIdentity(invalid),/项目/);
 });
+test('backup restore rejects null site identities instead of coercing them to literal text',()=>{
+ const backup=projectApi.serializeProject(projectApi.emptyProject());
+ backup.datasets.sites.features[0].id=null;
+ assert.throws(()=>projectApi.restoreProject(JSON.stringify(backup)),/ID/);
+});

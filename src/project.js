@@ -93,7 +93,7 @@ export function restoreProject(text) {
   const input = JSON.parse(text);
   if (input.schema !== 2 || !input.datasets || !input.sources) throw new Error("不是有效的古址天眸项目文件（版本 2）。");
   const project = emptyProject();
-  const oldIds = input.datasets.sites?.features?.map((f) => String(f.id));
+  const oldIds = input.datasets.sites?.features?.map((f) => f.id == null ? null : String(f.id));
   for (const { id } of DATASETS) {
     const collection = input.datasets[id];
     if (collection?.type !== "FeatureCollection" || !Array.isArray(collection.features)) throw new Error("项目图层结构不完整。");
