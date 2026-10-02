@@ -3,8 +3,9 @@ import * as THREE from "three";
 import { Viewer, SceneFormat, SceneRevealMode } from "@mkkellogg/gaussian-splats-3d";
 import { RotateCcw, Play, Pause, Scan, CircleAlert, Plus, Minus } from "lucide-react";
 import { createSampleSplat } from "./sampleSplat.js";
+import { inspectModelGeometry } from "./modelValidation.js";
 
-export function SplatViewer({ file, name, isSample = false }) {
+export function SplatViewer({ file, name, isSample = false, onReady, onError, onStatusChange }) {
   const host = useRef(null);
   const viewerRef = useRef(null);
   const frameRef = useRef(null);
@@ -19,14 +20,22 @@ export function SplatViewer({ file, name, isSample = false }) {
     let alive = true;
     let viewer;
     let resizeObserver;
+    let url;
+    const reportError = (error) => {
+      if (!alive) return;
+      setStatus("error"); setMessage(error.message || "模型加载失败");
+      onStatusChange?.("error");
+      onError?.(error);
+    };
     const root = document.createElement("div");
     root.className = "splat-render-root";
     host.current.appendChild(root);
-    const blob = file || createSampleSplat();
-    const url = URL.createObjectURL(blob);
     setStatus("loading"); setCount(0); setMessage(""); setRotate(false);
+    onStatusChange?.("loading");
     const up = axis === "z" ? [0, 0, 1] : axis === "-y" ? [0, -1, 0] : [0, 1, 0];
     try {
+      const blob = file || createSampleSplat();
+      url = URL.createObjectURL(blob);
       viewer = new Viewer({ rootElement: root, cameraUp: up, initialCameraPosition: [7, 5, 9], initialCameraLookAt: [0, 1.4, 0], sharedMemoryForWorkers: false, gpuAcceleratedSort: false, enableSIMDInSort: true, sphericalHarmonicsDegree: 0, sceneRevealMode: SceneRevealMode.Instant, ignoreDevicePixelRatio: true });
       viewerRef.current = viewer;
       const ext = file?.name?.split(".").pop().toLowerCase() || "splat";
@@ -34,15 +43,10 @@ export function SplatViewer({ file, name, isSample = false }) {
       viewer.addSplatScene(url, { format, showLoadingUI: false, progressiveLoad: false, splatAlphaRemovalThreshold: 5 }).then(() => {
         if (!alive) return;
         const mesh = viewer.splatMesh;
-        const n = mesh.getSplatCount();
-        if (!n) throw new Error("模型不包含有效的高斯点。");
-        const box = new THREE.Box3();
         const point = new THREE.Vector3();
-        const stride = Math.max(1, Math.ceil(n / 20000));
-        for (let i = 0; i < n; i += stride) { mesh.getSplatCenter(i, point); if ([point.x, point.y, point.z].every(Number.isFinite)) box.expandByPoint(point); }
-        const center = box.getCenter(new THREE.Vector3());
-        const size = box.getSize(new THREE.Vector3()).length();
-        if (!Number.isFinite(size) || size === 0) throw new Error("无法确定模型范围。");
+        const geometry = inspectModelGeometry(mesh.getSplatCount(), (index) => { mesh.getSplatCenter(index, point); return point; });
+        const { count: n, size } = geometry;
+        const center = new THREE.Vector3(...geometry.center);
         const frame = () => {
           const vertical = THREE.MathUtils.degToRad(viewer.camera.fov) / 2;
           const horizontal = Math.atan(Math.tan(vertical) * viewer.camera.aspect);
@@ -60,14 +64,16 @@ export function SplatViewer({ file, name, isSample = false }) {
         });
         resizeObserver.observe(root);
         setCount(n); setStatus("ready");
-      }).catch((error) => { if (alive) { setStatus("error"); setMessage(error.message || "模型加载失败"); } });
-    } catch (error) { setStatus("error"); setMessage(`WebGL 查看器无法启动：${error.message}`); }
+        onStatusChange?.("ready");
+        onReady?.(geometry);
+      }).catch(reportError);
+    } catch (error) { reportError(new Error(`WebGL 查看器无法启动：${error.message}`)); }
     return () => {
       alive = false; frameRef.current = null;
       resizeObserver?.disconnect();
       if (viewerRef.current === viewer) viewerRef.current = null;
-      URL.revokeObjectURL(url);
-      if (viewer) Promise.resolve(viewer.dispose()).catch(() => {}).finally(() => root.remove()); else root.remove();
+      if (url) URL.revokeObjectURL(url);
+      if (viewer) Promise.resolve().then(() => viewer.dispose()).catch(() => {}).finally(() => root.remove()); else root.remove();
     };
   }, [file, axis, retry]);
   useEffect(() => { if (viewerRef.current?.controls) viewerRef.current.controls.autoRotate = rotate; }, [rotate]);

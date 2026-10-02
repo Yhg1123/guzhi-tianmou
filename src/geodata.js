@@ -45,6 +45,7 @@ export function parseGeoJson(text, kind) {
   const features = [];
   let skipped = 0;
   let vertices = 0;
+  const siteIds = new Set();
 
   collection.features.forEach((feature, index) => {
     const geometry = feature?.geometry;
@@ -55,8 +56,14 @@ export function parseGeoJson(text, kind) {
         return;
       }
       const [lng, lat] = geometry.coordinates;
+      const explicit = feature.id ?? properties.id;
+      if (explicit != null && !(["string", "number"].includes(typeof explicit) && String(explicit).trim() && String(explicit).length <= 4096 && !["__proto__", "constructor", "prototype"].includes(String(explicit)))) throw new Error("遗址 ID 无效，请提供唯一的文字或数字 ID。");
+      const id = explicit == null ? `site-${crypto.randomUUID()}` : String(explicit);
+      if (siteIds.has(id)) throw new Error("遗址 ID 重复，请为每处遗址提供唯一 ID。");
+      siteIds.add(id);
       features.push({
-        id: `${String(feature.id ?? properties.id ?? "site")}-${index + 1}`,
+        id,
+        sourceId: properties.legacy_identity === true ? undefined : properties.source_id === null || explicit == null ? null : String(properties.source_id ?? explicit),
         name: property(properties, ["name", "名称", "遗址名称"], `未命名遗址 ${index + 1}`),
         period: property(properties, ["period", "年代", "时期"], "未填写"),
         type: property(properties, ["site_type", "type", "类型", "遗址类型"], "未填写"),
