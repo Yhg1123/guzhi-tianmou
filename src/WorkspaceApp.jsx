@@ -1,6 +1,6 @@
 import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import { get, set } from "idb-keyval";
-import { Map, Landmark, Database, ChartNoAxesCombined, ShieldCheck, Box, Search, Upload, ChevronRight, ArrowUpRight, MapPin, Layers, Menu, X, Check, CircleAlert, Download, ExternalLink } from "lucide-react";
+import { Map, Landmark, Database, ChartNoAxesCombined, ShieldCheck, Box, Search, Upload, ChevronRight, ArrowUpRight, MapPin, Layers, Menu, X, Check, CircleAlert, Download, ExternalLink, Users } from "lucide-react";
 import { HeritageMap } from "./HeritageMap.jsx";
 import { analyzeSites, historicalDistance } from "./geodata.js";
 import { emptyProject, fmt, download, asGeoJson, replaceDataset, restoreStoredProject } from "./project.js";
@@ -9,12 +9,14 @@ import { ResearchView } from "./ResearchView.jsx";
 import { ProtectionView } from "./ProtectionView.jsx";
 
 const ReconstructionView = lazy(() => import("./ReconstructionView.jsx"));
+const CommunityView = lazy(() => import("./CommunityView.jsx"));
 const NAV = [
   { id: "map", name: "遗址地图", icon: Map, group: "空间研究" },
   { id: "sites", name: "遗址档案", icon: Landmark },
   { id: "research", name: "选址研究", icon: ChartNoAxesCombined },
   { id: "protection", name: "保护评估", icon: ShieldCheck, group: "保护与记录" },
   { id: "reconstruction", name: "三维档案", icon: Box },
+  { id: "community", name: "公众共建", icon: Users, group: "参与与探访" },
   { id: "data", name: "数据中心", icon: Database, group: "项目" },
 ];
 const STORAGE_KEY = "heritage-project-v2";
@@ -85,7 +87,7 @@ export function App() {
   const metadata = (kind, values) => setProject((current) => ({ ...current, sources: { ...current.sources, [kind]: { ...current.sources[kind], ...values } } }));
   const restore = (next) => { setProject(next); setStorageWarning(""); setSelectedId(""); resetFilters(); };
   const currentNav = NAV.find((n) => n.id === page);
-  const isFilteredPage = !["data", "reconstruction"].includes(page);
+  const isFilteredPage = !["data", "reconstruction", "community"].includes(page);
   return <div className="app-shell"><a className="skip-link" href="#main-content" onClick={(e) => { e.preventDefault(); document.getElementById("main-content")?.focus(); }}>跳转到主要内容</a>{mobileNav && <button className="nav-scrim" aria-label="关闭导航" onClick={() => setMobileNav(false)} />}
     <aside className={`sidebar ${mobileNav ? "mobile-open" : ""}`}><a className="brand" href="#map" onClick={() => setMobileNav(false)}><div className="brand-symbol"><Landmark size={24} /></div><span><strong>古址天眸</strong><small>HERITAGE ATLAS</small></span></a><div className="project-label"><span className="status-dot" /><span>古遗址空间研究</span></div><nav aria-label="主导航">{NAV.map(({ id, name, icon: Icon, group }) => <div key={id}>{group && <span className="nav-group">{group}</span>}<a href={`#${id}`} title={name} className={`nav-item ${page === id ? "active" : ""}`} aria-current={page === id ? "page" : undefined} onClick={() => setMobileNav(false)}><Icon size={19} /><span>{name}</span>{id === "sites" && <small>{allSites.length}</small>}</a></div>)}</nav><div className="sidebar-bottom"><span className="local-avatar">研</span><div><strong>本地研究项目</strong><small>工作空间 / 01</small></div></div></aside>
     <div className="main-shell"><header className="app-header"><div className="breadcrumbs"><button className="icon-button mobile-menu" aria-label="展开导航" onClick={() => setMobileNav(!mobileNav)}>{mobileNav ? <X size={20} /> : <Menu size={20} />}</button><span>工作空间</span><ChevronRight size={14} /><strong>{currentNav.name}</strong></div><div className="header-actions"><span className="save-status" role="status">{storageWarning ? <CircleAlert size={13} /> : <Check size={13} />}{saveStatus}</span><button className="button primary" onClick={() => navigate("data")}><Upload size={15} /><span>导入数据</span></button></div></header>
@@ -96,6 +98,7 @@ export function App() {
         {page === "research" && <ResearchView sites={sites} sources={project.sources} onData={() => navigate("data")} onSelectSite={(id) => { setSelectedId(id); navigate("sites"); }} />}
         {page === "protection" && <ProtectionView sites={sites} selectedSite={selectedSite} project={project} onSelectSite={onSelectSite} radius={radius} setRadius={setRadius} onData={() => navigate("data")} onNote={(id, note) => setProject((p) => ({ ...p, notes: { ...p.notes, [id]: note } }))} />}
         {page === "reconstruction" && <Suspense fallback={<div className="empty-inline">加载三维工作区…</div>}><ReconstructionView sites={allSites} selectedId={selectedId || selectedSite?.id} onSelectSite={onSelectSite} /></Suspense>}
+        {page === "community" && <Suspense fallback={<div className="empty-inline">加载公众共建…</div>}><CommunityView sites={allSites} selectedId={selectedId || selectedSite?.id} onSelectSite={onSelectSite} onMap={() => { resetFilters(); navigate("map"); }} onReconstruction={() => navigate("reconstruction")} /></Suspense>}
         {page === "data" && <DataCenter project={project} saveStatus={saveStatus} onImport={onImport} onMetadata={metadata} onRestore={restore} onReset={() => restore(emptyProject())} />}
       </>}</main><footer className="app-footer"><span><CircleAlert size={12} />研究辅助 · 不替代考古与规划论证</span><a href="https://github.com/archesproject/arches" target="_blank" rel="noreferrer">开源遗产 GIS 参考 <ExternalLink size={11} /></a></footer>
     </div></div>;
