@@ -21,6 +21,7 @@ design-qa.md
 *.splat
 *.ksplat
 *.ply
+!public/samples/temple-of-bel.splat
 
 # Editor and operating-system files
 .vscode/

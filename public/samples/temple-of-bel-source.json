@@ -1,0 +1,15 @@
+{
+  "title": "Temple of Bel Tourist Photo Reconstruction",
+  "file": "temple-of-bel.splat",
+  "points": 592454,
+  "bytes": 18958528,
+  "sha256": "af2cd88c35f5a525aeaa8e99da088c5b3ac1ec914f3654d3258a27975b873127",
+  "source": "https://www.openheritage3d.org/project.php?id=zjnn-wx58",
+  "doi": "https://doi.org/10.26301/zjnn-wx58",
+  "attribution": "Scott McAvoy, Cultural Heritage Engineering Initiative (CHEI) 2020. Distributed by Open Heritage 3D.",
+  "license": "CC BY (version not specified on the source record)",
+  "sourceMetadata": "https://pointcloud.ucsd.edu/archive_temp/oh3d_store/oh3d-vis/datasets/zjnn-wx58/potree/zjnn-wx58_photogrammetry_terrestrial/metadata.json",
+  "accessed": "2026-10-22T19:54:32.998Z",
+  "transformation": "Potree LOD 0–3 subset; original XYZ/RGB decoded, centered, rotated from Z-up to Y-up; constant isotropic point sprites encoded as standard 32-byte SPLAT records. No learned covariance, COLMAP or 3DGS training was performed.",
+  "limitations": "Visualization derivative of an unscaled photogrammetry model. Source reports uncalibrated cameras and deformation; not suitable for measurements or georegistration. Not associated with the local project's selected archaeological site."
+}
