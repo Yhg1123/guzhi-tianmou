@@ -3,6 +3,19 @@ import { booleanPointInPolygon } from "@turf/boolean-point-in-polygon";
 import { buffer } from "@turf/buffer";
 
 const MAX_FEATURES = 5000;
+const RESERVED_IDS = new Set([...Object.getOwnPropertyNames(Object.prototype), "prototype"]);
+
+export function validSiteId(id) {
+  return (typeof id === "string" && id.trim().length > 0 || typeof id === "number" && Number.isFinite(id))
+    && !RESERVED_IDS.has(String(id));
+}
+
+function generatedSiteId(lng, lat, name) {
+  // Coordinates and name keep records without an external ID stable when rows are reordered.
+  let hash = 2166136261;
+  for (const character of name) hash = Math.imul(hash ^ character.codePointAt(0), 16777619);
+  return `site-${lng}-${lat}-${(hash >>> 0).toString(36)}`;
+}
 
 function validPosition(position) {
   return Array.isArray(position)
@@ -23,7 +36,7 @@ function property(properties, keys, fallback) {
   return fallback;
 }
 
-export function parseGeoJson(text, kind) {
+export function parseGeoJson(text, kind, { allowEmpty = false } = {}) {
   if (!["sites", "waterways", "routes", "boundaries", "hazards"].includes(kind)) throw new Error("不支持的图层类型。");
   let collection;
   try {
@@ -43,6 +56,7 @@ export function parseGeoJson(text, kind) {
   }
 
   const features = [];
+  const siteIds = new Set();
   let skipped = 0;
   let vertices = 0;
 
@@ -55,9 +69,15 @@ export function parseGeoJson(text, kind) {
         return;
       }
       const [lng, lat] = geometry.coordinates;
+      const name = property(properties, ["name", "名称", "遗址名称"], "未命名遗址");
+      const suppliedId = feature.id ?? properties.id;
+      if (suppliedId != null && !validSiteId(suppliedId)) throw new Error("遗址 ID 必须为非空字符串或有限数值，且不能使用保留名称。");
+      const id = suppliedId == null ? generatedSiteId(lng, lat, name) : String(suppliedId);
+      if (siteIds.has(id)) throw new Error(`遗址 ID 重复（${id}），请为每处遗址设置唯一 ID。`);
+      siteIds.add(id);
       features.push({
-        id: `${String(feature.id ?? properties.id ?? "site")}-${index + 1}`,
-        name: property(properties, ["name", "名称", "遗址名称"], `未命名遗址 ${index + 1}`),
+        id,
+        name,
         period: property(properties, ["period", "年代", "时期"], "未填写"),
         type: property(properties, ["site_type", "type", "类型", "遗址类型"], "未填写"),
         location: property(properties, ["location", "地址", "地点"], "未填写"),
@@ -81,6 +101,7 @@ export function parseGeoJson(text, kind) {
       if (!valid) { skipped += 1; return; }
       vertices += polygons.reduce((sum, rings) => sum + rings.reduce((n, ring) => n + ring.length, 0), 0);
       features.push({ type: "Feature", id: String(feature.id ?? index), geometry, properties: {
+        ...properties,
         name: property(properties, ["name", "名称"], `范围 ${index + 1}`),
         category: property(properties, ["category", "类型"], "未分类"),
         source: property(properties, ["source", "来源"], "未注明"),
@@ -93,31 +114,28 @@ export function parseGeoJson(text, kind) {
       : geometry?.type === "MultiLineString"
         ? geometry.coordinates
         : null;
-    if (!parts || !Array.isArray(parts)) {
+    if (!Array.isArray(parts) || !parts.length || !parts.every((coordinates) => Array.isArray(coordinates) && coordinates.length >= 2 && coordinates.every(validPosition))) {
       skipped += 1;
       return;
     }
-    let accepted = false;
     parts.forEach((coordinates, partIndex) => {
-      if (!Array.isArray(coordinates) || coordinates.length < 2 || !coordinates.every(validPosition)) return;
       vertices += coordinates.length;
       features.push({
         type: "Feature",
-        id: `${feature.id ?? index}-${partIndex}`,
+        id: geometry.type === "MultiLineString" ? `${feature.id ?? index}-${partIndex}` : String(feature.id ?? index),
         properties: {
+          ...properties,
           name: property(properties, ["name", "名称"], kind === "waterways" ? "未命名水系" : "未命名线路"),
           period: property(properties, ["period", "时期"], "未填写"),
         },
         geometry: { type: "LineString", coordinates },
       });
-      accepted = true;
     });
-    if (!accepted) skipped += 1;
   });
 
   if (features.length > MAX_FEATURES || vertices > 100000) throw new Error("图层过大，请将研究区裁剪到 5,000 个要素、100,000 个顶点以内。");
 
-  if (!features.length) {
+  if (!features.length && !(allowEmpty && collection.features.length === 0)) {
     throw new Error(kind === "sites"
       ? "文件中没有有效 Point 遗址点位。"
       : ["boundaries", "hazards"].includes(kind) ? "文件中没有有效的闭合 Polygon 或 MultiPolygon。" : "文件中没有有效 LineString 或 MultiLineString 线要素。");

@@ -1,5 +1,8 @@
 import { demoSites, demoSource } from "./demoData.js";
-import { parseGeoJson, assertWorkload } from "./geodata.js";
+import { parseGeoJson, assertWorkload, validSiteId } from "./geodata.js";
+
+export const LAYER_FILE_LIMIT = 15 * 1024 * 1024;
+export const PROJECT_FILE_LIMIT = 100 * 1024 * 1024;
 
 export const DATASETS = [
   { id: "sites", title: "遗址点位与地形属性", geometry: "Point", purpose: "遗址档案", template: "heritage-sites" },
@@ -10,7 +13,23 @@ export const DATASETS = [
 ];
 
 export function emptyProject() {
-  return { schema: 2, datasets: { sites: demoSites, waterways: [], routes: [], boundaries: [], hazards: [] }, sources: Object.fromEntries(DATASETS.map(({ id }) => [id, { name: id === "sites" ? demoSource : "未导入", count: id === "sites" ? 5 : 0, timing: "unknown", period: "", citation: "" }])), notes: {} };
+  return { schema: 2, datasets: { sites: demoSites.map((site) => ({ ...site })), waterways: [], routes: [], boundaries: [], hazards: [] }, sources: Object.fromEntries(DATASETS.map(({ id }) => [id, { name: id === "sites" ? demoSource : "未导入", count: id === "sites" ? demoSites.length : 0, timing: "unknown", period: "", citation: "" }])), notes: {} };
+}
+
+export function replaceDataset(project, kind, features, source) {
+  if (!DATASETS.some(({ id }) => id === kind)) throw new Error("不支持的图层类型。");
+  if (kind === "sites" && !features.length) throw new Error("项目必须包含遗址点位。");
+  const datasets = { ...project.datasets, [kind]: features };
+  assertWorkload(datasets.sites, datasets.waterways, datasets.routes, [...datasets.boundaries, ...datasets.hazards]);
+  let notes = project.notes;
+  if (kind === "sites") {
+    const previous = new Map(project.datasets.sites.map((site) => [site.id, site]));
+    notes = Object.fromEntries(features.filter((site) => {
+      const old = previous.get(site.id);
+      return old && old.lng === site.lng && old.lat === site.lat && typeof project.notes[site.id] === "string";
+    }).map((site) => [site.id, project.notes[site.id]]));
+  }
+  return { ...project, datasets, notes, sources: { ...project.sources, [kind]: { ...source, count: features.length } } };
 }
 
 export function asGeoJson(kind, features) {
@@ -22,30 +41,43 @@ export function serializeProject(project) {
 }
 
 export function restoreProject(text) {
-  const input = JSON.parse(text);
-  if (input.schema !== 2 || !input.datasets || !input.sources) throw new Error("不是有效的古址天眸项目文件（版本 2）。");
+  let input;
+  try { input = JSON.parse(text); } catch { throw new Error("项目文件不是有效的 JSON。"); }
+  const record = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+  if (!record(input) || input.schema !== 2 || !record(input.datasets) || !record(input.sources) || input.notes != null && !record(input.notes)) throw new Error("不是有效的古址天眸项目文件（版本 2）。");
   const project = emptyProject();
-  const oldIds = input.datasets.sites?.features?.map((f) => String(f.id));
   for (const { id } of DATASETS) {
     const collection = input.datasets[id];
     if (collection?.type !== "FeatureCollection" || !Array.isArray(collection.features)) throw new Error("项目图层结构不完整。");
     if (id === "sites" && !collection.features.length) throw new Error("项目必须包含遗址点位。");
-    const parsed = collection.features.length ? parseGeoJson(JSON.stringify(collection), id) : { features: [], skipped: 0 };
+    if (id === "sites") {
+      const ids = new Set();
+      for (const feature of collection.features) {
+        if (!validSiteId(feature?.id) || ids.has(String(feature.id))) throw new Error("遗址 ID 缺失、无效或重复。");
+        ids.add(String(feature.id));
+      }
+    }
+    const parsed = parseGeoJson(JSON.stringify(collection), id, { allowEmpty: id !== "sites" });
     if (parsed.skipped) throw new Error("项目含无效要素，请先修正数据；尚未替换当前项目。");
     project.datasets[id] = parsed.features;
     const source = input.sources[id] || {};
+    if (!record(source)) throw new Error("项目来源信息格式无效。");
     project.sources[id] = { name: String(source.name || "项目导入"), count: project.datasets[id].length, timing: ["historical", "present", "unknown"].includes(source.timing) ? source.timing : "unknown", period: String(source.period || ""), citation: String(source.citation || ""), sha256: String(source.sha256 || ""), importedAt: String(source.importedAt || "") };
   }
-  project.datasets.sites.forEach((site, index) => {
-    const id = oldIds[index];
-    if (!id || id === "undefined" || oldIds.indexOf(id) !== index || id === "__proto__" || id === "constructor") throw new Error("遗址 ID 缺失或重复。");
-    site.id = id;
-    site.isDemo = Array.isArray(input.demoIds) && input.demoIds.includes(id);
-    const note = input.notes?.[id];
+  const demoIds = new Set(Array.isArray(input.demoIds) ? input.demoIds.map(String) : []);
+  project.datasets.sites.forEach((site) => {
+    site.isDemo = site.isDemo || demoIds.has(site.id);
+    const note = input.notes?.[site.id];
     if (typeof note === "string") project.notes[site.id] = note.slice(0, 5000);
   });
   assertWorkload(project.datasets.sites, project.datasets.waterways, project.datasets.routes, [...project.datasets.boundaries, ...project.datasets.hazards]);
   return project;
+}
+
+export function restoreStoredProject(saved) {
+  if (saved === undefined) return emptyProject();
+  if (saved?.schema !== 2) throw new Error("本地项目版本无效。");
+  return restoreProject(JSON.stringify(serializeProject(saved)));
 }
 
 export function download(name, content, type = "application/json") {

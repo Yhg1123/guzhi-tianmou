@@ -2,8 +2,8 @@ import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from "react
 import { get, set } from "idb-keyval";
 import { Map, Landmark, Database, ChartNoAxesCombined, ShieldCheck, Box, Search, Upload, ChevronRight, ArrowUpRight, MapPin, Layers, Menu, X, Check, CircleAlert, Download, ExternalLink } from "lucide-react";
 import { HeritageMap } from "./HeritageMap.jsx";
-import { analyzeSites, assertWorkload, historicalDistance } from "./geodata.js";
-import { emptyProject, fmt, download, asGeoJson } from "./project.js";
+import { analyzeSites, historicalDistance } from "./geodata.js";
+import { emptyProject, fmt, download, asGeoJson, replaceDataset, restoreStoredProject } from "./project.js";
 import { DataCenter } from "./DataCenter.jsx";
 import { ResearchView } from "./ResearchView.jsx";
 import { ProtectionView } from "./ProtectionView.jsx";
@@ -38,6 +38,7 @@ export function App() {
   const [project, setProject] = useState(emptyProject);
   const [ready, setReady] = useState(false);
   const [saveStatus, setSaveStatus] = useState("读取本地项目…");
+  const [storageWarning, setStorageWarning] = useState("");
   const [page, setPage] = useState(hashPage);
   const [selectedId, setSelectedId] = useState("");
   const [period, setPeriod] = useState("all");
@@ -46,14 +47,25 @@ export function App() {
   const [mobileNav, setMobileNav] = useState(false);
   const [radius, setRadius] = useState(500);
   const [layers, setLayers] = useState({ points: true, waterways: true, routes: true, boundaries: true, hazards: true });
-  useEffect(() => { let alive = true; get(STORAGE_KEY).then((saved) => { if (alive && saved?.schema === 2) setProject(saved); }).catch(() => { if (alive) setSaveStatus("本地存储不可用，请备份项目"); }).finally(() => { if (alive) setReady(true); }); return () => { alive = false; }; }, []);
   useEffect(() => {
-    if (!ready) return undefined;
+    let alive = true;
+    get(STORAGE_KEY).then((saved) => {
+      if (alive) setProject(restoreStoredProject(saved));
+    }).catch(() => {
+      if (alive) {
+        setSaveStatus("自动保存已暂停");
+        setStorageWarning("本地存档读取或校验失败，原存档未被覆盖。当前显示临时演示项目；请先导出需要保留的数据，再到数据中心恢复有效备份或确认重置，以重新启用自动保存。");
+      }
+    }).finally(() => { if (alive) setReady(true); });
+    return () => { alive = false; };
+  }, []);
+  useEffect(() => {
+    if (!ready || storageWarning) return undefined;
     let current = true;
     setSaveStatus("保存中…");
     set(STORAGE_KEY, project).then(() => { if (current) setSaveStatus("已保存到此设备"); }).catch(() => { if (current) setSaveStatus("保存失败，请备份项目"); });
     return () => { current = false; };
-  }, [project, ready]);
+  }, [project, ready, storageWarning]);
   useEffect(() => { const change = () => setPage(hashPage()); window.addEventListener("hashchange", change); return () => window.removeEventListener("hashchange", change); }, []);
   useEffect(() => { window.scrollTo({ top: 0, behavior: "instant" }); }, [page]);
   const navigate = useCallback((id) => { window.location.hash = id; setPage(id); setMobileNav(false); }, []);
@@ -65,20 +77,20 @@ export function App() {
   const types = [...new Set(allSites.map((s) => s.type))];
   const resetFilters = () => { setPeriod("all"); setType("all"); setSearch(""); };
   const onImport = (kind, features, source) => {
-    const datasets = { ...project.datasets, [kind]: features };
-    assertWorkload(datasets.sites, datasets.waterways, datasets.routes, [...datasets.boundaries, ...datasets.hazards]);
-    setProject((current) => ({ ...current, datasets, notes: kind === "sites" ? {} : current.notes, sources: { ...current.sources, [kind]: source } }));
+    const next = replaceDataset(project, kind, features, source);
+    setProject(next);
     if (kind === "sites") { setSelectedId(features[0]?.id || ""); resetFilters(); }
+    return { removedNotes: Object.keys(project.notes).filter((id) => !Object.hasOwn(next.notes, id)).length };
   };
   const metadata = (kind, values) => setProject((current) => ({ ...current, sources: { ...current.sources, [kind]: { ...current.sources[kind], ...values } } }));
-  const restore = (next) => { setProject(next); setSelectedId(""); resetFilters(); };
+  const restore = (next) => { setProject(next); setStorageWarning(""); setSelectedId(""); resetFilters(); };
   const currentNav = NAV.find((n) => n.id === page);
   const isFilteredPage = !["data", "reconstruction"].includes(page);
   return <div className="app-shell"><a className="skip-link" href="#main-content" onClick={(e) => { e.preventDefault(); document.getElementById("main-content")?.focus(); }}>跳转到主要内容</a>{mobileNav && <button className="nav-scrim" aria-label="关闭导航" onClick={() => setMobileNav(false)} />}
     <aside className={`sidebar ${mobileNav ? "mobile-open" : ""}`}><a className="brand" href="#map" onClick={() => setMobileNav(false)}><div className="brand-symbol"><Landmark size={24} /></div><span><strong>古址天眸</strong><small>HERITAGE ATLAS</small></span></a><div className="project-label"><span className="status-dot" /><span>古遗址空间研究</span></div><nav aria-label="主导航">{NAV.map(({ id, name, icon: Icon, group }) => <div key={id}>{group && <span className="nav-group">{group}</span>}<a href={`#${id}`} title={name} className={`nav-item ${page === id ? "active" : ""}`} aria-current={page === id ? "page" : undefined} onClick={() => setMobileNav(false)}><Icon size={19} /><span>{name}</span>{id === "sites" && <small>{allSites.length}</small>}</a></div>)}</nav><div className="sidebar-bottom"><span className="local-avatar">研</span><div><strong>本地研究项目</strong><small>工作空间 / 01</small></div></div></aside>
-    <div className="main-shell"><header className="app-header"><div className="breadcrumbs"><button className="icon-button mobile-menu" aria-label="展开导航" onClick={() => setMobileNav(!mobileNav)}>{mobileNav ? <X size={20} /> : <Menu size={20} />}</button><span>工作空间</span><ChevronRight size={14} /><strong>{currentNav.name}</strong></div><div className="header-actions"><span className="save-status"><Check size={13} />{saveStatus}</span><button className="button primary" onClick={() => navigate("data")}><Upload size={15} /><span>导入数据</span></button></div></header>
+    <div className="main-shell"><header className="app-header"><div className="breadcrumbs"><button className="icon-button mobile-menu" aria-label="展开导航" onClick={() => setMobileNav(!mobileNav)}>{mobileNav ? <X size={20} /> : <Menu size={20} />}</button><span>工作空间</span><ChevronRight size={14} /><strong>{currentNav.name}</strong></div><div className="header-actions"><span className="save-status" role="status">{storageWarning ? <CircleAlert size={13} /> : <Check size={13} />}{saveStatus}</span><button className="button primary" onClick={() => navigate("data")}><Upload size={15} /><span>导入数据</span></button></div></header>
       {isFilteredPage && <div className="filter-toolbar"><label className="search-field"><Search size={16} /><input aria-label="搜索遗址" placeholder="搜索遗址名称或地点" value={search} onChange={(e) => setSearch(e.target.value)} /></label><label><span>时期</span><select aria-label="时间时期" value={period} onChange={(e) => setPeriod(e.target.value)}><option value="all">全部时期</option>{periods.map((p) => <option key={p}>{p}</option>)}</select></label><label><span>类型</span><select aria-label="遗址类型" value={type} onChange={(e) => setType(e.target.value)}><option value="all">全部类型</option>{types.map((t) => <option key={t}>{t}</option>)}</select></label>{(search || period !== "all" || type !== "all") && <button className="text-button" onClick={resetFilters}>清除筛选 <X size={13} /></button>}<span className="filter-summary">{sites.length} 处遗址</span></div>}
-      <main id="main-content" className={`main-content page-${page}`} tabIndex={-1}>{!ready ? <div className="empty-inline">正在读取本地项目…</div> : <>
+      <main id="main-content" className={`main-content page-${page}`} tabIndex={-1}>{storageWarning && <div className="notice warning" role="alert"><CircleAlert size={17} /><span>{storageWarning}</span><button className="text-button" onClick={() => navigate("data")}>打开数据中心</button></div>}{!ready ? <div className="empty-inline">正在读取本地项目…</div> : <>
         {page === "map" && <MapView sites={sites} selectedSite={selectedSite} datasets={project.datasets} layers={layers} setLayers={setLayers} onSelectSite={onSelectSite} navigate={navigate} />}
         {page === "sites" && <SitesView sites={sites} selectedSite={selectedSite} onSelectSite={onSelectSite} navigate={navigate} />}
         {page === "research" && <ResearchView sites={sites} sources={project.sources} onData={() => navigate("data")} onSelectSite={(id) => { setSelectedId(id); navigate("sites"); }} />}

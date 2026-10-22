@@ -13,6 +13,10 @@
 
 图层、来源和笔记保存在当前设备的 IndexedDB，不上传服务器；模型和采集清单按遗址另存。清除浏览器数据会删除这些存档。项目 JSON 备份包含图层和笔记，不包含三维模型或照片。照片登记只保存文件清单，不保存/上传照片内容。`public/templates/` 全部是明确标注的虚构格式模板，不能用于科研。
 
+数据中心支持逐层导出 GeoJSON。遗址导入保留 `Feature.id`（其次为 `properties.id`），数字 ID 会转成字符串；未提供 ID 时按坐标和名称生成稳定 ID。重复或保留名称的 ID 会阻止导入，请先在源数据中设置唯一 ID。建议长期使用外部档案编号，避免名称或坐标更新影响关联。
+
+替换遗址图层前请先备份。同 ID、同坐标的现场笔记会保留，已移除或坐标改变的遗址笔记不会转移；三维档案按 ID 与坐标关联。项目恢复保留要素 ID、来源属性及演示标记。GeoJSON 单文件上限 15 MB，项目 JSON 备份恢复上限 100 MB。读取或校验本地存档失败时，系统保留原件、暂停自动保存，并显示临时演示项目；恢复有效项目备份或确认重置后重新启用保存。
+
 ## 数据格式
 
 使用 WGS84 / EPSG:4326 GeoJSON `FeatureCollection`，坐标顺序为 `[经度, 纬度]`。遗址使用 `Point`；水系、古道使用 `LineString` / `MultiLineString`；保护范围、影响区使用闭合 `Polygon` / `MultiPolygon`，支持内洞。
@@ -34,4 +38,4 @@ pnpm install
 pnpm dev
 ```
 
-验证：`pnpm test:geo`、`pnpm test:sites`、`pnpm build`。交付到 Sites 的构建保留 `dist/client`、`dist/server` 和 hosting 配置。三维库按页面延迟加载。
+完整验证：`npm ci` 后运行 `npm test`（也可使用 `pnpm test`），依次执行空间计算与项目回归测试、生产构建、Sites 交付文件检查。单独运行 `test:sites` 前需先运行 `build`。GitHub Actions 对推送和拉取请求运行相同检查。交付到 Sites 的构建保留 `dist/client`、`dist/server` 和 hosting 配置。三维库按页面延迟加载。
