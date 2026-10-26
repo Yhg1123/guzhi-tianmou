@@ -5,8 +5,9 @@ import { RotateCcw, Play, Pause, Scan, CircleAlert, Plus, Minus } from "lucide-r
 import { createSampleSplat } from "./sampleSplat.js";
 import { heritageSample as defaultSample } from "./heritageSample.js";
 
-export function SplatViewer({ file, name, isSample = false, sampleMode = "heritage", sampleData = defaultSample }) {
+export function SplatViewer({ file, modelUrl, sourceAsset, name, isSample = false, sampleMode = "heritage", sampleData = defaultSample }) {
   const heritageSample = sampleData;
+  const photoDepth = sourceAsset?.representation === "photo-depth-gaussians";
   const host = useRef(null);
   const viewerRef = useRef(null);
   const frameRef = useRef(null);
@@ -26,10 +27,11 @@ export function SplatViewer({ file, name, isSample = false, sampleMode = "herita
     const root = document.createElement("div");
     root.className = "splat-render-root";
     host.current.appendChild(root);
-    const isHeritage = !file && sampleMode !== "synthetic";
-    const url = isHeritage ? heritageSample.url : URL.createObjectURL(file || createSampleSplat());
+    const isHeritage = !file && !modelUrl && sampleMode !== "synthetic";
+    const url = modelUrl || (isHeritage ? heritageSample.url : URL.createObjectURL(file || createSampleSplat()));
     setStatus("loading"); setCount(0); setMessage(""); setRotate(false);
-    const up = axis === "z" ? [0, 0, 1] : axis === "-y" ? [0, -1, 0] : [0, 1, 0];
+    viewRef.current = "overview"; setView("overview");
+    const up = photoDepth ? [0, 1, 0] : axis === "z" ? [0, 0, 1] : axis === "-y" ? [0, -1, 0] : [0, 1, 0];
     try {
       viewer = new Viewer({ rootElement: root, cameraUp: up, initialCameraPosition: [7, 5, 9], initialCameraLookAt: [0, 1.4, 0], sharedMemoryForWorkers: false, gpuAcceleratedSort: false, enableSIMDInSort: true, sphericalHarmonicsDegree: 0, sceneRevealMode: SceneRevealMode.Instant, ignoreDevicePixelRatio: true });
       viewerRef.current = viewer;
@@ -48,6 +50,24 @@ export function SplatViewer({ file, name, isSample = false, sampleMode = "herita
         const size = box.getSize(new THREE.Vector3()).length();
         if (!Number.isFinite(size) || size === 0) throw new Error("无法确定模型范围。");
         const frame = (preset = viewRef.current) => {
+          if (photoDepth) {
+            // Reproduce the source photograph's assumed projection. Orbit only a little:
+            // no unseen back side, invented 360-degree view, or metric dimensions.
+            const { processedWidth: w, processedHeight: h } = sourceAsset;
+            const focal = Math.max(w, h) * 0.95;
+            const verticalTangent = Math.max(h / (2 * focal), w / (2 * focal * viewer.camera.aspect));
+            viewer.camera.fov = THREE.MathUtils.radToDeg(2 * Math.atan(verticalTangent * (preset === "detail" ? 0.72 : 1.09)));
+            const angle = preset === "front" ? -0.16 : preset === "top" ? 0.16 : 0;
+            viewer.controls.enablePan = false;
+            viewer.controls.minAzimuthAngle = -0.24; viewer.controls.maxAzimuthAngle = 0.24;
+            viewer.controls.minPolarAngle = Math.PI / 2 - 0.12; viewer.controls.maxPolarAngle = Math.PI / 2 + 0.12;
+            viewer.controls.minDistance = 0.85; viewer.controls.maxDistance = 2.6;
+            viewer.controls.target.set(0, 0, -1.4);
+            viewer.camera.position.set(Math.sin(angle) * 1.4, 0, -1.4 + Math.cos(angle) * 1.4);
+            viewer.camera.near = 0.01; viewer.camera.far = 20;
+            viewer.camera.updateProjectionMatrix(); viewer.controls.update(); viewer.forceRenderNextFrame();
+            return;
+          }
           const vertical = THREE.MathUtils.degToRad(viewer.camera.fov) / 2;
           const horizontal = Math.atan(Math.tan(vertical) * viewer.camera.aspect);
           const directions = {
@@ -86,11 +106,11 @@ export function SplatViewer({ file, name, isSample = false, sampleMode = "herita
       if (url.startsWith("blob:")) URL.revokeObjectURL(url);
       if (viewer) Promise.resolve(viewer.dispose()).catch(() => {}).finally(() => root.remove()); else root.remove();
     };
-  }, [file, axis, retry, sampleMode, sampleData]);
+  }, [file, modelUrl, sourceAsset, photoDepth, axis, retry, sampleMode, sampleData]);
   useEffect(() => { if (viewerRef.current?.controls) viewerRef.current.controls.autoRotate = rotate; }, [rotate]);
   const zoom = (scale) => { const viewer = viewerRef.current; if (!viewer?.controls) return; viewer.camera.position.sub(viewer.controls.target).multiplyScalar(scale).add(viewer.controls.target); viewer.controls.update(); viewer.forceRenderNextFrame(); };
-  return <section className={`splat-stage ${background}`} aria-label={isSample && sampleMode !== "synthetic" ? "摄影测量点云查看器" : "三维高斯泼溅查看器"}><div ref={host} className="splat-host" /><div className="splat-stage-label"><span className="badge dark-badge">{isSample && sampleMode !== "synthetic" ? "HERITAGE · PHOTOGRAMMETRY" : "3D GAUSSIAN SPLATTING"}</span><span>{isSample ? sampleMode !== "synthetic" ? `${heritageSample.title} · 公开摄影测量采样` : "合成亭阁 · 渲染校验样例" : name}</span></div><div className="splat-toolbar"><button className="icon-button" aria-label="适应模型范围" title="适应模型范围" disabled={status !== "ready"} onClick={() => frameRef.current?.()}><Scan size={18} /></button><button className="icon-button" aria-label={rotate ? "暂停旋转" : "自动旋转"} title={rotate ? "暂停旋转" : "自动旋转"} disabled={status !== "ready"} onClick={() => setRotate(!rotate)}>{rotate ? <Pause size={18} /> : <Play size={18} />}</button><button className="icon-button" aria-label="放大模型" title="放大模型" disabled={status !== "ready"} onClick={() => zoom(0.8)}><Plus size={18} /></button><button className="icon-button" aria-label="缩小模型" title="缩小模型" disabled={status !== "ready"} onClick={() => zoom(1.25)}><Minus size={18} /></button><span className="tool-divider" /><label className="axis-label">上轴<select aria-label="模型上轴" value={axis} onChange={(e) => setAxis(e.target.value)}><option value="y">Y+</option><option value="-y">Y−</option><option value="z">Z+</option></select></label><button className={`background-swatch ${background}`} title="切换背景颜色" aria-label="切换背景颜色" onClick={() => setBackground(background === "dark" ? "light" : "dark")} /></div>
+  return <section className={`splat-stage ${background}`} aria-label={photoDepth ? "照片高斯预览查看器" : isSample && sampleMode !== "synthetic" ? "摄影测量点云查看器" : "三维高斯泼溅查看器"}><div ref={host} className="splat-host" /><div className="splat-stage-label"><span className="badge dark-badge">{photoDepth ? "PHOTO · GAUSSIAN" : isSample && sampleMode !== "synthetic" ? "HERITAGE · PHOTOGRAMMETRY" : "3D GAUSSIAN SPLATTING"}</span><span>{isSample ? sampleMode !== "synthetic" ? `${heritageSample.title} · 公开摄影测量采样` : "合成亭阁 · 渲染校验样例" : name}</span></div><div className="splat-toolbar"><button className="icon-button" aria-label="适应模型范围" title="适应模型范围" disabled={status !== "ready"} onClick={() => frameRef.current?.()}><Scan size={18} /></button>{!photoDepth && <button className="icon-button" aria-label={rotate ? "暂停旋转" : "自动旋转"} title={rotate ? "暂停旋转" : "自动旋转"} disabled={status !== "ready"} onClick={() => setRotate(!rotate)}>{rotate ? <Pause size={18} /> : <Play size={18} />}</button>}<button className="icon-button" aria-label="放大模型" title="放大模型" disabled={status !== "ready"} onClick={() => zoom(0.8)}><Plus size={18} /></button><button className="icon-button" aria-label="缩小模型" title="缩小模型" disabled={status !== "ready"} onClick={() => zoom(1.25)}><Minus size={18} /></button>{!photoDepth && <><span className="tool-divider" /><label className="axis-label">上轴<select aria-label="模型上轴" value={axis} onChange={(e) => setAxis(e.target.value)}><option value="y">Y+</option><option value="-y">Y−</option><option value="z">Z+</option></select></label></>}<button className={`background-swatch ${background}`} title="切换背景颜色" aria-label="切换背景颜色" onClick={() => setBackground(background === "dark" ? "light" : "dark")} /></div>
     {status === "loading" && <div className="splat-overlay" role="status"><span className="loader" />{isSample && sampleMode !== "synthetic" ? "正在加载摄影测量点云…" : "正在解析高斯模型…"}</div>}{status === "error" && <div className="splat-overlay" role="alert"><CircleAlert size={28} /><strong>模型暂时无法显示</strong><p>{message}</p><button className="button" onClick={() => setRetry(retry + 1)}><RotateCcw size={15} />重试加载</button></div>}
-    <div className="splat-presets" role="group" aria-label="观察视角">{[["overview", "全景"], ["front", "正面"], ["top", "俯视"], ["detail", "细节"]].map(([id, title]) => <button key={id} disabled={status !== "ready"} aria-pressed={view === id} onClick={() => { viewRef.current = id; setView(id); frameRef.current?.(id); }}>{title}</button>)}<span>拖拽旋转 · 滚轮缩放</span></div><div className="splat-status"><span>{status === "ready" ? `${count.toLocaleString()} ${isSample && sampleMode !== "synthetic" ? "个采样点" : "个高斯点"}` : status === "error" ? "加载失败" : "加载中"}</span><span>{isSample ? sampleMode !== "synthetic" ? "摄影测量点云 · 非训练 3DGS · 尺度未标定" : "合成数据 · 非古建筑实测重建" : "局部坐标 · 尺度未经标定"}</span></div>
+    <div className="splat-presets" role="group" aria-label="观察视角">{(photoDepth ? [["overview", "原始视角"], ["front", "向左微转"], ["top", "向右微转"], ["detail", "细节"]] : [["overview", "全景"], ["front", "正面"], ["top", "俯视"], ["detail", "细节"]]).map(([id, title]) => <button key={id} disabled={status !== "ready"} aria-pressed={view === id} onClick={() => { viewRef.current = id; setView(id); frameRef.current?.(id); }}>{title}</button>)}<span>{photoDepth ? "拖拽微转 · 滚轮缩放" : "拖拽旋转 · 滚轮缩放"}</span></div><div className="splat-status"><span>{status === "ready" ? `${count.toLocaleString()} ${isSample && sampleMode !== "synthetic" ? "个采样点" : "个高斯点"}` : status === "error" ? "加载失败" : "加载中"}</span><span>{photoDepth ? "单图深度推断 · 相对尺度" : isSample ? sampleMode !== "synthetic" ? "摄影测量点云 · 非训练 3DGS · 尺度未标定" : "合成数据 · 非古建筑实测重建" : "局部坐标 · 尺度未经标定"}</span></div>
   </section>;
 }
