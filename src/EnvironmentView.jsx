@@ -31,7 +31,7 @@ function EnvironmentMap({ sites, records, selectedId, metric, onSelect, asOf }) 
       return { ...site, active: site.id === selectedId, color: environmentColor(value, metric), label: siteName(site) + " · " + (stale ? "过期参考" : valueText(value) + METRICS[metric].unit) };
     });
   }, [sites, records, selectedId, metric, asOf]);
-  return <div className="environment-map">{provider === "tencent" ? <TencentMap points={points} fitLocations scrollable={false} onSelect={onSelect} onUnavailable={() => { setProvider("osm"); setUnavailable(true); }} label={METRICS[metric].title + "点位分布地图"} /> : <OpenEnvironmentMap sites={sites} records={records} selectedId={selectedId} metric={metric} onSelect={onSelect} asOf={asOf} />}<MapProviderSelect value={provider} onChange={(value) => { setProvider(value); setUnavailable(false); }} />{unavailable && <div className="basemap-status" role="status">腾讯地图暂不可用，已切换 OpenStreetMap</div>}</div>;
+  return <div className="environment-map">{provider !== "osm" ? <TencentMap points={points} imagery={provider === "tencent-satellite"} fitLocations scrollable={false} onSelect={onSelect} onUnavailable={() => { setProvider("osm"); setUnavailable(true); }} label={METRICS[metric].title + "点位分布地图"} /> : <OpenEnvironmentMap sites={sites} records={records} selectedId={selectedId} metric={metric} onSelect={onSelect} asOf={asOf} />}<MapProviderSelect value={provider} onChange={(value) => { setProvider(value); setUnavailable(false); }} />{unavailable && <div className="basemap-status" role="status">腾讯地图暂不可用，已切换 OpenStreetMap</div>}</div>;
 }
 
 function OpenEnvironmentMap({ sites, records, selectedId, metric, onSelect, asOf }) {

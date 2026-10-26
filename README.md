@@ -1,6 +1,6 @@
 # 古址天眸 · 古遗址研究工作空间
 
-本项目是可运行的浏览器 GIS 试点。遗址地图、保护评估和环境总览支持腾讯 JavaScript API GL 与 Leaflet / OpenStreetMap 两种底图，可在地图内切换。无 Key 时默认 OpenStreetMap；本地配置腾讯 Key 后可默认使用腾讯地图，连接失败会回退。Key 通过被 Git 忽略的 `.env.local` 配置，仓库只提供空白 [.env.example](.env.example)。接入范围、坐标转换与上线注意事项见 [地图配置](docs/maps.md)。OpenStreetMap 从 `tile.openstreetmap.org` 加载当前视野瓦片，使用须遵守 [OSM 瓦片使用政策](https://operations.osmfoundation.org/policies/tiles/)；自定义瓦片可设置 `VITE_TILE_URL` 和 `VITE_TILE_ATTRIBUTION`。
+本项目是可运行的浏览器 GIS 试点。遗址地图、保护评估和环境总览支持腾讯卫星图、腾讯标准图与 Leaflet / OpenStreetMap 底图，可在地图内切换。无 Key 时默认 OpenStreetMap；本地配置腾讯服务后默认使用卫星影像，连接失败会回退。Key 通过被 Git 忽略的 `.env.local` 配置，仓库只提供空白 [.env.example](.env.example)。接入范围、坐标转换与上线注意事项见 [地图配置](docs/maps.md)。OpenStreetMap 从 `tile.openstreetmap.org` 加载当前视野瓦片，使用须遵守 [OSM 瓦片使用政策](https://operations.osmfoundation.org/policies/tiles/)；自定义瓦片可设置 `VITE_TILE_URL` 和 `VITE_TILE_ATTRIBUTION`。
 
 ## 当前可用流程
 
