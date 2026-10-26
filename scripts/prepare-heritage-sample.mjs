@@ -4,7 +4,14 @@ import { brotliDecompressSync } from "node:zlib";
 import { mkdir, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 
-const base = "https://pointcloud.ucsd.edu/archive_temp/oh3d_store/oh3d-vis/datasets/zjnn-wx58/potree/zjnn-wx58_photogrammetry_terrestrial/";
+const samples = {
+  "temple-of-bel": { id: "zjnn-wx58", folder: "zjnn-wx58_photogrammetry_terrestrial", title: "Temple of Bel Tourist Photo Reconstruction", attribution: "Scott McAvoy, Cultural Heritage Engineering Initiative (CHEI) 2020. Distributed by Open Heritage 3D.", limitations: "Source reports uncalibrated cameras and deformation." },
+  "star-of-india": { id: "rebk-tb21", folder: "rebk-tb21_data_derivatives", title: "Star of India - Maritime Museum of San Diego", attribution: "Scott McAvoy, University of California, San Diego Library 2020. Distributed by Open Heritage 3D.", limitations: "High-quality model without georeferencing, as classified by the publisher." },
+};
+const slug = process.argv[2] || "temple-of-bel";
+const sample = samples[slug];
+if (!sample) throw new Error("Unknown sample name.");
+const base = "https://pointcloud.ucsd.edu/archive_temp/oh3d_store/oh3d-vis/datasets/" + sample.id + "/potree/" + sample.folder + "/";
 const maxDepth = 3;
 const output = new URL("../public/samples/", import.meta.url);
 
@@ -93,20 +100,20 @@ for (let start = 0; start < nodes.length; start += 4) {
   console.log(`Prepared ${Math.min(start + 4, nodes.length)}/${nodes.length} nodes (${pointIndex.toLocaleString()} points)`);
 }
 
-const file = "temple-of-bel.splat";
+const file = slug + ".splat";
 await writeFile(new URL(file, output), splats);
-await writeFile(new URL("temple-of-bel-source.json", output), JSON.stringify({
-  title: "Temple of Bel Tourist Photo Reconstruction",
+await writeFile(new URL(slug + "-source.json", output), JSON.stringify({
+  title: sample.title,
   file, points: total, bytes: splats.length,
   sha256: createHash("sha256").update(splats).digest("hex"),
-  source: "https://www.openheritage3d.org/project.php?id=zjnn-wx58",
-  doi: "https://doi.org/10.26301/zjnn-wx58",
-  attribution: "Scott McAvoy, Cultural Heritage Engineering Initiative (CHEI) 2020. Distributed by Open Heritage 3D.",
+  source: "https://www.openheritage3d.org/project.php?id=" + sample.id,
+  doi: "https://doi.org/10.26301/" + sample.id,
+  attribution: sample.attribution,
   license: "CC BY (version not specified on the source record)",
   sourceMetadata: base + "metadata.json",
   accessed: new Date().toISOString(),
   transformation: "Potree LOD 0–3 subset; original XYZ/RGB decoded, centered, rotated from Z-up to Y-up; constant isotropic point sprites encoded as standard 32-byte SPLAT records. No learned covariance, COLMAP or 3DGS training was performed.",
-  limitations: "Visualization derivative of an unscaled photogrammetry model. Source reports uncalibrated cameras and deformation; not suitable for measurements or georegistration. Not associated with the local project's selected archaeological site.",
+  limitations: "Visualization derivative. " + sample.limitations + " Display scale is uncalibrated; not suitable for measurements or georegistration. Not associated with the local project's selected archaeological site.",
 }, null, 2));
-await writeFile(new URL("temple-of-bel-metadata.json", output), metadataBytes);
+await writeFile(new URL(slug + "-metadata.json", output), metadataBytes.toString("utf8").replace(/[ \t]+$/gm, ""));
 console.log(`Saved ${file}: ${total.toLocaleString()} points, ${(splats.length / 1048576).toFixed(1)} MiB`);

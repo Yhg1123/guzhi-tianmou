@@ -1,11 +1,30 @@
 export const heritageSample = {
+  id: "heritage",
+  kind: "pointcloud",
   title: "贝尔神庙",
   subtitle: "Temple of Bel · 帕尔米拉，叙利亚",
   url: "/samples/temple-of-bel.splat",
+  previewUrl: "/samples/temple-of-bel-preview.jpg",
   pointCount: 592454,
   imageCount: 1581,
   sourceUrl: "https://www.openheritage3d.org/project.php?id=zjnn-wx58",
   doiUrl: "https://doi.org/10.26301/zjnn-wx58",
   credit: "Scott McAvoy / CHEI · Open Heritage 3D",
   license: "CC BY（来源记录未注明版本）",
+  bytes: 18958528,
+  sourceManifest: "/samples/temple-of-bel-source.json",
+  description: "来自毁坏前游客照片的摄影测量成果，保留残损与采样缺失。来源模型未标定尺度且存在局部变形。",
 };
+
+export const pointCloudSamples = [heritageSample, {
+  id: "star-of-india", kind: "pointcloud", title: "印度之星号",
+  subtitle: "Star of India · 美国圣迭戈 · 海事遗产",
+  url: "/samples/star-of-india.splat", previewUrl: "/samples/star-of-india-preview.jpg",
+  pointCount: 338580, imageCount: 1079, bytes: 10834560,
+  sourceUrl: "https://www.openheritage3d.org/project.php?id=rebk-tb21",
+  doiUrl: "https://doi.org/10.26301/rebk-tb21",
+  credit: "Scott McAvoy / UC San Diego Library · Open Heritage 3D",
+  license: "CC BY（来源记录未注明版本）",
+  sourceManifest: "/samples/star-of-india-source.json",
+  description: "1863 年建造的铁壳帆船。此案例使用 2020 年船坞维护期间的摄影测量点云；公开记录标为未地理配准模型，本站显示采样并未校准尺度。",
+}];

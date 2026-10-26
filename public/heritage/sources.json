@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "records": [
+    {
+      "id": "great-wall",
+      "kind": "photo",
+      "title": "慕田峪长城",
+      "subtitle": "中国 · 北京 · 真实开放摄影",
+      "previewUrl": "/heritage/great-wall.jpg",
+      "url": "/heritage/great-wall.jpg",
+      "credit": "Nicolas Perrault III / Wikimedia Commons",
+      "license": "CC0 1.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Great_Wall_of_China_July_2006.JPG",
+      "imageCount": 1,
+      "description": "2006 年 7 月的慕田峪长城摄影。可作为建筑环境与影像记录案例；单张照片不是三维重建成果。",
+      "capturedOn": "2006-07-21",
+      "siteId": "public-mutianyu",
+      "bytes": 754922,
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Great_Wall_of_China_July_2006.JPG",
+      "sha256": "047aa0874b244ed68973843d8bb52b5c998084c98e273e6adf66eb29ab8179fa",
+      "changes": "Original JPEG bytes retained unchanged; layout uses object-fit without altering the source file.",
+      "accessed": "2026-10-26"
+    },
+    {
+      "id": "forbidden-city",
+      "kind": "photo",
+      "title": "北京故宫",
+      "subtitle": "中国 · 北京 · 真实开放摄影",
+      "previewUrl": "/heritage/forbidden-city.jpg",
+      "url": "/heritage/forbidden-city.jpg",
+      "credit": "Kaap bij Sneeuw / Wikimedia Commons",
+      "license": "CC0 1.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Forbidden_City_2018-05_Beijing.jpg",
+      "imageCount": 1,
+      "description": "2018 年 5 月的北京故宫摄影，位于太和殿与乾清宫之间。展示真实影像与资料来源，尚未收录该地点的三维模型。",
+      "capturedOn": "2018-05-20",
+      "siteId": "public-forbidden-city",
+      "bytes": 122348,
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Forbidden_City_2018-05_Beijing.jpg",
+      "sha256": "2c660c7dad8004840b966953c04185d37cb9eaeeb439216f4edc2a765209ed1f",
+      "changes": "Original JPEG bytes retained unchanged; layout uses object-fit without altering the source file.",
+      "accessed": "2026-10-26"
+    }
+  ]
+}

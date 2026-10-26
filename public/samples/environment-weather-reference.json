@@ -1,0 +1,1170 @@
+{
+  "schema": 1,
+  "mode": "weather",
+  "sourceType": "weather_model_not_onsite_sensor",
+  "source": "Open-Meteo · 天气模型参考",
+  "requestedSites": [
+    {
+      "id": "public-forbidden-city",
+      "name": "北京故宫（公开参考点）",
+      "lat": 39.91583333333333,
+      "lng": 116.39083333333333,
+      "isDemo": false,
+      "recordSource": "公开参考点：Wikidata Q80290（源于 Wikipedia）；https://www.wikidata.org/wiki/Q80290；非测绘点位"
+    },
+    {
+      "id": "public-mutianyu",
+      "name": "慕田峪长城（影像参考点）",
+      "lat": 40.42915194444444,
+      "lng": 116.56724805555555,
+      "isDemo": false,
+      "recordSource": "公开摄影位置：Nicolas Perrault III / Wikimedia Commons；https://commons.wikimedia.org/wiki/File:Great_Wall_of_China_July_2006.JPG；非保护范围中心"
+    },
+    {
+      "id": "public-mogao",
+      "name": "莫高窟（公开参考点）",
+      "lat": 40.037277777777774,
+      "lng": 94.80408333333332,
+      "isDemo": false,
+      "recordSource": "公开参考中心：敦煌研究院 2002 年定期报告，UNESCO 文档 162539；https://whc.unesco.org/document/162539；非现状测绘边界"
+    }
+  ],
+  "fetchedAt": 1792980923286,
+  "units": {
+    "temperature": "°C",
+    "humidity": "%",
+    "windSpeed": "m/s",
+    "precipitation": "mm"
+  },
+  "records": [
+    {
+      "siteId": "public-forbidden-city",
+      "timestamp": 1792980900000,
+      "interval": 900,
+      "temperature": 12.8,
+      "humidity": 65,
+      "precipitation": 0,
+      "windSpeed": 2.1,
+      "source": "Open-Meteo · 天气模型参考",
+      "history": [
+        {
+          "timestamp": 1792886400000,
+          "temperature": 12.4,
+          "humidity": 91
+        },
+        {
+          "timestamp": 1792890000000,
+          "temperature": 12.5,
+          "humidity": 85
+        },
+        {
+          "timestamp": 1792893600000,
+          "temperature": 12.9,
+          "humidity": 81
+        },
+        {
+          "timestamp": 1792897200000,
+          "temperature": 13.3,
+          "humidity": 76
+        },
+        {
+          "timestamp": 1792900800000,
+          "temperature": 13.4,
+          "humidity": 75
+        },
+        {
+          "timestamp": 1792904400000,
+          "temperature": 13.4,
+          "humidity": 72
+        },
+        {
+          "timestamp": 1792908000000,
+          "temperature": 13.2,
+          "humidity": 80
+        },
+        {
+          "timestamp": 1792911600000,
+          "temperature": 12.9,
+          "humidity": 80
+        },
+        {
+          "timestamp": 1792915200000,
+          "temperature": 12.3,
+          "humidity": 83
+        },
+        {
+          "timestamp": 1792918800000,
+          "temperature": 11.7,
+          "humidity": 86
+        },
+        {
+          "timestamp": 1792922400000,
+          "temperature": 11.4,
+          "humidity": 87
+        },
+        {
+          "timestamp": 1792926000000,
+          "temperature": 11.3,
+          "humidity": 88
+        },
+        {
+          "timestamp": 1792929600000,
+          "temperature": 10.7,
+          "humidity": 91
+        },
+        {
+          "timestamp": 1792933200000,
+          "temperature": 10.4,
+          "humidity": 93
+        },
+        {
+          "timestamp": 1792936800000,
+          "temperature": 10.4,
+          "humidity": 94
+        },
+        {
+          "timestamp": 1792940400000,
+          "temperature": 10.4,
+          "humidity": 95
+        },
+        {
+          "timestamp": 1792944000000,
+          "temperature": 10.4,
+          "humidity": 95
+        },
+        {
+          "timestamp": 1792947600000,
+          "temperature": 10.4,
+          "humidity": 96
+        },
+        {
+          "timestamp": 1792951200000,
+          "temperature": 10.1,
+          "humidity": 96
+        },
+        {
+          "timestamp": 1792954800000,
+          "temperature": 10,
+          "humidity": 95
+        },
+        {
+          "timestamp": 1792958400000,
+          "temperature": 9.3,
+          "humidity": 96
+        },
+        {
+          "timestamp": 1792962000000,
+          "temperature": 9.1,
+          "humidity": 93
+        },
+        {
+          "timestamp": 1792965600000,
+          "temperature": 9.2,
+          "humidity": 90
+        },
+        {
+          "timestamp": 1792969200000,
+          "temperature": 9.1,
+          "humidity": 88
+        },
+        {
+          "timestamp": 1792972800000,
+          "temperature": 10.2,
+          "humidity": 85
+        },
+        {
+          "timestamp": 1792976400000,
+          "temperature": 11.2,
+          "humidity": 83
+        },
+        {
+          "timestamp": 1792980000000,
+          "temperature": 12.4,
+          "humidity": 70
+        },
+        {
+          "timestamp": 1792983600000,
+          "temperature": 14,
+          "humidity": 54
+        },
+        {
+          "timestamp": 1792987200000,
+          "temperature": 15.1,
+          "humidity": 48
+        },
+        {
+          "timestamp": 1792990800000,
+          "temperature": 16.6,
+          "humidity": 33
+        },
+        {
+          "timestamp": 1792994400000,
+          "temperature": 16.9,
+          "humidity": 32
+        },
+        {
+          "timestamp": 1792998000000,
+          "temperature": 16.9,
+          "humidity": 33
+        },
+        {
+          "timestamp": 1793001600000,
+          "temperature": 16.3,
+          "humidity": 33
+        },
+        {
+          "timestamp": 1793005200000,
+          "temperature": 14.4,
+          "humidity": 45
+        },
+        {
+          "timestamp": 1793008800000,
+          "temperature": 12.6,
+          "humidity": 61
+        },
+        {
+          "timestamp": 1793012400000,
+          "temperature": 11.8,
+          "humidity": 74
+        },
+        {
+          "timestamp": 1793016000000,
+          "temperature": 11.1,
+          "humidity": 79
+        },
+        {
+          "timestamp": 1793019600000,
+          "temperature": 11.4,
+          "humidity": 55
+        },
+        {
+          "timestamp": 1793023200000,
+          "temperature": 10.9,
+          "humidity": 45
+        },
+        {
+          "timestamp": 1793026800000,
+          "temperature": 11.3,
+          "humidity": 38
+        },
+        {
+          "timestamp": 1793030400000,
+          "temperature": 11.8,
+          "humidity": 29
+        },
+        {
+          "timestamp": 1793034000000,
+          "temperature": 10.7,
+          "humidity": 28
+        },
+        {
+          "timestamp": 1793037600000,
+          "temperature": 9.1,
+          "humidity": 30
+        },
+        {
+          "timestamp": 1793041200000,
+          "temperature": 8.4,
+          "humidity": 31
+        },
+        {
+          "timestamp": 1793044800000,
+          "temperature": 7.8,
+          "humidity": 33
+        },
+        {
+          "timestamp": 1793048400000,
+          "temperature": 7.2,
+          "humidity": 34
+        },
+        {
+          "timestamp": 1793052000000,
+          "temperature": 6.5,
+          "humidity": 37
+        },
+        {
+          "timestamp": 1793055600000,
+          "temperature": 6.3,
+          "humidity": 37
+        },
+        {
+          "timestamp": 1793059200000,
+          "temperature": 7.6,
+          "humidity": 35
+        },
+        {
+          "timestamp": 1793062800000,
+          "temperature": 9.3,
+          "humidity": 35
+        },
+        {
+          "timestamp": 1793066400000,
+          "temperature": 10.4,
+          "humidity": 32
+        },
+        {
+          "timestamp": 1793070000000,
+          "temperature": 11.9,
+          "humidity": 24
+        },
+        {
+          "timestamp": 1793073600000,
+          "temperature": 12.8,
+          "humidity": 22
+        },
+        {
+          "timestamp": 1793077200000,
+          "temperature": 13.3,
+          "humidity": 22
+        },
+        {
+          "timestamp": 1793080800000,
+          "temperature": 13.9,
+          "humidity": 22
+        },
+        {
+          "timestamp": 1793084400000,
+          "temperature": 14.3,
+          "humidity": 23
+        },
+        {
+          "timestamp": 1793088000000,
+          "temperature": 13.9,
+          "humidity": 35
+        },
+        {
+          "timestamp": 1793091600000,
+          "temperature": 11.6,
+          "humidity": 45
+        },
+        {
+          "timestamp": 1793095200000,
+          "temperature": 9.9,
+          "humidity": 49
+        },
+        {
+          "timestamp": 1793098800000,
+          "temperature": 9.1,
+          "humidity": 53
+        },
+        {
+          "timestamp": 1793102400000,
+          "temperature": 8.6,
+          "humidity": 55
+        },
+        {
+          "timestamp": 1793106000000,
+          "temperature": 8.1,
+          "humidity": 57
+        },
+        {
+          "timestamp": 1793109600000,
+          "temperature": 7.7,
+          "humidity": 58
+        },
+        {
+          "timestamp": 1793113200000,
+          "temperature": 7.5,
+          "humidity": 59
+        },
+        {
+          "timestamp": 1793116800000,
+          "temperature": 7.2,
+          "humidity": 59
+        },
+        {
+          "timestamp": 1793120400000,
+          "temperature": 6.5,
+          "humidity": 63
+        },
+        {
+          "timestamp": 1793124000000,
+          "temperature": 5.7,
+          "humidity": 67
+        },
+        {
+          "timestamp": 1793127600000,
+          "temperature": 4.9,
+          "humidity": 72
+        },
+        {
+          "timestamp": 1793131200000,
+          "temperature": 4.3,
+          "humidity": 76
+        },
+        {
+          "timestamp": 1793134800000,
+          "temperature": 3.7,
+          "humidity": 80
+        },
+        {
+          "timestamp": 1793138400000,
+          "temperature": 3.3,
+          "humidity": 83
+        },
+        {
+          "timestamp": 1793142000000,
+          "temperature": 3,
+          "humidity": 84
+        }
+      ],
+      "grid": {
+        "lat": 39.89455,
+        "lng": 116.35983
+      }
+    },
+    {
+      "siteId": "public-mutianyu",
+      "timestamp": 1792980900000,
+      "interval": 900,
+      "temperature": 10.3,
+      "humidity": 40,
+      "precipitation": 0,
+      "windSpeed": 2.88,
+      "source": "Open-Meteo · 天气模型参考",
+      "history": [
+        {
+          "timestamp": 1792886400000,
+          "temperature": 9.1,
+          "humidity": 95
+        },
+        {
+          "timestamp": 1792890000000,
+          "temperature": 9.2,
+          "humidity": 97
+        },
+        {
+          "timestamp": 1792893600000,
+          "temperature": 9.1,
+          "humidity": 96
+        },
+        {
+          "timestamp": 1792897200000,
+          "temperature": 9,
+          "humidity": 98
+        },
+        {
+          "timestamp": 1792900800000,
+          "temperature": 8.8,
+          "humidity": 99
+        },
+        {
+          "timestamp": 1792904400000,
+          "temperature": 8.7,
+          "humidity": 99
+        },
+        {
+          "timestamp": 1792908000000,
+          "temperature": 8.8,
+          "humidity": 100
+        },
+        {
+          "timestamp": 1792911600000,
+          "temperature": 8.5,
+          "humidity": 100
+        },
+        {
+          "timestamp": 1792915200000,
+          "temperature": 8.2,
+          "humidity": 100
+        },
+        {
+          "timestamp": 1792918800000,
+          "temperature": 8,
+          "humidity": 100
+        },
+        {
+          "timestamp": 1792922400000,
+          "temperature": 7.8,
+          "humidity": 100
+        },
+        {
+          "timestamp": 1792926000000,
+          "temperature": 7.7,
+          "humidity": 99
+        },
+        {
+          "timestamp": 1792929600000,
+          "temperature": 7.8,
+          "humidity": 98
+        },
+        {
+          "timestamp": 1792933200000,
+          "temperature": 7.9,
+          "humidity": 98
+        },
+        {
+          "timestamp": 1792936800000,
+          "temperature": 7.9,
+          "humidity": 99
+        },
+        {
+          "timestamp": 1792940400000,
+          "temperature": 8,
+          "humidity": 98
+        },
+        {
+          "timestamp": 1792944000000,
+          "temperature": 7.8,
+          "humidity": 98
+        },
+        {
+          "timestamp": 1792947600000,
+          "temperature": 7.3,
+          "humidity": 97
+        },
+        {
+          "timestamp": 1792951200000,
+          "temperature": 6.3,
+          "humidity": 94
+        },
+        {
+          "timestamp": 1792954800000,
+          "temperature": 5.7,
+          "humidity": 95
+        },
+        {
+          "timestamp": 1792958400000,
+          "temperature": 4.6,
+          "humidity": 96
+        },
+        {
+          "timestamp": 1792962000000,
+          "temperature": 4.3,
+          "humidity": 94
+        },
+        {
+          "timestamp": 1792965600000,
+          "temperature": 3.5,
+          "humidity": 95
+        },
+        {
+          "timestamp": 1792969200000,
+          "temperature": 3.3,
+          "humidity": 93
+        },
+        {
+          "timestamp": 1792972800000,
+          "temperature": 6.1,
+          "humidity": 77
+        },
+        {
+          "timestamp": 1792976400000,
+          "temperature": 8,
+          "humidity": 52
+        },
+        {
+          "timestamp": 1792980000000,
+          "temperature": 9.9,
+          "humidity": 42
+        },
+        {
+          "timestamp": 1792983600000,
+          "temperature": 11.3,
+          "humidity": 38
+        },
+        {
+          "timestamp": 1792987200000,
+          "temperature": 12.6,
+          "humidity": 35
+        },
+        {
+          "timestamp": 1792990800000,
+          "temperature": 13.7,
+          "humidity": 29
+        },
+        {
+          "timestamp": 1792994400000,
+          "temperature": 13.8,
+          "humidity": 26
+        },
+        {
+          "timestamp": 1792998000000,
+          "temperature": 12.7,
+          "humidity": 28
+        },
+        {
+          "timestamp": 1793001600000,
+          "temperature": 12,
+          "humidity": 29
+        },
+        {
+          "timestamp": 1793005200000,
+          "temperature": 10,
+          "humidity": 35
+        },
+        {
+          "timestamp": 1793008800000,
+          "temperature": 6.6,
+          "humidity": 46
+        },
+        {
+          "timestamp": 1793012400000,
+          "temperature": 6.5,
+          "humidity": 42
+        },
+        {
+          "timestamp": 1793016000000,
+          "temperature": 5.9,
+          "humidity": 42
+        },
+        {
+          "timestamp": 1793019600000,
+          "temperature": 4.7,
+          "humidity": 46
+        },
+        {
+          "timestamp": 1793023200000,
+          "temperature": 4.7,
+          "humidity": 40
+        },
+        {
+          "timestamp": 1793026800000,
+          "temperature": 5.5,
+          "humidity": 29
+        },
+        {
+          "timestamp": 1793030400000,
+          "temperature": 4.5,
+          "humidity": 30
+        },
+        {
+          "timestamp": 1793034000000,
+          "temperature": 3,
+          "humidity": 33
+        },
+        {
+          "timestamp": 1793037600000,
+          "temperature": 2,
+          "humidity": 35
+        },
+        {
+          "timestamp": 1793041200000,
+          "temperature": 1.8,
+          "humidity": 34
+        },
+        {
+          "timestamp": 1793044800000,
+          "temperature": 1.9,
+          "humidity": 33
+        },
+        {
+          "timestamp": 1793048400000,
+          "temperature": 1.9,
+          "humidity": 32
+        },
+        {
+          "timestamp": 1793052000000,
+          "temperature": 1.8,
+          "humidity": 32
+        },
+        {
+          "timestamp": 1793055600000,
+          "temperature": 1.9,
+          "humidity": 32
+        },
+        {
+          "timestamp": 1793059200000,
+          "temperature": 3.5,
+          "humidity": 29
+        },
+        {
+          "timestamp": 1793062800000,
+          "temperature": 5,
+          "humidity": 24
+        },
+        {
+          "timestamp": 1793066400000,
+          "temperature": 6.2,
+          "humidity": 23
+        },
+        {
+          "timestamp": 1793070000000,
+          "temperature": 7.3,
+          "humidity": 21
+        },
+        {
+          "timestamp": 1793073600000,
+          "temperature": 8.3,
+          "humidity": 20
+        },
+        {
+          "timestamp": 1793077200000,
+          "temperature": 9,
+          "humidity": 19
+        },
+        {
+          "timestamp": 1793080800000,
+          "temperature": 9.5,
+          "humidity": 19
+        },
+        {
+          "timestamp": 1793084400000,
+          "temperature": 9.7,
+          "humidity": 20
+        },
+        {
+          "timestamp": 1793088000000,
+          "temperature": 9.4,
+          "humidity": 21
+        },
+        {
+          "timestamp": 1793091600000,
+          "temperature": 6.6,
+          "humidity": 34
+        },
+        {
+          "timestamp": 1793095200000,
+          "temperature": 4.6,
+          "humidity": 36
+        },
+        {
+          "timestamp": 1793098800000,
+          "temperature": 3.5,
+          "humidity": 39
+        },
+        {
+          "timestamp": 1793102400000,
+          "temperature": 3.2,
+          "humidity": 37
+        },
+        {
+          "timestamp": 1793106000000,
+          "temperature": 3.7,
+          "humidity": 35
+        },
+        {
+          "timestamp": 1793109600000,
+          "temperature": 4.8,
+          "humidity": 30
+        },
+        {
+          "timestamp": 1793113200000,
+          "temperature": 4.9,
+          "humidity": 30
+        },
+        {
+          "timestamp": 1793116800000,
+          "temperature": 4.5,
+          "humidity": 31
+        },
+        {
+          "timestamp": 1793120400000,
+          "temperature": 4.1,
+          "humidity": 32
+        },
+        {
+          "timestamp": 1793124000000,
+          "temperature": 3.8,
+          "humidity": 33
+        },
+        {
+          "timestamp": 1793127600000,
+          "temperature": 3.4,
+          "humidity": 35
+        },
+        {
+          "timestamp": 1793131200000,
+          "temperature": 3,
+          "humidity": 36
+        },
+        {
+          "timestamp": 1793134800000,
+          "temperature": 2.6,
+          "humidity": 37
+        },
+        {
+          "timestamp": 1793138400000,
+          "temperature": 2.2,
+          "humidity": 38
+        },
+        {
+          "timestamp": 1793142000000,
+          "temperature": 1.9,
+          "humidity": 41
+        }
+      ],
+      "grid": {
+        "lat": 40.45694,
+        "lng": 116.53033
+      }
+    },
+    {
+      "siteId": "public-mogao",
+      "timestamp": 1792980900000,
+      "interval": 900,
+      "temperature": 1.4,
+      "humidity": 46,
+      "precipitation": 0,
+      "windSpeed": 1.16,
+      "source": "Open-Meteo · 天气模型参考",
+      "history": [
+        {
+          "timestamp": 1792886400000,
+          "temperature": -1.2,
+          "humidity": 68
+        },
+        {
+          "timestamp": 1792890000000,
+          "temperature": 0,
+          "humidity": 55
+        },
+        {
+          "timestamp": 1792893600000,
+          "temperature": 1.7,
+          "humidity": 46
+        },
+        {
+          "timestamp": 1792897200000,
+          "temperature": 2.9,
+          "humidity": 42
+        },
+        {
+          "timestamp": 1792900800000,
+          "temperature": 4.1,
+          "humidity": 38
+        },
+        {
+          "timestamp": 1792904400000,
+          "temperature": 5.2,
+          "humidity": 35
+        },
+        {
+          "timestamp": 1792908000000,
+          "temperature": 5.7,
+          "humidity": 33
+        },
+        {
+          "timestamp": 1792911600000,
+          "temperature": 6.2,
+          "humidity": 31
+        },
+        {
+          "timestamp": 1792915200000,
+          "temperature": 6.3,
+          "humidity": 31
+        },
+        {
+          "timestamp": 1792918800000,
+          "temperature": 6,
+          "humidity": 31
+        },
+        {
+          "timestamp": 1792922400000,
+          "temperature": 5.3,
+          "humidity": 32
+        },
+        {
+          "timestamp": 1792926000000,
+          "temperature": 3.7,
+          "humidity": 37
+        },
+        {
+          "timestamp": 1792929600000,
+          "temperature": 2.8,
+          "humidity": 42
+        },
+        {
+          "timestamp": 1792933200000,
+          "temperature": 2.3,
+          "humidity": 43
+        },
+        {
+          "timestamp": 1792936800000,
+          "temperature": 1,
+          "humidity": 49
+        },
+        {
+          "timestamp": 1792940400000,
+          "temperature": 0.2,
+          "humidity": 55
+        },
+        {
+          "timestamp": 1792944000000,
+          "temperature": -0.4,
+          "humidity": 56
+        },
+        {
+          "timestamp": 1792947600000,
+          "temperature": -0.9,
+          "humidity": 57
+        },
+        {
+          "timestamp": 1792951200000,
+          "temperature": -1.5,
+          "humidity": 60
+        },
+        {
+          "timestamp": 1792954800000,
+          "temperature": -1.9,
+          "humidity": 62
+        },
+        {
+          "timestamp": 1792958400000,
+          "temperature": -2.4,
+          "humidity": 63
+        },
+        {
+          "timestamp": 1792962000000,
+          "temperature": -2.9,
+          "humidity": 66
+        },
+        {
+          "timestamp": 1792965600000,
+          "temperature": -3.3,
+          "humidity": 69
+        },
+        {
+          "timestamp": 1792969200000,
+          "temperature": -3.4,
+          "humidity": 70
+        },
+        {
+          "timestamp": 1792972800000,
+          "temperature": -3.3,
+          "humidity": 69
+        },
+        {
+          "timestamp": 1792976400000,
+          "temperature": -1.3,
+          "humidity": 58
+        },
+        {
+          "timestamp": 1792980000000,
+          "temperature": 0.9,
+          "humidity": 48
+        },
+        {
+          "timestamp": 1792983600000,
+          "temperature": 2.6,
+          "humidity": 42
+        },
+        {
+          "timestamp": 1792987200000,
+          "temperature": 3.7,
+          "humidity": 42
+        },
+        {
+          "timestamp": 1792990800000,
+          "temperature": 5.1,
+          "humidity": 38
+        },
+        {
+          "timestamp": 1792994400000,
+          "temperature": 6.3,
+          "humidity": 33
+        },
+        {
+          "timestamp": 1792998000000,
+          "temperature": 7,
+          "humidity": 30
+        },
+        {
+          "timestamp": 1793001600000,
+          "temperature": 7.3,
+          "humidity": 29
+        },
+        {
+          "timestamp": 1793005200000,
+          "temperature": 7.1,
+          "humidity": 28
+        },
+        {
+          "timestamp": 1793008800000,
+          "temperature": 6.3,
+          "humidity": 30
+        },
+        {
+          "timestamp": 1793012400000,
+          "temperature": 4,
+          "humidity": 43
+        },
+        {
+          "timestamp": 1793016000000,
+          "temperature": 3.4,
+          "humidity": 42
+        },
+        {
+          "timestamp": 1793019600000,
+          "temperature": 2.9,
+          "humidity": 43
+        },
+        {
+          "timestamp": 1793023200000,
+          "temperature": 2.3,
+          "humidity": 44
+        },
+        {
+          "timestamp": 1793026800000,
+          "temperature": 1.6,
+          "humidity": 47
+        },
+        {
+          "timestamp": 1793030400000,
+          "temperature": 1.2,
+          "humidity": 49
+        },
+        {
+          "timestamp": 1793034000000,
+          "temperature": 0.8,
+          "humidity": 50
+        },
+        {
+          "timestamp": 1793037600000,
+          "temperature": 0.6,
+          "humidity": 51
+        },
+        {
+          "timestamp": 1793041200000,
+          "temperature": 0.6,
+          "humidity": 49
+        },
+        {
+          "timestamp": 1793044800000,
+          "temperature": 0.6,
+          "humidity": 47
+        },
+        {
+          "timestamp": 1793048400000,
+          "temperature": 0.5,
+          "humidity": 46
+        },
+        {
+          "timestamp": 1793052000000,
+          "temperature": 0.3,
+          "humidity": 47
+        },
+        {
+          "timestamp": 1793055600000,
+          "temperature": 0.1,
+          "humidity": 48
+        },
+        {
+          "timestamp": 1793059200000,
+          "temperature": -0.3,
+          "humidity": 49
+        },
+        {
+          "timestamp": 1793062800000,
+          "temperature": 0.9,
+          "humidity": 45
+        },
+        {
+          "timestamp": 1793066400000,
+          "temperature": 3.2,
+          "humidity": 37
+        },
+        {
+          "timestamp": 1793070000000,
+          "temperature": 4.7,
+          "humidity": 32
+        },
+        {
+          "timestamp": 1793073600000,
+          "temperature": 5.8,
+          "humidity": 31
+        },
+        {
+          "timestamp": 1793077200000,
+          "temperature": 6.9,
+          "humidity": 29
+        },
+        {
+          "timestamp": 1793080800000,
+          "temperature": 7.8,
+          "humidity": 25
+        },
+        {
+          "timestamp": 1793084400000,
+          "temperature": 8.1,
+          "humidity": 22
+        },
+        {
+          "timestamp": 1793088000000,
+          "temperature": 8,
+          "humidity": 20
+        },
+        {
+          "timestamp": 1793091600000,
+          "temperature": 7.7,
+          "humidity": 20
+        },
+        {
+          "timestamp": 1793095200000,
+          "temperature": 6.9,
+          "humidity": 21
+        },
+        {
+          "timestamp": 1793098800000,
+          "temperature": 4.6,
+          "humidity": 28
+        },
+        {
+          "timestamp": 1793102400000,
+          "temperature": 3.3,
+          "humidity": 32
+        },
+        {
+          "timestamp": 1793106000000,
+          "temperature": 2.8,
+          "humidity": 31
+        },
+        {
+          "timestamp": 1793109600000,
+          "temperature": 2.1,
+          "humidity": 32
+        },
+        {
+          "timestamp": 1793113200000,
+          "temperature": 1.4,
+          "humidity": 34
+        },
+        {
+          "timestamp": 1793116800000,
+          "temperature": 0.9,
+          "humidity": 38
+        },
+        {
+          "timestamp": 1793120400000,
+          "temperature": 0.3,
+          "humidity": 44
+        },
+        {
+          "timestamp": 1793124000000,
+          "temperature": 0.1,
+          "humidity": 44
+        },
+        {
+          "timestamp": 1793127600000,
+          "temperature": -0.4,
+          "humidity": 45
+        },
+        {
+          "timestamp": 1793131200000,
+          "temperature": -0.4,
+          "humidity": 45
+        },
+        {
+          "timestamp": 1793134800000,
+          "temperature": -0.1,
+          "humidity": 43
+        },
+        {
+          "timestamp": 1793138400000,
+          "temperature": 0.3,
+          "humidity": 40
+        },
+        {
+          "timestamp": 1793142000000,
+          "temperature": -0.3,
+          "humidity": 42
+        }
+      ],
+      "grid": {
+        "lat": 40.03515,
+        "lng": 94.78322
+      }
+    }
+  ],
+  "archiveNote": "2026-10-26 经实际 Open-Meteo API 请求导出的公开参考天气快照；断网时作为历史资料显示，不是实时实测。"
+}

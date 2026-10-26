@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { get, set, del, keys, getMany } from "idb-keyval";
-import { Users, Camera, Images, History, MapPin, Bookmark, Check, Download, X, CircleAlert, ArrowUpRight } from "lucide-react";
+import { Camera, Images, History, MapPin, Bookmark, Check, Download, X, CircleAlert, ArrowUpRight, ArrowRight, ChevronRight, FolderOpen, ShieldCheck } from "lucide-react";
 import { download } from "./project.js";
+import { heritageSample } from "./heritageSample.js";
+import { heritagePhotographs } from "./referenceSites.js";
 import { CAPTURE_ANGLES, PARTICIPATION_TASKS, CONTRIBUTION_PREFIX, VISITS_KEY, MAX_PHOTOS, validatePhotoBatch, makeContribution, contributionManifest, describeCoverage, siteIdentity, isStoredContribution } from "./participation.js";
 import "./community.css";
 
@@ -62,6 +64,8 @@ function CommunityProject({ site, sites, onSelectSite, onMap, onReconstruction }
   const [busy, setBusy] = useState("");
   const [notice, setNotice] = useState(null);
   const [removeConfirm, setRemoveConfirm] = useState("");
+  const entryRef = useRef(null);
+  const [dragging, setDragging] = useState(false);
   const alive = useRef(false);
   useEffect(() => {
     alive.current = true;
@@ -76,7 +80,28 @@ function CommunityProject({ site, sites, onSelectSite, onMap, onReconstruction }
   const coverage = site ? describeCoverage(records, site) : null;
   const visitSites = sites.filter((item) => visits.includes(siteIdentity(item)));
   const bookmarked = site && visits.includes(siteIdentity(site));
+  const photograph = heritagePhotographs.find((item) => item.siteId === site?.id);
+  function beginContribution() {
+    setTab("tasks");
+    requestAnimationFrame(() => {
+      entryRef.current?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth", block: "start" });
+      entryRef.current?.focus({ preventScroll: true });
+    });
+  }
+  function saveGuide() {
+    download("遗产影像采集指引.txt", [
+      "古址天眸 · 遗产影像采集指引", "", "当前遗址：" + (site?.name || "未选择"),
+      site?.isDemo ? "演示点位未经核验，请勿据此导航；任务为流程示例，非机构采集委托。" : "到访前请核实开放状态与拍摄权限。",
+      "当前任务：" + currentTask.title, currentTask.guidance, "",
+      "1. 先记录整体环境，再补充构件与细节；多张连续影像保留重叠。",
+      "2. 保留原图，不加滤镜、不用 AI 补画；可如实注明不确定的年代和方向。",
+      "3. 只在开放区域拍摄，不触碰、不攀爬文物；避开人脸与私人信息。",
+      "4. JPG / PNG / WEBP，每份最多 12 张，单张不超过 20 MB，每批不超过 60 MB。",
+      "5. 本地贡献未提交机构、未审核、未进入模型训练；请保留原图并下载资料说明。",
+    ].join("\n"), "text/plain;charset=utf-8");
+  }
   function selectSite(id) {
+    if (busy) return;
     if (photos.length) {
       setNotice({ error: true, message: "当前照片还未保存，请先保存本地贡献，或移除本批照片后再切换遗址。" });
       setTab("tasks"); return;
@@ -144,27 +169,60 @@ function CommunityProject({ site, sites, onSelectSite, onMap, onReconstruction }
     } catch { if (alive.current) setNotice({ error: true, message: "移除失败，原记录仍保留。" }); }
     finally { if (alive.current) setBusy(""); }
   }
-  return <div className="page-scroll community-page">
-    <div className="page-title"><div><span className="eyebrow">HERITAGE TOGETHER</span><h1>公众共建</h1></div><span className="badge amber">本地试点</span></div>
-    <section className="community-intro"><div><span className="community-kicker"><Users size={15} />文旅探访 · 数字守护</span><h2>让每一次探访，留下保护的线索</h2><p>旅途中拍下现状，在旧相册里寻找历史。把你的视角留给遗产档案，让更多人认识、记录和守护这些地方。</p></div><div className="community-intro-actions"><button className="button" onClick={onMap}><MapPin size={15} />浏览遗址地图</button><button className="text-button" onClick={onReconstruction}>看看真实三维案例 <ArrowUpRight size={14} /></button></div></section>
-    <div className="notice warning community-boundary"><CircleAlert size={17} /><span>本页是参与流程试点：照片原图保存在此设备，尚未上传或交给管理机构。公开征集、专家审核与重建训练将在接入后台后开放。</span></div>
-    <div className="community-context"><label>选择参与遗址<select aria-label="选择参与遗址" value={site?.id || ""} disabled={Boolean(busy)} onChange={(event) => selectSite(event.target.value)}>{sites.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}</select></label><button className="button" disabled={!site || !ready || Boolean(busy)} aria-pressed={Boolean(bookmarked)} onClick={toggleVisit}>{bookmarked ? <Check size={15} /> : <Bookmark size={15} />}{bookmarked ? "已加入探访清单" : "加入探访清单"}</button></div>
-    {site?.isDemo && <p className="community-demo">当前遗址点位未经核验；下方为任务设计示例，不代表已获得景区或文保管理方的采集委托。</p>}
+  return <div className="community-page">
+    <section className="community-hero" aria-label="参与遗产影像记录">
+      <div className="community-hero-copy">
+        <h1><span>让每一次探访，</span><span>留下保护的线索</span></h1>
+        <p>你的照片，记录了遗址的现状、细节与周边环境，<br className="desktop-break" />为历史留下更多真实的视角。<br />这些影像将帮助我们更好地理解、记录和守护这些地方。</p>
+        <button className="button primary community-start" onClick={beginContribution}><Camera size={22} />开始记录照片<ChevronRight size={20} /></button>
+        <button className="text-button community-map-link" onClick={onMap}>浏览遗址地图<ArrowRight size={18} /></button>
+      </div>
+      <figure className="community-hero-figure">
+        <button className="community-model-link" onClick={onReconstruction} aria-label="查看贝尔神庙真实三维案例"><img src={heritageSample.previewUrl} alt="贝尔神庙公开摄影测量点云的真实渲染，保留建筑残损与采样缺失" width="600" height="380" fetchPriority="high" /><span className="community-model-action">进入三维案例<ArrowUpRight size={16} /></span></button>
+        <figcaption><strong>开放影像案例 · 贝尔神庙</strong><a href={heritageSample.sourceUrl} target="_blank" rel="noreferrer">{heritageSample.credit} · CC BY<ArrowUpRight size={12} /></a><small>示例与所选遗址无关 · 摄影测量点云，非训练 3DGS</small></figcaption>
+      </figure>
+    </section>
+    <div className="community-workspace" data-view={tab}>
+    <div className="notice warning community-boundary"><CircleAlert size={17} /><span><strong>本地试点</strong> · 照片保存在此设备，尚未提交机构。公开征集、专业审核与重建训练暂未接入。</span></div>
     {notice && <div className={`notice ${notice.error ? "error" : "success"}`} role={notice.error ? "alert" : "status"}>{notice.message}</div>}
-    <div className="community-stats"><div><strong>{records.length}</strong><span>本地贡献草稿</span></div><div><strong>{records.reduce((sum, record) => sum + record.photos.length, 0)}</strong><span>本地保存照片</span></div><div><strong>{visitSites.length}</strong><span>探访清单遗址</span></div></div>
-    <div className="tabs community-tabs" role="tablist" aria-label="公众共建工作区"><button role="tab" aria-selected={tab === "tasks"} onClick={() => setTab("tasks")}>参与任务</button><button role="tab" aria-selected={tab === "contributions"} onClick={() => setTab("contributions")}>我的贡献</button><button role="tab" aria-selected={tab === "visits"} onClick={() => setTab("visits")}>探访清单</button></div>
-    {tab === "tasks" && <>
-      <div className="community-tasks">{PARTICIPATION_TASKS.map((item) => { const Icon = item.icon === "camera" ? Camera : item.icon === "archive" ? Images : History; return <button className={`community-task ${task === item.id ? "selected" : ""}`} aria-pressed={task === item.id} key={item.id} onClick={() => setTask(item.id)} disabled={Boolean(busy)}><Icon size={22} strokeWidth={1.4} /><small>{item.tag}</small><h3>{item.title}</h3><p>{item.description}</p><span>{task === item.id ? "当前任务" : "选择任务"} <ArrowUpRight size={13} /></span></button>; })}</div>
-      <div className="contribution-layout"><form className="contribution-form" onSubmit={saveContribution}><div className="section-heading"><div><h2>{currentTask.title} · 登记资料</h2><small className="muted">{site?.name || "暂无遗址，请先在数据中心导入点位"}</small></div><span className="badge gray">本地草稿</span></div><fieldset disabled={!ready || !site || Boolean(busy)}><label className="contribution-drop"><Camera size={25} /><strong>{busy === "photos" ? "正在读取照片…" : "选择你的照片"}</strong><span>JPG / PNG / WEBP · 每批最多 {MAX_PHOTOS} 张 · 合计不超过 60 MB</span><input aria-label="选择公众贡献照片" type="file" accept="image/jpeg,image/png,image/webp" multiple onChange={(event) => { choosePhotos(event.target.files); event.target.value = ""; }} /></label>
+    <div className="community-navigation">
+    <div className="tabs community-tabs" role="tablist" aria-label="公众共建工作区" onKeyDown={(event) => {
+      if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+      const buttons = Array.from(event.currentTarget.querySelectorAll('[role="tab"]'));
+      const current = buttons.indexOf(event.target); if (current < 0) return;
+      event.preventDefault();
+      const next = event.key === "Home" ? 0 : event.key === "End" ? buttons.length - 1 : (current + (event.key === "ArrowRight" ? 1 : -1) + buttons.length) % buttons.length;
+      buttons[next].click(); buttons[next].focus();
+    }}>{[["tasks", "参与任务"], ["contributions", "我的贡献"], ["visits", "探访清单"]].map(([id, title]) => <button key={id} id={"community-tab-" + id} role="tab" aria-selected={tab === id} aria-controls={"community-panel-" + id} tabIndex={tab === id ? 0 : -1} onClick={() => setTab(id)}>{title}</button>)}</div>
+    <button className="text-button community-guide-download" onClick={saveGuide}><Download size={14} />下载采集指引</button></div>
+    {tab === "tasks" && <section id="community-panel-tasks" role="tabpanel" aria-labelledby="community-tab-tasks">
+      <div className="community-tasks" role="group" aria-label="选择贡献类型">{PARTICIPATION_TASKS.map((item) => { const Icon = item.icon === "camera" ? Camera : item.icon === "archive" ? Images : History; return <button className={"community-task" + (task === item.id ? " selected" : "")} aria-pressed={task === item.id} key={item.id} onClick={() => setTask(item.id)} disabled={Boolean(busy)}><Icon size={21} strokeWidth={1.5} /><span>{{ capture: "现状影像", archive: "老照片", revisit: "变化记录" }[item.id]}</span></button>; })}</div>
+      <section className="community-site-card" aria-label="当前参与遗址">
+        <div className="community-site-image"><img src={photograph?.previewUrl || "/assets/archaeology-aerial.png"} alt={photograph ? photograph.description : "考古场景示意，非所选遗址实拍"} width="140" height="88" loading="lazy" /><span>{photograph ? "开放实景照片" : "示意影像"}</span></div>
+        <div className="community-site-body">{photograph && <a className="detail-real-photo-credit" href={photograph.sourceUrl} target="_blank" rel="noreferrer">{photograph.credit} · {photograph.license}</a>}<div className="community-site-title"><select className="community-site-select" aria-label="选择参与遗址" value={site?.id || ""} disabled={Boolean(busy)} onChange={(event) => selectSite(event.target.value)}>{!sites.length && <option value="">请先导入遗址</option>}{sites.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}</select><span className={"badge " + (site?.isDemo ? "amber" : "gray")}>{site?.isDemo ? "地点待核验" : "导入点位"}</span></div><p>{site?.isDemo ? "当前遗址为演示示例，任务不代表已获得景区或文保管理方的采集委托。" : "影像将关联当前遗址的本地档案。出发前请核实开放状态与拍摄权限。"}</p></div>
+        <button className="button community-bookmark" disabled={!site || !ready || Boolean(busy)} aria-pressed={Boolean(bookmarked)} onClick={toggleVisit}>{bookmarked ? <Check size={17} /> : <Bookmark size={17} />}{bookmarked ? "已加入探访清单" : "加入探访清单"}</button>
+      </section>
+      <div className="contribution-layout"><form className="contribution-form" onSubmit={saveContribution}><div ref={entryRef} tabIndex={-1} className="section-heading"><div><h2>记录你的照片</h2><small className="muted">{currentTask.description}</small></div><span className="badge gray">{currentTask.title}</span></div><fieldset disabled={!ready || !site || Boolean(busy)}>
+        <label className={"contribution-drop" + (dragging ? " dragging" : "")}
+          onDragOver={(event) => { event.preventDefault(); if (ready && site && !busy) setDragging(true); }}
+          onDragLeave={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setDragging(false); }}
+          onDrop={(event) => { event.preventDefault(); setDragging(false); if (ready && site && !busy) choosePhotos(event.dataTransfer.files); }}>
+          <Camera size={34} strokeWidth={1.3} /><strong>{busy === "photos" ? "正在读取照片…" : "选择本地照片，或拖入这里"}</strong>
+          <span>JPG / PNG / WEBP · 最多 {MAX_PHOTOS} 张 · 单张 ≤ 20 MB · 每批 ≤ 60 MB</span>
+          <small><ShieldCheck size={13} /> 原图仅在此设备处理和保存</small>
+          <input aria-label="选择公众贡献照片" type="file" accept="image/jpeg,image/png,image/webp" multiple onChange={(event) => { choosePhotos(event.target.files); event.target.value = ""; }} />
+        </label>
         {Boolean(photos.length) && <div className="contribution-photo-grid">{photos.map((photo) => <PhotoPreview key={photo.sha256} photo={photo} onRemove={() => setPhotos((current) => current.filter((item) => item.sha256 !== photo.sha256))} />)}</div>}
         <div className="contribution-fields"><label>拍摄方向<select aria-label="投稿拍摄方向" value={angle} onChange={(event) => setAngle(event.target.value)}>{CAPTURE_ANGLES.map(([value, label]) => <option value={value} key={value}>{label}</option>)}</select></label><label>拍摄日期（可留空）<input aria-label="投稿拍摄日期" type="date" value={capturedOn} onChange={(event) => setCapturedOn(event.target.value)} /></label><label className="wide-field">署名（可选）<input aria-label="贡献者署名" maxLength={40} value={contributor} onChange={(event) => setContributor(event.target.value)} placeholder="公开展示前会再次核对署名" /></label><label className="wide-field">照片线索与故事<textarea aria-label="照片线索与故事" maxLength={2000} value={note} onChange={(event) => setNote(event.target.value)} placeholder="拍摄位置、年代线索、同一机位的变化，或你不确定的地方…" /></label></div>
         <div className="contribution-consent"><label><input type="checkbox" checked={rights} onChange={(event) => setRights(event.target.checked)} />我确认这些照片为本人拍摄，或已取得提供资料的授权。</label><label><input type="checkbox" checked={researchConsent} onChange={(event) => setResearchConsent(event.target.checked)} />我同意资料用于该遗址的非商业研究、数字记录与保护。</label><label><input type="checkbox" checked={publicConsent} onChange={(event) => setPublicConsent(event.target.checked)} />允许后续经审核后公开展示照片与署名（可选）。</label></div>
         <button className="button primary" type="submit" disabled={!photos.length || !rights || !researchConsent}>{busy === "save" ? "正在保存…" : "保存本地贡献"}<ArrowUpRight size={15} /></button><small className="contribution-save-note">本地试点登记用途意向，未提交线上授权。项目 JSON 备份不包含本页照片，请保留原始文件。</small>
       </fieldset></form>
       <aside className="contribution-guide"><h2>怎样拍，才更有帮助</h2><p>{currentTask.guidance}</p><ol><li>先拍清楚整体，再补充构件与细节。</li><li>保留原图，不加滤镜、不用 AI 补画。</li><li>只在开放区域拍摄，不触碰、不攀爬文物。</li><li>避开可识别人脸与私人信息；不确定的地方如实备注。</li></ol>{coverage && <div className="capture-coverage"><h3>当前遗址的本地视角记录</h3>{CAPTURE_ANGLES.map(([value, title]) => <div key={value}><span>{title}</span><strong>{coverage.counts[value]} 张</strong></div>)}<small>方向由投稿者填写；这是素材分类，不代表三维覆盖率或修复进度。</small></div>}<div className="participation-next"><h3>你的照片将怎样被使用</h3><p>资料登记 → 项目方审核 → 专业人员筛选与建模 → 发布注明来源的成果 → 向贡献者反馈。</p><small>目前只开放本地资料登记，后续步骤尚未接入。</small></div></aside></div>
-    </>}
-    {tab === "contributions" && <section className="section"><div className="section-heading"><h2>此设备的全部贡献</h2><button className="button" disabled={!records.length} onClick={() => download("公众共建-本地贡献清单.json", { schema: 1, records: records.map(contributionManifest), includesPhotoBytes: false })}><Download size={14} />导出清单（不含照片）</button></div>{!ready && !notice && <p className="empty-inline">正在读取参与记录…</p>}{ready && !records.length && <div className="community-empty"><Images size={30} strokeWidth={1.2} /><h3>从一张有来历的照片开始</h3><p>选择任务、登记照片，保存后可以在这里查看原图和资料说明。</p><button className="button" onClick={() => setTab("tasks")}>去参与任务</button></div>}{records.map((record) => <article className="contribution-record" key={record.id}><div className="section-heading"><div><span className="badge amber">本地草稿 · 未上传、未审核</span><h3>{record.site.name} · {PARTICIPATION_TASKS.find((item) => item.id === record.task)?.title || "资料登记"}</h3><small>{record.contributor} · {CAPTURE_ANGLES.find(([value]) => value === record.angle)?.[1]} · {record.capturedOn || "拍摄日期不详"}</small></div><button className="text-button" onClick={() => download(`贡献清单-${record.id}.json`, contributionManifest(record))}><Download size={14} />导出资料说明</button></div>{record.note && <p className="contribution-story">{record.note}</p>}<p className="contribution-usage">{record.consent.publicDisplay ? "记录了允许审核后公开展示的意向" : "仅记录研究保护用途，未同意公开展示"}</p><div className="contribution-photo-grid">{record.photos.map((photo) => <PhotoPreview key={photo.sha256} photo={photo} original />)}</div>{removeConfirm === record.id ? <div className="contribution-remove-confirm"><span>请先下载原图；移除后无法从本页恢复。</span><button className="button danger" disabled={Boolean(busy)} onClick={() => removeRecord(record.id)}>确认移除本地副本</button><button className="button" disabled={Boolean(busy)} onClick={() => setRemoveConfirm("")}>取消</button></div> : <button className="text-button" disabled={Boolean(busy)} onClick={() => setRemoveConfirm(record.id)}>移除此本地草稿</button>}</article>)}</section>}
-    {tab === "visits" && <section className="section"><div className="section-heading"><h2>我的遗产探访清单</h2><span className="muted">出发前请核实开放信息</span></div>{!visitSites.length && <div className="community-empty"><Bookmark size={30} strokeWidth={1.2} /><h3>把想了解的地方加入清单</h3><p>先浏览遗址，再选择适合自己的参与任务。</p><button className="button" onClick={onMap}>去看遗址地图</button></div>}{visitSites.map((item) => <article className="visit-item" key={siteIdentity(item)}><MapPin size={20} /><div><h3>{item.name}</h3><p>{item.location} · {item.period}</p><small>{item.isDemo ? "演示点位，位置未经核验，不提供出行导航" : "导入点位；开放状态与到访权限需自行核实"}</small></div><button className="button" onClick={() => { selectSite(item.id); setTab("tasks"); }}>查看参与任务 <ArrowUpRight size={14} /></button></article>)}</section>}
+    </section>}
+    {tab === "contributions" && <section className="section" id="community-panel-contributions" role="tabpanel" aria-labelledby="community-tab-contributions"><div className="section-heading"><h2>此设备的全部贡献</h2><button className="button" disabled={!records.length} onClick={() => download("公众共建-本地贡献清单.json", { schema: 1, records: records.map(contributionManifest), includesPhotoBytes: false })}><Download size={14} />导出清单（不含照片）</button></div>{!ready && !notice && <p className="empty-inline">正在读取参与记录…</p>}{ready && !records.length && <div className="community-empty"><Images size={30} strokeWidth={1.2} /><h3>从一张有来历的照片开始</h3><p>选择任务、登记照片，保存后可以在这里查看原图和资料说明。</p><button className="button" onClick={() => setTab("tasks")}>去参与任务</button></div>}{records.map((record) => <article className="contribution-record" key={record.id}><div className="section-heading"><div><span className="badge amber">本地草稿 · 未上传、未审核</span><h3>{record.site.name} · {PARTICIPATION_TASKS.find((item) => item.id === record.task)?.title || "资料登记"}</h3><small>{record.contributor} · {CAPTURE_ANGLES.find(([value]) => value === record.angle)?.[1]} · {record.capturedOn || "拍摄日期不详"}</small></div><button className="text-button" onClick={() => download(`贡献清单-${record.id}.json`, contributionManifest(record))}><Download size={14} />导出资料说明</button></div>{record.note && <p className="contribution-story">{record.note}</p>}<p className="contribution-usage">{record.consent.publicDisplay ? "记录了允许审核后公开展示的意向" : "仅记录研究保护用途，未同意公开展示"}</p><div className="contribution-photo-grid">{record.photos.map((photo) => <PhotoPreview key={photo.sha256} photo={photo} original />)}</div>{removeConfirm === record.id ? <div className="contribution-remove-confirm"><span>请先下载原图；移除后无法从本页恢复。</span><button className="button danger" disabled={Boolean(busy)} onClick={() => removeRecord(record.id)}>确认移除本地副本</button><button className="button" disabled={Boolean(busy)} onClick={() => setRemoveConfirm("")}>取消</button></div> : <button className="text-button" disabled={Boolean(busy)} onClick={() => setRemoveConfirm(record.id)}>移除此本地草稿</button>}</article>)}</section>}
+    {tab === "visits" && <section className="section" id="community-panel-visits" role="tabpanel" aria-labelledby="community-tab-visits"><div className="section-heading"><h2>我的遗产探访清单</h2><span className="muted">出发前请核实开放信息</span></div>{!visitSites.length && <div className="community-empty"><Bookmark size={30} strokeWidth={1.2} /><h3>把想了解的地方加入清单</h3><p>先浏览遗址，再选择适合自己的参与任务。</p><button className="button" onClick={onMap}>去看遗址地图</button></div>}{visitSites.map((item) => <article className="visit-item" key={siteIdentity(item)}><MapPin size={20} /><div><h3>{item.name}</h3><p>{item.location} · {item.period}</p><small>{item.isDemo ? "演示点位，位置未经核验，不提供出行导航" : "导入点位；开放状态与到访权限需自行核实"}</small></div><button className="button" onClick={() => { selectSite(item.id); setTab("tasks"); }}>查看参与任务 <ArrowUpRight size={14} /></button></article>)}</section>}
+    <div className="community-local-footer"><FolderOpen size={15} /><span>每份资料保留原图与来源线索，支持后续核验与整理。</span></div>
+    </div>
   </div>;
 }
 

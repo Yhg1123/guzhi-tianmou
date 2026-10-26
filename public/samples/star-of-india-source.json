@@ -1,0 +1,15 @@
+{
+  "title": "Star of India - Maritime Museum of San Diego",
+  "file": "star-of-india.splat",
+  "points": 338580,
+  "bytes": 10834560,
+  "sha256": "80ca82e791f58a3da1322c52d6646442dcbc3685610fdb2b37f5f80e0dcfa533",
+  "source": "https://www.openheritage3d.org/project.php?id=rebk-tb21",
+  "doi": "https://doi.org/10.26301/rebk-tb21",
+  "attribution": "Scott McAvoy, University of California, San Diego Library 2020. Distributed by Open Heritage 3D.",
+  "license": "CC BY (version not specified on the source record)",
+  "sourceMetadata": "https://pointcloud.ucsd.edu/archive_temp/oh3d_store/oh3d-vis/datasets/rebk-tb21/potree/rebk-tb21_data_derivatives/metadata.json",
+  "accessed": "2026-10-26T01:40:53.730Z",
+  "transformation": "Potree LOD 0–3 subset; original XYZ/RGB decoded, centered, rotated from Z-up to Y-up; constant isotropic point sprites encoded as standard 32-byte SPLAT records. No learned covariance, COLMAP or 3DGS training was performed.",
+  "limitations": "Visualization derivative. High-quality model without georeferencing, as classified by the publisher. Display scale is uncalibrated; not suitable for measurements or georegistration. Not associated with the local project's selected archaeological site."
+}

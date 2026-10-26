@@ -2,12 +2,13 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
-import { heritageSample } from "../src/heritageSample.js";
+import { pointCloudSamples } from "../src/heritageSample.js";
 
-test("the bundled heritage preview matches its source manifest and preserves valid captured coordinates", async () => {
+for (const heritageSample of pointCloudSamples) test(heritageSample.title + ": bundled preview matches its source and retains captured XYZ/RGB", async () => {
   const root = new URL("../public/samples/", import.meta.url);
-  const manifest = JSON.parse(await readFile(new URL("temple-of-bel-source.json", root), "utf8"));
-  const metadata = JSON.parse(await readFile(new URL("temple-of-bel-metadata.json", root), "utf8"));
+  const stem = heritageSample.url.split("/").at(-1).replace(".splat", "");
+  const manifest = JSON.parse(await readFile(new URL(stem + "-source.json", root), "utf8"));
+  const metadata = JSON.parse(await readFile(new URL(stem + "-metadata.json", root), "utf8"));
   const bytes = await readFile(new URL(manifest.file, root));
   assert.equal(bytes.length, manifest.bytes);
   assert.equal(bytes.length / 32, heritageSample.pointCount);
@@ -17,7 +18,10 @@ test("the bundled heritage preview matches its source manifest and preserves val
   assert.match(manifest.license, /CC BY/);
   assert.match(manifest.transformation, /No learned covariance/);
   const origin = metadata.boundingBox.min.map((min, axis) => (min + metadata.boundingBox.max[axis]) / 2);
-  const sourceBounds = metadata.attributes.find((attribute) => attribute.name === "position");
+  // Attribute statistics omit some sampled LOD extrema in the ship dataset.
+  // Root bounds plus two quantization steps cover the actual encoded coordinates.
+  const sourceBounds = metadata.boundingBox;
+  const tolerance = Math.max(...metadata.scale) * 2 + 0.00001;
   const colors = new Set();
   const min = [Infinity, Infinity, Infinity];
   const max = [-Infinity, -Infinity, -Infinity];
@@ -25,8 +29,7 @@ test("the bundled heritage preview matches its source manifest and preserves val
     const xyz = [bytes.readFloatLE(at) + origin[0], -bytes.readFloatLE(at + 8) + origin[1], bytes.readFloatLE(at + 4) + origin[2]];
     for (let axis = 0; axis < 3; axis++) {
       assert.ok(Number.isFinite(xyz[axis]));
-      // Decoded LOD extrema differ slightly from the publisher's attribute statistics.
-      assert.ok(xyz[axis] >= sourceBounds.min[axis] - 0.002 && xyz[axis] <= sourceBounds.max[axis] + 0.002, `Decoded axis ${axis} outside source bounds`);
+      assert.ok(xyz[axis] >= sourceBounds.min[axis] - tolerance && xyz[axis] <= sourceBounds.max[axis] + tolerance, `Decoded axis ${axis} outside source bounds`);
       const radius = bytes.readFloatLE(at + 12 + axis * 4);
       assert.ok(radius > 0 && radius < metadata.spacing);
       min[axis] = Math.min(min[axis], xyz[axis]);

@@ -1,0 +1,8 @@
+{
+  "schema": 1,
+  "source": "请填写设备、测点与校准来源；此模板不包含任何模拟读数",
+  "units": { "temperature": "°C", "humidity": "%" },
+  "readings": [],
+  "instructions": "将 readings 填为观测数组。每条需有 siteId（对应当前点位 ID）、timestamp（带时区的 ISO 8601 时间），以及 temperature（°C）或 humidity（0–100 %）。时间不可晚于当前时间 5 分钟。空模板不可作为观测数据导入。",
+  "availablePublicSiteIds": ["public-forbidden-city", "public-mutianyu", "public-mogao"]
+}

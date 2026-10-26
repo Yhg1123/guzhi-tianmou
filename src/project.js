@@ -1,5 +1,6 @@
 import { demoSites, demoSource } from "./demoData.js";
 import { parseGeoJson, assertWorkload, validSiteId } from "./geodata.js";
+import { referenceSites } from "./referenceSites.js";
 
 export const LAYER_FILE_LIMIT = 15 * 1024 * 1024;
 export const PROJECT_FILE_LIMIT = 100 * 1024 * 1024;
@@ -14,6 +15,16 @@ export const DATASETS = [
 
 export function emptyProject() {
   return { schema: 2, datasets: { sites: demoSites.map((site) => ({ ...site })), waterways: [], routes: [], boundaries: [], hazards: [] }, sources: Object.fromEntries(DATASETS.map(({ id }) => [id, { name: id === "sites" ? demoSource : "未导入", count: id === "sites" ? demoSites.length : 0, timing: "unknown", period: "", citation: "" }])), notes: {} };
+}
+
+export function appendReferenceSites(project) {
+  const ids = new Set(project.datasets.sites.map((site) => site.id));
+  const additions = referenceSites.filter((site) => !ids.has(site.id)).map((site) => ({ ...site }));
+  if (!additions.length) return { project, added: 0 };
+  if (project.datasets.sites.length + additions.length > 5000) throw new Error("加入参考点后超过 5,000 处，请先拆分项目。");
+  const previous = project.sources.sites;
+  const source = { ...previous, name: "项目点位 + 公开遗产参考点", sha256: "", timing: "unknown", importedAt: new Date().toISOString(), citation: [previous.citation, "追加前图层：" + previous.name + (previous.sha256 ? "；原文件 SHA-256：" + previous.sha256 : ""), ...additions.map((site) => site.recordSource)].filter(Boolean).join("\n") };
+  return { project: replaceDataset(project, "sites", [...project.datasets.sites, ...additions], source), added: additions.length };
 }
 
 export function replaceDataset(project, kind, features, source) {

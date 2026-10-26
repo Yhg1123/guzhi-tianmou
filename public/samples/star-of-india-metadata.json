@@ -1,0 +1,104 @@
+{
+	"version": "2.0",
+	"name": "Star_of_India_dd",
+	"description": "",
+	"points": 182371665,
+	"projection": "",
+	"hierarchy": {
+		"firstChunkSize": 4840,
+		"stepSize": 4,
+		"depth": 11
+	},
+	"offset": [-40.316200000000002, -10.215299999999999, 0.186],
+	"scale": [0.0001, 0.0001, 0.0001],
+	"spacing": 0.58202343750000007,
+	"boundingBox": {
+		"min": [-40.316200000000002, -10.215299999999999, 0.186],
+		"max": [34.182800000000007, 64.28370000000001, 74.685000000000016]
+	},
+	"encoding": "BROTLI",
+	"attributes": [
+		{
+			"name": "position",
+			"description": "",
+			"size": 12,
+			"numElements": 3,
+			"elementSize": 4,
+			"type": "int32",
+			"min": [-40.315000000000005, -10.215299999999999, 0.24349999999999999],
+			"max": [34.149300000000004, 6.808600000000002, 34.228999999999999]
+		},{
+			"name": "intensity",
+			"description": "",
+			"size": 2,
+			"numElements": 1,
+			"elementSize": 2,
+			"type": "uint16",
+			"min": [0],
+			"max": [65278]
+		},{
+			"name": "return number",
+			"description": "",
+			"size": 1,
+			"numElements": 1,
+			"elementSize": 1,
+			"type": "uint8",
+			"min": [1],
+			"max": [1]
+		},{
+			"name": "number of returns",
+			"description": "",
+			"size": 1,
+			"numElements": 1,
+			"elementSize": 1,
+			"type": "uint8",
+			"min": [1],
+			"max": [1]
+		},{
+			"name": "classification",
+			"description": "",
+			"size": 1,
+			"numElements": 1,
+			"elementSize": 1,
+			"type": "uint8",
+			"min": [0],
+			"max": [0]
+		},{
+			"name": "scan angle rank",
+			"description": "",
+			"size": 1,
+			"numElements": 1,
+			"elementSize": 1,
+			"type": "uint8",
+			"min": [0],
+			"max": [0]
+		},{
+			"name": "user data",
+			"description": "",
+			"size": 1,
+			"numElements": 1,
+			"elementSize": 1,
+			"type": "uint8",
+			"min": [0],
+			"max": [0]
+		},{
+			"name": "point source id",
+			"description": "",
+			"size": 2,
+			"numElements": 1,
+			"elementSize": 2,
+			"type": "uint16",
+			"min": [1],
+			"max": [1]
+		},{
+			"name": "rgb",
+			"description": "",
+			"size": 6,
+			"numElements": 3,
+			"elementSize": 2,
+			"type": "uint16",
+			"min": [0, 0, 0],
+			"max": [65024, 65280, 65024]
+		}
+	]
+}

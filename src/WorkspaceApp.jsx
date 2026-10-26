@@ -1,20 +1,23 @@
 import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import { get, set } from "idb-keyval";
-import { Map, Landmark, Database, ChartNoAxesCombined, ShieldCheck, Box, Search, Upload, ChevronRight, ArrowUpRight, MapPin, Layers, Menu, X, Check, CircleAlert, Download, ExternalLink, Users } from "lucide-react";
+import { Map, Landmark, Database, ChartNoAxesCombined, ShieldCheck, Box, Search, Upload, ChevronRight, ArrowUpRight, MapPin, Layers, Menu, X, Check, CircleAlert, Download, ExternalLink, Users, Thermometer } from "lucide-react";
 import { HeritageMap } from "./HeritageMap.jsx";
 import { analyzeSites, historicalDistance } from "./geodata.js";
-import { emptyProject, fmt, download, asGeoJson, replaceDataset, restoreStoredProject } from "./project.js";
+import { emptyProject, fmt, download, asGeoJson, replaceDataset, restoreStoredProject, appendReferenceSites } from "./project.js";
+import { heritagePhotographs } from "./referenceSites.js";
 import { DataCenter } from "./DataCenter.jsx";
 import { ResearchView } from "./ResearchView.jsx";
 import { ProtectionView } from "./ProtectionView.jsx";
 
 const ReconstructionView = lazy(() => import("./ReconstructionView.jsx"));
 const CommunityView = lazy(() => import("./CommunityView.jsx"));
+const EnvironmentView = lazy(() => import("./EnvironmentView.jsx"));
 const NAV = [
   { id: "map", name: "遗址地图", icon: Map, group: "空间研究" },
   { id: "sites", name: "遗址档案", icon: Landmark },
   { id: "research", name: "选址研究", icon: ChartNoAxesCombined },
   { id: "protection", name: "保护评估", icon: ShieldCheck, group: "保护与记录" },
+  { id: "environment", name: "环境总览", icon: Thermometer },
   { id: "reconstruction", name: "三维档案", icon: Box },
   { id: "community", name: "公众共建", icon: Users, group: "参与与探访" },
   { id: "data", name: "数据中心", icon: Database, group: "项目" },
@@ -24,7 +27,8 @@ function hashPage() { const hash = window.location.hash.slice(1); return NAV.som
 
 function SiteDetail({ site, onResearch, onReconstruct }) {
   if (!site) return <div className="empty-inline">没有匹配的遗址</div>;
-  return <div className="site-detail"><div className="detail-photo"><img src="/assets/archaeology-aerial.png" alt="考古场景示意，非当前遗址实拍" /><span>示意影像 · 非遗址实拍</span></div><div className="detail-content"><span className={`badge ${site.isDemo ? "amber" : "green"}`}>{site.isDemo ? "演示点位 · 未核验" : "已导入点位"}</span><h2>{site.name.replace("（演示）", "")}</h2><p className="muted">{site.period} <span className="dot-separator">·</span> {site.type}</p><div className="location-line"><MapPin size={14} />{site.location}</div><div className="coordinate">{site.lng.toFixed(5)}° E / {site.lat.toFixed(5)}° N</div><dl className="detail-metrics"><div><dt>已导入水系距离</dt><dd>{fmt(site.waterDistanceKm, " km")}</dd></div><div><dt>地表高程</dt><dd>{fmt(site.elevation_m, " m")}</dd></div><div><dt>地形坡度</dt><dd>{fmt(site.slope_deg, "°")}</dd></div><div><dt>坐标精度</dt><dd>{fmt(site.precision_m, " m")}</dd></div></dl><div className="detail-actions"><button className="button primary" onClick={onResearch}>选址研究 <ArrowUpRight size={15} /></button><button className="button" onClick={onReconstruct}><Box size={16} />三维档案</button></div></div></div>;
+  const photograph = heritagePhotographs.find((item) => item.siteId === site.id);
+  return <div className="site-detail"><div className="detail-photo"><img src={photograph?.previewUrl || "/assets/archaeology-aerial.png"} alt={photograph ? photograph.description : "考古场景示意，非当前遗址实拍"} /><span>{photograph ? "开放实景照片 · " + photograph.capturedOn : "示意影像 · 非遗址实拍"}</span></div>{photograph && <a className="detail-real-photo-credit" href={photograph.sourceUrl} target="_blank" rel="noreferrer">{photograph.credit} · {photograph.license} ↗</a>}<div className="detail-content"><span className={`badge ${site.isDemo ? "amber" : "green"}`}>{site.isDemo ? "演示点位 · 未核验" : "已导入点位"}</span><h2>{site.name.replace("（演示）", "")}</h2><p className="muted">{site.period} <span className="dot-separator">·</span> {site.type}</p><div className="location-line"><MapPin size={14} />{site.location}</div><div className="coordinate">{site.lng.toFixed(5)}° E / {site.lat.toFixed(5)}° N</div><dl className="detail-metrics"><div><dt>已导入水系距离</dt><dd>{fmt(site.waterDistanceKm, " km")}</dd></div><div><dt>地表高程</dt><dd>{fmt(site.elevation_m, " m")}</dd></div><div><dt>地形坡度</dt><dd>{fmt(site.slope_deg, "°")}</dd></div><div><dt>坐标精度</dt><dd>{fmt(site.precision_m, " m")}</dd></div></dl><div className="detail-actions"><button className="button primary" onClick={onResearch}>选址研究 <ArrowUpRight size={15} /></button><button className="button" onClick={onReconstruct}><Box size={16} />三维档案</button></div></div></div>;
 }
 
 function MapView({ sites, selectedSite, datasets, layers, setLayers, onSelectSite, navigate }) {
@@ -87,7 +91,7 @@ export function App() {
   const metadata = (kind, values) => setProject((current) => ({ ...current, sources: { ...current.sources, [kind]: { ...current.sources[kind], ...values } } }));
   const restore = (next) => { setProject(next); setStorageWarning(""); setSelectedId(""); resetFilters(); };
   const currentNav = NAV.find((n) => n.id === page);
-  const isFilteredPage = !["data", "reconstruction", "community"].includes(page);
+  const isFilteredPage = !["data", "reconstruction", "community", "environment"].includes(page);
   return <div className="app-shell"><a className="skip-link" href="#main-content" onClick={(e) => { e.preventDefault(); document.getElementById("main-content")?.focus(); }}>跳转到主要内容</a>{mobileNav && <button className="nav-scrim" aria-label="关闭导航" onClick={() => setMobileNav(false)} />}
     <aside className={`sidebar ${mobileNav ? "mobile-open" : ""}`}><a className="brand" href="#map" onClick={() => setMobileNav(false)}><div className="brand-symbol"><Landmark size={24} /></div><span><strong>古址天眸</strong><small>HERITAGE ATLAS</small></span></a><div className="project-label"><span className="status-dot" /><span>古遗址空间研究</span></div><nav aria-label="主导航">{NAV.map(({ id, name, icon: Icon, group }) => <div key={id}>{group && <span className="nav-group">{group}</span>}<a href={`#${id}`} title={name} className={`nav-item ${page === id ? "active" : ""}`} aria-current={page === id ? "page" : undefined} onClick={() => setMobileNav(false)}><Icon size={19} /><span>{name}</span>{id === "sites" && <small>{allSites.length}</small>}</a></div>)}</nav><div className="sidebar-bottom"><span className="local-avatar">研</span><div><strong>本地研究项目</strong><small>工作空间 / 01</small></div></div></aside>
     <div className="main-shell"><header className="app-header"><div className="breadcrumbs"><button className="icon-button mobile-menu" aria-label="展开导航" onClick={() => setMobileNav(!mobileNav)}>{mobileNav ? <X size={20} /> : <Menu size={20} />}</button><span>工作空间</span><ChevronRight size={14} /><strong>{currentNav.name}</strong></div><div className="header-actions"><span className="save-status" role="status">{storageWarning ? <CircleAlert size={13} /> : <Check size={13} />}{saveStatus}</span><button className="button primary" onClick={() => navigate("data")}><Upload size={15} /><span>导入数据</span></button></div></header>
@@ -99,7 +103,8 @@ export function App() {
         {page === "protection" && <ProtectionView sites={sites} selectedSite={selectedSite} project={project} onSelectSite={onSelectSite} radius={radius} setRadius={setRadius} onData={() => navigate("data")} onNote={(id, note) => setProject((p) => ({ ...p, notes: { ...p.notes, [id]: note } }))} />}
         {page === "reconstruction" && <Suspense fallback={<div className="empty-inline">加载三维工作区…</div>}><ReconstructionView sites={allSites} selectedId={selectedId || selectedSite?.id} onSelectSite={onSelectSite} /></Suspense>}
         {page === "community" && <Suspense fallback={<div className="empty-inline">加载公众共建…</div>}><CommunityView sites={allSites} selectedId={selectedId || selectedSite?.id} onSelectSite={onSelectSite} onMap={() => { resetFilters(); navigate("map"); }} onReconstruction={() => navigate("reconstruction")} /></Suspense>}
-        {page === "data" && <DataCenter project={project} saveStatus={saveStatus} onImport={onImport} onMetadata={metadata} onRestore={restore} onReset={() => restore(emptyProject())} />}
+        {page === "environment" && <Suspense fallback={<div className="empty-inline">加载环境总览…</div>}><EnvironmentView sites={allSites} onData={() => navigate("data")} /></Suspense>}
+        {page === "data" && <DataCenter project={project} saveStatus={saveStatus} onImport={onImport} onMetadata={metadata} onRestore={restore} onLoadReference={() => { if (storageWarning) throw new Error("本地存档异常，先恢复有效备份再追加点位。"); const result = appendReferenceSites(project); setProject(result.project); return result.added; }} onReset={() => restore(emptyProject())} />}
       </>}</main><footer className="app-footer"><span><CircleAlert size={12} />研究辅助 · 不替代考古与规划论证</span><a href="https://github.com/archesproject/arches" target="_blank" rel="noreferrer">开源遗产 GIS 参考 <ExternalLink size={11} /></a></footer>
     </div></div>;
 }
