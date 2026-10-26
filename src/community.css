@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&display=swap");
 .community-page { color: #264a3e; font-size: 14px; background: #f8faf9; }
+.community-storage-note { color:#8b9a90; font-size:11px; margin:0 0 15px; line-height:1.9; }
+.community-storage-note summary { display:flex; align-items:center; gap:7px; cursor:pointer; list-style:none; padding:6px 0; }
+.community-storage-note summary span { margin-left:auto; color:#68917d; }
+.community-storage-note p { padding:8px 0; max-width:900px; }
 .community-hero { display: grid; grid-template-columns: .86fr 1.14fr; min-height: 515px; border-bottom: 1px solid var(--line); }
 .community-hero-copy { padding: 64px 36px 44px; display: flex; align-items: flex-start; flex-direction: column; justify-content: center; }
 .community-hero h1 { font-family: "Noto Serif SC", "Songti SC", SimSun, serif; font-size: clamp(32px,3.9vw,58px); font-weight: 700; line-height: 1.4; letter-spacing: -1px; color: #123c31; }

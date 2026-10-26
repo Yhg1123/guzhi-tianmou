@@ -1,6 +1,28 @@
 export const WEATHER_SOURCE = "Open-Meteo · 天气模型参考";
-export const WEATHER_REFRESH_MS = 10 * 60 * 1000;
+export const WEATHER_REFRESH_MS = 60 * 1000;
 export const SENSOR_STALE_MS = 60 * 60 * 1000;
+export const REFRESH_OPTIONS = { weather: [60, 300, 600], sensor: [30, 60, 300] };
+export function refreshCadence(mode, seconds) {
+  const options = REFRESH_OPTIONS[mode] || REFRESH_OPTIONS.weather;
+  return (options.includes(Number(seconds)) ? Number(seconds) : options[0]) * 1000;
+}
+export function trendWindow(record, weather, range = 48) {
+  if (!record || !Array.isArray(record.history)) return [];
+  const hours = range === 24 ? 24 : 48;
+  const start = record.timestamp - (weather ? 24 : hours) * 3600000;
+  const end = record.timestamp + (weather && hours === 48 ? 24 : 0) * 3600000;
+  return record.history.filter((point) => point.timestamp >= start && point.timestamp <= end);
+}
+export function connectionStatus({ loading, offline, error, records, now = Date.now(), mode, endpoint, automatic = true }) {
+  if (loading) return { key: "syncing", label: "正在同步" };
+  if (offline) return { key: "archive", label: "历史记录" };
+  if (error) return { key: "retrying", label: "连接待恢复" };
+  if (!records.length) return { key: "empty", label: "等待数据" };
+  if (mode === "sensor" && !endpoint) return { key: "local", label: "文件记录" };
+  if (!automatic) return { key: "paused", label: "自动更新已暂停" };
+  if (records.every((row) => now - row.timestamp > SENSOR_STALE_MS || row.timestamp > now + 300000)) return { key: "delayed", label: "数据延迟" };
+  return { key: "connected", label: "自动更新中" };
+}
 export const METRICS = {
   temperature: { title: "气温", unit: "°C", color: "#b66e3f", range: [-90, 70] },
   humidity: { title: "相对湿度", unit: "%", color: "#428d99", range: [0, 100] },

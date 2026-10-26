@@ -1,3 +1,4 @@
+import { siteName } from "./presentation.js";
 import { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -18,7 +19,7 @@ export function HeritageMap({ sites, selectedSite, waterways = [], routes = [], 
 
   useEffect(() => {
     if (!elementRef.current) return undefined;
-    const map = L.map(elementRef.current, { zoomControl: false }).setView([34.31, 108.95], 9);
+    const map = L.map(elementRef.current, { zoomControl: false, zoomAnimation: false, fadeAnimation: false, markerZoomAnimation: false }).setView([34.31, 108.95], 9);
     const tileLayer = L.tileLayer(TILE_URL, {
       maxZoom: 18,
       attribution: TILE_ATTRIBUTION,
@@ -35,7 +36,7 @@ export function HeritageMap({ sites, selectedSite, waterways = [], routes = [], 
     observer.observe(elementRef.current);
     return () => {
       observer.disconnect();
-      map.remove();
+      map.stop(); map.remove();
       mapRef.current = null;
       contentRef.current = null;
     };
@@ -71,8 +72,8 @@ export function HeritageMap({ sites, selectedSite, waterways = [], routes = [], 
           fillColor: active ? "#0f6b58" : site.isDemo ? "#d39537" : "#c75a43",
           fillOpacity: 0.96,
         }).addTo(content);
-        marker.bindTooltip(label(site.name), { direction: "top", offset: [0, -10] });
-        marker.getElement()?.setAttribute("aria-label", site.name);
+        marker.bindTooltip(label(siteName(site)), { direction: "top", offset: [0, -10] });
+        marker.getElement()?.setAttribute("aria-label", siteName(site));
         marker.on("click", () => onSelectSite(site.id));
       });
     }

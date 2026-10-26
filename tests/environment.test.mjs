@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { weatherUrl, parseWeather, parseWeatherSnapshot, parseSensorData, summarizeEnvironment, environmentColor, environmentSnapshot } from "../src/environment.js";
+import { weatherUrl, parseWeather, parseWeatherSnapshot, parseSensorData, summarizeEnvironment, environmentColor, environmentSnapshot, refreshCadence, connectionStatus, trendWindow } from "../src/environment.js";
 import { readFile } from "node:fs/promises";
 import { referenceSites } from "../src/referenceSites.js";
 import { appendReferenceSites, emptyProject, serializeProject, restoreProject } from "../src/project.js";
@@ -10,6 +10,32 @@ const response = (temperature = 0, humidity = 0) => ({ current_units: { time: "u
 const now = Date.parse("2026-10-26T01:00:00Z");
 const sensor = (readings) => ({ schema: 1, source: "测试设备（单元测试数据）", units: { temperature: "°C", humidity: "%" }, readings });
 const reading = (overrides = {}) => ({ siteId: "first", timestamp: "2026-10-26T00:00:00Z", temperature: 0, humidity: 0, ...overrides });
+
+test("trend windows distinguish 48 hours of observations from past-plus-forecast weather", () => {
+  const record = {timestamp:now,history:[-49,-48,-25,-24,0,24,25].map((hour)=>({timestamp:now+hour*3600000,temperature:hour}))};
+  assert.deepEqual(trendWindow(record,true,48).map(x=>x.temperature),[-24,0,24]);
+  assert.deepEqual(trendWindow(record,true,24).map(x=>x.temperature),[-24,0]);
+  assert.deepEqual(trendWindow(record,false,48).map(x=>x.temperature),[-48,-25,-24,0]);
+  assert.deepEqual(trendWindow(record,false,24).map(x=>x.temperature),[-24,0]);
+  assert.deepEqual(trendWindow(null,false,24),[]);
+});
+
+test("automatic refresh cadence is bounded by source and states never call archived or failed data connected", () => {
+  assert.equal(refreshCadence("weather",60),60000);
+  assert.equal(refreshCadence("sensor",30),30000);
+  assert.equal(refreshCadence("weather",1),60000);
+  assert.equal(refreshCadence("weather",-1),60000);
+  const current = { records:[{timestamp:now}],now,mode:"weather",automatic:true };
+  assert.equal(connectionStatus(current).key,"connected");
+  assert.equal(connectionStatus({...current,offline:true}).key,"archive");
+  assert.equal(connectionStatus({...current,error:"network"}).key,"retrying");
+  assert.equal(connectionStatus({...current,loading:true}).key,"syncing");
+  assert.equal(connectionStatus({...current,automatic:false}).key,"paused");
+  assert.equal(connectionStatus({...current,records:[]}).key,"empty");
+  assert.equal(connectionStatus({...current,records:[{timestamp:now-3600001}]}).key,"delayed");
+  assert.equal(connectionStatus({...current,records:[{timestamp:now+3600000}]}).key,"delayed");
+  assert.equal(connectionStatus({...current,mode:"sensor",endpoint:""}).key,"local");
+});
 
 test("archived weather keeps source time and validates site identity and units before fallback", async () => {
   const archive = JSON.parse(await readFile(new URL("../public/samples/environment-weather-reference.json", import.meta.url), "utf8"));
