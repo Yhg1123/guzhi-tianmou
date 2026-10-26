@@ -1,0 +1,39 @@
+# 真正的三维高斯场景
+
+2026-10-27：用户明确要求有空间体积、可以自由绕看的 3D Gaussian Splatting，而不是照片的深度表面。新增独立的“实景 3D 高斯”工作页；既有八处照片衍生资产在界面中改称“单图空间预览”。保留来源和数据，不把照片推断或普通摄影测量点云描述成训练后的实景 3DGS。
+
+## 北京灵岳寺：来源平台在线浏览
+
+- 作者：roblinka。原始场景：[1400-Year Temple](https://superspl.at/scene/073bac93)，发布者说明使用 XGRIDS L2 Pro 采集，页面标为约 660 万个高斯、72.17 MB。
+- 使用来源页面提供的 [SuperSplat 嵌入查看器](https://superspl.at/s?id=073bac93)。场景页提供 Share / Embed，未开放文件下载，也未声明可再分发文件的 CC 许可。**本站只嵌入公开查看器，不下载、转换或镜像该模型及其贴图。**
+- 灵岳寺的地点与古建筑身份可核对[北京市文物局档案](https://wwj.beijing.gov.cn/bjww/362771/362779/dqpqgzdwwbhdw/523508/index.html)。不将发布者的市保等级旧说用于替代官方国保档案，也不采用其英文朝向描述。
+- 加载、进度、导航与动画由来源查看器提供。iframe 文档加载不等于模型加载完毕；本站不显示伪造的加载成功、训练完成或覆盖率。网络不可用时可打开来源独立窗口，或切换本地模型。
+
+## Seem Kirke：可本地读取的训练模型
+
+- 作者：roedsgaard。原始场景：[Seem Kirke, Danmark](https://superspl.at/scene/e832997f)，明确允许下载，许可 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)。
+- 作者声明：DJI 无人机摄影 → RealityScan 解算 → LichtFeld Studio 训练。不是本站训练成果；原照片数量、相机测量精度、地理配准及采集日期未提供，不编造这些指标。
+- 原始发布为 SOG v2。保留全部 **960,991** 个训练高斯的三维位置、各向异性尺度、方向、DC 颜色与透明度，没有把它转成等大小、不透明的 RGB 点云。源高阶 SH 码本全为零，因此去除高阶项不丢弃非零方向项。
+- 用 PlayCanvas 官方 SplatTransform 3.10.3 解码为 Gaussian PLY。为 Y 向上查看，绕 X 轴转 180 度，并同步旋转四元数；量化颜色、透明度、旋转到标准 32 字节 SPLAT。文件 **30,751,712 字节**；SHA-256、来源 SOG 各文件的原始字节校验值和处理过程见 `public/gaussians/seem-church-source.json`。
+- 发布者的预览 WebP 随模型按 CC BY 4.0 使用，并记录校验值与原图地址。预览网页中保留作者、许可、来源链接、模型下载及清单下载。
+- 原始参考相机视场角 90 度保留在来源清单；本站推荐视角用 75 度显示。其他预设、自动旋转、平移与缩放使用完整三维场景。查看器过滤 alpha ≤ 5 的极低透明度高斯，实际载入 958,781 点，源文件仍完整保留 960,991 点。
+
+## 复现本地资产
+
+在项目目录运行（开发工具，不是用户照片上传或训练接口）：
+
+1. `./scripts/fetch-trained-gaussian.ps1`，获取明确允许再分发的 Seem 场景原始 SOG 文件与预览，保存到被忽略的 `qa/seem-source/`。此脚本不获取灵岳寺文件。
+2. 在独立工具目录安装 `npm install --prefix qa/splat-tools @playcanvas/splat-transform@3.10.3 --no-audit --no-fund --ignore-scripts`。
+3. 运行 `./qa/splat-tools/node_modules/.bin/splat-transform.cmd -w -g cpu qa/seem-source/meta.json --filter-harmonics 0 qa/seem-trained.ply`。
+4. 在已有 NumPy 的独立 Python 环境运行 `python scripts/prepare-trained-gaussian.py`。脚本校验计数与 SH 码本，写出 SPLAT、公开来源清单及前端对应清单。
+5. `npm test` 校验三维体积、训练透明度分布、各向异性尺度、旋转、SHA-256 与路由身份。浏览器检查推荐视角、其他方位、自动环绕、全屏、返回原遗址、刷新和历史记录。
+
+## 路由与项目身份
+
+独立案例使用 `#reconstruction?case=seem-church&site=demo-xianyang` 或 `case=lingyue`，`site` 仅保留返回遗址的导航上下文。页面标题、作者及地点始终是案例自身，不显示成“咸阳三维模型”。没有将这些场景绑定到中国项目点位，未覆盖本地导入模型或 IndexedDB 原始照片。
+
+真正重建咸阳等既有遗址，需要同一现存目标的连续多视角原片、位姿解算、训练和覆盖检验；历史上已经消失的建筑不能凭零散网上照片取得实测背面。现阶段仅新增可验证的实际 3DGS 浏览，不声称照片训练服务已连接。
+
+## 验证记录
+
+`npm test` 通过 67 项检查（63 项领域/数据检查与 4 项 Sites 检查），生产构建输出 Sites 所需文件。浏览器实际加载本地高斯场景、切换相反方向与俯视、启停自动环绕；在线灵岳寺在系统 iframe 中完成加载并能展示古寺院落。场景选择与返回链接保留原项目遗址 ID，两者不混用模型。全屏使用原生对话框；来源平台的操作提示可自行收起，外链来源和模型文件可访问。

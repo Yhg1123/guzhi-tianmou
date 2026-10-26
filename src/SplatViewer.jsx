@@ -10,6 +10,7 @@ export function SplatViewer({ file, modelUrl, sourceAsset, name, isSample = fals
   const heritageSample = sampleData;
   const photoDepth = sourceAsset?.representation === "photo-depth-gaussians";
   const photogrammetry = isSample && sampleMode !== "synthetic";
+  const trained = sampleData.kind === "gaussian";
   const host = useRef(null);
   const viewerRef = useRef(null);
   const frameRef = useRef(null);
@@ -32,7 +33,7 @@ export function SplatViewer({ file, modelUrl, sourceAsset, name, isSample = fals
     const isHeritage = !file && !modelUrl && sampleMode !== "synthetic";
     const url = modelUrl || (isHeritage ? heritageSample.url : URL.createObjectURL(file || createSampleSplat()));
     setStatus("loading"); setCount(0); setMessage(""); setRotate(false);
-    viewRef.current = "overview"; setView("overview");
+    viewRef.current = trained ? "capture" : "overview"; setView(viewRef.current);
     const up = photoDepth ? [0, 1, 0] : axis === "z" ? [0, 0, 1] : axis === "-y" ? [0, -1, 0] : [0, 1, 0];
     try {
       viewer = new Viewer({ rootElement: root, cameraUp: up, initialCameraPosition: [7, 5, 9], initialCameraLookAt: [0, 1.4, 0], sharedMemoryForWorkers: false, gpuAcceleratedSort: false, enableSIMDInSort: true, sphericalHarmonicsDegree: 0, sceneRevealMode: SceneRevealMode.Instant, ignoreDevicePixelRatio: true });
@@ -54,6 +55,14 @@ export function SplatViewer({ file, modelUrl, sourceAsset, name, isSample = fals
         const frame = (preset = viewRef.current) => {
           viewer.camera.aspect = Math.max(1, root.clientWidth) / Math.max(1, root.clientHeight);
           viewer.camera.zoom = 1;
+          if (trained && preset === "capture" && sampleData.camera) {
+            viewer.camera.position.fromArray(sampleData.camera.position);
+            viewer.controls.target.fromArray(sampleData.camera.target);
+            viewer.camera.fov = sampleData.camera.fov;
+            viewer.camera.near = 0.01; viewer.camera.far = 1000;
+            viewer.camera.updateProjectionMatrix(); viewer.controls.update(); viewer.forceRenderNextFrame();
+            return;
+          }
           if (photoDepth) {
             // Reproduce the source photograph's assumed projection. Orbit only a little:
             // no unseen back side, invented 360-degree view, or metric dimensions.
@@ -71,6 +80,7 @@ export function SplatViewer({ file, modelUrl, sourceAsset, name, isSample = fals
             viewer.camera.updateProjectionMatrix(); viewer.controls.update(); viewer.forceRenderNextFrame();
             return;
           }
+          if (trained) viewer.camera.fov = 50;
           const vertical = THREE.MathUtils.degToRad(viewer.camera.fov) / 2;
           const horizontal = Math.atan(Math.tan(vertical) * viewer.camera.aspect);
           const directions = {
@@ -129,8 +139,8 @@ export function SplatViewer({ file, modelUrl, sourceAsset, name, isSample = fals
     element.addEventListener("wheel", onWheel, { passive: false });
     return () => element.removeEventListener("wheel", onWheel);
   }, [photoDepth]);
-  return <section className={`splat-stage ${background} ${photoDepth ? "photo-depth-stage" : ""}`} aria-label={photoDepth ? "照片高斯预览查看器" : photogrammetry ? "摄影测量点云查看器" : "三维高斯泼溅查看器"}>
-    <div className="splat-chrome"><div className="splat-stage-label"><span className="badge dark-badge">{photoDepth ? "PHOTO · GAUSSIAN" : photogrammetry ? "HERITAGE · PHOTOGRAMMETRY" : "3D GAUSSIAN SPLATTING"}</span><span>{photogrammetry ? `${heritageSample.title} · 公开摄影测量采样` : name}</span></div>
+  return <section className={`splat-stage ${background} ${photoDepth ? "photo-depth-stage" : trained ? "trained-gs-stage" : ""}`} aria-label={photoDepth ? "照片空间预览查看器" : photogrammetry ? "摄影测量点云查看器" : "三维高斯泼溅查看器"}>
+    <div className="splat-chrome"><div className="splat-stage-label"><span className="badge dark-badge">{photoDepth ? "PHOTO · DEPTH" : photogrammetry ? "HERITAGE · PHOTOGRAMMETRY" : "3D GAUSSIAN SPLATTING"}</span><span>{photogrammetry ? `${heritageSample.title} · 公开摄影测量采样` : name}</span></div>
       <div className="splat-toolbar"><button className="icon-button splat-fit" aria-label={photoDepth ? "显示全图" : "适应模型范围"} title="恢复完整取景" disabled={status !== "ready"} onClick={fit}><Scan size={18} />{photoDepth && <span>显示全图</span>}</button>
         {!photoDepth && <button className="icon-button" aria-label={rotate ? "暂停旋转" : "自动旋转"} disabled={status !== "ready"} onClick={() => setRotate(!rotate)}>{rotate ? <Pause size={18} /> : <Play size={18} />}</button>}
         <button className="icon-button" aria-label="放大模型" title="放大模型" disabled={status !== "ready"} onClick={() => zoom(0.8)}><Plus size={18} /></button><button className="icon-button" aria-label="缩小模型" title="缩小模型" disabled={status !== "ready"} onClick={() => zoom(1.25)}><Minus size={18} /></button>
@@ -141,8 +151,8 @@ export function SplatViewer({ file, modelUrl, sourceAsset, name, isSample = fals
     <div ref={host} className="splat-host" />
     {status === "loading" && <div className="splat-overlay" role="status"><span className="loader" />{photogrammetry ? "正在加载摄影测量点云…" : "正在解析高斯模型…"}</div>}
     {status === "error" && <div className="splat-overlay" role="alert"><CircleAlert size={28} /><strong>模型暂时无法显示</strong><p>{message}</p><button className="button" onClick={() => setRetry(retry + 1)}><RotateCcw size={15} />重试加载</button></div>}
-    <div className="splat-footer"><div className="splat-presets" role="group" aria-label="观察视角">{(photoDepth ? [["overview", "完整取景"], ["front", "向左微转"], ["top", "向右微转"], ["detail", "细节"]] : [["overview", "全景"], ["front", "正面"], ["top", "俯视"], ["detail", "细节"]]).map(([id, title]) => <button key={id} disabled={status !== "ready"} aria-pressed={view === id} onClick={() => { viewRef.current = id; setView(id); frameRef.current?.(id); }}>{title}</button>)}<span>{photoDepth ? "拖拽微转 · 滚轮缩放" : "拖拽旋转 · 滚轮缩放"}</span></div>
-      <div className="splat-status"><span>{status === "ready" ? `${count.toLocaleString()} ${photogrammetry ? "个采样点" : "个高斯点"}` : status === "error" ? "加载失败" : "加载中"}</span><span>{photoDepth ? "单图深度推断 · 相对尺度" : photogrammetry ? "摄影测量点云 · 非训练 3DGS · 尺度未标定" : "局部坐标 · 尺度未经标定"}</span></div>
+    <div className="splat-footer"><div className="splat-presets" role="group" aria-label="观察视角">{(photoDepth ? [["overview", "完整取景"], ["front", "向左微转"], ["top", "向右微转"], ["detail", "细节"]] : trained ? [["capture", "推荐视角"], ["overview", "整体"], ["front", "正面"], ["top", "俯视"]] : [["overview", "全景"], ["front", "正面"], ["top", "俯视"], ["detail", "细节"]]).map(([id, title]) => <button key={id} disabled={status !== "ready"} aria-pressed={view === id} onClick={() => { viewRef.current = id; setView(id); frameRef.current?.(id); }}>{title}</button>)}<span>{photoDepth ? "拖拽微转 · 滚轮缩放" : "拖拽旋转 · 滚轮缩放"}</span></div>
+      <div className="splat-status"><span>{status === "ready" ? `${count.toLocaleString()} ${photogrammetry ? "个采样点" : "个高斯点"}` : status === "error" ? "加载失败" : "加载中"}</span><span>{photoDepth ? "单图深度推断 · 相对尺度" : photogrammetry ? "摄影测量点云 · 非训练 3DGS · 尺度未标定" : trained ? "实景训练 3DGS · 尺度未核验" : "局部坐标 · 尺度未经标定"}</span></div>
     </div>
   </section>;
 }

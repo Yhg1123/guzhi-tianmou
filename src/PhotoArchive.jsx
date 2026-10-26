@@ -25,7 +25,7 @@ export function PhotoArchiveStage({ asset }) {
   }, [expanded]);
   const content = <>
     <div className="archive-view-header"><div className="archive-view-modes" role="group" aria-label="影像查看方式">
-      {[["gaussian", "高斯预览", Box], ["photo", "来源照片", Camera], ["depth", "相对深度", Layers]].map(([id, title, Icon]) =>
+      {[["gaussian", "照片空间预览", Box], ["photo", "来源照片", Camera], ["depth", "相对深度", Layers]].map(([id, title, Icon]) =>
         <button key={id} aria-pressed={mode === id} onClick={() => setMode(id)}><Icon size={14} />{title}</button>)}
     </div><button className="archive-expand-button" ref={expanded ? null : expandButton} data-close-viewer={expanded || undefined} aria-label={expanded ? "退出全屏查看" : "全屏查看影像"} onClick={() => setExpanded(!expanded)}>{expanded ? <X size={16} /> : <Maximize2 size={15} />}<span>{expanded ? "退出全屏" : "全屏查看"}</span></button></div>
     {mode === "gaussian" ? <SplatViewer modelUrl={asset.modelUrl} sourceAsset={asset} name={asset.subject} /> : <>

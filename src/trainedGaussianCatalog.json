@@ -1,0 +1,102 @@
+{
+  "id": "seem-church",
+  "kind": "gaussian",
+  "representation": "trained-3dgs",
+  "title": "Seem 古教堂",
+  "subtitle": "Seem Kirke · 丹麦 · 无人机实景采集",
+  "url": "/gaussians/seem-church.splat",
+  "previewUrl": "/gaussians/seem-church-preview.webp",
+  "pointCount": 960991,
+  "bytes": 30751712,
+  "sha256": "3b35d2abe4289ae0318b69cdae5f59eb1bf35e946c224deb0278e8ed977b7598",
+  "previewSha256": "a9aeb83982a98fa2e5a288e2ea8e9b59f95cc38e4b873a216f9d385df0030f98",
+  "previewSourceUrl": "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/splat/e832997f/v1/xl.webp",
+  "credit": "roedsgaard / SuperSplat",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "sourceUrl": "https://superspl.at/scene/e832997f",
+  "sourceManifest": "/gaussians/seem-church-source.json",
+  "training": "Author: DJI drone photographs → RealityScan camera alignment → LichtFeld Studio training",
+  "trainedByAuthor": true,
+  "trainedInThisApp": false,
+  "metricScaleVerified": false,
+  "georeferenced": false,
+  "description": "作者以无人机照片采集古教堂，在 RealityScan 中解算相机，再用 LichtFeld Studio 训练的三维高斯场景。保留训练后的空间位置、各向异性尺度、方向、颜色与透明度，可自由环绕观察。本站转换并打包模型，未在本站重新训练。",
+  "transformation": "Official SplatTransform 3.10.3: SOG → degree-zero Gaussian PLY (source higher-order SH codebook is entirely zero); 180-degree X rotation for Y-up; 32-byte SPLAT DC/alpha/quaternion quantization. All Gaussians retained; no flattening, synthetic geometry or monocular unprojection.",
+  "sourceFiles": [
+    {
+      "name": "means_l.webp",
+      "url": "https://d28zzqy0iyovbz.cloudfront.net/e832997f/v1/means_l.webp",
+      "bytes": 2684042,
+      "sha256": "4af1a1be093c613ad48083bb206758d6001b109c30698a3d7a19e0468fb9acc9"
+    },
+    {
+      "name": "means_u.webp",
+      "url": "https://d28zzqy0iyovbz.cloudfront.net/e832997f/v1/means_u.webp",
+      "bytes": 465414,
+      "sha256": "da31d2d59c8ecac55811da5a14d2c02f39eaed9edbfc996e5846ff271c5c8d86"
+    },
+    {
+      "name": "meta.json",
+      "url": "https://d28zzqy0iyovbz.cloudfront.net/e832997f/v1/meta.json",
+      "bytes": 10794,
+      "sha256": "29d26ce46ef80eec801b41fe27f04c8d31a77aa929f25112d6cd0b10cbb02f65"
+    },
+    {
+      "name": "quats.webp",
+      "url": "https://d28zzqy0iyovbz.cloudfront.net/e832997f/v1/quats.webp",
+      "bytes": 2717980,
+      "sha256": "b044c8876ed8ca5641ab36b3ba70cfa8d7c0ff05c5925eb29ff6e3450672bd16"
+    },
+    {
+      "name": "scales.webp",
+      "url": "https://d28zzqy0iyovbz.cloudfront.net/e832997f/v1/scales.webp",
+      "bytes": 2662990,
+      "sha256": "7016723d4f6b14cd50772eed2c9606c3cbf13ee4a716aae80cf0ad33ed1c1964"
+    },
+    {
+      "name": "sh0.webp",
+      "url": "https://d28zzqy0iyovbz.cloudfront.net/e832997f/v1/sh0.webp",
+      "bytes": 3321348,
+      "sha256": "c2bb729c7972291fd527895103ea161969f43342ef7995310c62105d15a3d1f9"
+    },
+    {
+      "name": "shN_centroids.webp",
+      "url": "https://d28zzqy0iyovbz.cloudfront.net/e832997f/v1/shN_centroids.webp",
+      "bytes": 82,
+      "sha256": "860ee94ae09eb7c37ca5d0adbfefcb53a956ecedd6a1202936267f53601d5608"
+    },
+    {
+      "name": "shN_labels.webp",
+      "url": "https://d28zzqy0iyovbz.cloudfront.net/e832997f/v1/shN_labels.webp",
+      "bytes": 90,
+      "sha256": "08ff45f6153bdd3e11d656ff3387144382443caa285271052ed832571b9b181a"
+    }
+  ],
+  "bounds": {
+    "min": [
+      -27.076383590698242,
+      -2.7136318683624268,
+      -26.677127838134766
+    ],
+    "max": [
+      27.189542770385742,
+      27.971454620361328,
+      22.02122688293457
+    ]
+  },
+  "camera": {
+    "position": [
+      -12.421453475952148,
+      10.829668045043945,
+      -21.73072052001953
+    ],
+    "target": [
+      -4.814439652520558,
+      10.377790210301438,
+      -0.09553461726887491
+    ],
+    "fov": 90
+  },
+  "packagedAt": "2026-10-26T17:51:46.757462+00:00"
+}

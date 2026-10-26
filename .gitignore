@@ -24,6 +24,7 @@ design-qa.md
 !public/samples/temple-of-bel.splat
 !public/samples/star-of-india.splat
 !public/site-archives/*.splat
+!public/gaussians/*.splat
 
 # Editor and operating-system files
 .vscode/
