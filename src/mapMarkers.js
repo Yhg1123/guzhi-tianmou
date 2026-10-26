@@ -3,8 +3,8 @@ import { siteName } from "./presentation.js";
 export const MARKER_SIZE = [44, 52];
 export const MARKER_ANCHOR = [22, 50];
 
-export function heritageMarker(site, selectedId) {
-  return { ...site, active: site.id === selectedId, kind: "heritage", label: siteName(site), title: siteName(site), caption: site.id === selectedId ? "当前遗址" : site.type || "遗址档案" };
+export function heritageMarker(site, selectedId, openModel = false) {
+  return { ...site, active: site.id === selectedId, kind: "heritage", label: siteName(site), title: siteName(site), actionLabel: openModel ? "打开三维档案" : "", caption: openModel ? "查看三维档案 ↗" : site.id === selectedId ? "当前遗址" : site.type || "遗址档案" };
 }
 
 const SVG_NS = "http://www.w3.org/2000/svg";
@@ -29,6 +29,7 @@ export function createMapMarker(point, onSelect) {
   button.title = point.label;
   button.setAttribute("aria-label", point.label);
   button.setAttribute("aria-pressed", String(Boolean(point.active)));
+  if (point.actionLabel) { button.title += " · " + point.actionLabel; button.setAttribute("aria-description", point.actionLabel); }
   if (point.color) button.style.setProperty("--observation-color", point.color);
 
   const foot = document.createElement("i"); foot.className = "map-marker-foot";

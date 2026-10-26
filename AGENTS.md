@@ -26,6 +26,8 @@ The user prefers satellite imagery over the standard road map. Default configure
 
 The user requested more professional location markers. Use shared, crisp vector pins with heritage building symbols, neutral unselected pins, a forest-green selected pin, and a compact name card. Environmental pins use metric symbols and preserve the value-color legend. Keep the pin tip anchored to the original display position, keep labels within the viewport, and retain keyboard/click selection in both Tencent and OSM maps. Marker styling must not imply surveyed accuracy or a conservation/risk rating.
 
+The user wants a single click on a heritage pin or its name card to open that site's 3D archive. Atlas and conservation pins navigate with an encoded site ID in the URL; dropdown selection remains selection-only, and environment pins retain reading selection. Load only the model associated with that site's ID and coordinates. If no matching model exists, show that site's model-import/preparation state; never substitute an independent public case. Public cases remain available through explicit browsing. Preserve site identity across refresh/history, and offer a return-to-map action.
+
 When implementing from a selected generated mock, treat that image as the source of truth for layout, component anatomy, density, spacing, color, typography, visible content, and hierarchy.
 
 Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts/prepare-sites-build.mjs`, and `tests/sites-worker.test.mjs` intact so the same local prototype can be handed to Sites. Before a Sites handoff, run `npm run build` and `npm run test:sites`; the build must leave `dist/client/index.html`, `dist/server/index.js`, and `dist/.openai/hosting.json`.

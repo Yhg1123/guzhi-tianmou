@@ -16,14 +16,15 @@ function label(text) { const element = document.createElement("span"); element.t
 export function HeritageMap(props) {
   const [provider, setProvider] = useState(defaultMapProvider);
   const [unavailable, setUnavailable] = useState(false);
-  const { sites, selectedSite, waterways = EMPTY, routes = EMPTY, boundaries = EMPTY, hazards = EMPTY, referenceArea, mode, layers, onSelectSite } = props;
-  const points = useMemo(() => layers.points ? sites.map((site) => heritageMarker(site, selectedSite?.id)) : [], [sites, selectedSite?.id, layers.points]);
+  const { sites, selectedSite, waterways = EMPTY, routes = EMPTY, boundaries = EMPTY, hazards = EMPTY, referenceArea, mode, layers, onSelectSite, onOpenSiteModel } = props;
+  const activate = onOpenSiteModel || onSelectSite;
+  const points = useMemo(() => layers.points ? sites.map((site) => heritageMarker(site, selectedSite?.id, Boolean(onOpenSiteModel))) : [], [sites, selectedSite?.id, layers.points, onOpenSiteModel]);
   const lines = useMemo(() => [...(layers.waterways ? waterways.map((feature) => ({ feature, color: "#2d8fa8", width: mode === "water" ? 5 : 3 })) : []), ...(layers.routes ? routes.map((feature) => ({ feature, color: "#bb8140", dashed: true })) : [])], [waterways, routes, layers.waterways, layers.routes, mode]);
   const polygons = useMemo(() => [...(layers.boundaries ? boundaries.map((feature) => ({ feature, color: "#168372", fill: "rgba(22,131,114,0.12)" })) : []), ...(layers.hazards ? hazards.map((feature) => ({ feature, color: "#ce6c42", fill: "rgba(206,108,66,0.12)", dashed: true })) : []), ...(referenceArea ? [{ feature: referenceArea, color: "#357fbd", fill: "rgba(53,127,189,0.08)", dashed: true }] : [])], [boundaries, hazards, referenceArea, layers.boundaries, layers.hazards]);
-  return <div className="map-canvas-wrap">{provider !== "osm" ? <TencentMap points={points} locations={sites} lines={lines} polygons={polygons} imagery={provider === "tencent-satellite"} center={selectedSite} zoom={14} onSelect={onSelectSite} onUnavailable={() => { setProvider("osm"); setUnavailable(true); }} /> : <OpenHeritageMap {...props} />}<MapProviderSelect value={provider} onChange={(value) => { setProvider(value); setUnavailable(false); }} />{unavailable && <div className="basemap-status" role="status">腾讯地图暂不可用，已切换 OpenStreetMap</div>}</div>;
+  return <div className="map-canvas-wrap">{provider !== "osm" ? <TencentMap points={points} locations={sites} lines={lines} polygons={polygons} imagery={provider === "tencent-satellite"} center={selectedSite} zoom={14} onSelect={activate} onUnavailable={() => { setProvider("osm"); setUnavailable(true); }} /> : <OpenHeritageMap {...props} />}<MapProviderSelect value={provider} onChange={(value) => { setProvider(value); setUnavailable(false); }} />{unavailable && <div className="basemap-status" role="status">腾讯地图暂不可用，已切换 OpenStreetMap</div>}</div>;
 }
 
-function OpenHeritageMap({ sites, selectedSite, waterways = [], routes = [], boundaries = [], hazards = [], referenceArea, mode, layers, onSelectSite }) {
+function OpenHeritageMap({ sites, selectedSite, waterways = [], routes = [], boundaries = [], hazards = [], referenceArea, mode, layers, onSelectSite, onOpenSiteModel }) {
   const elementRef = useRef(null);
   const mapRef = useRef(null);
   const contentRef = useRef(null);
@@ -77,7 +78,7 @@ function OpenHeritageMap({ sites, selectedSite, waterways = [], routes = [], bou
     if (layers.points) {
       sites.forEach((site) => {
         const active = site.id === selectedSite?.id;
-        const button = createMapMarker(heritageMarker(site, selectedSite?.id), onSelectSite);
+        const button = createMapMarker(heritageMarker(site, selectedSite?.id, Boolean(onOpenSiteModel)), onOpenSiteModel || onSelectSite);
         const marker = L.marker([site.lat, site.lng], { icon: L.divIcon({ html: button, className: "heritage-leaflet-icon", iconSize: MARKER_SIZE, iconAnchor: MARKER_ANCHOR }), keyboard: false, zIndexOffset: active ? 1000 : 0, riseOnHover: true }).addTo(content);
         const instance = mapRef.current;
         const place = () => { if (!elementRef.current) return; const point = instance.latLngToContainerPoint(marker.getLatLng()); placeMarkerLabel(button, point.x, point.y, elementRef.current.clientWidth); };
@@ -85,7 +86,7 @@ function OpenHeritageMap({ sites, selectedSite, waterways = [], routes = [], bou
         marker.on("remove", () => { instance.off("move zoom resize", place); button.onclick = null; });
       });
     }
-  }, [sites, selectedSite, waterways, routes, boundaries, hazards, referenceArea, mode, layers, onSelectSite]);
+  }, [sites, selectedSite, waterways, routes, boundaries, hazards, referenceArea, mode, layers, onSelectSite, onOpenSiteModel]);
 
   useEffect(() => {
     if (mapRef.current && selectedSite) {
