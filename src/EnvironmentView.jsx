@@ -8,6 +8,7 @@ import { METRICS, REFRESH_OPTIONS, refreshCadence, connectionStatus, trendWindow
 import "./environment.css";
 import { siteName } from "./presentation.js";
 import { TencentMap, MapProviderSelect, defaultMapProvider } from "./TencentMap.jsx";
+import { createMapMarker, placeMarkerLabel, MARKER_SIZE, MARKER_ANCHOR } from "./mapMarkers.js";
 
 const valueText = (value, digits = 1) => Number.isFinite(value) ? value.toFixed(digits) : "—";
 const timeText = (time, date = false) => time ? new Intl.DateTimeFormat("zh-CN", { timeZone: "Asia/Shanghai", month: date ? "2-digit" : undefined, day: date ? "2-digit" : undefined, hour: "2-digit", minute: "2-digit", hour12: false }).format(time) : "待接入";
@@ -28,7 +29,7 @@ function EnvironmentMap({ sites, records, selectedId, metric, onSelect, asOf }) 
     return sites.map((site) => {
       const observation = byId.get(site.id); const stale = observation && asOf - observation.timestamp > SENSOR_STALE_MS;
       const value = stale ? null : observation?.[metric];
-      return { ...site, active: site.id === selectedId, color: environmentColor(value, metric), label: siteName(site) + " · " + (stale ? "过期参考" : valueText(value) + METRICS[metric].unit) };
+      return { ...site, kind: metric, title: siteName(site), caption: stale ? "过期参考" : METRICS[metric].title + " " + valueText(value) + METRICS[metric].unit, active: site.id === selectedId, color: environmentColor(value, metric), label: siteName(site) + " · " + (stale ? "过期参考" : valueText(value) + METRICS[metric].unit) };
     });
   }, [sites, records, selectedId, metric, asOf]);
   return <div className="environment-map">{provider !== "osm" ? <TencentMap points={points} imagery={provider === "tencent-satellite"} fitLocations scrollable={false} onSelect={onSelect} onUnavailable={() => { setProvider("osm"); setUnavailable(true); }} label={METRICS[metric].title + "点位分布地图"} /> : <OpenEnvironmentMap sites={sites} records={records} selectedId={selectedId} metric={metric} onSelect={onSelect} asOf={asOf} />}<MapProviderSelect value={provider} onChange={(value) => { setProvider(value); setUnavailable(false); }} />{unavailable && <div className="basemap-status" role="status">腾讯地图暂不可用，已切换 OpenStreetMap</div>}</div>;
@@ -55,9 +56,12 @@ function OpenEnvironmentMap({ sites, records, selectedId, metric, onSelect, asOf
     for (const site of sites) {
       const observation = byId.get(site.id); const stale = observation && asOf - observation.timestamp > SENSOR_STALE_MS;
       const value = stale ? null : observation?.[metric]; const active = site.id === selectedId;
-      const marker = L.circleMarker([site.lat, site.lng], { radius: active ? 12 : 9, color: active ? "#254e40" : "white", weight: active ? 3 : 2, fillColor: environmentColor(value, metric), fillOpacity: .95 }).addTo(group.current);
-      const label = document.createElement("span"); label.textContent = siteName(site) + " · " + (stale ? "过期参考" : valueText(value) + METRICS[metric].unit);
-      marker.bindTooltip(label, { permanent: active, direction: "top" }); marker.on("click", () => onSelect(site.id));
+      const button = createMapMarker({ id: site.id, kind: metric, active, title: siteName(site), caption: stale ? "过期参考" : METRICS[metric].title + " " + valueText(value) + METRICS[metric].unit, label: siteName(site) + " · " + (stale ? "过期参考" : valueText(value) + METRICS[metric].unit), color: environmentColor(value, metric) }, onSelect);
+      const marker = L.marker([site.lat, site.lng], { icon: L.divIcon({ html: button, className: "heritage-leaflet-icon", iconSize: MARKER_SIZE, iconAnchor: MARKER_ANCHOR }), keyboard: false, zIndexOffset: active ? 1000 : 0, riseOnHover: true }).addTo(group.current);
+      const instance = map.current;
+      const place = () => { if (!host.current) return; const point = instance.latLngToContainerPoint(marker.getLatLng()); placeMarkerLabel(button, point.x, point.y, host.current.clientWidth); };
+      instance.on("move zoom resize", place); place();
+      marker.on("remove", () => { instance.off("move zoom resize", place); button.onclick = null; });
     }
   }, [sites, records, selectedId, metric, onSelect, asOf]);
   return <div className="map-canvas" ref={host} aria-label={METRICS[metric].title + "点位分布地图"} />;

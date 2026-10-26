@@ -106,12 +106,26 @@ svg { flex-shrink: 0; vertical-align: middle; }
 .atlas-map:has(.tencent-map-wrap) .map-caption { display:none; }
 .protection-map:has(.tencent-map-wrap) .map-legend { top:60px; bottom:auto; max-width:calc(100% - 28px); flex-wrap:wrap; }
 .protection-map:has(.tencent-map-wrap) .basemap-status { top:108px; }
-.tencent-map-point { position:absolute; top:0; left:0; width:26px; height:26px; padding:0; overflow:visible; display:grid; place-items:center; background:transparent; cursor:pointer; margin:-13px 0 0 -13px; }
-.tencent-map-point > i { display:block; width:17px; height:17px; border:2px solid white; border-radius:50%; background:var(--point-color); box-shadow:0 1px 5px #193a3040; }
-.tencent-map-point.active > i { width:23px; height:23px; border-width:3px; }
-.tencent-map-point > span { display:none; position:absolute; bottom:34px; left:50%; transform:translateX(-50%); white-space:nowrap; color:#315b47; background:#fffffff2; border:1px solid #d8e2da; box-shadow:0 2px 10px #324f3012; border-radius:5px; font-size:11px; padding:7px 10px; pointer-events:none; }
-.tencent-map-point:hover > span,.tencent-map-point:focus-visible > span,.tencent-map-point.active > span { display:block; }
-.tencent-map-point:focus-visible { outline:2px solid #326f54; outline-offset:4px; border-radius:50%; }
+.map-marker { position:absolute; top:0; left:0; width:44px; height:52px; margin:-50px 0 0 -22px; padding:0; border:0; background:none; overflow:visible; cursor:pointer; user-select:none; touch-action:manipulation; --pin-fill:#fffdf6; --pin-stroke:#fff; --pin-symbol:#386453; }
+.map-marker-pin { position:absolute; left:4px; top:6px; width:36px; height:46px; overflow:visible; transform:scale(.82); transform-origin:18px 44px; filter:drop-shadow(0 2px 3px #102d3266); }
+.map-marker-shell { fill:var(--pin-fill); stroke:var(--pin-stroke); stroke-width:2; stroke-linejoin:round; }
+.map-marker-symbol { fill:none; stroke:var(--pin-symbol); stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+.map-marker-foot { position:absolute; left:14px; top:46px; width:16px; height:8px; border-radius:50%; background:#102c3a45; box-shadow:0 0 0 2px #ffffff70; }
+.map-marker.active { --pin-fill:#246a55; --pin-symbol:#fff; }
+.map-marker.active .map-marker-pin,.map-marker:hover .map-marker-pin,.map-marker:focus-visible .map-marker-pin { transform:none; }
+.map-marker.active .map-marker-foot { left:7px; top:43px; width:30px; height:14px; background:#dbede65c; box-shadow:0 0 0 1px #ffffffd0; }
+.map-marker.observation-marker { --pin-fill:var(--observation-color,#9aa9a3); --pin-symbol:#fff; }
+.map-marker-label { display:none; position:absolute; top:5px; left:47px; width:max-content; max-width:var(--marker-label-max,210px); padding:7px 11px 8px; color:#294b3d; background:#fffffff5; border:1px solid #d4e0d8; border-radius:6px; box-shadow:0 3px 14px #0e292e2b; text-align:left; pointer-events:none; line-height:1.4; }
+.map-marker-label::before { content:""; position:absolute; top:14px; left:-4px; width:6px; height:6px; background:#fff; border-left:1px solid #d4e0d8; border-bottom:1px solid #d4e0d8; transform:rotate(45deg); }
+.map-marker-label small { display:block; color:#7c8d82; font-size:9px; margin-bottom:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.map-marker-label strong { display:block; font-size:12px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.map-marker.active .map-marker-label { border-color:#a5c5b2; }.map-marker.active .map-marker-label small { color:#4d826a; }
+.map-marker:hover,.map-marker:focus-visible { z-index:50 !important; }
+.map-marker:hover .map-marker-label,.map-marker:focus-visible .map-marker-label,.map-marker.active .map-marker-label { display:block; }
+.map-marker.label-left .map-marker-label { left:auto; right:47px; }.map-marker.label-left .map-marker-label::before { left:auto; right:-4px; transform:rotate(225deg); }
+.map-marker.label-below .map-marker-label { top:58px; }.map-marker.label-below .map-marker-label::before { display:none; }
+.map-marker:focus-visible { outline:2px solid #cce9db; outline-offset:3px; border-radius:18px 18px 8px 8px; }
+.heritage-leaflet-icon { background:none; border:0; }.heritage-leaflet-icon .map-marker { margin:0; }
 @media (max-width:520px) { .atlas-map .map-provider-select { top:auto; bottom:80px; }.atlas-map .basemap-status { top:auto; bottom:124px; } }
 .map-layer-panel { position: absolute; top: 18px; right: 16px; z-index: 800; width: 155px; background: #fffffff2; border: 1px solid #d9e1d9; border-radius: 5px; box-shadow: 0 3px 16px #233b3214; }
 .layer-title { display: flex; gap: 8px; width: 100%; align-items: center; padding: 12px; font-weight: 600; }

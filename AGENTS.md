@@ -24,6 +24,8 @@ The user subsequently requested applying for Tencent Maps and completed login, t
 
 The user prefers satellite imagery over the standard road map. Default configured Tencent maps to satellite imagery with road labels in the atlas, conservation and environment pages; retain standard-map and OSM choices. Preserve the camera and overlays when switching between Tencent base maps, and keep point/area contrast readable over imagery. Do not label satellite imagery as realtime or invent acquisition dates.
 
+The user requested more professional location markers. Use shared, crisp vector pins with heritage building symbols, neutral unselected pins, a forest-green selected pin, and a compact name card. Environmental pins use metric symbols and preserve the value-color legend. Keep the pin tip anchored to the original display position, keep labels within the viewport, and retain keyboard/click selection in both Tencent and OSM maps. Marker styling must not imply surveyed accuracy or a conservation/risk rating.
+
 When implementing from a selected generated mock, treat that image as the source of truth for layout, component anatomy, density, spacing, color, typography, visible content, and hierarchy.
 
 Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts/prepare-sites-build.mjs`, and `tests/sites-worker.test.mjs` intact so the same local prototype can be handed to Sites. Before a Sites handoff, run `npm run build` and `npm run test:sites`; the build must leave `dist/client/index.html`, `dist/server/index.js`, and `dist/.openai/hosting.json`.

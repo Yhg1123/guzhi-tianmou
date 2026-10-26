@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Scan } from "lucide-react";
 import { displayPosition, displayPaths } from "./mapCoordinates.js";
+import { createMapMarker, placeMarkerLabel } from "./mapMarkers.js";
 
 const key = import.meta.env.VITE_TENCENT_MAP_KEY?.trim();
 export const hasTencentMap = Boolean(key);
@@ -62,20 +63,10 @@ function fit(map, TMap, points, maxZoom = 13) {
 
 function pointOverlay(TMap) {
   return class extends TMap.DOMOverlay {
-    onInit(options) { this.point = options.point; this.choose = options.choose; this.position = position(TMap, [this.point.lng, this.point.lat]); }
+    onInit(options) { this.point = options.point; this.choose = options.choose; this.host = options.host; this.position = position(TMap, [this.point.lng, this.point.lat]); }
     createDOM() {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "tencent-map-point" + (this.point.active ? " active" : "");
-      button.style.setProperty("--point-color", this.point.color);
-      button.title = this.point.label;
-      button.setAttribute("aria-label", this.point.label);
-      button.setAttribute("aria-pressed", String(Boolean(this.point.active)));
-      const dot = document.createElement("i");
-      const label = document.createElement("span"); label.textContent = this.point.label;
-      button.append(dot, label);
-      this.click = (event) => { event.stopPropagation(); this.choose(this.point.id); };
-      button.addEventListener("click", this.click);
+      const button = createMapMarker(this.point, this.choose);
+      button.classList.add("tencent-map-point");
       this.element = button;
       return button;
     }
@@ -85,9 +76,10 @@ function pointOverlay(TMap) {
       if (!map || !this.element) return;
       const pixel = map.projectToContainer(this.position);
       this.element.style.transform = `translate(${pixel.getX()}px, ${pixel.getY()}px)`;
-      this.element.style.zIndex = this.point.active ? "2" : "1";
+      this.element.style.zIndex = this.point.active ? "30" : "10";
+      placeMarkerLabel(this.element, pixel.getX(), pixel.getY(), this.host.clientWidth, this.host);
     }
-    onDestroy() { this.element?.removeEventListener("click", this.click); }
+    onDestroy() { if (this.element) this.element.onclick = null; this.element = null; this.host = null; }
   };
 }
 
@@ -140,7 +132,7 @@ export function TencentMap({ points, locations = points, lines = EMPTY, polygons
       overlays.push(new TMap.MultiPolygon({ map, styles, geometries: polygons.map((polygon, index) => ({ id: "area-" + index, styleId: "area-" + index, paths: paths(TMap, polygon.feature.geometry.coordinates), properties: polygon.feature.properties })) }));
     }
     const Point = pointOverlay(TMap);
-    points.forEach((point) => overlays.push(new Point({ map, point, choose: onSelect, isStopPropagation: true })));
+    points.forEach((point) => overlays.push(new Point({ map, point, host: host.current, choose: onSelect, isStopPropagation: true })));
     return () => overlays.forEach((overlay) => overlay.destroy());
   }, [ready, points, lines, polygons, imagery, onSelect]);
 
