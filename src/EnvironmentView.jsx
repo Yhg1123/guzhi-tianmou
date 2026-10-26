@@ -7,6 +7,7 @@ import { download } from "./project.js";
 import { METRICS, REFRESH_OPTIONS, refreshCadence, connectionStatus, trendWindow, SENSOR_STALE_MS, weatherUrl, parseWeather, parseWeatherSnapshot, parseSensorData, summarizeEnvironment, environmentColor, environmentSnapshot } from "./environment.js";
 import "./environment.css";
 import { siteName } from "./presentation.js";
+import { TencentMap, MapProviderSelect, defaultMapProvider } from "./TencentMap.jsx";
 
 const valueText = (value, digits = 1) => Number.isFinite(value) ? value.toFixed(digits) : "—";
 const timeText = (time, date = false) => time ? new Intl.DateTimeFormat("zh-CN", { timeZone: "Asia/Shanghai", month: date ? "2-digit" : undefined, day: date ? "2-digit" : undefined, hour: "2-digit", minute: "2-digit", hour12: false }).format(time) : "待接入";
@@ -20,11 +21,26 @@ async function readJson(response) {
 }
 
 function EnvironmentMap({ sites, records, selectedId, metric, onSelect, asOf }) {
+  const [provider, setProvider] = useState(defaultMapProvider);
+  const [unavailable, setUnavailable] = useState(false);
+  const points = useMemo(() => {
+    const byId = new Map(records.map((record) => [record.siteId, record]));
+    return sites.map((site) => {
+      const observation = byId.get(site.id); const stale = observation && asOf - observation.timestamp > SENSOR_STALE_MS;
+      const value = stale ? null : observation?.[metric];
+      return { ...site, active: site.id === selectedId, color: environmentColor(value, metric), label: siteName(site) + " · " + (stale ? "过期参考" : valueText(value) + METRICS[metric].unit) };
+    });
+  }, [sites, records, selectedId, metric, asOf]);
+  return <div className="environment-map">{provider === "tencent" ? <TencentMap points={points} fitLocations scrollable={false} onSelect={onSelect} onUnavailable={() => { setProvider("osm"); setUnavailable(true); }} label={METRICS[metric].title + "点位分布地图"} /> : <OpenEnvironmentMap sites={sites} records={records} selectedId={selectedId} metric={metric} onSelect={onSelect} asOf={asOf} />}<MapProviderSelect value={provider} onChange={(value) => { setProvider(value); setUnavailable(false); }} />{unavailable && <div className="basemap-status" role="status">腾讯地图暂不可用，已切换 OpenStreetMap</div>}</div>;
+}
+
+function OpenEnvironmentMap({ sites, records, selectedId, metric, onSelect, asOf }) {
   const host = useRef(null); const map = useRef(null); const group = useRef(null);
   const locations = useRef(sites); locations.current = sites;
   useEffect(() => {
-    const instance = L.map(host.current, { scrollWheelZoom: false, zoomAnimation: false, fadeAnimation: false, markerZoomAnimation: false }).setView([36, 105], 4);
+    const instance = L.map(host.current, { zoomControl: false, scrollWheelZoom: false, zoomAnimation: false, fadeAnimation: false, markerZoomAnimation: false }).setView([36, 105], 4);
     map.current = instance;
+    L.control.zoom({ position: "bottomright" }).addTo(instance);
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors', maxZoom: 18 }).addTo(instance);
     group.current = L.layerGroup().addTo(instance);
     const resize = new ResizeObserver(() => { instance.invalidateSize(); if (locations.current.length) instance.fitBounds(locations.current.map((site) => [site.lat, site.lng]), { padding: [45, 45], maxZoom: 10 }); }); resize.observe(host.current);
@@ -44,7 +60,7 @@ function EnvironmentMap({ sites, records, selectedId, metric, onSelect, asOf }) 
       marker.bindTooltip(label, { permanent: active, direction: "top" }); marker.on("click", () => onSelect(site.id));
     }
   }, [sites, records, selectedId, metric, onSelect, asOf]);
-  return <div className="environment-map" ref={host} aria-label={METRICS[metric].title + "点位分布地图"} />;
+  return <div className="map-canvas" ref={host} aria-label={METRICS[metric].title + "点位分布地图"} />;
 }
 
 function EnvironmentChart({ record, metric, weather, range = 48 }) {

@@ -1,17 +1,29 @@
 import { siteName } from "./presentation.js";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { geoJsonLines } from "./geodata.js";
 import { Scan } from "lucide-react";
+import { TencentMap, MapProviderSelect, defaultMapProvider } from "./TencentMap.jsx";
 
 const TILE_URL = import.meta.env.VITE_TILE_URL || "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 const TILE_ATTRIBUTION = import.meta.env.VITE_TILE_ATTRIBUTION
   || '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+const EMPTY = [];
 
 function label(text) { const element = document.createElement("span"); element.textContent = text; return element; }
 
-export function HeritageMap({ sites, selectedSite, waterways = [], routes = [], boundaries = [], hazards = [], referenceArea, mode, layers, onSelectSite }) {
+export function HeritageMap(props) {
+  const [provider, setProvider] = useState(defaultMapProvider);
+  const [unavailable, setUnavailable] = useState(false);
+  const { sites, selectedSite, waterways = EMPTY, routes = EMPTY, boundaries = EMPTY, hazards = EMPTY, referenceArea, mode, layers, onSelectSite } = props;
+  const points = useMemo(() => layers.points ? sites.map((site) => ({ ...site, label: siteName(site), active: site.id === selectedSite?.id, color: site.id === selectedSite?.id ? "#0f6b58" : site.isDemo ? "#d39537" : "#c75a43" })) : [], [sites, selectedSite?.id, layers.points]);
+  const lines = useMemo(() => [...(layers.waterways ? waterways.map((feature) => ({ feature, color: "#2d8fa8", width: mode === "water" ? 5 : 3 })) : []), ...(layers.routes ? routes.map((feature) => ({ feature, color: "#bb8140", dashed: true })) : [])], [waterways, routes, layers.waterways, layers.routes, mode]);
+  const polygons = useMemo(() => [...(layers.boundaries ? boundaries.map((feature) => ({ feature, color: "#168372", fill: "rgba(22,131,114,0.12)" })) : []), ...(layers.hazards ? hazards.map((feature) => ({ feature, color: "#ce6c42", fill: "rgba(206,108,66,0.12)", dashed: true })) : []), ...(referenceArea ? [{ feature: referenceArea, color: "#357fbd", fill: "rgba(53,127,189,0.08)", dashed: true }] : [])], [boundaries, hazards, referenceArea, layers.boundaries, layers.hazards]);
+  return <div className="map-canvas-wrap">{provider === "tencent" ? <TencentMap points={points} locations={sites} lines={lines} polygons={polygons} center={selectedSite} zoom={referenceArea ? 14 : 10} onSelect={onSelectSite} onUnavailable={() => { setProvider("osm"); setUnavailable(true); }} /> : <OpenHeritageMap {...props} />}<MapProviderSelect value={provider} onChange={(value) => { setProvider(value); setUnavailable(false); }} />{unavailable && <div className="basemap-status" role="status">腾讯地图暂不可用，已切换 OpenStreetMap</div>}</div>;
+}
+
+function OpenHeritageMap({ sites, selectedSite, waterways = [], routes = [], boundaries = [], hazards = [], referenceArea, mode, layers, onSelectSite }) {
   const elementRef = useRef(null);
   const mapRef = useRef(null);
   const contentRef = useRef(null);

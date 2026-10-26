@@ -1,10 +1,10 @@
 # 古址天眸 · 古遗址研究工作空间
 
-本项目是可运行的浏览器 GIS 试点。地图使用 Leaflet 和 OpenStreetMap 底图，不需要地图 API Key。浏览器从 `tile.openstreetmap.org` 加载当前视野的瓦片；正式上线前应按访问规模选择稳定的瓦片服务或自建服务，并遵守 [OSM 瓦片使用政策](https://operations.osmfoundation.org/policies/tiles/)。如更换服务，可设置 `VITE_TILE_URL` 和 `VITE_TILE_ATTRIBUTION`。
+本项目是可运行的浏览器 GIS 试点。遗址地图、保护评估和环境总览支持腾讯 JavaScript API GL 与 Leaflet / OpenStreetMap 两种底图，可在地图内切换。无 Key 时默认 OpenStreetMap；本地配置腾讯 Key 后可默认使用腾讯地图，连接失败会回退。Key 通过被 Git 忽略的 `.env.local` 配置，仓库只提供空白 [.env.example](.env.example)。接入范围、坐标转换与上线注意事项见 [地图配置](docs/maps.md)。OpenStreetMap 从 `tile.openstreetmap.org` 加载当前视野瓦片，使用须遵守 [OSM 瓦片使用政策](https://operations.osmfoundation.org/policies/tiles/)；自定义瓦片可设置 `VITE_TILE_URL` 和 `VITE_TILE_ATTRIBUTION`。
 
 ## 当前可用流程
 
-1. **遗址地图**：浏览 OpenStreetMap、遗址点位、水系、交通、保护范围和影响区，切换图层、定位全部遗址。
+1. **遗址地图**：浏览腾讯地图或 OpenStreetMap、遗址点位、水系、交通、保护范围和影响区，切换图层、定位全部遗址。
 2. **遗址档案**：筛选名录、查看记录，并联动选址研究与三维档案。
 3. **选址研究**：按聚落、防御、礼制研究问题切换因子；分时期/类型比较中位数与观测值。只有 `historical` 数据且时期名称与遗址一致，水系和交通距离才进入历史选址分析。线自身的 `period` 优先于图层时期。
 4. **保护评估**：Turf 点落面核查、50–2,000 m 调查参考缓冲区、现场笔记和 GeoJSON/JSON 导出。调查参考区不是法定边界；点位未落入影响区不表示安全。

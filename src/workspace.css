@@ -99,7 +99,20 @@ svg { flex-shrink: 0; vertical-align: middle; }
 .leaflet-control-attribution { font-size: 9px !important; max-width: 100%; }
 .leaflet-control-scale { margin-bottom: 48px !important; }
 .map-fit { position: absolute; bottom: 86px; right: 10px; z-index: 800; border: 1px solid #cad6ce; background: #fff; width: 32px; height: 32px; box-shadow: 0 1px 5px #263c331c; }
-.basemap-status { z-index: 700; position: absolute; left: 14px; top: 14px; background: white; border: 1px solid var(--line); padding: 7px 10px; max-width: 60%; font-size: 11px; }
+.basemap-status { z-index: 700; position: absolute; left: 14px; top: 60px; background: white; border: 1px solid var(--line); padding: 7px 10px; max-width: 60%; font-size: 11px; }
+.map-provider-select { z-index:800; position:absolute; left:14px; top:14px; display:flex; align-items:center; gap:7px; padding:4px 7px; background:#fffffff2; border:1px solid #d9e1d9; border-radius:5px; color:#607267; font-size:10px; box-shadow:0 2px 8px #233b3210; }
+.map-provider-select select { width:auto; padding:5px 20px 5px 3px; border:0; background-color:transparent; font-size:11px; min-height:26px; color:#315b47; }
+.tencent-map-wrap > .map-fit { bottom:118px; }
+.atlas-map:has(.tencent-map-wrap) .map-caption { display:none; }
+.protection-map:has(.tencent-map-wrap) .map-legend { top:60px; bottom:auto; max-width:calc(100% - 28px); flex-wrap:wrap; }
+.protection-map:has(.tencent-map-wrap) .basemap-status { top:108px; }
+.tencent-map-point { position:absolute; top:0; left:0; width:26px; height:26px; padding:0; overflow:visible; display:grid; place-items:center; background:transparent; cursor:pointer; margin:-13px 0 0 -13px; }
+.tencent-map-point > i { display:block; width:17px; height:17px; border:2px solid white; border-radius:50%; background:var(--point-color); box-shadow:0 1px 5px #193a3040; }
+.tencent-map-point.active > i { width:23px; height:23px; border-width:3px; }
+.tencent-map-point > span { display:none; position:absolute; bottom:34px; left:50%; transform:translateX(-50%); white-space:nowrap; color:#315b47; background:#fffffff2; border:1px solid #d8e2da; box-shadow:0 2px 10px #324f3012; border-radius:5px; font-size:11px; padding:7px 10px; pointer-events:none; }
+.tencent-map-point:hover > span,.tencent-map-point:focus-visible > span,.tencent-map-point.active > span { display:block; }
+.tencent-map-point:focus-visible { outline:2px solid #326f54; outline-offset:4px; border-radius:50%; }
+@media (max-width:520px) { .atlas-map .map-provider-select { top:auto; bottom:80px; }.atlas-map .basemap-status { top:auto; bottom:124px; } }
 .map-layer-panel { position: absolute; top: 18px; right: 16px; z-index: 800; width: 155px; background: #fffffff2; border: 1px solid #d9e1d9; border-radius: 5px; box-shadow: 0 3px 16px #233b3214; }
 .layer-title { display: flex; gap: 8px; width: 100%; align-items: center; padding: 12px; font-weight: 600; }
 .layer-title svg:last-child { margin-left: auto; }
