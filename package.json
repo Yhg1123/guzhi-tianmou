@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "vite build && node scripts/prepare-sites-build.mjs",
     "preview": "vite preview",
-    "test:geo": "node --test tests/geodata.test.mjs tests/project.test.mjs tests/heritage-sample.test.mjs tests/heritage-photos.test.mjs tests/participation.test.mjs tests/environment.test.mjs tests/map-coordinates.test.mjs tests/reconstruction.test.mjs tests/site-archives.test.mjs",
+    "test:geo": "node --test tests/geodata.test.mjs tests/project.test.mjs tests/heritage-sample.test.mjs tests/heritage-photos.test.mjs tests/participation.test.mjs tests/environment.test.mjs tests/map-coordinates.test.mjs tests/reconstruction.test.mjs tests/site-archives.test.mjs tests/splat-framing.test.mjs",
     "test:sites": "node --test tests/sites-worker.test.mjs"
   },
   "dependencies": {

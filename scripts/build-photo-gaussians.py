@@ -75,7 +75,17 @@ def main():
         if digest(image_path) != photo["sha256"]:
             raise ValueError("Source image hash changed: " + entry["id"])
         image = ImageOps.exif_transpose(Image.open(image_path)).convert("RGB")
-        image.thumbnail((args.max_side, args.max_side), Image.Resampling.LANCZOS)
+        processing = entry.get("processing") or {}
+        crop = processing.get("crop")
+        if crop:
+            left, top, right, bottom = crop
+            if not (0 <= left < right <= image.width and 0 <= top < bottom <= image.height):
+                raise ValueError("Crop lies outside the original photograph")
+            image = image.crop(crop)
+        max_side = processing.get("maxSide", args.max_side)
+        if not 256 <= max_side <= 768:
+            raise ValueError("Invalid processing resolution")
+        image.thumbnail((max_side, max_side), Image.Resampling.LANCZOS)
         rgb = np.asarray(image)
         predicted = model.infer_image(cv2.cvtColor(rgb, cv2.COLOR_RGB2BGR), input_size=518)
         splats, inverse = create_splats(rgb, predicted)
@@ -105,7 +115,7 @@ def main():
             "checkpointUrl": "https://huggingface.co/depth-anything/Depth-Anything-V2-Small/resolve/main/depth_anything_v2_vits.pth",
             "checkpointSha256": EXPECTED_WEIGHT_SHA256, "runtime": "torch " + torch.__version__ + " / CPU",
             "pythonVersion": sys.version.split()[0], "numpyVersion": np.__version__, "pillowVersion": pillow_version, "opencvVersion": cv2.__version__,
-            "preprocessing": "EXIF orientation, RGB conversion, LANCZOS resize; original JPEG remains unchanged",
+            "preprocessing": "EXIF orientation, RGB conversion, optional crop declared in processing, LANCZOS resize; original JPEG remains unchanged",
             "depthMapping": "2nd/98th-percentile inverse-depth normalization; relative z=1.4/(0.7+0.6*d)",
             "intrinsics": "Assumed focal length = 0.95 * max(width,height); not calibrated",
             "multiViewTraining": False, "metricScale": False, "georeferenced": False,

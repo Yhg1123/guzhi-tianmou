@@ -42,7 +42,8 @@
         "sha256": "92ef20c035d99cef642d73af6d23886f155a6e7c27caaa89580e483756ff88a3",
         "originalUnmodified": true
       }
-    ]
+    ],
+    "processing": null
   },
   {
     "id": "xianyang",
@@ -52,9 +53,25 @@
       "lng": 108.714,
       "lat": 34.396
     },
-    "subject": "咸阳宫一号宫殿建筑复原陈列",
+    "subject": "咸阳宫建筑复原陈列",
     "subjectType": "考古复原陈列",
     "photos": [
+      {
+        "id": "xianyang-palace-wide",
+        "title": "咸阳宫建筑复原陈列 · 宫殿群正面全景",
+        "url": "/site-archives/xianyang-palace-wide.jpg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Model_of_Restored_Xianyang_Qin_Palace_Made_in_1992_(9910397415).jpg",
+        "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Model_of_Restored_Xianyang_Qin_Palace_Made_in_1992_%289910397415%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Gary Todd from Xinzheng, China",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "capturedOn": "2012-04-05 12:50",
+        "width": 5184,
+        "height": 3456,
+        "bytes": 3069433,
+        "sha256": "9489c11e1c89f1413b6e81e4011992bba957bf964deaff076a6dbd73244fd2d3",
+        "originalUnmodified": true
+      },
       {
         "id": "xianyang-palace-model",
         "title": "据一号宫殿考古遗址复原的建筑陈列模型",
@@ -70,8 +87,34 @@
         "bytes": 1503448,
         "sha256": "bf05f11c578be008e03ec5be16f3fd9788cee96b62c6bdf418eaca44b1430341",
         "originalUnmodified": true
+      },
+      {
+        "id": "xianyang-site-overview",
+        "title": "咸阳宫遗迹陈列沙盘",
+        "url": "/site-archives/xianyang-site-overview.jpg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Model_of_Xianyang_Qin_Palace_Site_Made_in_1970s_(9910399875).jpg",
+        "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Model_of_Xianyang_Qin_Palace_Site_Made_in_1970s_%289910399875%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Gary Todd from Xinzheng, China",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "capturedOn": "2012-04-05 12:50",
+        "width": 5184,
+        "height": 3456,
+        "bytes": 3072228,
+        "sha256": "cf205ddbbdfd1c18c2bb9e2660ac25a5c7d344e036a13b0f946a446720f8ceca",
+        "originalUnmodified": true
       }
-    ]
+    ],
+    "processing": {
+      "crop": [
+        0,
+        1300,
+        5184,
+        2800
+      ],
+      "maxSide": 768,
+      "note": "Keep the full horizontal photograph; crop only upper exhibit wall and lower display cabinet to focus on the two palace groups."
+    }
   },
   {
     "id": "fenghao",
@@ -100,7 +143,8 @@
         "sha256": "e0f64ec981dd878cc5605ab338d7c6000c80e0c44b82b4c6621bdccddbdd79ab",
         "originalUnmodified": true
       }
-    ]
+    ],
+    "processing": null
   },
   {
     "id": "yangling",
@@ -129,7 +173,8 @@
         "sha256": "36002787d10ef55345240ff1688f9e67f8be1bee4b7facc0d638560e2ed182ae",
         "originalUnmodified": true
       }
-    ]
+    ],
+    "processing": null
   },
   {
     "id": "daming",
@@ -158,7 +203,8 @@
         "sha256": "29a2a511811a871f8a64886922f0080d6756dcebaf8a9ac341938495aa4d884b",
         "originalUnmodified": true
       }
-    ]
+    ],
+    "processing": null
   },
   {
     "id": "forbidden-city",
@@ -187,7 +233,8 @@
         "sha256": "2c660c7dad8004840b966953c04185d37cb9eaeeb439216f4edc2a765209ed1f",
         "originalUnmodified": true
       }
-    ]
+    ],
+    "processing": null
   },
   {
     "id": "mutianyu",
@@ -216,7 +263,8 @@
         "sha256": "047aa0874b244ed68973843d8bb52b5c998084c98e273e6adf66eb29ab8179fa",
         "originalUnmodified": true
       }
-    ]
+    ],
+    "processing": null
   },
   {
     "id": "mogao",
@@ -245,6 +293,7 @@
         "sha256": "3ade871188c51159899a355237803d439d200c426a06c3c44c10a68c3a92cee7",
         "originalUnmodified": true
       }
-    ]
+    ],
+    "processing": null
   }
 ]

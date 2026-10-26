@@ -26,13 +26,23 @@
     "siteName": "秦咸阳城址",
     "lng": 108.714,
     "lat": 34.396,
-    "subject": "咸阳宫一号宫殿建筑复原陈列",
+    "subject": "咸阳宫建筑复原陈列",
     "subjectType": "考古复原陈列",
     "photos": [
+      {
+        "id": "xianyang-palace-wide",
+        "file": "File:Model of Restored Xianyang Qin Palace Made in 1992 (9910397415).jpg",
+        "title": "咸阳宫建筑复原陈列 · 宫殿群正面全景"
+      },
       {
         "id": "xianyang-palace-model",
         "file": "File:A Model of the Site of Xianyang Palace I 02 2012-09.JPG",
         "title": "据一号宫殿考古遗址复原的建筑陈列模型"
+      },
+      {
+        "id": "xianyang-site-overview",
+        "file": "File:Model of Xianyang Qin Palace Site Made in 1970s (9910399875).jpg",
+        "title": "咸阳宫遗迹陈列沙盘"
       },
       {
         "id": "xianyang-archaeology-model",
@@ -44,7 +54,17 @@
         "file": "File:Qin Xianyang Palace Site Museum.jpg",
         "title": "秦咸阳宫遗址博物馆大门"
       }
-    ]
+    ],
+    "processing": {
+      "crop": [
+        0,
+        1300,
+        5184,
+        2800
+      ],
+      "maxSide": 768,
+      "note": "Keep the full horizontal photograph; crop only upper exhibit wall and lower display cabinet to focus on the two palace groups."
+    }
   },
   {
     "id": "fenghao",

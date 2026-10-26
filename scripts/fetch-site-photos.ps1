@@ -40,6 +40,6 @@ foreach ($entry in $config) {
     $records += [ordered]@{ id=$photo.id; title=$photo.title; url=$relative; sourceUrl=$info.descriptionurl; originalUrl=$info.url; author=[System.Net.WebUtility]::HtmlDecode(($meta.Artist.value -replace '<[^>]+>','')); license=$license; licenseUrl=$meta.LicenseUrl.value; capturedOn=[System.Net.WebUtility]::HtmlDecode(($meta.DateTimeOriginal.value -replace '<[^>]+>','')); width=$info.width; height=$info.height; bytes=$info.size; sha256=(Get-FileHash -LiteralPath $target -Algorithm SHA256).Hash.ToLower(); originalUnmodified=$true }
     Write-Output ('Fetched ' + $photo.id + ' / ' + $license)
   }
-  $catalog += [ordered]@{ id=$entry.id; site=[ordered]@{id=$entry.siteId;name=$entry.siteName;lng=$entry.lng;lat=$entry.lat}; subject=$entry.subject; subjectType=$entry.subjectType; photos=$records }
+  $catalog += [ordered]@{ id=$entry.id; site=[ordered]@{id=$entry.siteId;name=$entry.siteName;lng=$entry.lng;lat=$entry.lat}; subject=$entry.subject; subjectType=$entry.subjectType; photos=$records; processing=$entry.processing }
 }
 $catalog | ConvertTo-Json -Depth 15 | Set-Content -Encoding utf8 (Join-Path $output 'sources.json')

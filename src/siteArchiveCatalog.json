@@ -43,6 +43,7 @@
         "originalUnmodified": true
       }
     ],
+    "processing": null,
     "representation": "photo-depth-gaussians",
     "modelUrl": "/site-archives/banpo.splat",
     "depthUrl": "/site-archives/banpo-depth.png",
@@ -56,7 +57,7 @@
     "processedHeight": 366,
     "license": "CC BY-SA 3.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-    "generatedAt": "2026-10-26T16:12:39.122653+00:00",
+    "generatedAt": "2026-10-26T16:48:21.937340+00:00",
     "generation": {
       "method": "Depth Anything V2 Small relative-depth inference followed by perspective unprojection and view-facing anisotropic Gaussian encoding",
       "model": "Depth-Anything-V2-Small / vits",
@@ -70,7 +71,7 @@
       "numpyVersion": "1.26.4",
       "pillowVersion": "12.3.0",
       "opencvVersion": "4.11.0",
-      "preprocessing": "EXIF orientation, RGB conversion, LANCZOS resize; original JPEG remains unchanged",
+      "preprocessing": "EXIF orientation, RGB conversion, optional crop declared in processing, LANCZOS resize; original JPEG remains unchanged",
       "depthMapping": "2nd/98th-percentile inverse-depth normalization; relative z=1.4/(0.7+0.6*d)",
       "intrinsics": "Assumed focal length = 0.95 * max(width,height); not calibrated",
       "multiViewTraining": false,
@@ -87,9 +88,25 @@
       "lng": 108.714,
       "lat": 34.396
     },
-    "subject": "咸阳宫一号宫殿建筑复原陈列",
+    "subject": "咸阳宫建筑复原陈列",
     "subjectType": "考古复原陈列",
     "photos": [
+      {
+        "id": "xianyang-palace-wide",
+        "title": "咸阳宫建筑复原陈列 · 宫殿群正面全景",
+        "url": "/site-archives/xianyang-palace-wide.jpg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Model_of_Restored_Xianyang_Qin_Palace_Made_in_1992_(9910397415).jpg",
+        "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Model_of_Restored_Xianyang_Qin_Palace_Made_in_1992_%289910397415%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Gary Todd from Xinzheng, China",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "capturedOn": "2012-04-05 12:50",
+        "width": 5184,
+        "height": 3456,
+        "bytes": 3069433,
+        "sha256": "9489c11e1c89f1413b6e81e4011992bba957bf964deaff076a6dbd73244fd2d3",
+        "originalUnmodified": true
+      },
       {
         "id": "xianyang-palace-model",
         "title": "据一号宫殿考古遗址复原的建筑陈列模型",
@@ -105,22 +122,48 @@
         "bytes": 1503448,
         "sha256": "bf05f11c578be008e03ec5be16f3fd9788cee96b62c6bdf418eaca44b1430341",
         "originalUnmodified": true
+      },
+      {
+        "id": "xianyang-site-overview",
+        "title": "咸阳宫遗迹陈列沙盘",
+        "url": "/site-archives/xianyang-site-overview.jpg",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Model_of_Xianyang_Qin_Palace_Site_Made_in_1970s_(9910399875).jpg",
+        "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Model_of_Xianyang_Qin_Palace_Site_Made_in_1970s_%289910399875%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "author": "Gary Todd from Xinzheng, China",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "capturedOn": "2012-04-05 12:50",
+        "width": 5184,
+        "height": 3456,
+        "bytes": 3072228,
+        "sha256": "cf205ddbbdfd1c18c2bb9e2660ac25a5c7d344e036a13b0f946a446720f8ceca",
+        "originalUnmodified": true
       }
     ],
+    "processing": {
+      "crop": [
+        0,
+        1300,
+        5184,
+        2800
+      ],
+      "maxSide": 768,
+      "note": "Keep the full horizontal photograph; crop only upper exhibit wall and lower display cabinet to focus on the two palace groups."
+    },
     "representation": "photo-depth-gaussians",
     "modelUrl": "/site-archives/xianyang.splat",
     "depthUrl": "/site-archives/xianyang-depth.png",
     "previewUrl": "/site-archives/xianyang-preview.jpg",
-    "bytes": 6291456,
-    "pointCount": 196608,
-    "sha256": "3d01b55593d4e9130c171eb21e08351dd164b8b9c00ad3d08721e9d058cc16a1",
-    "depthSha256": "57287cab28bb9f2cfdc01bdd02dfbcd7ac56c45b633537fde4fe05c08cfa4396",
-    "previewSha256": "810435a48d2ea40809e0c28b07985359c8101ec4e684db813649475e69e84a6b",
-    "processedWidth": 512,
-    "processedHeight": 384,
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-    "generatedAt": "2026-10-26T16:12:40.657351+00:00",
+    "bytes": 5455872,
+    "pointCount": 170496,
+    "sha256": "beb518af168298027ea0aca0b6815eeb9705590b8bcf757d24fb967cb198f5f5",
+    "depthSha256": "fdea6c91e6d94d4e02c7b8091af23fed3a6c6775208b5a5a3d284006d4c74bbb",
+    "previewSha256": "79274edf7dca7958af2608ea731174c05cc3e4875bcf0bba5f0bd9c6e57bcaed",
+    "processedWidth": 768,
+    "processedHeight": 222,
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "generatedAt": "2026-10-26T16:48:29.419057+00:00",
     "generation": {
       "method": "Depth Anything V2 Small relative-depth inference followed by perspective unprojection and view-facing anisotropic Gaussian encoding",
       "model": "Depth-Anything-V2-Small / vits",
@@ -134,7 +177,7 @@
       "numpyVersion": "1.26.4",
       "pillowVersion": "12.3.0",
       "opencvVersion": "4.11.0",
-      "preprocessing": "EXIF orientation, RGB conversion, LANCZOS resize; original JPEG remains unchanged",
+      "preprocessing": "EXIF orientation, RGB conversion, optional crop declared in processing, LANCZOS resize; original JPEG remains unchanged",
       "depthMapping": "2nd/98th-percentile inverse-depth normalization; relative z=1.4/(0.7+0.6*d)",
       "intrinsics": "Assumed focal length = 0.95 * max(width,height); not calibrated",
       "multiViewTraining": false,
@@ -171,6 +214,7 @@
         "originalUnmodified": true
       }
     ],
+    "processing": null,
     "representation": "photo-depth-gaussians",
     "modelUrl": "/site-archives/fenghao.splat",
     "depthUrl": "/site-archives/fenghao-depth.png",
@@ -184,7 +228,7 @@
     "processedHeight": 512,
     "license": "CC0",
     "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "generatedAt": "2026-10-26T16:12:42.406067+00:00",
+    "generatedAt": "2026-10-26T16:48:31.356329+00:00",
     "generation": {
       "method": "Depth Anything V2 Small relative-depth inference followed by perspective unprojection and view-facing anisotropic Gaussian encoding",
       "model": "Depth-Anything-V2-Small / vits",
@@ -198,7 +242,7 @@
       "numpyVersion": "1.26.4",
       "pillowVersion": "12.3.0",
       "opencvVersion": "4.11.0",
-      "preprocessing": "EXIF orientation, RGB conversion, LANCZOS resize; original JPEG remains unchanged",
+      "preprocessing": "EXIF orientation, RGB conversion, optional crop declared in processing, LANCZOS resize; original JPEG remains unchanged",
       "depthMapping": "2nd/98th-percentile inverse-depth normalization; relative z=1.4/(0.7+0.6*d)",
       "intrinsics": "Assumed focal length = 0.95 * max(width,height); not calibrated",
       "multiViewTraining": false,
@@ -235,6 +279,7 @@
         "originalUnmodified": true
       }
     ],
+    "processing": null,
     "representation": "photo-depth-gaussians",
     "modelUrl": "/site-archives/yangling.splat",
     "depthUrl": "/site-archives/yangling-depth.png",
@@ -248,7 +293,7 @@
     "processedHeight": 288,
     "license": "Public domain",
     "licenseUrl": null,
-    "generatedAt": "2026-10-26T16:12:44.692367+00:00",
+    "generatedAt": "2026-10-26T16:48:33.559208+00:00",
     "generation": {
       "method": "Depth Anything V2 Small relative-depth inference followed by perspective unprojection and view-facing anisotropic Gaussian encoding",
       "model": "Depth-Anything-V2-Small / vits",
@@ -262,7 +307,7 @@
       "numpyVersion": "1.26.4",
       "pillowVersion": "12.3.0",
       "opencvVersion": "4.11.0",
-      "preprocessing": "EXIF orientation, RGB conversion, LANCZOS resize; original JPEG remains unchanged",
+      "preprocessing": "EXIF orientation, RGB conversion, optional crop declared in processing, LANCZOS resize; original JPEG remains unchanged",
       "depthMapping": "2nd/98th-percentile inverse-depth normalization; relative z=1.4/(0.7+0.6*d)",
       "intrinsics": "Assumed focal length = 0.95 * max(width,height); not calibrated",
       "multiViewTraining": false,
@@ -299,6 +344,7 @@
         "originalUnmodified": true
       }
     ],
+    "processing": null,
     "representation": "photo-depth-gaussians",
     "modelUrl": "/site-archives/daming.splat",
     "depthUrl": "/site-archives/daming-depth.png",
@@ -312,7 +358,7 @@
     "processedHeight": 341,
     "license": "CC BY 2.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
-    "generatedAt": "2026-10-26T16:12:46.497181+00:00",
+    "generatedAt": "2026-10-26T16:48:35.236268+00:00",
     "generation": {
       "method": "Depth Anything V2 Small relative-depth inference followed by perspective unprojection and view-facing anisotropic Gaussian encoding",
       "model": "Depth-Anything-V2-Small / vits",
@@ -326,7 +372,7 @@
       "numpyVersion": "1.26.4",
       "pillowVersion": "12.3.0",
       "opencvVersion": "4.11.0",
-      "preprocessing": "EXIF orientation, RGB conversion, LANCZOS resize; original JPEG remains unchanged",
+      "preprocessing": "EXIF orientation, RGB conversion, optional crop declared in processing, LANCZOS resize; original JPEG remains unchanged",
       "depthMapping": "2nd/98th-percentile inverse-depth normalization; relative z=1.4/(0.7+0.6*d)",
       "intrinsics": "Assumed focal length = 0.95 * max(width,height); not calibrated",
       "multiViewTraining": false,
@@ -363,6 +409,7 @@
         "originalUnmodified": true
       }
     ],
+    "processing": null,
     "representation": "photo-depth-gaussians",
     "modelUrl": "/site-archives/forbidden-city.splat",
     "depthUrl": "/site-archives/forbidden-city-depth.png",
@@ -376,7 +423,7 @@
     "processedHeight": 449,
     "license": "CC0",
     "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "generatedAt": "2026-10-26T16:12:47.690845+00:00",
+    "generatedAt": "2026-10-26T16:48:36.431546+00:00",
     "generation": {
       "method": "Depth Anything V2 Small relative-depth inference followed by perspective unprojection and view-facing anisotropic Gaussian encoding",
       "model": "Depth-Anything-V2-Small / vits",
@@ -390,7 +437,7 @@
       "numpyVersion": "1.26.4",
       "pillowVersion": "12.3.0",
       "opencvVersion": "4.11.0",
-      "preprocessing": "EXIF orientation, RGB conversion, LANCZOS resize; original JPEG remains unchanged",
+      "preprocessing": "EXIF orientation, RGB conversion, optional crop declared in processing, LANCZOS resize; original JPEG remains unchanged",
       "depthMapping": "2nd/98th-percentile inverse-depth normalization; relative z=1.4/(0.7+0.6*d)",
       "intrinsics": "Assumed focal length = 0.95 * max(width,height); not calibrated",
       "multiViewTraining": false,
@@ -427,6 +474,7 @@
         "originalUnmodified": true
       }
     ],
+    "processing": null,
     "representation": "photo-depth-gaussians",
     "modelUrl": "/site-archives/mutianyu.splat",
     "depthUrl": "/site-archives/mutianyu-depth.png",
@@ -440,7 +488,7 @@
     "processedHeight": 383,
     "license": "CC0",
     "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "generatedAt": "2026-10-26T16:12:49.093807+00:00",
+    "generatedAt": "2026-10-26T16:48:37.889417+00:00",
     "generation": {
       "method": "Depth Anything V2 Small relative-depth inference followed by perspective unprojection and view-facing anisotropic Gaussian encoding",
       "model": "Depth-Anything-V2-Small / vits",
@@ -454,7 +502,7 @@
       "numpyVersion": "1.26.4",
       "pillowVersion": "12.3.0",
       "opencvVersion": "4.11.0",
-      "preprocessing": "EXIF orientation, RGB conversion, LANCZOS resize; original JPEG remains unchanged",
+      "preprocessing": "EXIF orientation, RGB conversion, optional crop declared in processing, LANCZOS resize; original JPEG remains unchanged",
       "depthMapping": "2nd/98th-percentile inverse-depth normalization; relative z=1.4/(0.7+0.6*d)",
       "intrinsics": "Assumed focal length = 0.95 * max(width,height); not calibrated",
       "multiViewTraining": false,
@@ -491,6 +539,7 @@
         "originalUnmodified": true
       }
     ],
+    "processing": null,
     "representation": "photo-depth-gaussians",
     "modelUrl": "/site-archives/mogao.splat",
     "depthUrl": "/site-archives/mogao-depth.png",
@@ -504,7 +553,7 @@
     "processedHeight": 341,
     "license": "CC BY 2.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
-    "generatedAt": "2026-10-26T16:12:50.812626+00:00",
+    "generatedAt": "2026-10-26T16:48:41.280645+00:00",
     "generation": {
       "method": "Depth Anything V2 Small relative-depth inference followed by perspective unprojection and view-facing anisotropic Gaussian encoding",
       "model": "Depth-Anything-V2-Small / vits",
@@ -518,7 +567,7 @@
       "numpyVersion": "1.26.4",
       "pillowVersion": "12.3.0",
       "opencvVersion": "4.11.0",
-      "preprocessing": "EXIF orientation, RGB conversion, LANCZOS resize; original JPEG remains unchanged",
+      "preprocessing": "EXIF orientation, RGB conversion, optional crop declared in processing, LANCZOS resize; original JPEG remains unchanged",
       "depthMapping": "2nd/98th-percentile inverse-depth normalization; relative z=1.4/(0.7+0.6*d)",
       "intrinsics": "Assumed focal length = 0.95 * max(width,height); not calibrated",
       "multiViewTraining": false,
