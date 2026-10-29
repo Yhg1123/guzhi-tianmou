@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "sceneId": "local-cb",
+  "modelSha256": "8b592e225381155c2394b204a21e58c5b8dcde91da28187cf9003e8ff54afe1c",
+  "reviewedAt": "2026-10-29T17:22:46Z",
+  "status": "rejected",
+  "basis": "User screenshot and retained validation render inspection; training completion and image metrics do not constitute visual acceptance.",
+  "checks": { "structure": false, "novelViews": false, "floaters": false, "subjectIdentity": false },
+  "findings": [
+    { "id": "structure", "title": "结构与清晰度", "detail": "穹顶和墙体模糊、重影，构件边缘缺乏稳定轮廓。" },
+    { "id": "novelViews", "title": "环绕稳定性", "detail": "偏离拍摄位置后出现缺口；默认远距离环绕暴露了覆盖不足的区域。" },
+    { "id": "floaters", "title": "漂浮噪点", "detail": "主体周围仍有超出建筑表面的高斯噪点，现有尺寸过滤不足。" },
+    { "id": "subjectIdentity", "title": "遗址对应关系", "detail": "资料拍摄于意大利托斯卡纳，不能作为大明宫或其他中国遗址的重建成果。" }
+  ]
+}

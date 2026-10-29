@@ -3,13 +3,14 @@ import { Box, Camera, Download, ExternalLink, Layers, Maximize2, X } from "lucid
 import { SplatViewer } from "./SplatViewer.jsx";
 import { download } from "./project.js";
 
-export function PhotoArchiveStage({ asset }) {
-  const [mode, setMode] = useState("gaussian");
+export function PhotoArchiveStage({ asset, onViewChange }) {
+  const [mode, setMode] = useState("photo");
   const [photoId, setPhotoId] = useState(asset.photos[0].id);
   const [expanded, setExpanded] = useState(false);
   const modal = useRef(null);
   const expandButton = useRef(null);
   const photo = asset.photos.find((p) => p.id === photoId) || asset.photos[0];
+  useEffect(() => { onViewChange?.({ mode, photo }); }, [mode, photo, onViewChange]);
   useEffect(() => {
     if (!expanded) return undefined;
     const dialog = modal.current;

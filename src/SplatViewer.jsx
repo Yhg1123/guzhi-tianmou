@@ -5,7 +5,7 @@ import { RotateCcw, Play, Pause, Scan, CircleAlert, Plus, Minus } from "lucide-r
 import { createSampleSplat } from "./sampleSplat.js";
 import { heritageSample as defaultSample } from "./heritageSample.js";
 import { photoFraming } from "./splatFraming.js";
-import { gaussianViewPose } from "./gaussianNavigation.js";
+import { gaussianViewPose, gaussianCaptureProjection } from "./gaussianNavigation.js";
 
 export function SplatViewer({ file, modelUrl, sourceAsset, name, isSample = false, sampleMode = "heritage", sampleData = defaultSample }) {
   const heritageSample = sampleData;
@@ -31,13 +31,27 @@ export function SplatViewer({ file, modelUrl, sourceAsset, name, isSample = fals
     const root = document.createElement("div");
     root.className = "splat-render-root";
     host.current.appendChild(root);
+    const layoutCapture = () => {
+      if (!trained || !sampleData.captureCamera || !host.current) return;
+      const { width, height } = sampleData.captureCamera.intrinsics;
+      const ratio = Math.min(host.current.clientWidth / width, host.current.clientHeight / height);
+      root.style.inset = "auto";
+      root.style.width = `${width * ratio}px`; root.style.height = `${height * ratio}px`;
+      root.style.left = `${(host.current.clientWidth - width * ratio) / 2}px`;
+      root.style.top = `${(host.current.clientHeight - height * ratio) / 2}px`;
+    };
+    layoutCapture();
     const isHeritage = !file && !modelUrl && sampleMode !== "synthetic";
     const url = modelUrl || (isHeritage ? heritageSample.url : URL.createObjectURL(file || createSampleSplat()));
     setStatus("loading"); setCount(0); setMessage(""); setRotate(false);
     viewRef.current = trained ? "capture" : "overview"; setView(viewRef.current);
-    const up = photoDepth ? [0, 1, 0] : axis === "z" ? [0, 0, 1] : axis === "-y" ? [0, -1, 0] : [0, 1, 0];
+    const up = trained && sampleData.captureCamera ? sampleData.captureCamera.up : photoDepth ? [0, 1, 0] : axis === "z" ? [0, 0, 1] : axis === "-y" ? [0, -1, 0] : [0, 1, 0];
     try {
-      viewer = new Viewer({ rootElement: root, cameraUp: up, initialCameraPosition: [7, 5, 9], initialCameraLookAt: [0, 1.4, 0], sharedMemoryForWorkers: false, gpuAcceleratedSort: false, enableSIMDInSort: true, sphericalHarmonicsDegree: trained ? (sampleData.shDegree || 0) : 0, sceneRevealMode: SceneRevealMode.Instant, ignoreDevicePixelRatio: true });
+      // Own calibrated cameras so the renderer's internal resize handler cannot
+      // replace the asymmetric source projection with a generic FOV matrix.
+      const captureCamera = trained && sampleData.captureCamera ? new THREE.PerspectiveCamera(50, 1, 0.01, 1000) : undefined;
+      if (captureCamera) { captureCamera.position.set(7, 5, 9); captureCamera.up.fromArray(up); }
+      viewer = new Viewer({ rootElement: root, camera: captureCamera, cameraUp: up, initialCameraPosition: [7, 5, 9], initialCameraLookAt: [0, 1.4, 0], sharedMemoryForWorkers: false, gpuAcceleratedSort: false, enableSIMDInSort: true, sphericalHarmonicsDegree: trained ? (sampleData.shDegree || 0) : 0, sceneRevealMode: SceneRevealMode.Instant, ignoreDevicePixelRatio: true });
       viewerRef.current = viewer;
       // A single click focuses this workspace's keyboard controls. The library's
       // automatic ray-picked pivot can hit a large background Gaussian and turn
@@ -60,6 +74,21 @@ export function SplatViewer({ file, modelUrl, sourceAsset, name, isSample = fals
         const frame = (preset = viewRef.current) => {
           viewer.camera.aspect = Math.max(1, root.clientWidth) / Math.max(1, root.clientHeight);
           viewer.camera.zoom = 1;
+          viewer.camera.up.fromArray(up);
+          if (trained && preset === "capture" && sampleData.captureCamera) {
+            const capture = sampleData.captureCamera;
+            viewer.camera.position.fromArray(capture.position);
+            viewer.camera.up.fromArray(capture.up);
+            viewer.controls.target.fromArray(capture.target);
+            const projection = gaussianCaptureProjection(capture.intrinsics, viewer.camera.aspect);
+            viewer.camera.fov = projection.fov;
+            viewer.camera.near = 0.01; viewer.camera.far = 1000;
+            viewer.camera.updateProjectionMatrix();
+            viewer.camera.projectionMatrix.makePerspective(projection.left, projection.right, projection.top, projection.bottom, 0.01, 1000);
+            viewer.camera.projectionMatrixInverse.copy(viewer.camera.projectionMatrix).invert();
+            viewer.controls.update(); viewer.forceRenderNextFrame();
+            return;
+          }
           if (trained && preset !== "overview" && sampleData.camera) {
             const pose = gaussianViewPose(sampleData.camera, preset, viewer.camera.aspect);
             viewer.camera.position.fromArray(pose.position);
@@ -120,14 +149,15 @@ export function SplatViewer({ file, modelUrl, sourceAsset, name, isSample = fals
           setRotate(false);
           if (!photoDepth) { viewRef.current = "custom"; setView("custom"); }
         });
-        if (trained && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) setRotate(true);
+        if (trained && sampleData.autoRotate !== false && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) setRotate(true);
         resizeObserver = new ResizeObserver(() => {
           if (!alive || !root.clientHeight) return;
+          layoutCapture();
           const oldAspect = viewer.camera.aspect;
           viewer.camera.aspect = root.clientWidth / root.clientHeight;
           // Preserve the user's spatial viewpoint and zoom on resize. Only the
           // source-photo projection needs to be refitted to its image frame.
-          if (photoDepth) frame();
+          if (photoDepth || trained && sampleData.captureCamera && viewRef.current === "capture") frame();
           else {
             if (trained && oldAspect !== viewer.camera.aspect) {
               const fitChange = Math.max(1, 1.5 / viewer.camera.aspect) / Math.max(1, 1.5 / oldAspect);
@@ -136,7 +166,7 @@ export function SplatViewer({ file, modelUrl, sourceAsset, name, isSample = fals
             viewer.camera.updateProjectionMatrix(); viewer.controls.update(); viewer.forceRenderNextFrame();
           }
         });
-        resizeObserver.observe(root);
+        resizeObserver.observe(sampleData.captureCamera ? host.current : root);
         setCount(n); setStatus("ready");
       }).catch((error) => { if (alive) { setStatus("error"); setMessage(error.message || "模型加载失败"); } });
     } catch (error) { setStatus("error"); setMessage(`WebGL 查看器无法启动：${error.message}`); }

@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
-import { trainedGaussianCases, gaussianCaseRoute, gaussianCaseId } from "../src/trainedGaussians.js";
+import { experimentalGaussianCases, trainedGaussianCases, gaussianCaseRoute, gaussianCaseId } from "../src/trainedGaussians.js";
 import { workspaceRoute } from "../src/reconstruction.js";
 import { gaussianViewPose } from "../src/gaussianNavigation.js";
 
@@ -13,7 +13,7 @@ test("independent Gaussian scene links preserve project-site identity without pr
     assert.deepEqual(workspaceRoute("#" + route), { page: "reconstruction", siteId: "遗址 & A" });
   }
   assert.equal(gaussianCaseId("#map?case=lingyue"), "");
-  assert.equal(gaussianCaseId("#reconstruction"), "local-cb");
+  assert.equal(gaussianCaseId("#reconstruction"), "");
   assert.equal(gaussianCaseId("#reconstruction?site=unmatched-site"), "");
   assert.equal(gaussianCaseId("#reconstruction?site=demo-xianyang"), "");
   assert.equal(gaussianCaseId("#" + gaussianCaseRoute("lingyue")), "lingyue");
@@ -21,7 +21,7 @@ test("independent Gaussian scene links preserve project-site identity without pr
 });
 
 test("spatial presets orbit the trained camera through opposite sides without flattening or changing the target", () => {
-  const camera = trainedGaussianCases.find((scene) => scene.id === "local-cb").camera;
+  const camera = experimentalGaussianCases.find((scene) => scene.id === "local-cb").camera;
   const offset = (pose) => pose.position.map((v, i) => v - camera.target[i]);
   const originalDistance = Math.hypot(...camera.position.map((v, i) => v - camera.target[i]));
   const front = offset(gaussianViewPose(camera, "capture"));
@@ -43,7 +43,8 @@ test("spatial presets orbit the trained camera through opposite sides without fl
 });
 
 test("finished third-party scenes and external embeds are retired from the normal workspace", () => {
-  assert.ok(trainedGaussianCases.length > 0);
+  assert.equal(trainedGaussianCases.length, 0, "The rejected CB experiment must not enter the published model list");
+  assert.equal(experimentalGaussianCases[0].qualityReview.status, "rejected");
   assert.ok(trainedGaussianCases.every(scene => scene.delivery === "local" && scene.trainedInThisApp && !scene.embedUrl));
   assert.ok(trainedGaussianCases.every(scene => !["lingyue","seem-church"].includes(scene.id)));
 });

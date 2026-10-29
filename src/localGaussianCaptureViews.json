@@ -1,0 +1,138 @@
+[
+  {
+    "id": "5_CB_008",
+    "label": "保留视角 01",
+    "name": "5_CB_008.png",
+    "position": [
+      15.1231390444552,
+      -2.57610012656293,
+      -2.13849783633029
+    ],
+    "target": [
+      6.80974451601085,
+      -0.4312547083907101,
+      -7.26559346120186
+    ],
+    "up": [
+      0.230668849817986,
+      0.972479275646294,
+      0.0328015268258651
+    ],
+    "intrinsics": {
+      "width": 960,
+      "height": 643,
+      "fx": 731.485007340803,
+      "fy": 746.2289963945157,
+      "cx": 482.4608506985229,
+      "cy": 318.75736005384493
+    },
+    "inputUrl": "/generated/cb/validation/5_CB_008-input.png",
+    "renderUrl": "/generated/cb/validation/5_CB_008-render.png",
+    "inputSha256": "3fd3739f682873f7fb6e73daeb1ba4476aa058d245fe57243154eb0846f2040f",
+    "originalSha256": "20b0084dcaaa921935e955762534fc937d9ebb91224e2580d7dfbd9a1b3a8bf6",
+    "displayRotationDegrees": 0,
+    "method": "Published withheld camera pose, matching processed image calibration; portrait rotation applied to camera basis and intrinsics as well as the review image."
+  },
+  {
+    "id": "5_CB_048",
+    "label": "保留视角 02",
+    "name": "5_CB_048.png",
+    "position": [
+      -1.27950953827032,
+      -0.321710820253692,
+      -1.13355597316844
+    ],
+    "target": [
+      -0.9530362667502832,
+      0.602637584461292,
+      -11.08538973532925
+    ],
+    "up": [
+      0.0244493443934053,
+      0.995342330530649,
+      0.0932516735107153
+    ],
+    "intrinsics": {
+      "width": 643,
+      "height": 960,
+      "fx": 746.2289963945157,
+      "fy": 731.485007340803,
+      "cx": 318.75736005384493,
+      "cy": 477.5391493014771
+    },
+    "inputUrl": "/generated/cb/validation/5_CB_048-input.png",
+    "renderUrl": "/generated/cb/validation/5_CB_048-render.png",
+    "inputSha256": "e82ff203c3b698ba7059a9924891050b30c289f4a8dfbcb6c681074c30e25775",
+    "originalSha256": "5618f0d3a077351f175d8402965e197d2ed614f8ac1415ad64436b3e2b0aabf2",
+    "displayRotationDegrees": 90,
+    "method": "Published withheld camera pose, matching processed image calibration; portrait rotation applied to camera basis and intrinsics as well as the review image."
+  },
+  {
+    "id": "5_CB_088",
+    "label": "保留视角 03",
+    "name": "5_CB_088.png",
+    "position": [
+      5.97562819240297,
+      -0.919295617583218,
+      -12.6868127857211
+    ],
+    "target": [
+      -1.3914493474326797,
+      -1.649771075649552,
+      -19.40935502264397
+    ],
+    "up": [
+      0.0440100722400851,
+      0.986860942790542,
+      -0.155462513603715
+    ],
+    "intrinsics": {
+      "width": 643,
+      "height": 960,
+      "fx": 746.2289963945157,
+      "fy": 731.485007340803,
+      "cx": 318.75736005384493,
+      "cy": 477.5391493014771
+    },
+    "inputUrl": "/generated/cb/validation/5_CB_088-input.png",
+    "renderUrl": "/generated/cb/validation/5_CB_088-render.png",
+    "inputSha256": "88ac29cb9cf46b5c1db8eaf0349c7c675788702a8b0d5b32240e037d07ac8fb0",
+    "originalSha256": "a509f7ce8bfe65424fbdecf59830d266b87abc361869d5d9277c753f3facf88f",
+    "displayRotationDegrees": 90,
+    "method": "Published withheld camera pose, matching processed image calibration; portrait rotation applied to camera basis and intrinsics as well as the review image."
+  },
+  {
+    "id": "5_CB_128",
+    "label": "保留视角 04",
+    "name": "5_CB_128.png",
+    "position": [
+      7.16137161172066,
+      -0.655128671595289,
+      -9.90745209496377
+    ],
+    "target": [
+      2.0585426364461394,
+      3.842603355318551,
+      -2.5772718063779294
+    ],
+    "up": [
+      0.225713585737819,
+      0.892502444154447,
+      -0.390503219438348
+    ],
+    "intrinsics": {
+      "width": 643,
+      "height": 960,
+      "fx": 746.2289963945157,
+      "fy": 731.485007340803,
+      "cx": 318.75736005384493,
+      "cy": 477.5391493014771
+    },
+    "inputUrl": "/generated/cb/validation/5_CB_128-input.png",
+    "renderUrl": "/generated/cb/validation/5_CB_128-render.png",
+    "inputSha256": "06619085c8bdac838413f86b8ba825255ba28ad3d375ae4a1752e57f4237ebcd",
+    "originalSha256": "21ac9850a16671fd5ebe8b82947472877d28d5a88b089bb282680624f0011ca8",
+    "displayRotationDegrees": 90,
+    "method": "Published withheld camera pose, matching processed image calibration; portrait rotation applied to camera basis and intrinsics as well as the review image."
+  }
+]

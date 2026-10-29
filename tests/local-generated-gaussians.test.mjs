@@ -2,12 +2,12 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
-import { trainedGaussianCases } from '../src/trainedGaussians.js';
+import { experimentalGaussianCases } from '../src/trainedGaussians.js';
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const asset = url => readFile(new URL('../public'+url,import.meta.url));
 
-test('the published generation is tied to a completed local run and independently triangulated photo inputs',async()=>{
-  const scene=trainedGaussianCases.find(s=>s.id==='local-cb');
+test('the archived experiment is tied to a completed local run and independently triangulated photo inputs',async()=>{
+  const scene=experimentalGaussianCases.find(s=>s.id==='local-cb');
   assert.equal(scene.trainedInThisApp,true); assert.equal(scene.trainedByAuthor,false);
   const manifest=JSON.parse(await asset(scene.sourceManifest));
   const run=JSON.parse(await asset(scene.trainingRecordUrl));
@@ -38,7 +38,7 @@ test('the published generation is tied to a completed local run and independentl
 });
 
 test('the generated Gaussian PLY preserves learned volume, anisotropic covariance, alpha and higher-order color',async()=>{
-  const scene=trainedGaussianCases.find(s=>s.id==='local-cb');
+  const scene=experimentalGaussianCases.find(s=>s.id==='local-cb');
   const bytes=await asset(scene.url), manifest=JSON.parse(await asset(scene.sourceManifest));
   const raw=await asset(scene.rawUrl), indices=await asset(scene.displayFilter.indicesUrl);
   assert.equal(sha(raw),scene.rawSha256);assert.equal(sha(indices),scene.displayFilter.indicesSha256);
