@@ -5,9 +5,9 @@ import { RotateCcw, Play, Pause, Scan, CircleAlert, Plus, Minus } from "lucide-r
 import { createSampleSplat } from "./sampleSplat.js";
 import { heritageSample as defaultSample } from "./heritageSample.js";
 import { photoFraming } from "./splatFraming.js";
-import { gaussianViewPose, gaussianCaptureProjection } from "./gaussianNavigation.js";
+import { gaussianViewPose, gaussianCaptureProjection, gaussianBoundsPose } from "./gaussianNavigation.js";
 
-export function SplatViewer({ file, modelUrl, sourceAsset, name, isSample = false, sampleMode = "heritage", sampleData = defaultSample }) {
+export function SplatViewer({ file, modelUrl, sourceAsset, name, isSample = false, sampleMode = "heritage", sampleData = defaultSample, viewRequest }) {
   const heritageSample = sampleData;
   const photoDepth = sourceAsset?.representation === "photo-depth-gaussians";
   const photogrammetry = isSample && sampleMode !== "synthetic";
@@ -66,8 +66,9 @@ export function SplatViewer({ file, modelUrl, sourceAsset, name, isSample = fals
         if (!n) throw new Error("模型不包含有效的高斯点。");
         const box = new THREE.Box3();
         const point = new THREE.Vector3();
+        const conceptSupport = sampleData.interpretation === "architectural-concept" ? [] : null;
         const stride = Math.max(1, Math.ceil(n / 20000));
-        for (let i = 0; i < n; i += stride) { mesh.getSplatCenter(i, point); if ([point.x, point.y, point.z].every(Number.isFinite)) box.expandByPoint(point); }
+        for (let i = 0; i < n; i += stride) { mesh.getSplatCenter(i, point); if ([point.x, point.y, point.z].every(Number.isFinite)) { box.expandByPoint(point); conceptSupport?.push(point.toArray()); } }
         const center = box.getCenter(new THREE.Vector3());
         const size = box.getSize(new THREE.Vector3()).length();
         if (!Number.isFinite(size) || size === 0) throw new Error("无法确定模型范围。");
@@ -75,6 +76,22 @@ export function SplatViewer({ file, modelUrl, sourceAsset, name, isSample = fals
           viewer.camera.aspect = Math.max(1, root.clientWidth) / Math.max(1, root.clientHeight);
           viewer.camera.zoom = 1;
           viewer.camera.up.fromArray(up);
+          if (sampleData.interpretation === "architectural-concept" && ["capture", "overview", "left", "back", "right", "top"].includes(preset)) {
+            const direction = sampleData.viewpoints?.[preset] || gaussianViewPose(sampleData.camera, preset === "overview" ? "capture" : preset, 1.5);
+            const pose = gaussianBoundsPose(sampleData.bounds, direction, viewer.camera.aspect, 1.12, conceptSupport);
+            viewer.camera.position.fromArray(pose.position); viewer.controls.target.fromArray(pose.target);
+            viewer.camera.fov = pose.fov; viewer.camera.near = 0.01; viewer.camera.far = 1000;
+            viewer.camera.updateProjectionMatrix(); viewer.controls.update(); viewer.forceRenderNextFrame();
+            return;
+          }
+          if (trained && sampleData.viewpoints?.[preset]) {
+            const pose = sampleData.viewpoints[preset];
+            viewer.camera.position.fromArray(pose.position); viewer.controls.target.fromArray(pose.target);
+            viewer.camera.fov = pose.fov;
+            viewer.camera.near = 0.01; viewer.camera.far = 1000;
+            viewer.camera.updateProjectionMatrix(); viewer.controls.update(); viewer.forceRenderNextFrame();
+            return;
+          }
           if (trained && preset === "capture" && sampleData.captureCamera) {
             const capture = sampleData.captureCamera;
             viewer.camera.position.fromArray(capture.position);
@@ -191,6 +208,10 @@ export function SplatViewer({ file, modelUrl, sourceAsset, name, isSample = fals
     viewer.forceRenderNextFrame();
   };
   const fit = () => { const preset = trained ? "capture" : "overview"; viewRef.current = preset; setView(preset); setRotate(false); frameRef.current?.(preset); };
+  useEffect(() => {
+    if (!viewRequest || status !== "ready") return;
+    setRotate(false); viewRef.current = viewRequest.preset; setView(viewRequest.preset); frameRef.current?.(viewRequest.preset);
+  }, [viewRequest, status]);
   const navigateKeyboard = (event) => {
     const viewer = viewerRef.current;
     if (!trained || status !== "ready" || !viewer?.controls || event.altKey || event.ctrlKey || event.metaKey) return;
@@ -236,7 +257,7 @@ export function SplatViewer({ file, modelUrl, sourceAsset, name, isSample = fals
     {status === "error" && <div className="splat-overlay" role="alert"><CircleAlert size={28} /><strong>模型暂时无法显示</strong><p>{message}</p><button className="button" onClick={() => setRetry(retry + 1)}><RotateCcw size={15} />重试加载</button></div>}
     <div className="splat-footer"><div className="splat-presets" role="group" aria-label="观察视角">{(photoDepth ? [["overview", "完整取景"], ["front", "向左微转"], ["top", "向右微转"], ["detail", "细节"]] : trained ? [["capture", "初始视角"], ["left", "左侧"], ["back", "背面"], ["right", "右侧"], ["top", "俯视"], ["overview", "全场景"]] : [["overview", "全景"], ["front", "正面"], ["top", "俯视"], ["detail", "细节"]]).map(([id, title]) => <button key={id} disabled={status !== "ready"} aria-pressed={view === id} onClick={() => { setRotate(false); viewRef.current = id; setView(id); frameRef.current?.(id); }}>{title}</button>)}<span>{photoDepth ? "拖拽微转 · 滚轮缩放" : "拖拽环绕 · 右键平移 · 滚轮缩放"}</span></div>
       {trained && <div className="splat-keyboard-hint">点击场景后：方向键环绕 · Shift + 方向键平移 · Home 复位</div>}
-      <div className="splat-status"><span>{status === "ready" ? `${count.toLocaleString()} ${photogrammetry ? "个采样点" : "个高斯点"}` : status === "error" ? "加载失败" : "加载中"}</span><span>{photoDepth ? "单图深度推断 · 相对尺度" : photogrammetry ? "摄影测量点云 · 非训练 3DGS · 尺度未标定" : trained ? "实景训练 3DGS · 尺度未核验" : "局部坐标 · 尺度未经标定"}</span></div>
+      <div className="splat-status"><span>{status === "ready" ? `${count.toLocaleString()} ${photogrammetry ? "个采样点" : "个高斯点"}` : status === "error" ? "加载失败" : "加载中"}</span><span>{photoDepth ? "单图深度推断 · 相对尺度" : photogrammetry ? "摄影测量点云 · 非训练 3DGS · 尺度未标定" : sampleData.interpretation === "architectural-concept" ? "复原构想 · 本机生成素材训练" : trained ? "实景训练 3DGS · 尺度未核验" : "局部坐标 · 尺度未经标定"}</span></div>
     </div>
   </section>;
 }

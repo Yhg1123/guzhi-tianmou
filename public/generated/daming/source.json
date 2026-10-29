@@ -1,0 +1,5410 @@
+{
+  "schema": 1,
+  "id": "daming-hanyuan",
+  "kind": "gaussian",
+  "representation": "trained-3dgs",
+  "interpretation": "architectural-concept",
+  "inputKind": "locally-authored-multiview-renders",
+  "title": "含元殿 · 复原构想",
+  "subtitle": "大明宫 · 唐代宫殿建筑意象",
+  "site": {
+    "id": "demo-daming",
+    "name": "大明宫遗址",
+    "lng": 108.969,
+    "lat": 34.307
+  },
+  "url": "/generated/daming/model.ply",
+  "rawUrl": "/generated/daming/model.ply",
+  "previewUrl": "/generated/daming/views/hanyuan_001.png",
+  "rawSha256": "370cdca9a9ce46cab3ade441282bc42fe61ce881fe55154cfa205c92b244e1bf",
+  "sha256": "370cdca9a9ce46cab3ade441282bc42fe61ce881fe55154cfa205c92b244e1bf",
+  "rawBytes": 19086420,
+  "bytes": 19086420,
+  "rawPointCount": 207454,
+  "pointCount": 207454,
+  "shDegree": 1,
+  "trainedInThisApp": true,
+  "trainedByAuthor": false,
+  "metricScaleVerified": false,
+  "georeferenced": false,
+  "notCapturedPhotographs": true,
+  "notSurveyedRestoration": true,
+  "credit": "古址天眸 · 本机创作与训练",
+  "sourceManifest": "/generated/daming/source.json",
+  "trainingRecordUrl": "/generated/daming/training.json",
+  "trainingLogUrl": "/generated/daming/training.txt",
+  "visualReferenceUrl": "/generated/daming/visual-reference.png",
+  "visualReferenceSha256": "a1e3d6a4091471e55a9412b5cc1eca6deace417450d197b82383081b232bf8ca",
+  "visualReferenceRole": "AI-generated art direction only; not a training input or viewer capture",
+  "qualityReview": {
+    "sceneId": "daming-hanyuan",
+    "modelSha256": "370cdca9a9ce46cab3ade441282bc42fe61ce881fe55154cfa205c92b244e1bf",
+    "reviewedAt": "2026-10-29T18:52:33.983756+00:00",
+    "status": "accepted",
+    "scope": "Architectural-concept visual presentation only",
+    "notArchaeologicalValidation": true,
+    "checks": {
+      "structure": true,
+      "novelViews": true,
+      "floaters": true,
+      "subjectIdentity": true
+    },
+    "basis": "Final native PLY inspected directly in the application at front, back, left, right, full roof and main-hall closeup. The complete authored building group has coherent volumetric structure, readable columns, lattice, roofs and stairs, and no conspicuous loose splat masses. Subject identity is limited to the user-authorized Daming architectural concept. This does not verify archaeological geometry.",
+    "evidence": {
+      "result": "passed",
+      "mode": "inspection",
+      "checkedAt": "2026-10-29T18:47:12.482Z",
+      "modelSha256": "370cdca9a9ce46cab3ade441282bc42fe61ce881fe55154cfa205c92b244e1bf",
+      "errors": [],
+      "foreign": [],
+      "screenshots": [
+        {
+          "path": "qa/daming-concept/final-初始视角.png",
+          "sha256": "e0208275bdfcdbbcf15c20c7764bdc700c477cf6da77d90013c93cd75ee6f579"
+        },
+        {
+          "path": "qa/daming-concept/final-左侧.png",
+          "sha256": "e8c824f8e7c9b5376b4bbf642568cf5636dc5160752d52f4c20821900a78b5a6"
+        },
+        {
+          "path": "qa/daming-concept/final-背面.png",
+          "sha256": "d3644366953cece07c814f7365526c6510ab44e0a5322b4a739a1e728f93ba9d"
+        },
+        {
+          "path": "qa/daming-concept/final-右侧.png",
+          "sha256": "7618972e63476b3d27f2072e7e160aa55a5b13c7c091493a40a6c774a8759593"
+        },
+        {
+          "path": "qa/daming-concept/final-俯视.png",
+          "sha256": "dc5e0ef5306562a17cc6707f4a86c828b45f2a6e3bf144cab977f61f436ec2ce"
+        },
+        {
+          "path": "qa/daming-concept/focus-主殿细节.png",
+          "sha256": "6d894cf8eb9d55b71b75757a94d47942b4c47768793021723f6fb85c9e20e3c9"
+        },
+        {
+          "path": "qa/daming-concept/focus-东侧楼阁.png",
+          "sha256": "dc4bb97f5e69a1b4fff0a40b6a765175c0b5639b4c2a544d6a62ce29d8e396cb"
+        },
+        {
+          "path": "qa/daming-concept/focus-西侧楼阁.png",
+          "sha256": "5c25606ace103a105799be7ad273b4cba8315c42f43e3a002c14ad53cf9fd5ac"
+        },
+        {
+          "path": "qa/daming-concept/focus-台基与阶梯.png",
+          "sha256": "8ee0dddec629a79ffba6ca1d62745b65a1571c242952ba5766456f4755851f6b"
+        }
+      ],
+      "checks": [
+        "Actual local Gaussian PLY and WebGL canvas",
+        "Opposite spatial views",
+        "Roof structure",
+        "Four part closeups",
+        "Keyboard orbit/pan/zoom",
+        "Fullscreen Escape",
+        "390px layout"
+      ]
+    },
+    "limitations": [
+      "Generated coherent views, not site capture or surveyed restoration.",
+      "Materials, proportions and construction details are artistic.",
+      "Very close views have Gaussian softness; surface details do not establish historical accuracy."
+    ]
+  },
+  "training": {
+    "schema": 1,
+    "status": "completed",
+    "inputKind": "locally-authored-multiview-renders",
+    "notCapturedPhotographs": true,
+    "notSurveyedRestoration": true,
+    "startedAt": "2026-10-29T18:22:15.653Z",
+    "tool": "Brush",
+    "version": "0.3.0",
+    "sourceRevision": "3edecbb2fe79d3e2c87eeab85b15e0b1dd10d486",
+    "executableSha256": "37e46cbf808b9983dd15a5f9a25328dbe43e7e06d53c4f59fbeaeb10e3a5b34a",
+    "args": [
+      "workspace\\qa\\daming-concept\\prepared",
+      "--total-steps",
+      "24000",
+      "--max-resolution",
+      "960",
+      "--max-splats",
+      "500000",
+      "--sh-degree",
+      "1",
+      "--lr-mean",
+      "0.00001",
+      "--lr-mean-end",
+      "0.0000005",
+      "--mean-noise-weight",
+      "10",
+      "--scale-loss-weight",
+      "0.0000001",
+      "--refine-every",
+      "128",
+      "--growth-stop-iter",
+      "16000",
+      "--export-every",
+      "2000",
+      "--eval-every",
+      "2000",
+      "--eval-save-to-disk",
+      "--export-path",
+      "workspace\\qa\\daming-concept\\trained",
+      "--export-name",
+      "model_{iter}.ply",
+      "--seed",
+      "734"
+    ],
+    "generatedViewCount": 104,
+    "trainingViews": 91,
+    "validationViews": 13,
+    "initialPoints": 180000,
+    "preparationSha256": "6efead6eaef527309ac5a96c9524460616abd285a40d4e7b594ff5c3bf91ffac",
+    "completedSteps": 24000,
+    "pid": 54564,
+    "validationHistory": [
+      {
+        "iteration": 2000,
+        "psnr": 37.74032,
+        "ssim": 0.97479403
+      },
+      {
+        "iteration": 4000,
+        "psnr": 39.00806,
+        "ssim": 0.9826692
+      },
+      {
+        "iteration": 6000,
+        "psnr": 39.630913,
+        "ssim": 0.985913
+      },
+      {
+        "iteration": 8000,
+        "psnr": 39.672337,
+        "ssim": 0.9875686
+      },
+      {
+        "iteration": 10000,
+        "psnr": 40.00602,
+        "ssim": 0.9884033
+      },
+      {
+        "iteration": 12000,
+        "psnr": 40.3947,
+        "ssim": 0.98915166
+      },
+      {
+        "iteration": 14000,
+        "psnr": 40.53127,
+        "ssim": 0.9895846
+      },
+      {
+        "iteration": 16000,
+        "psnr": 40.59034,
+        "ssim": 0.9898623
+      },
+      {
+        "iteration": 18000,
+        "psnr": 40.39125,
+        "ssim": 0.98989654
+      },
+      {
+        "iteration": 20000,
+        "psnr": 40.79826,
+        "ssim": 0.99009174
+      },
+      {
+        "iteration": 22000,
+        "psnr": 40.31097,
+        "ssim": 0.9900348
+      },
+      {
+        "iteration": 24000,
+        "psnr": 40.954227,
+        "ssim": 0.9904782
+      }
+    ],
+    "device": "NVIDIA GeForce RTX 3050 Laptop GPU",
+    "endedAt": "2026-10-29T18:37:02.272Z",
+    "exitCode": 0,
+    "checkpoints": [
+      {
+        "file": "model_02000.ply",
+        "iteration": 2000,
+        "bytes": 17843040,
+        "sha256": "eb2450e25a9fe13f335578491a648154fc7ca93fd4931433a2fa27f3c6700291"
+      },
+      {
+        "file": "model_04000.ply",
+        "iteration": 4000,
+        "bytes": 18402952,
+        "sha256": "87cf2b19279b3a999368f8f0aac8300b93a6a9df5839e1d62235bf7f50837477"
+      },
+      {
+        "file": "model_06000.ply",
+        "iteration": 6000,
+        "bytes": 18402952,
+        "sha256": "5785a1dde331e96314d63c1bc83676b38905dc511e4acada6f1f88c40d8bcb68"
+      },
+      {
+        "file": "model_08000.ply",
+        "iteration": 8000,
+        "bytes": 18402952,
+        "sha256": "4e447e2f6c587d1536094805cda2b033aeb8ed4eda09e6d16afb1e6b7487c898"
+      },
+      {
+        "file": "model_10000.ply",
+        "iteration": 10000,
+        "bytes": 18402952,
+        "sha256": "14879c31d870c4768f5d16b774d76baede29ffde507d0af9fa2b869851a3a1a8"
+      },
+      {
+        "file": "model_12000.ply",
+        "iteration": 12000,
+        "bytes": 18498816,
+        "sha256": "8a8f0bb19bd2fd7f50ebb1b452ab7acecc343755860564cf2ab1392425201ec8"
+      },
+      {
+        "file": "model_14000.ply",
+        "iteration": 14000,
+        "bytes": 18788800,
+        "sha256": "a076175c765a7a8670ae875f2f79b97b42333910955813f6d3a1ff8bc6b16143"
+      },
+      {
+        "file": "model_16000.ply",
+        "iteration": 16000,
+        "bytes": 19086420,
+        "sha256": "2a171f3fa16e5ef26feb5f9655a0326c3d2663698e5439c0b5c423611162973c"
+      },
+      {
+        "file": "model_18000.ply",
+        "iteration": 18000,
+        "bytes": 19086420,
+        "sha256": "76d87de302fc41b92472819bf10eb7b42de0c9415e559f5b7afbeed949ec6d7a"
+      },
+      {
+        "file": "model_20000.ply",
+        "iteration": 20000,
+        "bytes": 19086420,
+        "sha256": "6ecd764ae59ffc6e34d8e811d9b532e7e36e03e162982df2bb259a642902a5fe"
+      },
+      {
+        "file": "model_22000.ply",
+        "iteration": 22000,
+        "bytes": 19086420,
+        "sha256": "c7922a05af917280f111df993696c2835ec0f430008b8178cf48e1ea5d179ffe"
+      },
+      {
+        "file": "model_24000.ply",
+        "iteration": 24000,
+        "bytes": 19086420,
+        "sha256": "370cdca9a9ce46cab3ade441282bc42fe61ce881fe55154cfa205c92b244e1bf"
+      }
+    ],
+    "outputSha256": "370cdca9a9ce46cab3ade441282bc42fe61ce881fe55154cfa205c92b244e1bf",
+    "trainingLogSha256": "c6fc72e31ad87978f51cfd620a1f4134b31a1ea066faff34f094d70f115156ac",
+    "foregroundValidation": [
+      {
+        "iteration": 2000,
+        "psnr": 33.530482478312265,
+        "views": [
+          {
+            "name": "hanyuan_007.png",
+            "pixels": 143837,
+            "psnr": 31.268188682423617
+          },
+          {
+            "name": "hanyuan_015.png",
+            "pixels": 149148,
+            "psnr": 33.364141408417474
+          },
+          {
+            "name": "hanyuan_023.png",
+            "pixels": 153298,
+            "psnr": 31.738619074822605
+          },
+          {
+            "name": "hanyuan_031.png",
+            "pixels": 211202,
+            "psnr": 35.26898719750586
+          },
+          {
+            "name": "hanyuan_039.png",
+            "pixels": 205282,
+            "psnr": 35.71805905697136
+          },
+          {
+            "name": "hanyuan_047.png",
+            "pixels": 207535,
+            "psnr": 35.22691773881405
+          },
+          {
+            "name": "hanyuan_055.png",
+            "pixels": 243507,
+            "psnr": 36.82350242019263
+          },
+          {
+            "name": "hanyuan_063.png",
+            "pixels": 252334,
+            "psnr": 37.23035325701018
+          },
+          {
+            "name": "hanyuan_071.png",
+            "pixels": 254167,
+            "psnr": 37.27951049302213
+          },
+          {
+            "name": "hanyuan_079.png",
+            "pixels": 280730,
+            "psnr": 36.481891727042715
+          },
+          {
+            "name": "hanyuan_087.png",
+            "pixels": 95676,
+            "psnr": 21.514735944477255
+          },
+          {
+            "name": "hanyuan_095.png",
+            "pixels": 347048,
+            "psnr": 32.085780903079446
+          },
+          {
+            "name": "hanyuan_103.png",
+            "pixels": 355655,
+            "psnr": 31.89558431428006
+          }
+        ]
+      },
+      {
+        "iteration": 4000,
+        "psnr": 34.812680948378095,
+        "views": [
+          {
+            "name": "hanyuan_007.png",
+            "pixels": 143837,
+            "psnr": 33.03789052500845
+          },
+          {
+            "name": "hanyuan_015.png",
+            "pixels": 149148,
+            "psnr": 34.18773247002166
+          },
+          {
+            "name": "hanyuan_023.png",
+            "pixels": 153298,
+            "psnr": 33.209110667372435
+          },
+          {
+            "name": "hanyuan_031.png",
+            "pixels": 211202,
+            "psnr": 36.24601287794343
+          },
+          {
+            "name": "hanyuan_039.png",
+            "pixels": 205282,
+            "psnr": 36.8470361505304
+          },
+          {
+            "name": "hanyuan_047.png",
+            "pixels": 207535,
+            "psnr": 36.83450209051662
+          },
+          {
+            "name": "hanyuan_055.png",
+            "pixels": 243507,
+            "psnr": 38.019695905956446
+          },
+          {
+            "name": "hanyuan_063.png",
+            "pixels": 252334,
+            "psnr": 39.068835793426544
+          },
+          {
+            "name": "hanyuan_071.png",
+            "pixels": 254167,
+            "psnr": 38.122344686930134
+          },
+          {
+            "name": "hanyuan_079.png",
+            "pixels": 280730,
+            "psnr": 37.9229352212189
+          },
+          {
+            "name": "hanyuan_087.png",
+            "pixels": 95676,
+            "psnr": 23.115081118140242
+          },
+          {
+            "name": "hanyuan_095.png",
+            "pixels": 347048,
+            "psnr": 33.40940535927232
+          },
+          {
+            "name": "hanyuan_103.png",
+            "pixels": 355655,
+            "psnr": 32.54426946257765
+          }
+        ]
+      },
+      {
+        "iteration": 6000,
+        "psnr": 35.44292178169942,
+        "views": [
+          {
+            "name": "hanyuan_007.png",
+            "pixels": 143837,
+            "psnr": 33.57266840337095
+          },
+          {
+            "name": "hanyuan_015.png",
+            "pixels": 149148,
+            "psnr": 34.1633736712643
+          },
+          {
+            "name": "hanyuan_023.png",
+            "pixels": 153298,
+            "psnr": 34.22410032624438
+          },
+          {
+            "name": "hanyuan_031.png",
+            "pixels": 211202,
+            "psnr": 36.816233267944206
+          },
+          {
+            "name": "hanyuan_039.png",
+            "pixels": 205282,
+            "psnr": 37.030565675043746
+          },
+          {
+            "name": "hanyuan_047.png",
+            "pixels": 207535,
+            "psnr": 37.9005247925036
+          },
+          {
+            "name": "hanyuan_055.png",
+            "pixels": 243507,
+            "psnr": 38.698083572249196
+          },
+          {
+            "name": "hanyuan_063.png",
+            "pixels": 252334,
+            "psnr": 39.43112042018527
+          },
+          {
+            "name": "hanyuan_071.png",
+            "pixels": 254167,
+            "psnr": 39.106482932798
+          },
+          {
+            "name": "hanyuan_079.png",
+            "pixels": 280730,
+            "psnr": 38.98457906948263
+          },
+          {
+            "name": "hanyuan_087.png",
+            "pixels": 95676,
+            "psnr": 23.60758338971856
+          },
+          {
+            "name": "hanyuan_095.png",
+            "pixels": 347048,
+            "psnr": 34.20401339588183
+          },
+          {
+            "name": "hanyuan_103.png",
+            "pixels": 355655,
+            "psnr": 33.018654245405806
+          }
+        ]
+      },
+      {
+        "iteration": 8000,
+        "psnr": 35.59220285705748,
+        "views": [
+          {
+            "name": "hanyuan_007.png",
+            "pixels": 143837,
+            "psnr": 32.84839514520195
+          },
+          {
+            "name": "hanyuan_015.png",
+            "pixels": 149148,
+            "psnr": 34.360594005352475
+          },
+          {
+            "name": "hanyuan_023.png",
+            "pixels": 153298,
+            "psnr": 34.4732124080577
+          },
+          {
+            "name": "hanyuan_031.png",
+            "pixels": 211202,
+            "psnr": 36.471431796691306
+          },
+          {
+            "name": "hanyuan_039.png",
+            "pixels": 205282,
+            "psnr": 37.13857594235278
+          },
+          {
+            "name": "hanyuan_047.png",
+            "pixels": 207535,
+            "psnr": 37.575435022207614
+          },
+          {
+            "name": "hanyuan_055.png",
+            "pixels": 243507,
+            "psnr": 38.956503866566614
+          },
+          {
+            "name": "hanyuan_063.png",
+            "pixels": 252334,
+            "psnr": 40.14598993593735
+          },
+          {
+            "name": "hanyuan_071.png",
+            "pixels": 254167,
+            "psnr": 39.18017301610172
+          },
+          {
+            "name": "hanyuan_079.png",
+            "pixels": 280730,
+            "psnr": 39.205965335638325
+          },
+          {
+            "name": "hanyuan_087.png",
+            "pixels": 95676,
+            "psnr": 24.210802865577378
+          },
+          {
+            "name": "hanyuan_095.png",
+            "pixels": 347048,
+            "psnr": 34.51356986372046
+          },
+          {
+            "name": "hanyuan_103.png",
+            "pixels": 355655,
+            "psnr": 33.61798793834151
+          }
+        ]
+      },
+      {
+        "iteration": 10000,
+        "psnr": 35.991264391081295,
+        "views": [
+          {
+            "name": "hanyuan_007.png",
+            "pixels": 143837,
+            "psnr": 34.48020336926348
+          },
+          {
+            "name": "hanyuan_015.png",
+            "pixels": 149148,
+            "psnr": 35.00159027541879
+          },
+          {
+            "name": "hanyuan_023.png",
+            "pixels": 153298,
+            "psnr": 34.30598663653178
+          },
+          {
+            "name": "hanyuan_031.png",
+            "pixels": 211202,
+            "psnr": 38.19031854627747
+          },
+          {
+            "name": "hanyuan_039.png",
+            "pixels": 205282,
+            "psnr": 37.77112216402728
+          },
+          {
+            "name": "hanyuan_047.png",
+            "pixels": 207535,
+            "psnr": 37.6063111950838
+          },
+          {
+            "name": "hanyuan_055.png",
+            "pixels": 243507,
+            "psnr": 39.729950847072566
+          },
+          {
+            "name": "hanyuan_063.png",
+            "pixels": 252334,
+            "psnr": 40.25271055822089
+          },
+          {
+            "name": "hanyuan_071.png",
+            "pixels": 254167,
+            "psnr": 39.470724972673665
+          },
+          {
+            "name": "hanyuan_079.png",
+            "pixels": 280730,
+            "psnr": 39.26031594389986
+          },
+          {
+            "name": "hanyuan_087.png",
+            "pixels": 95676,
+            "psnr": 24.45440866862798
+          },
+          {
+            "name": "hanyuan_095.png",
+            "pixels": 347048,
+            "psnr": 33.499072327345935
+          },
+          {
+            "name": "hanyuan_103.png",
+            "pixels": 355655,
+            "psnr": 33.863721579613355
+          }
+        ]
+      },
+      {
+        "iteration": 12000,
+        "psnr": 36.240345591193126,
+        "views": [
+          {
+            "name": "hanyuan_007.png",
+            "pixels": 143837,
+            "psnr": 34.089352374900706
+          },
+          {
+            "name": "hanyuan_015.png",
+            "pixels": 149148,
+            "psnr": 34.788720461563116
+          },
+          {
+            "name": "hanyuan_023.png",
+            "pixels": 153298,
+            "psnr": 35.154199514104704
+          },
+          {
+            "name": "hanyuan_031.png",
+            "pixels": 211202,
+            "psnr": 38.033586840737485
+          },
+          {
+            "name": "hanyuan_039.png",
+            "pixels": 205282,
+            "psnr": 37.85915395770346
+          },
+          {
+            "name": "hanyuan_047.png",
+            "pixels": 207535,
+            "psnr": 38.43491788269982
+          },
+          {
+            "name": "hanyuan_055.png",
+            "pixels": 243507,
+            "psnr": 40.46115472783082
+          },
+          {
+            "name": "hanyuan_063.png",
+            "pixels": 252334,
+            "psnr": 40.611496447815085
+          },
+          {
+            "name": "hanyuan_071.png",
+            "pixels": 254167,
+            "psnr": 39.798675832354405
+          },
+          {
+            "name": "hanyuan_079.png",
+            "pixels": 280730,
+            "psnr": 40.09324598237033
+          },
+          {
+            "name": "hanyuan_087.png",
+            "pixels": 95676,
+            "psnr": 24.753948444569794
+          },
+          {
+            "name": "hanyuan_095.png",
+            "pixels": 347048,
+            "psnr": 33.488034132564
+          },
+          {
+            "name": "hanyuan_103.png",
+            "pixels": 355655,
+            "psnr": 33.558006086296935
+          }
+        ]
+      },
+      {
+        "iteration": 14000,
+        "psnr": 36.396773389985114,
+        "views": [
+          {
+            "name": "hanyuan_007.png",
+            "pixels": 143837,
+            "psnr": 34.52310145459537
+          },
+          {
+            "name": "hanyuan_015.png",
+            "pixels": 149148,
+            "psnr": 34.9677375122597
+          },
+          {
+            "name": "hanyuan_023.png",
+            "pixels": 153298,
+            "psnr": 35.18304617849806
+          },
+          {
+            "name": "hanyuan_031.png",
+            "pixels": 211202,
+            "psnr": 38.31089431857884
+          },
+          {
+            "name": "hanyuan_039.png",
+            "pixels": 205282,
+            "psnr": 37.89220604228771
+          },
+          {
+            "name": "hanyuan_047.png",
+            "pixels": 207535,
+            "psnr": 38.39633312626262
+          },
+          {
+            "name": "hanyuan_055.png",
+            "pixels": 243507,
+            "psnr": 40.72749289097083
+          },
+          {
+            "name": "hanyuan_063.png",
+            "pixels": 252334,
+            "psnr": 40.36849614945794
+          },
+          {
+            "name": "hanyuan_071.png",
+            "pixels": 254167,
+            "psnr": 40.00317088833793
+          },
+          {
+            "name": "hanyuan_079.png",
+            "pixels": 280730,
+            "psnr": 40.156377815190254
+          },
+          {
+            "name": "hanyuan_087.png",
+            "pixels": 95676,
+            "psnr": 24.90522305833906
+          },
+          {
+            "name": "hanyuan_095.png",
+            "pixels": 347048,
+            "psnr": 33.83644248623065
+          },
+          {
+            "name": "hanyuan_103.png",
+            "pixels": 355655,
+            "psnr": 33.88753214879753
+          }
+        ]
+      },
+      {
+        "iteration": 16000,
+        "psnr": 36.57548315485873,
+        "views": [
+          {
+            "name": "hanyuan_007.png",
+            "pixels": 143837,
+            "psnr": 34.53317792980953
+          },
+          {
+            "name": "hanyuan_015.png",
+            "pixels": 149148,
+            "psnr": 35.215966817631326
+          },
+          {
+            "name": "hanyuan_023.png",
+            "pixels": 153298,
+            "psnr": 35.04675140027784
+          },
+          {
+            "name": "hanyuan_031.png",
+            "pixels": 211202,
+            "psnr": 38.44433587870793
+          },
+          {
+            "name": "hanyuan_039.png",
+            "pixels": 205282,
+            "psnr": 38.44001949630418
+          },
+          {
+            "name": "hanyuan_047.png",
+            "pixels": 207535,
+            "psnr": 38.005327135094774
+          },
+          {
+            "name": "hanyuan_055.png",
+            "pixels": 243507,
+            "psnr": 40.95379179578177
+          },
+          {
+            "name": "hanyuan_063.png",
+            "pixels": 252334,
+            "psnr": 41.08494129859986
+          },
+          {
+            "name": "hanyuan_071.png",
+            "pixels": 254167,
+            "psnr": 39.89460913282802
+          },
+          {
+            "name": "hanyuan_079.png",
+            "pixels": 280730,
+            "psnr": 40.11394605072428
+          },
+          {
+            "name": "hanyuan_087.png",
+            "pixels": 95676,
+            "psnr": 25.109109356713265
+          },
+          {
+            "name": "hanyuan_095.png",
+            "pixels": 347048,
+            "psnr": 34.57381217004346
+          },
+          {
+            "name": "hanyuan_103.png",
+            "pixels": 355655,
+            "psnr": 34.065492550647335
+          }
+        ]
+      },
+      {
+        "iteration": 18000,
+        "psnr": 36.45198913968714,
+        "views": [
+          {
+            "name": "hanyuan_007.png",
+            "pixels": 143837,
+            "psnr": 34.32978920015862
+          },
+          {
+            "name": "hanyuan_015.png",
+            "pixels": 149148,
+            "psnr": 35.267032918244816
+          },
+          {
+            "name": "hanyuan_023.png",
+            "pixels": 153298,
+            "psnr": 34.96382291453057
+          },
+          {
+            "name": "hanyuan_031.png",
+            "pixels": 211202,
+            "psnr": 38.20864110787203
+          },
+          {
+            "name": "hanyuan_039.png",
+            "pixels": 205282,
+            "psnr": 38.392244663902375
+          },
+          {
+            "name": "hanyuan_047.png",
+            "pixels": 207535,
+            "psnr": 38.17165850921444
+          },
+          {
+            "name": "hanyuan_055.png",
+            "pixels": 243507,
+            "psnr": 40.64915859699502
+          },
+          {
+            "name": "hanyuan_063.png",
+            "pixels": 252334,
+            "psnr": 40.9890195666894
+          },
+          {
+            "name": "hanyuan_071.png",
+            "pixels": 254167,
+            "psnr": 39.94295179811027
+          },
+          {
+            "name": "hanyuan_079.png",
+            "pixels": 280730,
+            "psnr": 39.74488734425003
+          },
+          {
+            "name": "hanyuan_087.png",
+            "pixels": 95676,
+            "psnr": 25.04299011132431
+          },
+          {
+            "name": "hanyuan_095.png",
+            "pixels": 347048,
+            "psnr": 33.9205740380189
+          },
+          {
+            "name": "hanyuan_103.png",
+            "pixels": 355655,
+            "psnr": 34.25308804662207
+          }
+        ]
+      },
+      {
+        "iteration": 20000,
+        "psnr": 36.74325280766618,
+        "views": [
+          {
+            "name": "hanyuan_007.png",
+            "pixels": 143837,
+            "psnr": 34.37366459073911
+          },
+          {
+            "name": "hanyuan_015.png",
+            "pixels": 149148,
+            "psnr": 35.74543517680254
+          },
+          {
+            "name": "hanyuan_023.png",
+            "pixels": 153298,
+            "psnr": 35.43707891583435
+          },
+          {
+            "name": "hanyuan_031.png",
+            "pixels": 211202,
+            "psnr": 38.336545220887515
+          },
+          {
+            "name": "hanyuan_039.png",
+            "pixels": 205282,
+            "psnr": 38.62323974582749
+          },
+          {
+            "name": "hanyuan_047.png",
+            "pixels": 207535,
+            "psnr": 39.13503074261106
+          },
+          {
+            "name": "hanyuan_055.png",
+            "pixels": 243507,
+            "psnr": 40.98934129115187
+          },
+          {
+            "name": "hanyuan_063.png",
+            "pixels": 252334,
+            "psnr": 41.19849807122135
+          },
+          {
+            "name": "hanyuan_071.png",
+            "pixels": 254167,
+            "psnr": 40.749334885872514
+          },
+          {
+            "name": "hanyuan_079.png",
+            "pixels": 280730,
+            "psnr": 40.42557368194423
+          },
+          {
+            "name": "hanyuan_087.png",
+            "pixels": 95676,
+            "psnr": 25.26156648198695
+          },
+          {
+            "name": "hanyuan_095.png",
+            "pixels": 347048,
+            "psnr": 34.01407145662373
+          },
+          {
+            "name": "hanyuan_103.png",
+            "pixels": 355655,
+            "psnr": 33.3729062381577
+          }
+        ]
+      },
+      {
+        "iteration": 22000,
+        "psnr": 36.58884554625569,
+        "views": [
+          {
+            "name": "hanyuan_007.png",
+            "pixels": 143837,
+            "psnr": 34.493557297661035
+          },
+          {
+            "name": "hanyuan_015.png",
+            "pixels": 149148,
+            "psnr": 35.503150338792096
+          },
+          {
+            "name": "hanyuan_023.png",
+            "pixels": 153298,
+            "psnr": 35.409686067626865
+          },
+          {
+            "name": "hanyuan_031.png",
+            "pixels": 211202,
+            "psnr": 38.37664342991865
+          },
+          {
+            "name": "hanyuan_039.png",
+            "pixels": 205282,
+            "psnr": 38.599809161656495
+          },
+          {
+            "name": "hanyuan_047.png",
+            "pixels": 207535,
+            "psnr": 38.67047550797967
+          },
+          {
+            "name": "hanyuan_055.png",
+            "pixels": 243507,
+            "psnr": 40.344731704988575
+          },
+          {
+            "name": "hanyuan_063.png",
+            "pixels": 252334,
+            "psnr": 40.92488591354507
+          },
+          {
+            "name": "hanyuan_071.png",
+            "pixels": 254167,
+            "psnr": 40.23777600669136
+          },
+          {
+            "name": "hanyuan_079.png",
+            "pixels": 280730,
+            "psnr": 40.05040780715184
+          },
+          {
+            "name": "hanyuan_087.png",
+            "pixels": 95676,
+            "psnr": 25.25785572359778
+          },
+          {
+            "name": "hanyuan_095.png",
+            "pixels": 347048,
+            "psnr": 33.69135180893799
+          },
+          {
+            "name": "hanyuan_103.png",
+            "pixels": 355655,
+            "psnr": 34.094661332776546
+          }
+        ]
+      },
+      {
+        "iteration": 24000,
+        "psnr": 36.90633375671557,
+        "views": [
+          {
+            "name": "hanyuan_007.png",
+            "pixels": 143837,
+            "psnr": 34.834839638562926
+          },
+          {
+            "name": "hanyuan_015.png",
+            "pixels": 149148,
+            "psnr": 35.369633172246964
+          },
+          {
+            "name": "hanyuan_023.png",
+            "pixels": 153298,
+            "psnr": 35.621162314807066
+          },
+          {
+            "name": "hanyuan_031.png",
+            "pixels": 211202,
+            "psnr": 38.72745830488532
+          },
+          {
+            "name": "hanyuan_039.png",
+            "pixels": 205282,
+            "psnr": 38.78857976474566
+          },
+          {
+            "name": "hanyuan_047.png",
+            "pixels": 207535,
+            "psnr": 39.25339616375613
+          },
+          {
+            "name": "hanyuan_055.png",
+            "pixels": 243507,
+            "psnr": 40.97779231419309
+          },
+          {
+            "name": "hanyuan_063.png",
+            "pixels": 252334,
+            "psnr": 41.08033606445963
+          },
+          {
+            "name": "hanyuan_071.png",
+            "pixels": 254167,
+            "psnr": 40.66045362410078
+          },
+          {
+            "name": "hanyuan_079.png",
+            "pixels": 280730,
+            "psnr": 40.40271807957339
+          },
+          {
+            "name": "hanyuan_087.png",
+            "pixels": 95676,
+            "psnr": 25.129355750251975
+          },
+          {
+            "name": "hanyuan_095.png",
+            "pixels": 347048,
+            "psnr": 35.00870031110482
+          },
+          {
+            "name": "hanyuan_103.png",
+            "pixels": 355655,
+            "psnr": 33.92791333461455
+          }
+        ]
+      }
+    ],
+    "selectedCheckpoint": {
+      "iteration": 24000,
+      "psnr": 36.90633375671557,
+      "views": [
+        {
+          "name": "hanyuan_007.png",
+          "pixels": 143837,
+          "psnr": 34.834839638562926
+        },
+        {
+          "name": "hanyuan_015.png",
+          "pixels": 149148,
+          "psnr": 35.369633172246964
+        },
+        {
+          "name": "hanyuan_023.png",
+          "pixels": 153298,
+          "psnr": 35.621162314807066
+        },
+        {
+          "name": "hanyuan_031.png",
+          "pixels": 211202,
+          "psnr": 38.72745830488532
+        },
+        {
+          "name": "hanyuan_039.png",
+          "pixels": 205282,
+          "psnr": 38.78857976474566
+        },
+        {
+          "name": "hanyuan_047.png",
+          "pixels": 207535,
+          "psnr": 39.25339616375613
+        },
+        {
+          "name": "hanyuan_055.png",
+          "pixels": 243507,
+          "psnr": 40.97779231419309
+        },
+        {
+          "name": "hanyuan_063.png",
+          "pixels": 252334,
+          "psnr": 41.08033606445963
+        },
+        {
+          "name": "hanyuan_071.png",
+          "pixels": 254167,
+          "psnr": 40.66045362410078
+        },
+        {
+          "name": "hanyuan_079.png",
+          "pixels": 280730,
+          "psnr": 40.40271807957339
+        },
+        {
+          "name": "hanyuan_087.png",
+          "pixels": 95676,
+          "psnr": 25.129355750251975
+        },
+        {
+          "name": "hanyuan_095.png",
+          "pixels": 347048,
+          "psnr": 35.00870031110482
+        },
+        {
+          "name": "hanyuan_103.png",
+          "pixels": 355655,
+          "psnr": 33.92791333461455
+        }
+      ]
+    },
+    "validationCaveat": "Image reproduction of the locally authored concept; use input alpha >=250 and RGB MSE. Held-out renders are not used in image optimization, but all initial geometry comes from the authored scene. No archaeological or geometric survey accuracy is implied."
+  },
+  "preparation": {
+    "schema": 1,
+    "subject": "大明宫 · 含元殿复原构想",
+    "generatedAt": "2026-10-29T18:21:35.007156+00:00",
+    "inputKind": "locally-authored-multiview-renders",
+    "notCapturedPhotographs": true,
+    "notSurveyedRestoration": true,
+    "notSingleImageDepth": true,
+    "notImportedFinishedModel": true,
+    "authoringScriptSha256": "9d8f0095653b50fd57a6ad746e84b1d354c1dc05a527bd6b3d0ef8905c895324",
+    "blenderVersion": "5.1.2",
+    "geometryVertices": 421440,
+    "geometryPolygons": 395822,
+    "seedPointCount": 180000,
+    "seedSha256": "1aa92e38c4dd918572f1b35d7793c1266558dbce27970e4484012a760ef75a37",
+    "seedMethod": "Area-weighted sampling of locally authored geometric surfaces, converted from Blender Z-up to Y-up; source geometry is creative, not observed or surveyed.",
+    "photoCount": 104,
+    "intrinsics": {
+      "camera_model": "OPENCV",
+      "fl_x": 1146.6666666666667,
+      "fl_y": 1146.6666666666667,
+      "cx": 480.0,
+      "cy": 360.0,
+      "w": 960,
+      "h": 720,
+      "ply_file_path": "init.ply"
+    },
+    "views": [
+      {
+        "name": "hanyuan_000.png",
+        "split": "train",
+        "azimuth": 0,
+        "elevation": 18,
+        "radius": 128,
+        "sha256": "42802c9cd8facfe711fb2791574ffa2b928ece3eb5c137c3e8cec4d78917fe20",
+        "bytes": 396770,
+        "frame": {
+          "file_path": "images/hanyuan_000.png",
+          "transform_matrix": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.9510565400123596,
+              0.30901697278022766,
+              45.35417556762695
+            ],
+            [
+              0.0,
+              -0.30901697278022766,
+              0.9510565400123596,
+              121.73523712158203
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_001.png",
+        "split": "train",
+        "azimuth": 15,
+        "elevation": 18,
+        "radius": 128,
+        "sha256": "8575c48254919279168dc181d2338da344ab0b6cbfb7353488c4299e87e2d56c",
+        "bytes": 426771,
+        "frame": {
+          "file_path": "images/hanyuan_001.png",
+          "transform_matrix": [
+            [
+              0.9659258127212524,
+              -0.07997947931289673,
+              0.2461516112089157,
+              31.507396697998047
+            ],
+            [
+              1.477071265298946e-08,
+              0.9510565400123596,
+              0.3090168535709381,
+              45.35417556762695
+            ],
+            [
+              -0.2588191032409668,
+              -0.2984873354434967,
+              0.9186500906944275,
+              117.58720397949219
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_002.png",
+        "split": "train",
+        "azimuth": 30,
+        "elevation": 18,
+        "radius": 128,
+        "sha256": "a11b22cb771834093145b700820d94df4b650b8529935fda306eb9877bbeae7f",
+        "bytes": 446733,
+        "frame": {
+          "file_path": "images/hanyuan_002.png",
+          "transform_matrix": [
+            [
+              0.8660253286361694,
+              -0.15450850129127502,
+              0.47552838921546936,
+              60.867618560791016
+            ],
+            [
+              -1.3296393319706112e-08,
+              0.9510565400123596,
+              0.30901697278022766,
+              45.35417556762695
+            ],
+            [
+              -0.5000001192092896,
+              -0.26761651039123535,
+              0.8236390352249146,
+              105.4258041381836
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_003.png",
+        "split": "train",
+        "azimuth": 45,
+        "elevation": 18,
+        "radius": 128,
+        "sha256": "fc286f6cd4148a578413f2ad527a0e1b485aface6431dbcfb26ef4f155e5bef9",
+        "bytes": 452395,
+        "frame": {
+          "file_path": "images/hanyuan_003.png",
+          "transform_matrix": [
+            [
+              0.7071067690849304,
+              -0.21850799024105072,
+              0.6724985241889954,
+              86.0798110961914
+            ],
+            [
+              1.1449044023947863e-07,
+              0.9510565400123596,
+              0.3090168535709381,
+              45.35417556762695
+            ],
+            [
+              -0.7071067690849304,
+              -0.2185078263282776,
+              0.6724985837936401,
+              86.0798110961914
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_004.png",
+        "split": "train",
+        "azimuth": 60,
+        "elevation": 18,
+        "radius": 128,
+        "sha256": "726e7f504529ffe1a1b8ba69f1c7117643304f68079ed15770a19ad6bdcc0b34",
+        "bytes": 443249,
+        "frame": {
+          "file_path": "images/hanyuan_004.png",
+          "transform_matrix": [
+            [
+              0.4999999701976776,
+              -0.2676164507865906,
+              0.8236391544342041,
+              105.4258041381836
+            ],
+            [
+              4.189101332485734e-08,
+              0.9510565400123596,
+              0.3090168535709381,
+              45.35417556762695
+            ],
+            [
+              -0.866025447845459,
+              -0.15450838208198547,
+              0.4755282700061798,
+              60.867618560791016
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_005.png",
+        "split": "train",
+        "azimuth": 75,
+        "elevation": 18,
+        "radius": 128,
+        "sha256": "01928b34a9a5513389b2094f5e2c0ef290bd0d9287a7805c024d4bea5dbaeb19",
+        "bytes": 430018,
+        "frame": {
+          "file_path": "images/hanyuan_005.png",
+          "transform_matrix": [
+            [
+              0.2588190734386444,
+              -0.29848748445510864,
+              0.9186500310897827,
+              117.58720397949219
+            ],
+            [
+              7.386266531739238e-08,
+              0.9510565400123596,
+              0.30901697278022766,
+              45.35417556762695
+            ],
+            [
+              -0.9659258127212524,
+              -0.07997941225767136,
+              0.24615158140659332,
+              31.507396697998047
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_006.png",
+        "split": "train",
+        "azimuth": 90,
+        "elevation": 18,
+        "radius": 128,
+        "sha256": "e42d23dd8a2b6cb7e687f383a563dfa19b59b4795965052a1737d1aa117b49c1",
+        "bytes": 407665,
+        "frame": {
+          "file_path": "images/hanyuan_006.png",
+          "transform_matrix": [
+            [
+              -4.371138828673793e-08,
+              -0.3090170621871948,
+              0.9510564804077148,
+              121.73523712158203
+            ],
+            [
+              3.409751769822833e-08,
+              0.9510564804077148,
+              0.3090170621871948,
+              45.35417556762695
+            ],
+            [
+              -1.0,
+              4.59362325955226e-08,
+              -3.103528456449567e-08,
+              7.454133034293705e-15
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_007.png",
+        "split": "validation",
+        "azimuth": 105,
+        "elevation": 18,
+        "radius": 128,
+        "sha256": "58d3a090b005d92653a130324dc4567f9bf27fd9debbfbf82236a8d4cf4b45a6",
+        "bytes": 428516,
+        "frame": {
+          "file_path": "images/hanyuan_007.png",
+          "transform_matrix": [
+            [
+              -0.258819043636322,
+              -0.2984875738620758,
+              0.9186500310897827,
+              117.58720397949219
+            ],
+            [
+              -6.251047679484145e-09,
+              0.9510564804077148,
+              0.3090170621871948,
+              45.35417556762695
+            ],
+            [
+              -0.9659258127212524,
+              0.07997949421405792,
+              -0.24615152180194855,
+              -31.507396697998047
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_008.png",
+        "split": "train",
+        "azimuth": 120,
+        "elevation": 18,
+        "radius": 128,
+        "sha256": "37b5d6f08d3c86d8ec1de24f3e897d555307efc44fc8095a30a23acf92bda581",
+        "bytes": 439272,
+        "frame": {
+          "file_path": "images/hanyuan_008.png",
+          "transform_matrix": [
+            [
+              -0.5000000596046448,
+              -0.26761648058891296,
+              0.8236390948295593,
+              105.4258041381836
+            ],
+            [
+              8.985166743968875e-08,
+              0.9510565400123596,
+              0.30901697278022766,
+              45.35417556762695
+            ],
+            [
+              -0.8660253882408142,
+              0.154508575797081,
+              -0.4755282998085022,
+              -60.867618560791016
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_009.png",
+        "split": "train",
+        "azimuth": 135,
+        "elevation": 18,
+        "radius": 128,
+        "sha256": "692f02633f6fc3dff4076e0837ec65704d983698de6ea0d725415f0560125116",
+        "bytes": 442143,
+        "frame": {
+          "file_path": "images/hanyuan_009.png",
+          "transform_matrix": [
+            [
+              -0.7071067690849304,
+              -0.21850799024105072,
+              0.6724985241889954,
+              86.0798110961914
+            ],
+            [
+              5.964108762412934e-09,
+              0.9510565400123596,
+              0.30901697278022766,
+              45.35417556762695
+            ],
+            [
+              -0.7071067690849304,
+              0.21850799024105072,
+              -0.6724985241889954,
+              -86.0798110961914
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_010.png",
+        "split": "train",
+        "azimuth": 150,
+        "elevation": 18,
+        "radius": 128,
+        "sha256": "542a10ef6a6eea5d57283023dad0133084407d742e158249570cd65b9c1094b3",
+        "bytes": 439523,
+        "frame": {
+          "file_path": "images/hanyuan_010.png",
+          "transform_matrix": [
+            [
+              -0.8660253882408142,
+              -0.15450847148895264,
+              0.4755282998085022,
+              60.867618560791016
+            ],
+            [
+              2.4818676891413816e-08,
+              0.9510565400123596,
+              0.30901697278022766,
+              45.35417556762695
+            ],
+            [
+              -0.5000000596046448,
+              0.26761654019355774,
+              -0.8236390948295593,
+              -105.4258041381836
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_011.png",
+        "split": "train",
+        "azimuth": 165,
+        "elevation": 18,
+        "radius": 128,
+        "sha256": "77a3c75ef1aef8fef9a995c5a6ea92890a6326cbbebfad78dae140b46aeab5ef",
+        "bytes": 422413,
+        "frame": {
+          "file_path": "images/hanyuan_011.png",
+          "transform_matrix": [
+            [
+              -0.9659258127212524,
+              -0.07997957617044449,
+              0.2461516112089157,
+              31.507396697998047
+            ],
+            [
+              -7.994684381174011e-08,
+              0.9510565400123596,
+              0.30901697278022766,
+              45.35417556762695
+            ],
+            [
+              -0.2588191330432892,
+              0.29848742485046387,
+              -0.9186500310897827,
+              -117.58720397949219
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_012.png",
+        "split": "train",
+        "azimuth": 180,
+        "elevation": 18,
+        "radius": 128,
+        "sha256": "9e8e560b504d222d49e3093679abad6a1c38d1ebc5e89b9cef49c2aea02273a1",
+        "bytes": 390366,
+        "frame": {
+          "file_path": "images/hanyuan_012.png",
+          "transform_matrix": [
+            [
+              -1.0,
+              5.205953712561495e-08,
+              1.0883690748642039e-07,
+              1.490826606858741e-14
+            ],
+            [
+              8.314400190556626e-08,
+              0.9510565400123596,
+              0.3090168535709381,
+              45.35417556762695
+            ],
+            [
+              -8.742277657347586e-08,
+              0.3090168535709381,
+              -0.9510565400123596,
+              -121.73523712158203
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_013.png",
+        "split": "train",
+        "azimuth": 195,
+        "elevation": 18,
+        "radius": 128,
+        "sha256": "f3a4772355d49cd396f908cd1068b636fbde057659b96bee9ec163148d6432d6",
+        "bytes": 413980,
+        "frame": {
+          "file_path": "images/hanyuan_013.png",
+          "transform_matrix": [
+            [
+              -0.9659258127212524,
+              0.07997957617044449,
+              -0.2461516112089157,
+              -31.507396697998047
+            ],
+            [
+              7.994684381174011e-08,
+              0.9510565400123596,
+              0.30901697278022766,
+              45.35417556762695
+            ],
+            [
+              0.2588191330432892,
+              0.29848742485046387,
+              -0.9186500310897827,
+              -117.58720397949219
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_014.png",
+        "split": "train",
+        "azimuth": 210,
+        "elevation": 18,
+        "radius": 128,
+        "sha256": "8dd11df9c8288a7bb499fad57b55f0904d5c2060c178be9580433131f038bf51",
+        "bytes": 434255,
+        "frame": {
+          "file_path": "images/hanyuan_014.png",
+          "transform_matrix": [
+            [
+              -0.8660253882408142,
+              0.15450847148895264,
+              -0.4755282998085022,
+              -60.867618560791016
+            ],
+            [
+              -2.4818676891413816e-08,
+              0.9510565400123596,
+              0.30901697278022766,
+              45.35417556762695
+            ],
+            [
+              0.5000000596046448,
+              0.26761654019355774,
+              -0.8236390948295593,
+              -105.4258041381836
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_015.png",
+        "split": "validation",
+        "azimuth": 225,
+        "elevation": 18,
+        "radius": 128,
+        "sha256": "8f39a3da81715d728c109ab849c23d8e6c0fd979a335de9a5cedcd6742d352ac",
+        "bytes": 437658,
+        "frame": {
+          "file_path": "images/hanyuan_015.png",
+          "transform_matrix": [
+            [
+              -0.7071067690849304,
+              0.21850799024105072,
+              -0.6724985241889954,
+              -86.0798110961914
+            ],
+            [
+              -5.964108762412934e-09,
+              0.9510565400123596,
+              0.30901697278022766,
+              45.35417556762695
+            ],
+            [
+              0.7071067690849304,
+              0.21850799024105072,
+              -0.6724985241889954,
+              -86.0798110961914
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_016.png",
+        "split": "train",
+        "azimuth": 240,
+        "elevation": 18,
+        "radius": 128,
+        "sha256": "8947113f330a573ed8a6a015c998ddf6448e0de87a9958e6c19610e13ae2d2d6",
+        "bytes": 427228,
+        "frame": {
+          "file_path": "images/hanyuan_016.png",
+          "transform_matrix": [
+            [
+              -0.5000000596046448,
+              0.26761648058891296,
+              -0.8236390948295593,
+              -105.4258041381836
+            ],
+            [
+              -8.985166743968875e-08,
+              0.9510565400123596,
+              0.30901697278022766,
+              45.35417556762695
+            ],
+            [
+              0.8660253882408142,
+              0.154508575797081,
+              -0.4755282998085022,
+              -60.867618560791016
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_017.png",
+        "split": "train",
+        "azimuth": 255,
+        "elevation": 18,
+        "radius": 128,
+        "sha256": "1549335a8c09abe9f12d57aafc5037eaf1c72e0b687646326f4376434100aebe",
+        "bytes": 418723,
+        "frame": {
+          "file_path": "images/hanyuan_017.png",
+          "transform_matrix": [
+            [
+              -0.258819043636322,
+              0.2984875738620758,
+              -0.9186500310897827,
+              -117.58720397949219
+            ],
+            [
+              6.251047679484145e-09,
+              0.9510564804077148,
+              0.3090170621871948,
+              45.35417556762695
+            ],
+            [
+              0.9659258127212524,
+              0.07997949421405792,
+              -0.24615152180194855,
+              -31.507396697998047
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_018.png",
+        "split": "train",
+        "azimuth": 270,
+        "elevation": 18,
+        "radius": 128,
+        "sha256": "01bc6d164e739467b62156fca04f1aea66d71f10f972eb9fd0134de314c42cd3",
+        "bytes": 402863,
+        "frame": {
+          "file_path": "images/hanyuan_018.png",
+          "transform_matrix": [
+            [
+              -4.371138828673793e-08,
+              0.3090170621871948,
+              -0.9510564804077148,
+              -121.73523712158203
+            ],
+            [
+              -3.409751769822833e-08,
+              0.9510564804077148,
+              0.3090170621871948,
+              45.35417556762695
+            ],
+            [
+              1.0,
+              4.59362325955226e-08,
+              -3.103528456449567e-08,
+              -2.2362399949914062e-14
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_019.png",
+        "split": "train",
+        "azimuth": 285,
+        "elevation": 18,
+        "radius": 128,
+        "sha256": "2a0d211bcc0e92be66eaedbb59542e31a67f47e4957a5cfcef861e2635df6ecb",
+        "bytes": 431559,
+        "frame": {
+          "file_path": "images/hanyuan_019.png",
+          "transform_matrix": [
+            [
+              0.2588190734386444,
+              0.29848748445510864,
+              -0.9186500310897827,
+              -117.58720397949219
+            ],
+            [
+              -7.386266531739238e-08,
+              0.9510565400123596,
+              0.30901697278022766,
+              45.35417556762695
+            ],
+            [
+              0.9659258127212524,
+              -0.07997941225767136,
+              0.24615158140659332,
+              31.507396697998047
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_020.png",
+        "split": "train",
+        "azimuth": 300,
+        "elevation": 18,
+        "radius": 128,
+        "sha256": "bffab6dac2f1193f8df0ffca0cdf3ede7a526a47c829c69d98da9cf382b84056",
+        "bytes": 444472,
+        "frame": {
+          "file_path": "images/hanyuan_020.png",
+          "transform_matrix": [
+            [
+              0.4999999701976776,
+              0.2676164507865906,
+              -0.8236391544342041,
+              -105.4258041381836
+            ],
+            [
+              -4.189101332485734e-08,
+              0.9510565400123596,
+              0.3090168535709381,
+              45.35417556762695
+            ],
+            [
+              0.866025447845459,
+              -0.15450838208198547,
+              0.4755282700061798,
+              60.867618560791016
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_021.png",
+        "split": "train",
+        "azimuth": 315,
+        "elevation": 18,
+        "radius": 128,
+        "sha256": "3f8ae7760faca721d261551a2b6cdc2a603c4b70bac9a516458001065be9b82f",
+        "bytes": 446923,
+        "frame": {
+          "file_path": "images/hanyuan_021.png",
+          "transform_matrix": [
+            [
+              0.7071067690849304,
+              0.21850799024105072,
+              -0.6724985241889954,
+              -86.0798110961914
+            ],
+            [
+              -1.1449044023947863e-07,
+              0.9510565400123596,
+              0.3090168535709381,
+              45.35417556762695
+            ],
+            [
+              0.7071067690849304,
+              -0.2185078263282776,
+              0.6724985837936401,
+              86.0798110961914
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_022.png",
+        "split": "train",
+        "azimuth": 330,
+        "elevation": 18,
+        "radius": 128,
+        "sha256": "f7b6aa6c8efdccd07e358d7f91a11731cb07e7b9c709b120954dbcdd308950ca",
+        "bytes": 444190,
+        "frame": {
+          "file_path": "images/hanyuan_022.png",
+          "transform_matrix": [
+            [
+              0.8660253286361694,
+              0.15450850129127502,
+              -0.47552838921546936,
+              -60.867618560791016
+            ],
+            [
+              1.3296393319706112e-08,
+              0.9510565400123596,
+              0.30901697278022766,
+              45.35417556762695
+            ],
+            [
+              0.5000001192092896,
+              -0.26761651039123535,
+              0.8236390352249146,
+              105.4258041381836
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_023.png",
+        "split": "validation",
+        "azimuth": 345,
+        "elevation": 18,
+        "radius": 128,
+        "sha256": "004915f8a9d65cfdfea4825dda00ccb2818a0b6187bb78c76dc1211707ce87e1",
+        "bytes": 426362,
+        "frame": {
+          "file_path": "images/hanyuan_023.png",
+          "transform_matrix": [
+            [
+              0.9659258127212524,
+              0.07997947931289673,
+              -0.2461516112089157,
+              -31.507396697998047
+            ],
+            [
+              -1.477071265298946e-08,
+              0.9510565400123596,
+              0.3090168535709381,
+              45.35417556762695
+            ],
+            [
+              0.2588191032409668,
+              -0.2984873354434967,
+              0.9186500906944275,
+              117.58720397949219
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_024.png",
+        "split": "train",
+        "azimuth": 0,
+        "elevation": 35,
+        "radius": 128,
+        "sha256": "91ccbc75cf9e87cc090906548434aef31a9136137eb302659def73560562813e",
+        "bytes": 461673,
+        "frame": {
+          "file_path": "images/hanyuan_024.png",
+          "transform_matrix": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.8191521167755127,
+              0.5735763311386108,
+              79.21778106689453
+            ],
+            [
+              0.0,
+              -0.5735763311386108,
+              0.8191521167755127,
+              104.8514633178711
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_025.png",
+        "split": "train",
+        "azimuth": 15,
+        "elevation": 35,
+        "radius": 128,
+        "sha256": "57cbc48f3ce557b5e2936552c4326b8a2d33cbd9ba543cdf2ef0999abb86c801",
+        "bytes": 518904,
+        "frame": {
+          "file_path": "images/hanyuan_025.png",
+          "transform_matrix": [
+            [
+              0.9659258127212524,
+              -0.1484525501728058,
+              0.21201220154762268,
+              27.137556076049805
+            ],
+            [
+              4.205430315096237e-08,
+              0.8191521167755127,
+              0.5735763311386108,
+              79.21778106689453
+            ],
+            [
+              -0.2588191032409668,
+              -0.5540322065353394,
+              0.7912401556968689,
+              101.27873229980469
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_026.png",
+        "split": "train",
+        "azimuth": 30,
+        "elevation": 35,
+        "radius": 128,
+        "sha256": "922fea20c5b1f6a712805b54941be0b5b1d4e3b5fe6d0a76c7dc4875649fed65",
+        "bytes": 539449,
+        "frame": {
+          "file_path": "images/hanyuan_026.png",
+          "transform_matrix": [
+            [
+              0.866025447845459,
+              -0.2867882549762726,
+              0.4095759689807892,
+              52.42573165893555
+            ],
+            [
+              2.568769197353049e-08,
+              0.8191519975662231,
+              0.5735765099525452,
+              79.21778106689453
+            ],
+            [
+              -0.4999999701976776,
+              -0.49673181772232056,
+              0.7094064950942993,
+              90.80403137207031
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_027.png",
+        "split": "train",
+        "azimuth": 45,
+        "elevation": 35,
+        "radius": 128,
+        "sha256": "3c08fcbfc63f73bd7628e814a1e90052d6cbf84fe04c9e7b535e42fedfebb765",
+        "bytes": 535895,
+        "frame": {
+          "file_path": "images/hanyuan_027.png",
+          "transform_matrix": [
+            [
+              0.7071067094802856,
+              -0.4055798053741455,
+              0.5792280435562134,
+              74.14118194580078
+            ],
+            [
+              1.1520868525849437e-07,
+              0.8191521167755127,
+              0.5735762715339661,
+              79.21778106689453
+            ],
+            [
+              -0.70710688829422,
+              -0.4055795669555664,
+              0.5792279839515686,
+              74.14118194580078
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_028.png",
+        "split": "train",
+        "azimuth": 60,
+        "elevation": 35,
+        "radius": 128,
+        "sha256": "a274c1ed935b8029475f171d26d1fc4dba9e9c0df79e7ea8c95f355fd72665a1",
+        "bytes": 529587,
+        "frame": {
+          "file_path": "images/hanyuan_028.png",
+          "transform_matrix": [
+            [
+              0.5000000596046448,
+              -0.49673178791999817,
+              0.7094063758850098,
+              90.80403137207031
+            ],
+            [
+              2.4233159479081223e-08,
+              0.8191519975662231,
+              0.5735765099525452,
+              79.21778106689453
+            ],
+            [
+              -0.8660253882408142,
+              -0.28678828477859497,
+              0.40957608819007874,
+              52.42573165893555
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_029.png",
+        "split": "train",
+        "azimuth": 75,
+        "elevation": 35,
+        "radius": 128,
+        "sha256": "99bfd897e73fda3892b0acafbdd14331578fb0bb4cdbb6cc9eea261523f27cb9",
+        "bytes": 548183,
+        "frame": {
+          "file_path": "images/hanyuan_029.png",
+          "transform_matrix": [
+            [
+              0.25881895422935486,
+              -0.5540322661399841,
+              0.7912401556968689,
+              101.27873229980469
+            ],
+            [
+              1.4758465738395898e-07,
+              0.8191521167755127,
+              0.5735763311386108,
+              79.21778106689453
+            ],
+            [
+              -0.9659258723258972,
+              -0.14845231175422668,
+              0.2120121717453003,
+              27.137556076049805
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_030.png",
+        "split": "train",
+        "azimuth": 90,
+        "elevation": 35,
+        "radius": 128,
+        "sha256": "558fb2ac07b190558081c51a62f6436f0fea40895255b798610e39e1328895f0",
+        "bytes": 518956,
+        "frame": {
+          "file_path": "images/hanyuan_030.png",
+          "transform_matrix": [
+            [
+              -4.371138828673793e-08,
+              -0.5735763311386108,
+              0.8191521167755127,
+              104.8514633178711
+            ],
+            [
+              7.476941732420528e-08,
+              0.8191521167755127,
+              0.5735763311386108,
+              79.21778106689453
+            ],
+            [
+              -1.0,
+              8.631934633740457e-08,
+              7.079692387890191e-09,
+              6.420300523049625e-15
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_031.png",
+        "split": "validation",
+        "azimuth": 105,
+        "elevation": 35,
+        "radius": 128,
+        "sha256": "f7c4b75b6f52d3c8d7b7a4945412893fd2480c957e886bac1fe070b7c3e14233",
+        "bytes": 550585,
+        "frame": {
+          "file_path": "images/hanyuan_031.png",
+          "transform_matrix": [
+            [
+              -0.258819043636322,
+              -0.5540321469306946,
+              0.7912402153015137,
+              101.27873229980469
+            ],
+            [
+              5.1054879435241673e-08,
+              0.8191521167755127,
+              0.5735762715339661,
+              79.21778106689453
+            ],
+            [
+              -0.9659258127212524,
+              0.1484525054693222,
+              -0.2120121419429779,
+              -27.137556076049805
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_032.png",
+        "split": "train",
+        "azimuth": 120,
+        "elevation": 35,
+        "radius": 128,
+        "sha256": "4089c56db9fa231d1c75608e0ad0b93da6756ced3fb384a5c10b86c5795d9ae3",
+        "bytes": 539509,
+        "frame": {
+          "file_path": "images/hanyuan_032.png",
+          "transform_matrix": [
+            [
+              -0.5000000596046448,
+              -0.49673160910606384,
+              0.7094065546989441,
+              90.80403137207031
+            ],
+            [
+              1.3602041804006149e-07,
+              0.8191521167755127,
+              0.5735763311386108,
+              79.21778106689453
+            ],
+            [
+              -0.8660253882408142,
+              0.28678831458091736,
+              -0.40957602858543396,
+              -52.42573165893555
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_033.png",
+        "split": "train",
+        "azimuth": 135,
+        "elevation": 35,
+        "radius": 128,
+        "sha256": "4ffe146a204eda7fa660fe0e4d08a68ea0dffaca32f95721e2fa53dd20770cfb",
+        "bytes": 541402,
+        "frame": {
+          "file_path": "images/hanyuan_033.png",
+          "transform_matrix": [
+            [
+              -0.7071067690849304,
+              -0.4055796265602112,
+              0.5792281031608582,
+              74.14118194580078
+            ],
+            [
+              5.339705566598241e-08,
+              0.8191521763801575,
+              0.5735762715339661,
+              79.21778106689453
+            ],
+            [
+              -0.7071067690849304,
+              0.40557968616485596,
+              -0.5792280435562134,
+              -74.14118194580078
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_034.png",
+        "split": "train",
+        "azimuth": 150,
+        "elevation": 35,
+        "radius": 128,
+        "sha256": "41d8c5fc8d4c439c509ddce8783cf54fa841ee25d007f30866eb14c80e63b4cb",
+        "bytes": 539022,
+        "frame": {
+          "file_path": "images/hanyuan_034.png",
+          "transform_matrix": [
+            [
+              -0.8660253882408142,
+              -0.2867881655693054,
+              0.4095761179924011,
+              52.42573165893555
+            ],
+            [
+              -4.326766500639678e-08,
+              0.8191522359848022,
+              0.5735762119293213,
+              79.21778106689453
+            ],
+            [
+              -0.5000000596046448,
+              0.4967315196990967,
+              -0.7094066143035889,
+              -90.80403137207031
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_035.png",
+        "split": "train",
+        "azimuth": 165,
+        "elevation": 35,
+        "radius": 128,
+        "sha256": "511911e121fbbbf40c6bcbcdf2545b9d4fe6b7969961f2c49bd86edc26dabf8d",
+        "bytes": 502331,
+        "frame": {
+          "file_path": "images/hanyuan_035.png",
+          "transform_matrix": [
+            [
+              -0.9659258127212524,
+              -0.1484525352716446,
+              0.21201224625110626,
+              27.137556076049805
+            ],
+            [
+              -6.45468745119615e-08,
+              0.8191522359848022,
+              0.5735761523246765,
+              79.21778106689453
+            ],
+            [
+              -0.2588191330432892,
+              0.5540319681167603,
+              -0.7912402749061584,
+              -101.27873229980469
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_036.png",
+        "split": "train",
+        "azimuth": 180,
+        "elevation": 35,
+        "radius": 128,
+        "sha256": "04c0cc3ca3174ce1383946879de519aff2a7e509b93a5a1b198865be8cd9230e",
+        "bytes": 449421,
+        "frame": {
+          "file_path": "images/hanyuan_036.png",
+          "transform_matrix": [
+            [
+              -1.0,
+              1.452691691383734e-07,
+              -8.261329043079968e-08,
+              1.284060104609925e-14
+            ],
+            [
+              7.161253989806937e-08,
+              0.8191522359848022,
+              0.5735762119293213,
+              79.21778106689453
+            ],
+            [
+              1.5099580252808664e-07,
+              0.5735762119293213,
+              -0.8191522359848022,
+              -104.8514633178711
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_037.png",
+        "split": "train",
+        "azimuth": 195,
+        "elevation": 35,
+        "radius": 128,
+        "sha256": "0a65c7df91fb3826faa26d69df0e5db6d83f263df3c74fac193dd7a1c2a1a676",
+        "bytes": 497183,
+        "frame": {
+          "file_path": "images/hanyuan_037.png",
+          "transform_matrix": [
+            [
+              -0.9659258127212524,
+              0.1484525352716446,
+              -0.21201224625110626,
+              -27.137556076049805
+            ],
+            [
+              6.45468745119615e-08,
+              0.8191522359848022,
+              0.5735761523246765,
+              79.21778106689453
+            ],
+            [
+              0.2588191330432892,
+              0.5540319681167603,
+              -0.7912402749061584,
+              -101.27873229980469
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_038.png",
+        "split": "train",
+        "azimuth": 210,
+        "elevation": 35,
+        "radius": 128,
+        "sha256": "39da606b7ec88412adfc57725de73d07c074ce8fd63702ed3645507b113c745b",
+        "bytes": 518127,
+        "frame": {
+          "file_path": "images/hanyuan_038.png",
+          "transform_matrix": [
+            [
+              -0.8660253882408142,
+              0.2867881655693054,
+              -0.4095761179924011,
+              -52.42573165893555
+            ],
+            [
+              4.326766500639678e-08,
+              0.8191522359848022,
+              0.5735762119293213,
+              79.21778106689453
+            ],
+            [
+              0.5000000596046448,
+              0.4967315196990967,
+              -0.7094066143035889,
+              -90.80403137207031
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_039.png",
+        "split": "validation",
+        "azimuth": 225,
+        "elevation": 35,
+        "radius": 128,
+        "sha256": "18a30821d50c3a4adf457eec9d0957500878c56692bcac4c03eda470d14181b7",
+        "bytes": 518191,
+        "frame": {
+          "file_path": "images/hanyuan_039.png",
+          "transform_matrix": [
+            [
+              -0.7071067690849304,
+              0.4055796265602112,
+              -0.5792281031608582,
+              -74.14118194580078
+            ],
+            [
+              -5.339705566598241e-08,
+              0.8191521763801575,
+              0.5735762715339661,
+              79.21778106689453
+            ],
+            [
+              0.7071067690849304,
+              0.40557968616485596,
+              -0.5792280435562134,
+              -74.14118194580078
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_040.png",
+        "split": "train",
+        "azimuth": 240,
+        "elevation": 35,
+        "radius": 128,
+        "sha256": "37515ca6e4ce463b7c36eb3e45a6c30f72f96a2b33b15b555464c06619867597",
+        "bytes": 516823,
+        "frame": {
+          "file_path": "images/hanyuan_040.png",
+          "transform_matrix": [
+            [
+              -0.5000000596046448,
+              0.49673160910606384,
+              -0.7094065546989441,
+              -90.80403137207031
+            ],
+            [
+              -1.3602041804006149e-07,
+              0.8191521167755127,
+              0.5735763311386108,
+              79.21778106689453
+            ],
+            [
+              0.8660253882408142,
+              0.28678831458091736,
+              -0.40957602858543396,
+              -52.42573165893555
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_041.png",
+        "split": "train",
+        "azimuth": 255,
+        "elevation": 35,
+        "radius": 128,
+        "sha256": "863f9f380c99e0f9f8409db325ee4ec4b50a572a706905f0ebf2add2e74df17f",
+        "bytes": 538030,
+        "frame": {
+          "file_path": "images/hanyuan_041.png",
+          "transform_matrix": [
+            [
+              -0.258819043636322,
+              0.5540321469306946,
+              -0.7912402153015137,
+              -101.27873229980469
+            ],
+            [
+              -5.1054879435241673e-08,
+              0.8191521167755127,
+              0.5735762715339661,
+              79.21778106689453
+            ],
+            [
+              0.9659258127212524,
+              0.1484525054693222,
+              -0.2120121419429779,
+              -27.137556076049805
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_042.png",
+        "split": "train",
+        "azimuth": 270,
+        "elevation": 35,
+        "radius": 128,
+        "sha256": "c857d35664393a98e08e24adbe49c6b8e8983a80cd3154db6371aef62395289d",
+        "bytes": 509221,
+        "frame": {
+          "file_path": "images/hanyuan_042.png",
+          "transform_matrix": [
+            [
+              -4.371138828673793e-08,
+              0.5735763311386108,
+              -0.8191521167755127,
+              -104.8514633178711
+            ],
+            [
+              -7.476941732420528e-08,
+              0.8191521167755127,
+              0.5735763311386108,
+              79.21778106689453
+            ],
+            [
+              1.0,
+              8.631934633740457e-08,
+              7.079692387890191e-09,
+              -1.9260900722115927e-14
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_043.png",
+        "split": "train",
+        "azimuth": 285,
+        "elevation": 35,
+        "radius": 128,
+        "sha256": "94518392c8b23ff56a721f06d0c5d45af110b611fbcf2fef59da1fa25a173797",
+        "bytes": 543268,
+        "frame": {
+          "file_path": "images/hanyuan_043.png",
+          "transform_matrix": [
+            [
+              0.25881895422935486,
+              0.5540322661399841,
+              -0.7912401556968689,
+              -101.27873229980469
+            ],
+            [
+              -1.4758465738395898e-07,
+              0.8191521167755127,
+              0.5735763311386108,
+              79.21778106689453
+            ],
+            [
+              0.9659258723258972,
+              -0.14845231175422668,
+              0.2120121717453003,
+              27.137556076049805
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_044.png",
+        "split": "train",
+        "azimuth": 300,
+        "elevation": 35,
+        "radius": 128,
+        "sha256": "03423f7a70d88c167ed3e282bf6d5560ccf5765a1fd089afdd2cfc4fafaed3b0",
+        "bytes": 536217,
+        "frame": {
+          "file_path": "images/hanyuan_044.png",
+          "transform_matrix": [
+            [
+              0.5000000596046448,
+              0.49673178791999817,
+              -0.7094063758850098,
+              -90.80403137207031
+            ],
+            [
+              -2.4233159479081223e-08,
+              0.8191519975662231,
+              0.5735765099525452,
+              79.21778106689453
+            ],
+            [
+              0.8660253882408142,
+              -0.28678828477859497,
+              0.40957608819007874,
+              52.42573165893555
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_045.png",
+        "split": "train",
+        "azimuth": 315,
+        "elevation": 35,
+        "radius": 128,
+        "sha256": "69cd18ab082ee5aa134878e7f85f31ab6d535ec0e68b523bc675b30f5968ce40",
+        "bytes": 543307,
+        "frame": {
+          "file_path": "images/hanyuan_045.png",
+          "transform_matrix": [
+            [
+              0.7071067094802856,
+              0.4055798053741455,
+              -0.5792280435562134,
+              -74.14118194580078
+            ],
+            [
+              -1.1520868525849437e-07,
+              0.8191521167755127,
+              0.5735762715339661,
+              79.21778106689453
+            ],
+            [
+              0.70710688829422,
+              -0.4055795669555664,
+              0.5792279839515686,
+              74.14118194580078
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_046.png",
+        "split": "train",
+        "azimuth": 330,
+        "elevation": 35,
+        "radius": 128,
+        "sha256": "889f937925fbc0fca7f66f46aea1da0e790541ee6e233ce5a632993448dd5ef6",
+        "bytes": 548802,
+        "frame": {
+          "file_path": "images/hanyuan_046.png",
+          "transform_matrix": [
+            [
+              0.866025447845459,
+              0.2867882549762726,
+              -0.4095759689807892,
+              -52.42573165893555
+            ],
+            [
+              -2.568769197353049e-08,
+              0.8191519975662231,
+              0.5735765099525452,
+              79.21778106689453
+            ],
+            [
+              0.4999999701976776,
+              -0.49673181772232056,
+              0.7094064950942993,
+              90.80403137207031
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_047.png",
+        "split": "validation",
+        "azimuth": 345,
+        "elevation": 35,
+        "radius": 128,
+        "sha256": "147780b36b22fce5e1932acb843d6721dd2362d9bbbe786a45c8722e7a8e7906",
+        "bytes": 512202,
+        "frame": {
+          "file_path": "images/hanyuan_047.png",
+          "transform_matrix": [
+            [
+              0.9659258127212524,
+              0.1484525501728058,
+              -0.21201220154762268,
+              -27.137556076049805
+            ],
+            [
+              -4.205430315096237e-08,
+              0.8191521167755127,
+              0.5735763311386108,
+              79.21778106689453
+            ],
+            [
+              0.2588191032409668,
+              -0.5540322065353394,
+              0.7912401556968689,
+              101.27873229980469
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_048.png",
+        "split": "train",
+        "azimuth": 0,
+        "elevation": 55,
+        "radius": 128,
+        "sha256": "3e52b40557c2bc492d0376821ec12f2ad33c71eb548dd8d0612ccbb5f08a89e3",
+        "bytes": 515388,
+        "frame": {
+          "file_path": "images/hanyuan_048.png",
+          "transform_matrix": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.5735765099525452,
+              0.8191519975662231,
+              110.65145874023438
+            ],
+            [
+              0.0,
+              -0.8191519975662231,
+              0.5735765099525452,
+              73.41778564453125
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_049.png",
+        "split": "train",
+        "azimuth": 15,
+        "elevation": 55,
+        "radius": 128,
+        "sha256": "ddb5aa2425b3048765dc347aef2618efc14594ea08da120b0f7913fbc6408c16",
+        "bytes": 597997,
+        "frame": {
+          "file_path": "images/hanyuan_049.png",
+          "transform_matrix": [
+            [
+              0.9659258127212524,
+              -0.2120121717453003,
+              0.14845247566699982,
+              19.001920700073242
+            ],
+            [
+              2.1786672022017228e-08,
+              0.5735763907432556,
+              0.8191520571708679,
+              110.65145874023438
+            ],
+            [
+              -0.258819043636322,
+              -0.7912401556968689,
+              0.5540322661399841,
+              70.91613006591797
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_050.png",
+        "split": "train",
+        "azimuth": 30,
+        "elevation": 55,
+        "radius": 128,
+        "sha256": "8a16e53c0dec0dc6f538382acf2d676d85069e2efda18bd1b305e4842ed96743",
+        "bytes": 601590,
+        "frame": {
+          "file_path": "images/hanyuan_050.png",
+          "transform_matrix": [
+            [
+              0.8660253882408142,
+              -0.40957608819007874,
+              0.2867881655693054,
+              36.708892822265625
+            ],
+            [
+              4.609707815461661e-08,
+              0.5735763907432556,
+              0.8191520571708679,
+              110.65145874023438
+            ],
+            [
+              -0.5,
+              -0.7094064950942993,
+              0.4967317283153534,
+              63.5816650390625
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_051.png",
+        "split": "train",
+        "azimuth": 45,
+        "elevation": 55,
+        "radius": 128,
+        "sha256": "354f00f323c0df1b678f0939e097b5c7b15df361005dda287fe0ed275293e813",
+        "bytes": 601498,
+        "frame": {
+          "file_path": "images/hanyuan_051.png",
+          "transform_matrix": [
+            [
+              0.7071067094802856,
+              -0.5792280435562134,
+              0.4055798053741455,
+              51.91421127319336
+            ],
+            [
+              4.194027880544127e-08,
+              0.5735764503479004,
+              0.8191520571708679,
+              110.65145874023438
+            ],
+            [
+              -0.70710688829422,
+              -0.579227864742279,
+              0.40557974576950073,
+              51.91421127319336
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_052.png",
+        "split": "train",
+        "azimuth": 60,
+        "elevation": 55,
+        "radius": 128,
+        "sha256": "63f4ac513cc7e7803566ba14b3b76d7b3379f0ea6cf764028e26b4d7169490cb",
+        "bytes": 600605,
+        "frame": {
+          "file_path": "images/hanyuan_052.png",
+          "transform_matrix": [
+            [
+              0.4999997615814209,
+              -0.7094065546989441,
+              0.49673187732696533,
+              63.5816650390625
+            ],
+            [
+              1.3683948907328158e-07,
+              0.5735765099525452,
+              0.8191519975662231,
+              110.65145874023438
+            ],
+            [
+              -0.8660255670547485,
+              -0.4095757305622101,
+              0.2867882251739502,
+              36.708892822265625
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_053.png",
+        "split": "train",
+        "azimuth": 75,
+        "elevation": 55,
+        "radius": 128,
+        "sha256": "c73b508766f4ccecfc477eb7a87e736b2529e6abe0f28454fb47774e955ed3e0",
+        "bytes": 625864,
+        "frame": {
+          "file_path": "images/hanyuan_053.png",
+          "transform_matrix": [
+            [
+              0.25881895422935486,
+              -0.7912400960922241,
+              0.5540323853492737,
+              70.91613006591797
+            ],
+            [
+              1.256999553334026e-07,
+              0.5735765099525452,
+              0.8191519975662231,
+              110.65145874023438
+            ],
+            [
+              -0.9659258723258972,
+              -0.21201199293136597,
+              0.14845257997512817,
+              19.001920700073242
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_054.png",
+        "split": "train",
+        "azimuth": 90,
+        "elevation": 55,
+        "radius": 128,
+        "sha256": "ab1218743849e9b19a4b7dd59d7c3041a936ea9937bd27f1516e3b39bf23e210",
+        "bytes": 577445,
+        "frame": {
+          "file_path": "images/hanyuan_054.png",
+          "transform_matrix": [
+            [
+              7.549790126404332e-08,
+              -0.8191519975662231,
+              0.5735765099525452,
+              73.41778564453125
+            ],
+            [
+              0.0,
+              0.5735765099525452,
+              0.8191519975662231,
+              110.65145874023438
+            ],
+            [
+              -1.0,
+              -6.184425416222439e-08,
+              4.3303820973505935e-08,
+              4.495542664257474e-15
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_055.png",
+        "split": "validation",
+        "azimuth": 105,
+        "elevation": 55,
+        "radius": 128,
+        "sha256": "17b90fb813976e6751438800b063329a17735abaf8ae6a836fc525a3d4e149cd",
+        "bytes": 625101,
+        "frame": {
+          "file_path": "images/hanyuan_055.png",
+          "transform_matrix": [
+            [
+              -0.2588191628456116,
+              -0.7912400364875793,
+              0.5540323853492737,
+              70.91613006591797
+            ],
+            [
+              1.640634827992926e-08,
+              0.5735765099525452,
+              0.8191519975662231,
+              110.65145874023438
+            ],
+            [
+              -0.9659258127212524,
+              0.21201223134994507,
+              -0.14845257997512817,
+              -19.001920700073242
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_056.png",
+        "split": "train",
+        "azimuth": 120,
+        "elevation": 55,
+        "radius": 128,
+        "sha256": "2f04ca9995dd1b34984fe68c40f89b32105f3df2902c6010fc8c9ba941488c4a",
+        "bytes": 622327,
+        "frame": {
+          "file_path": "images/hanyuan_056.png",
+          "transform_matrix": [
+            [
+              -0.5000000596046448,
+              -0.7094063758850098,
+              0.49673187732696533,
+              63.5816650390625
+            ],
+            [
+              1.1186183712652564e-07,
+              0.5735765099525452,
+              0.8191519975662231,
+              110.65145874023438
+            ],
+            [
+              -0.8660253882408142,
+              0.40957608819007874,
+              -0.2867882251739502,
+              -36.708892822265625
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_057.png",
+        "split": "train",
+        "azimuth": 135,
+        "elevation": 55,
+        "radius": 128,
+        "sha256": "9840b3727b50929dec37f89a0b0c1e8becee57620b1a7b8abcc3ff1081c25f8c",
+        "bytes": 603762,
+        "frame": {
+          "file_path": "images/hanyuan_057.png",
+          "transform_matrix": [
+            [
+              -0.7071067690849304,
+              -0.5792279243469238,
+              0.40557989478111267,
+              51.91421127319336
+            ],
+            [
+              4.868984149197786e-08,
+              0.5735765099525452,
+              0.8191519975662231,
+              110.65145874023438
+            ],
+            [
+              -0.7071067690849304,
+              0.5792279243469238,
+              -0.4055798351764679,
+              -51.91421127319336
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_058.png",
+        "split": "train",
+        "azimuth": 150,
+        "elevation": 55,
+        "radius": 128,
+        "sha256": "4065a87801f6fe8a097b76f49de7b02166d1d243db20fab9ac49d17bbeabfa7a",
+        "bytes": 620517,
+        "frame": {
+          "file_path": "images/hanyuan_058.png",
+          "transform_matrix": [
+            [
+              -0.8660253882408142,
+              -0.4095759987831116,
+              0.28678831458091736,
+              36.708892822265625
+            ],
+            [
+              -3.8290533410645367e-08,
+              0.5735766291618347,
+              0.8191519379615784,
+              110.65145874023438
+            ],
+            [
+              -0.5000000596046448,
+              0.709406316280365,
+              -0.4967319369316101,
+              -63.5816650390625
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_059.png",
+        "split": "train",
+        "azimuth": 165,
+        "elevation": 55,
+        "radius": 128,
+        "sha256": "e52174f4928678a5b38c0a2f431902144f43ddbb44bf3fff90372a46560c7d57",
+        "bytes": 595935,
+        "frame": {
+          "file_path": "images/hanyuan_059.png",
+          "transform_matrix": [
+            [
+              -0.9659258127212524,
+              -0.21201220154762268,
+              0.14845259487628937,
+              19.001920700073242
+            ],
+            [
+              -1.6707875971633257e-08,
+              0.5735766291618347,
+              0.8191519379615784,
+              110.65145874023438
+            ],
+            [
+              -0.2588191330432892,
+              0.7912399768829346,
+              -0.5540324449539185,
+              -70.91613006591797
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_060.png",
+        "split": "train",
+        "azimuth": 180,
+        "elevation": 55,
+        "radius": 128,
+        "sha256": "32473a6371553396b3f16067acedb1195905d3f7aefeabb1f6be580a2cda2597",
+        "bytes": 511443,
+        "frame": {
+          "file_path": "images/hanyuan_060.png",
+          "transform_matrix": [
+            [
+              -1.0,
+              1.5244972928485367e-07,
+              -4.55323529990892e-08,
+              8.991085328514947e-15
+            ],
+            [
+              5.014364745647981e-08,
+              0.5735763907432556,
+              0.8191520571708679,
+              110.65145874023438
+            ],
+            [
+              1.5099580252808664e-07,
+              0.8191520571708679,
+              -0.5735763907432556,
+              -73.41778564453125
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_061.png",
+        "split": "train",
+        "azimuth": 195,
+        "elevation": 55,
+        "radius": 128,
+        "sha256": "8fe4531db71f36f31337f44c5eda2401e0c3d9180516569012248c8d0b353b79",
+        "bytes": 582955,
+        "frame": {
+          "file_path": "images/hanyuan_061.png",
+          "transform_matrix": [
+            [
+              -0.9659258127212524,
+              0.21201220154762268,
+              -0.14845259487628937,
+              -19.001920700073242
+            ],
+            [
+              1.6707875971633257e-08,
+              0.5735766291618347,
+              0.8191519379615784,
+              110.65145874023438
+            ],
+            [
+              0.2588191330432892,
+              0.7912399768829346,
+              -0.5540324449539185,
+              -70.91613006591797
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_062.png",
+        "split": "train",
+        "azimuth": 210,
+        "elevation": 55,
+        "radius": 128,
+        "sha256": "c2fbe433c595caf8f6ae933dfc301da256e2f689a6016a4088f25b81b63c1442",
+        "bytes": 589124,
+        "frame": {
+          "file_path": "images/hanyuan_062.png",
+          "transform_matrix": [
+            [
+              -0.8660253882408142,
+              0.4095759987831116,
+              -0.28678831458091736,
+              -36.708892822265625
+            ],
+            [
+              3.8290533410645367e-08,
+              0.5735766291618347,
+              0.8191519379615784,
+              110.65145874023438
+            ],
+            [
+              0.5000000596046448,
+              0.709406316280365,
+              -0.4967319369316101,
+              -63.5816650390625
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_063.png",
+        "split": "validation",
+        "azimuth": 225,
+        "elevation": 55,
+        "radius": 128,
+        "sha256": "836aadf69674570172d97466b0bec338aec9e437c475bb2e7c6096b6db77c427",
+        "bytes": 589846,
+        "frame": {
+          "file_path": "images/hanyuan_063.png",
+          "transform_matrix": [
+            [
+              -0.7071067690849304,
+              0.5792279243469238,
+              -0.40557989478111267,
+              -51.91421127319336
+            ],
+            [
+              -4.868984149197786e-08,
+              0.5735765099525452,
+              0.8191519975662231,
+              110.65145874023438
+            ],
+            [
+              0.7071067690849304,
+              0.5792279243469238,
+              -0.4055798351764679,
+              -51.91421127319336
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_064.png",
+        "split": "train",
+        "azimuth": 240,
+        "elevation": 55,
+        "radius": 128,
+        "sha256": "8d68e196b7299a84fcfc3cefe38258255d8cee330d424a75bc6859ca07b0f424",
+        "bytes": 590605,
+        "frame": {
+          "file_path": "images/hanyuan_064.png",
+          "transform_matrix": [
+            [
+              -0.5000000596046448,
+              0.7094063758850098,
+              -0.49673187732696533,
+              -63.5816650390625
+            ],
+            [
+              -1.1186183712652564e-07,
+              0.5735765099525452,
+              0.8191519975662231,
+              110.65145874023438
+            ],
+            [
+              0.8660253882408142,
+              0.40957608819007874,
+              -0.2867882251739502,
+              -36.708892822265625
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_065.png",
+        "split": "train",
+        "azimuth": 255,
+        "elevation": 55,
+        "radius": 128,
+        "sha256": "f30dac7567a9df44435f5771129ec8b0dbdbfe138fc26527184ea02dbe117da6",
+        "bytes": 620886,
+        "frame": {
+          "file_path": "images/hanyuan_065.png",
+          "transform_matrix": [
+            [
+              -0.2588191628456116,
+              0.7912400364875793,
+              -0.5540323853492737,
+              -70.91613006591797
+            ],
+            [
+              -1.640634827992926e-08,
+              0.5735765099525452,
+              0.8191519975662231,
+              110.65145874023438
+            ],
+            [
+              0.9659258127212524,
+              0.21201223134994507,
+              -0.14845257997512817,
+              -19.001920700073242
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_066.png",
+        "split": "train",
+        "azimuth": 270,
+        "elevation": 55,
+        "radius": 128,
+        "sha256": "6c88e1dada9036a5c132a860609bd7fdbb006d78072421414c707217fcb8ef16",
+        "bytes": 566223,
+        "frame": {
+          "file_path": "images/hanyuan_066.png",
+          "transform_matrix": [
+            [
+              7.549790126404332e-08,
+              0.8191519975662231,
+              -0.5735765099525452,
+              -73.41778564453125
+            ],
+            [
+              0.0,
+              0.5735765099525452,
+              0.8191519975662231,
+              110.65145874023438
+            ],
+            [
+              1.0,
+              -6.184425416222439e-08,
+              4.3303820973505935e-08,
+              -1.3486627992772421e-14
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_067.png",
+        "split": "train",
+        "azimuth": 285,
+        "elevation": 55,
+        "radius": 128,
+        "sha256": "48bc27b64cf571f756b8870ecdc64e3ce37305afb54f51189adbbacb288f9d94",
+        "bytes": 610797,
+        "frame": {
+          "file_path": "images/hanyuan_067.png",
+          "transform_matrix": [
+            [
+              0.25881895422935486,
+              0.7912400960922241,
+              -0.5540323853492737,
+              -70.91613006591797
+            ],
+            [
+              -1.256999553334026e-07,
+              0.5735765099525452,
+              0.8191519975662231,
+              110.65145874023438
+            ],
+            [
+              0.9659258723258972,
+              -0.21201199293136597,
+              0.14845257997512817,
+              19.001920700073242
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_068.png",
+        "split": "train",
+        "azimuth": 300,
+        "elevation": 55,
+        "radius": 128,
+        "sha256": "6c1581ab43f6b38490853ecdcd379e659d5a8434c3fdc7e70869086b07467063",
+        "bytes": 610190,
+        "frame": {
+          "file_path": "images/hanyuan_068.png",
+          "transform_matrix": [
+            [
+              0.4999997615814209,
+              0.7094065546989441,
+              -0.49673187732696533,
+              -63.5816650390625
+            ],
+            [
+              -1.3683948907328158e-07,
+              0.5735765099525452,
+              0.8191519975662231,
+              110.65145874023438
+            ],
+            [
+              0.8660255670547485,
+              -0.4095757305622101,
+              0.2867882251739502,
+              36.708892822265625
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_069.png",
+        "split": "train",
+        "azimuth": 315,
+        "elevation": 55,
+        "radius": 128,
+        "sha256": "7133d31285c1a640ff7cfdf0ec835051e0b91ae08d24e96250aab0f2c22c28eb",
+        "bytes": 598841,
+        "frame": {
+          "file_path": "images/hanyuan_069.png",
+          "transform_matrix": [
+            [
+              0.7071067094802856,
+              0.5792280435562134,
+              -0.4055798053741455,
+              -51.91421127319336
+            ],
+            [
+              -4.194027880544127e-08,
+              0.5735764503479004,
+              0.8191520571708679,
+              110.65145874023438
+            ],
+            [
+              0.70710688829422,
+              -0.579227864742279,
+              0.40557974576950073,
+              51.91421127319336
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_070.png",
+        "split": "train",
+        "azimuth": 330,
+        "elevation": 55,
+        "radius": 128,
+        "sha256": "6d4b5f0a3a674742a62acef18d580d6986b464c1d7e7fd79a34ed02846232720",
+        "bytes": 621220,
+        "frame": {
+          "file_path": "images/hanyuan_070.png",
+          "transform_matrix": [
+            [
+              0.8660253882408142,
+              0.40957608819007874,
+              -0.2867881655693054,
+              -36.708892822265625
+            ],
+            [
+              -4.609707815461661e-08,
+              0.5735763907432556,
+              0.8191520571708679,
+              110.65145874023438
+            ],
+            [
+              0.5,
+              -0.7094064950942993,
+              0.4967317283153534,
+              63.5816650390625
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_071.png",
+        "split": "validation",
+        "azimuth": 345,
+        "elevation": 55,
+        "radius": 128,
+        "sha256": "35d32069e9374e73d04bea35cbd4603b8ae822f9dd418afc68e2036725bf4214",
+        "bytes": 594970,
+        "frame": {
+          "file_path": "images/hanyuan_071.png",
+          "transform_matrix": [
+            [
+              0.9659258127212524,
+              0.2120121717453003,
+              -0.14845247566699982,
+              -19.001920700073242
+            ],
+            [
+              -2.1786672022017228e-08,
+              0.5735763907432556,
+              0.8191520571708679,
+              110.65145874023438
+            ],
+            [
+              0.258819043636322,
+              -0.7912401556968689,
+              0.5540322661399841,
+              70.91613006591797
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_072.png",
+        "split": "train",
+        "azimuth": 0,
+        "elevation": 76,
+        "radius": 128,
+        "sha256": "29197d8be2dc81f1aa6dd9528d991ddd76fe91bcdfc53b87e6d0b1b659a61891",
+        "bytes": 554886,
+        "frame": {
+          "file_path": "images/hanyuan_072.png",
+          "transform_matrix": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.24192190170288086,
+              0.9702957272529602,
+              129.9978485107422
+            ],
+            [
+              0.0,
+              -0.9702957272529602,
+              0.24192190170288086,
+              30.96600341796875
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_073.png",
+        "split": "train",
+        "azimuth": 45,
+        "elevation": 76,
+        "radius": 128,
+        "sha256": "051fb2771796116a23e6b2b9f85a929b5338ce728abad4271bfac30b6658b409",
+        "bytes": 659278,
+        "frame": {
+          "file_path": "images/hanyuan_073.png",
+          "transform_matrix": [
+            [
+              0.7071065306663513,
+              -0.6861029267311096,
+              0.17106468975543976,
+              21.896270751953125
+            ],
+            [
+              4.127996788838573e-08,
+              0.24192197620868683,
+              0.9702957272529602,
+              129.9978485107422
+            ],
+            [
+              -0.7071070075035095,
+              -0.6861024498939514,
+              0.17106464505195618,
+              21.896270751953125
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_074.png",
+        "split": "train",
+        "azimuth": 90,
+        "elevation": 76,
+        "radius": 128,
+        "sha256": "9abd02138397dd453e10a193ff6e665f123d863065bd8db8bbcc473b9a81c255",
+        "bytes": 625049,
+        "frame": {
+          "file_path": "images/hanyuan_074.png",
+          "transform_matrix": [
+            [
+              -4.371138828673793e-08,
+              -0.9702957272529602,
+              0.24192191660404205,
+              30.96600341796875
+            ],
+            [
+              1.0458172994276538e-08,
+              0.24192191660404205,
+              0.9702957272529602,
+              129.9978485107422
+            ],
+            [
+              -1.0,
+              4.494303595947713e-08,
+              -4.2722250737092793e-10,
+              1.8961207336366673e-15
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_075.png",
+        "split": "train",
+        "azimuth": 135,
+        "elevation": 76,
+        "radius": 128,
+        "sha256": "01daf03eeb400ec6ec111e8245cf4da797da7424cf95108514db778e544f49ff",
+        "bytes": 659579,
+        "frame": {
+          "file_path": "images/hanyuan_075.png",
+          "transform_matrix": [
+            [
+              -0.7071067690849304,
+              -0.6861026883125305,
+              0.17106464505195618,
+              21.896270751953125
+            ],
+            [
+              -1.5365824168611653e-08,
+              0.24192196130752563,
+              0.9702957272529602,
+              129.9978485107422
+            ],
+            [
+              -0.7071067690849304,
+              0.6861026883125305,
+              -0.17106465995311737,
+              -21.896270751953125
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_076.png",
+        "split": "train",
+        "azimuth": 180,
+        "elevation": 76,
+        "radius": 128,
+        "sha256": "638faff1a251915b545985a3e2ab14b95238a6da7416d04cad013c1042887f6a",
+        "bytes": 554730,
+        "frame": {
+          "file_path": "images/hanyuan_076.png",
+          "transform_matrix": [
+            [
+              -1.0,
+              1.5162710553795478e-07,
+              -1.6007946967988573e-08,
+              3.792241467273335e-15
+            ],
+            [
+              2.1149482165583322e-08,
+              0.24192196130752563,
+              0.9702957272529602,
+              129.9978485107422
+            ],
+            [
+              1.5099580252808664e-07,
+              0.9702957272529602,
+              -0.24192196130752563,
+              -30.96600341796875
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_077.png",
+        "split": "train",
+        "azimuth": 225,
+        "elevation": 76,
+        "radius": 128,
+        "sha256": "c4c535beff7d008f5dc02ecccc48471ffdf9e435592b4dbc98aa7f01018188b4",
+        "bytes": 652387,
+        "frame": {
+          "file_path": "images/hanyuan_077.png",
+          "transform_matrix": [
+            [
+              -0.7071067690849304,
+              0.6861026883125305,
+              -0.17106464505195618,
+              -21.896270751953125
+            ],
+            [
+              1.5365824168611653e-08,
+              0.24192196130752563,
+              0.9702957272529602,
+              129.9978485107422
+            ],
+            [
+              0.7071067690849304,
+              0.6861026883125305,
+              -0.17106465995311737,
+              -21.896270751953125
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_078.png",
+        "split": "train",
+        "azimuth": 270,
+        "elevation": 76,
+        "radius": 128,
+        "sha256": "38429a668d80014f963fc0c77dffbbecb160704c464dab4b50da298b2b206bbd",
+        "bytes": 616445,
+        "frame": {
+          "file_path": "images/hanyuan_078.png",
+          "transform_matrix": [
+            [
+              -4.371138828673793e-08,
+              0.9702957272529602,
+              -0.24192191660404205,
+              -30.96600341796875
+            ],
+            [
+              -1.0458172994276538e-08,
+              0.24192191660404205,
+              0.9702957272529602,
+              129.9978485107422
+            ],
+            [
+              1.0,
+              4.494303595947713e-08,
+              -4.2722250737092793e-10,
+              -5.688362412668239e-15
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_079.png",
+        "split": "validation",
+        "azimuth": 315,
+        "elevation": 76,
+        "radius": 128,
+        "sha256": "6de29a2f47eae631e84afc9c3305c57d5c73b7a6fb3cfde9f72b34b78b628631",
+        "bytes": 651792,
+        "frame": {
+          "file_path": "images/hanyuan_079.png",
+          "transform_matrix": [
+            [
+              0.7071065306663513,
+              0.6861029267311096,
+              -0.17106468975543976,
+              -21.896270751953125
+            ],
+            [
+              -4.127996788838573e-08,
+              0.24192197620868683,
+              0.9702957272529602,
+              129.9978485107422
+            ],
+            [
+              0.7071070075035095,
+              -0.6861024498939514,
+              0.17106464505195618,
+              21.896270751953125
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_080.png",
+        "split": "train",
+        "azimuth": 0,
+        "elevation": -12,
+        "radius": 128,
+        "sha256": "dcf2c624d50ff2c5c1ee40a936af608e9db325607dda64ce19ba7865e3260ca0",
+        "bytes": 305564,
+        "frame": {
+          "file_path": "images/hanyuan_080.png",
+          "transform_matrix": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.978147566318512,
+              -0.20791184902191162,
+              -20.81269645690918
+            ],
+            [
+              0.0,
+              0.20791184902191162,
+              0.978147566318512,
+              125.20289611816406
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_081.png",
+        "split": "train",
+        "azimuth": 45,
+        "elevation": -12,
+        "radius": 128,
+        "sha256": "540e52b30971b25139c7e1f5be0a7bae584b1d43ce655a72c35b7cfe74d537ab",
+        "bytes": 312806,
+        "frame": {
+          "file_path": "images/hanyuan_081.png",
+          "transform_matrix": [
+            [
+              0.7071067690849304,
+              0.1470157653093338,
+              0.6916548013687134,
+              88.53181457519531
+            ],
+            [
+              5.679112646816975e-08,
+              0.978147566318512,
+              -0.20791174471378326,
+              -20.81269645690918
+            ],
+            [
+              -0.7071067690849304,
+              0.14701583981513977,
+              0.6916547417640686,
+              88.53181457519531
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_082.png",
+        "split": "train",
+        "azimuth": 90,
+        "elevation": -12,
+        "radius": 128,
+        "sha256": "9e32d1c2e684a0ba7331921dcea91e4857150077773e0322b02fa8111edc2c1d",
+        "bytes": 274656,
+        "frame": {
+          "file_path": "images/hanyuan_082.png",
+          "transform_matrix": [
+            [
+              -4.371138828673793e-08,
+              0.20791174471378326,
+              0.978147566318512,
+              125.20289611816406
+            ],
+            [
+              -3.2754250867128576e-08,
+              0.978147566318512,
+              -0.20791174471378326,
+              -20.81269645690918
+            ],
+            [
+              -1.0,
+              -4.112660434429927e-08,
+              -3.594619712998792e-08,
+              7.666466406478466e-15
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_083.png",
+        "split": "train",
+        "azimuth": 135,
+        "elevation": -12,
+        "radius": 128,
+        "sha256": "404f958d2eda425cdb5fc076590582b52f51719f055fbeec8064b3ef38110ee4",
+        "bytes": 318621,
+        "frame": {
+          "file_path": "images/hanyuan_083.png",
+          "transform_matrix": [
+            [
+              -0.7071069478988647,
+              0.14701583981513977,
+              0.691654622554779,
+              88.53181457519531
+            ],
+            [
+              -7.251911071648465e-09,
+              0.978147566318512,
+              -0.20791184902191162,
+              -20.81269645690918
+            ],
+            [
+              -0.7071065902709961,
+              -0.14701592922210693,
+              -0.6916549205780029,
+              -88.53181457519531
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_084.png",
+        "split": "train",
+        "azimuth": 180,
+        "elevation": -12,
+        "radius": 128,
+        "sha256": "5f487b2fd30afc5d526424958c678fba687defc5e0a997fae0f0158e130570c7",
+        "bytes": 302780,
+        "frame": {
+          "file_path": "images/hanyuan_084.png",
+          "transform_matrix": [
+            [
+              -1.0,
+              1.514752199227587e-07,
+              -1.3614780414172856e-08,
+              1.533293281295693e-14
+            ],
+            [
+              1.5099580252808664e-07,
+              0.978147566318512,
+              -0.20791177451610565,
+              -20.81269645690918
+            ],
+            [
+              -1.8176217864152022e-08,
+              -0.20791177451610565,
+              -0.978147566318512,
+              -125.20289611816406
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_085.png",
+        "split": "train",
+        "azimuth": 225,
+        "elevation": -12,
+        "radius": 128,
+        "sha256": "f186c801319525c6c2c5c924a9a8464687001a52a030974be616883002c98f9e",
+        "bytes": 319782,
+        "frame": {
+          "file_path": "images/hanyuan_085.png",
+          "transform_matrix": [
+            [
+              -0.7071069478988647,
+              -0.14701583981513977,
+              -0.691654622554779,
+              -88.53181457519531
+            ],
+            [
+              7.251911071648465e-09,
+              0.978147566318512,
+              -0.20791184902191162,
+              -20.81269645690918
+            ],
+            [
+              0.7071065902709961,
+              -0.14701592922210693,
+              -0.6916549205780029,
+              -88.53181457519531
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_086.png",
+        "split": "train",
+        "azimuth": 270,
+        "elevation": -12,
+        "radius": 128,
+        "sha256": "abba0849ed6bef06b0952343ee0672c73a036e9f3c839df73eb68373dd6ecfbd",
+        "bytes": 274511,
+        "frame": {
+          "file_path": "images/hanyuan_086.png",
+          "transform_matrix": [
+            [
+              -4.371138828673793e-08,
+              -0.20791174471378326,
+              -0.978147566318512,
+              -125.20289611816406
+            ],
+            [
+              3.2754250867128576e-08,
+              0.978147566318512,
+              -0.20791174471378326,
+              -20.81269645690918
+            ],
+            [
+              1.0,
+              -4.112660434429927e-08,
+              -3.594619712998792e-08,
+              -2.2999397525369503e-14
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_087.png",
+        "split": "validation",
+        "azimuth": 315,
+        "elevation": -12,
+        "radius": 128,
+        "sha256": "08175d445ab58428f56bbce2d4f83d0fdf46346e071a1b6063b3ced5371dc946",
+        "bytes": 314783,
+        "frame": {
+          "file_path": "images/hanyuan_087.png",
+          "transform_matrix": [
+            [
+              0.7071067690849304,
+              -0.1470157653093338,
+              -0.6916548013687134,
+              -88.53181457519531
+            ],
+            [
+              -5.679112646816975e-08,
+              0.978147566318512,
+              -0.20791174471378326,
+              -20.81269645690918
+            ],
+            [
+              0.7071067690849304,
+              0.14701583981513977,
+              0.6916547417640686,
+              88.53181457519531
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_088.png",
+        "split": "train",
+        "azimuth": 0.0,
+        "elevation": 25,
+        "radius": 85,
+        "sha256": "5306b902a59cae104b35f67482408987141f43cffe196036e041d17b9ebbe55c",
+        "bytes": 638048,
+        "frame": {
+          "file_path": "images/hanyuan_088.png",
+          "transform_matrix": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.9063078165054321,
+              0.42261824011802673,
+              41.72255325317383
+            ],
+            [
+              0.0,
+              -0.42261824011802673,
+              0.9063078165054321,
+              77.03616333007812
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_089.png",
+        "split": "train",
+        "azimuth": 22.5,
+        "elevation": 25,
+        "radius": 85,
+        "sha256": "650d853dfba4e420b884c91d8e32cff349aed5af334401e00df657a9243ed812",
+        "bytes": 742858,
+        "frame": {
+          "file_path": "images/hanyuan_089.png",
+          "transform_matrix": [
+            [
+              0.9238795042037964,
+              -0.16172896325588226,
+              0.3468290865421295,
+              29.4804630279541
+            ],
+            [
+              -4.3047947428931366e-09,
+              0.9063078761100769,
+              0.42261803150177,
+              41.72255325317383
+            ],
+            [
+              -0.38268351554870605,
+              -0.39044812321662903,
+              0.8373192548751831,
+              71.17213439941406
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_090.png",
+        "split": "train",
+        "azimuth": 45.0,
+        "elevation": 25,
+        "radius": 85,
+        "sha256": "8e4eaeff367348420b25929c54659a6801fbf87713040a60d1523ac1d1c6f7a8",
+        "bytes": 784322,
+        "frame": {
+          "file_path": "images/hanyuan_090.png",
+          "transform_matrix": [
+            [
+              0.7071067094802856,
+              -0.2988361418247223,
+              0.6408565640449524,
+              54.47279357910156
+            ],
+            [
+              1.5245952056375245e-08,
+              0.9063078761100769,
+              0.42261803150177,
+              41.72255325317383
+            ],
+            [
+              -0.70710688829422,
+              -0.29883602261543274,
+              0.6408563852310181,
+              54.47279357910156
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_091.png",
+        "split": "train",
+        "azimuth": 67.5,
+        "elevation": 25,
+        "radius": 85,
+        "sha256": "e90f2a2d8673c30838e25ddf50ba7263966ad86e41d5edba95ddaef73a1ce554",
+        "bytes": 741587,
+        "frame": {
+          "file_path": "images/hanyuan_091.png",
+          "transform_matrix": [
+            [
+              0.38268330693244934,
+              -0.3904483914375305,
+              0.8373192548751831,
+              71.17213439941406
+            ],
+            [
+              3.129046532990287e-08,
+              0.9063078165054321,
+              0.42261824011802673,
+              41.72255325317383
+            ],
+            [
+              -0.9238795638084412,
+              -0.16172893345355988,
+              0.3468288779258728,
+              29.4804630279541
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_092.png",
+        "split": "train",
+        "azimuth": 90.0,
+        "elevation": 25,
+        "radius": 85,
+        "sha256": "008a93b6ec126cf4891545fea5d7956b73fefa63967b65b2ba53fc3fb0d53333",
+        "bytes": 688462,
+        "frame": {
+          "file_path": "images/hanyuan_092.png",
+          "transform_matrix": [
+            [
+              -4.371138828673793e-08,
+              -0.42261824011802673,
+              0.9063078165054321,
+              77.03616333007812
+            ],
+            [
+              9.744677953449354e-09,
+              0.9063078165054321,
+              0.42261824011802673,
+              41.72255325317383
+            ],
+            [
+              -1.0,
+              2.7304908556402552e-08,
+              -3.549769544974879e-08,
+              4.71710446040257e-15
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_093.png",
+        "split": "train",
+        "azimuth": 112.5,
+        "elevation": 25,
+        "radius": 85,
+        "sha256": "15b7b3f249e86914d0d149d2f73bd5910b5fb47974d140f2202bc2808bf165b3",
+        "bytes": 746918,
+        "frame": {
+          "file_path": "images/hanyuan_093.png",
+          "transform_matrix": [
+            [
+              -0.3826836347579956,
+              -0.3904482424259186,
+              0.8373191952705383,
+              71.17213439941406
+            ],
+            [
+              -5.9076047165262935e-08,
+              0.9063078165054321,
+              0.42261815071105957,
+              41.72255325317383
+            ],
+            [
+              -0.9238794445991516,
+              0.16172899305820465,
+              -0.3468291759490967,
+              -29.4804630279541
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_094.png",
+        "split": "train",
+        "azimuth": 135.0,
+        "elevation": 25,
+        "radius": 85,
+        "sha256": "ff00000ff9efd860ad2b378221733e3c9405fa3131a8747dae38103334dde643",
+        "bytes": 763729,
+        "frame": {
+          "file_path": "images/hanyuan_094.png",
+          "transform_matrix": [
+            [
+              -0.7071069478988647,
+              -0.29883602261543274,
+              0.6408563256263733,
+              54.47279357910156
+            ],
+            [
+              1.1090006779568284e-07,
+              0.9063078165054321,
+              0.42261815071105957,
+              41.72255325317383
+            ],
+            [
+              -0.7071065902709961,
+              0.29883629083633423,
+              -0.6408565640449524,
+              -54.47279357910156
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_095.png",
+        "split": "validation",
+        "azimuth": 157.5,
+        "elevation": 25,
+        "radius": 85,
+        "sha256": "d074f2f742d12cddc22365d67dfbb4ef2911fe279251479aead8765694c87761",
+        "bytes": 743162,
+        "frame": {
+          "file_path": "images/hanyuan_095.png",
+          "transform_matrix": [
+            [
+              -0.9238795042037964,
+              -0.16172915697097778,
+              0.34682896733283997,
+              29.4804630279541
+            ],
+            [
+              -9.22224643318259e-08,
+              0.9063077569007874,
+              0.4226183593273163,
+              41.72255325317383
+            ],
+            [
+              -0.38268348574638367,
+              0.3904484212398529,
+              -0.8373191356658936,
+              -71.17213439941406
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_096.png",
+        "split": "train",
+        "azimuth": 180.0,
+        "elevation": 25,
+        "radius": 85,
+        "sha256": "d641f996b5801ccb625c3695d154bd4129aaf3e662e9f31dbaef6e46e086571d",
+        "bytes": 639394,
+        "frame": {
+          "file_path": "images/hanyuan_096.png",
+          "transform_matrix": [
+            [
+              -1.0,
+              1.356221019932491e-07,
+              -1.0336379574482635e-07,
+              9.43420892080514e-15
+            ],
+            [
+              7.923192413272773e-08,
+              0.9063077569007874,
+              0.4226183593273163,
+              41.72255325317383
+            ],
+            [
+              1.5099580252808664e-07,
+              0.4226183593273163,
+              -0.9063077569007874,
+              -77.03616333007812
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_097.png",
+        "split": "train",
+        "azimuth": 202.5,
+        "elevation": 25,
+        "radius": 85,
+        "sha256": "70781acc6993d920d74a1b70e98af4b3b22d88427b6c357a2a674b2cb3ff5749",
+        "bytes": 723329,
+        "frame": {
+          "file_path": "images/hanyuan_097.png",
+          "transform_matrix": [
+            [
+              -0.9238795042037964,
+              0.16172915697097778,
+              -0.34682896733283997,
+              -29.4804630279541
+            ],
+            [
+              9.22224643318259e-08,
+              0.9063077569007874,
+              0.4226183593273163,
+              41.72255325317383
+            ],
+            [
+              0.38268348574638367,
+              0.3904484212398529,
+              -0.8373191356658936,
+              -71.17213439941406
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_098.png",
+        "split": "train",
+        "azimuth": 225.0,
+        "elevation": 25,
+        "radius": 85,
+        "sha256": "bd5fb4685ac8b82eee24e81ed4ceac4e09afd6303ac32519e2204265c6c656a0",
+        "bytes": 739654,
+        "frame": {
+          "file_path": "images/hanyuan_098.png",
+          "transform_matrix": [
+            [
+              -0.7071069478988647,
+              0.29883602261543274,
+              -0.6408563256263733,
+              -54.47279357910156
+            ],
+            [
+              -1.1090006779568284e-07,
+              0.9063078165054321,
+              0.42261815071105957,
+              41.72255325317383
+            ],
+            [
+              0.7071065902709961,
+              0.29883629083633423,
+              -0.6408565640449524,
+              -54.47279357910156
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_099.png",
+        "split": "train",
+        "azimuth": 247.5,
+        "elevation": 25,
+        "radius": 85,
+        "sha256": "1bfd2e48cd268e1fde9c2e48f91feae36fb25b6e7284885a0608bba437c6c124",
+        "bytes": 709224,
+        "frame": {
+          "file_path": "images/hanyuan_099.png",
+          "transform_matrix": [
+            [
+              -0.3826836347579956,
+              0.3904482424259186,
+              -0.8373191952705383,
+              -71.17213439941406
+            ],
+            [
+              5.9076047165262935e-08,
+              0.9063078165054321,
+              0.42261815071105957,
+              41.72255325317383
+            ],
+            [
+              0.9238794445991516,
+              0.16172899305820465,
+              -0.3468291759490967,
+              -29.4804630279541
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_100.png",
+        "split": "train",
+        "azimuth": 270.0,
+        "elevation": 25,
+        "radius": 85,
+        "sha256": "afd0ec7068c3120351c07667fc89110f5a3353ec713eb78994bc8ea72c571a1b",
+        "bytes": 671950,
+        "frame": {
+          "file_path": "images/hanyuan_100.png",
+          "transform_matrix": [
+            [
+              -4.371138828673793e-08,
+              0.42261824011802673,
+              -0.9063078165054321,
+              -77.03616333007812
+            ],
+            [
+              -9.744677953449354e-09,
+              0.9063078165054321,
+              0.42261824011802673,
+              41.72255325317383
+            ],
+            [
+              1.0,
+              2.7304908556402552e-08,
+              -3.549769544974879e-08,
+              -1.415131338120771e-14
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_101.png",
+        "split": "train",
+        "azimuth": 292.5,
+        "elevation": 25,
+        "radius": 85,
+        "sha256": "34d5ace17302e8e168d72aa2cb32f1062f0e9c7f6c3f8e5b29ec4fe9e3e16c93",
+        "bytes": 741698,
+        "frame": {
+          "file_path": "images/hanyuan_101.png",
+          "transform_matrix": [
+            [
+              0.38268330693244934,
+              0.3904483914375305,
+              -0.8373192548751831,
+              -71.17213439941406
+            ],
+            [
+              -3.129046532990287e-08,
+              0.9063078165054321,
+              0.42261824011802673,
+              41.72255325317383
+            ],
+            [
+              0.9238795638084412,
+              -0.16172893345355988,
+              0.3468288779258728,
+              29.4804630279541
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_102.png",
+        "split": "train",
+        "azimuth": 315.0,
+        "elevation": 25,
+        "radius": 85,
+        "sha256": "77e5b0b98a1c43e075bf67ed69a5828a7b4f0ef3edd85749557d224a0cbbf1cf",
+        "bytes": 785625,
+        "frame": {
+          "file_path": "images/hanyuan_102.png",
+          "transform_matrix": [
+            [
+              0.7071067094802856,
+              0.2988361418247223,
+              -0.6408565640449524,
+              -54.47279357910156
+            ],
+            [
+              -1.5245952056375245e-08,
+              0.9063078761100769,
+              0.42261803150177,
+              41.72255325317383
+            ],
+            [
+              0.70710688829422,
+              -0.29883602261543274,
+              0.6408563852310181,
+              54.47279357910156
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      {
+        "name": "hanyuan_103.png",
+        "split": "validation",
+        "azimuth": 337.5,
+        "elevation": 25,
+        "radius": 85,
+        "sha256": "e6974cbdd74766ba07eddd2e82bb25b9ee1d898992988d6698a992c4b3d1ce5b",
+        "bytes": 743147,
+        "frame": {
+          "file_path": "images/hanyuan_103.png",
+          "transform_matrix": [
+            [
+              0.9238795042037964,
+              0.16172896325588226,
+              -0.3468290865421295,
+              -29.4804630279541
+            ],
+            [
+              4.3047947428931366e-09,
+              0.9063078761100769,
+              0.42261803150177,
+              41.72255325317383
+            ],
+            [
+              0.38268351554870605,
+              -0.39044812321662903,
+              0.8373192548751831,
+              71.17213439941406
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      }
+    ],
+    "limitations": "Architectural interpretation generated for visual experience. No surveyed ancient building, measured dimensions, current site capture, archaeological restoration verification, or invented real photo coverage."
+  },
+  "views": [
+    {
+      "name": "hanyuan_001.png",
+      "label": "前侧",
+      "url": "/generated/daming/views/hanyuan_001.png",
+      "sha256": "8575c48254919279168dc181d2338da344ab0b6cbfb7353488c4299e87e2d56c",
+      "sourceKind": "locally-authored-multiview-renders",
+      "azimuth": 15,
+      "elevation": 18
+    },
+    {
+      "name": "hanyuan_006.png",
+      "label": "东侧",
+      "url": "/generated/daming/views/hanyuan_006.png",
+      "sha256": "e42d23dd8a2b6cb7e687f383a563dfa19b59b4795965052a1737d1aa117b49c1",
+      "sourceKind": "locally-authored-multiview-renders",
+      "azimuth": 90,
+      "elevation": 18
+    },
+    {
+      "name": "hanyuan_012.png",
+      "label": "背面",
+      "url": "/generated/daming/views/hanyuan_012.png",
+      "sha256": "9e8e560b504d222d49e3093679abad6a1c38d1ebc5e89b9cef49c2aea02273a1",
+      "sourceKind": "locally-authored-multiview-renders",
+      "azimuth": 180,
+      "elevation": 18
+    },
+    {
+      "name": "hanyuan_018.png",
+      "label": "西侧",
+      "url": "/generated/daming/views/hanyuan_018.png",
+      "sha256": "01bc6d164e739467b62156fca04f1aea66d71f10f972eb9fd0134de314c42cd3",
+      "sourceKind": "locally-authored-multiview-renders",
+      "azimuth": 270,
+      "elevation": 18
+    },
+    {
+      "name": "hanyuan_049.png",
+      "label": "屋顶",
+      "url": "/generated/daming/views/hanyuan_049.png",
+      "sha256": "ddb5aa2425b3048765dc347aef2618efc14594ea08da120b0f7913fbc6408c16",
+      "sourceKind": "locally-authored-multiview-renders",
+      "azimuth": 15,
+      "elevation": 55
+    },
+    {
+      "name": "hanyuan_088.png",
+      "label": "近景",
+      "url": "/generated/daming/views/hanyuan_088.png",
+      "sha256": "5306b902a59cae104b35f67482408987141f43cffe196036e041d17b9ebbe55c",
+      "sourceKind": "locally-authored-multiview-renders",
+      "azimuth": 0.0,
+      "elevation": 25
+    }
+  ],
+  "validation": [
+    {
+      "name": "hanyuan_007.png",
+      "inputUrl": "/generated/daming/validation/hanyuan_007-input.png",
+      "renderUrl": "/generated/daming/validation/hanyuan_007-render.png"
+    },
+    {
+      "name": "hanyuan_015.png",
+      "inputUrl": "/generated/daming/validation/hanyuan_015-input.png",
+      "renderUrl": "/generated/daming/validation/hanyuan_015-render.png"
+    },
+    {
+      "name": "hanyuan_023.png",
+      "inputUrl": "/generated/daming/validation/hanyuan_023-input.png",
+      "renderUrl": "/generated/daming/validation/hanyuan_023-render.png"
+    },
+    {
+      "name": "hanyuan_031.png",
+      "inputUrl": "/generated/daming/validation/hanyuan_031-input.png",
+      "renderUrl": "/generated/daming/validation/hanyuan_031-render.png"
+    },
+    {
+      "name": "hanyuan_039.png",
+      "inputUrl": "/generated/daming/validation/hanyuan_039-input.png",
+      "renderUrl": "/generated/daming/validation/hanyuan_039-render.png"
+    },
+    {
+      "name": "hanyuan_047.png",
+      "inputUrl": "/generated/daming/validation/hanyuan_047-input.png",
+      "renderUrl": "/generated/daming/validation/hanyuan_047-render.png"
+    }
+  ],
+  "camera": {
+    "position": [
+      55,
+      37,
+      78
+    ],
+    "target": [
+      0,
+      0,
+      0
+    ],
+    "fov": 38,
+    "fitMargin": 1.02
+  },
+  "viewpoints": {
+    "top": {
+      "position": [
+        0.02,
+        160,
+        0.02
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ],
+      "fov": 38
+    },
+    "hall": {
+      "position": [
+        31,
+        17,
+        48
+      ],
+      "target": [
+        0,
+        9,
+        0
+      ],
+      "fov": 40
+    },
+    "east": {
+      "position": [
+        53,
+        16,
+        28
+      ],
+      "target": [
+        34,
+        6,
+        3.8
+      ],
+      "fov": 42
+    },
+    "west": {
+      "position": [
+        -53,
+        16,
+        28
+      ],
+      "target": [
+        -34,
+        6,
+        3.8
+      ],
+      "fov": 42
+    },
+    "terrace": {
+      "position": [
+        24,
+        13,
+        38
+      ],
+      "target": [
+        0,
+        2,
+        12
+      ],
+      "fov": 45
+    }
+  },
+  "bounds": {
+    "min": [
+      -44.52456283569336,
+      -2.0419600009918213,
+      -22.54595375061035
+    ],
+    "max": [
+      45.31669616699219,
+      16.148239135742188,
+      22.54716682434082
+    ]
+  },
+  "references": [
+    {
+      "url": "https://www.mct.gov.cn/whzx/whyw/201112/t20111201_707767.htm",
+      "role": "Historical context and identity, not a geometric survey"
+    },
+    {
+      "url": "https://commons.wikimedia.org/wiki/Category:Daming_Palace",
+      "role": "Research/reference imagery only, no external finished geometry used"
+    }
+  ],
+  "geometryPolicy": "Locally authored coherent 3D scene, calibrated generated views and area-sampled authored initialization, then actual Gaussian optimization. Complete learned covariance, rotation, opacity and SH retained. No single-image depth or borrowed finished model. Site coordinates are an archive association, not a georeferenced model.",
+  "packagedAt": "2026-10-29T18:52:43.630860+00:00"
+}

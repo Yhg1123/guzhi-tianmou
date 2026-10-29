@@ -11,6 +11,9 @@ import { findSiteArchive } from "./siteArchives.js";
 import { PhotoArchiveStage, PhotoArchiveSources } from "./PhotoArchive.jsx";
 import TrainedGaussianView from "./TrainedGaussianView.jsx";
 import CaptureWorkspace from "./CaptureWorkspace.jsx";
+import ConceptGaussianWorkspace from "./ConceptGaussianWorkspace.jsx";
+import { findGeneratedConcept, generatedConceptCandidate } from "./generatedConcepts.js";
+import { canPublishGaussian } from "./gaussianQuality.js";
 import { experimentalGaussianCases, gaussianCaseId, gaussianCaseRoute, localGaussianCase } from "./trainedGaussians.js";
 import { reconstructionRoute } from "./reconstruction.js";
 const publicCases = [...pointCloudSamples, ...heritagePhotographs];
@@ -21,6 +24,9 @@ export default function ReconstructionView({ sites, selectedId, onSelectSite, on
   useEffect(() => { const change = () => setCaseId(gaussianCaseId(window.location.hash)); window.addEventListener("hashchange", change); return () => window.removeEventListener("hashchange", change); }, []);
   const onBack = () => { window.location.hash = site ? reconstructionRoute(site.id) : "map"; };
   if (caseId) {
+    if (generatedConceptCandidate?.id === caseId && siteModelKey(generatedConceptCandidate.site) === siteModelKey(site) && siteName(generatedConceptCandidate.site) === siteName(site)) {
+      return <div className="reconstruction-page"><div className="page-title"><div><span className="eyebrow">DAMING PALACE · GAUSSIAN</span><h1>大明宫 · 含元殿</h1></div><button className="button" onClick={onBack}><ArrowLeft size={15} />返回遗址档案</button></div><ConceptGaussianWorkspace scene={generatedConceptCandidate} inspection={!canPublishGaussian(generatedConceptCandidate)} onShowImagery={() => { window.location.hash = reconstructionRoute(site.id) + "&view=imagery"; }} onCapture={() => { window.location.hash = reconstructionRoute(site.id) + "&view=capture"; }} /></div>;
+    }
     const scene = experimentalGaussianCases.find((c) => c.id === caseId);
     return scene ? <TrainedGaussianView key={scene.id} scene={scene} site={site} onSelect={(id) => { window.location.hash = gaussianCaseRoute(id, site?.id); }} onBack={onBack} /> : <div className="reconstruction-page"><div className="page-title"><div><span className="eyebrow">RECONSTRUCTION ARCHIVE</span><h1>{["lingyue", "seem-church"].includes(caseId) ? "外部模型入口已停用" : "未找到三维场景"}</h1></div></div><p className="muted">请返回对应遗址整理原片，或导入该遗址的本地模型。无关建筑不会替代项目成果。</p><button className="button primary" onClick={onBack}><ArrowLeft size={15} />返回遗址档案</button></div>;
   }
@@ -30,11 +36,13 @@ export default function ReconstructionView({ sites, selectedId, onSelectSite, on
 function ReconstructionProject({ site, sites, onSelectSite, onMap }) {
   const [localModel, setModel] = useState(null);
   const archive = findSiteArchive(site);
-  const model = localModel || (archive ? { name: archive.subject, url: archive.modelUrl, bytes: archive.bytes, archive } : null);
+  const concept = findGeneratedConcept(site);
+  const archiveModel = archive ? { name: archive.subject, url: archive.modelUrl, bytes: archive.bytes, archive } : null;
+  const model = localModel || concept || archiveModel;
   const [loaded, setLoaded] = useState(false);
   const [showSample, setShowSample] = useState(false);
   const [sampleMode, setSampleMode] = useState(heritagePhotographs.find((item) => item.siteId === site?.id)?.id || "heritage");
-  const [tab, setTab] = useState("viewer");
+  const [tab, setTab] = useState(() => { const view = new URLSearchParams(window.location.hash.split("?")[1]).get("view"); return ["imagery", "capture", "concept"].includes(view) ? view : "viewer"; });
   const [notice, setNotice] = useState("");
   const [saving, setSaving] = useState(false);
   const alive = useRef(true);
@@ -70,10 +78,10 @@ function ReconstructionProject({ site, sites, onSelectSite, onMap }) {
   const sample = showSample;
   const realSample = sample && sampleMode !== "synthetic";
   return <div className="reconstruction-page"><div className="page-title"><div><span className="eyebrow">DIGITAL CONSERVATION</span><h1>三维档案</h1></div><div className="button-row"><button className="button" onClick={onMap}><ArrowLeft size={15} />返回地图</button><label className="button primary"><Upload size={16} />导入高斯模型<input ref={modelInput} type="file" accept=".ply,.splat,.ksplat" aria-label="导入高斯模型" disabled={!site || saving || !loaded} onChange={(e) => { openModel(e.target.files[0]); e.target.value = ""; }} /></label></div></div>
-    <div className="reconstruction-context"><label><LandmarkLabel previewingSample={sample && tab === "viewer"} /><select aria-label="三维档案关联遗址" value={site?.id || ""} onChange={(e) => onSelectSite(e.target.value)}>{!site && <option value="" disabled>请选择遗址</option>}{sites.map((s) => <option key={s.id} value={s.id}>{siteName(s)}</option>)}</select></label><div className="tabs" role="tablist" aria-label="三维工作区"><button role="tab" aria-selected={tab === "viewer"} onClick={() => setTab("viewer")}>{archive && !localModel ? "影像档案" : "模型档案"}</button><button role="tab" aria-selected={tab === "capture"} onClick={() => setTab("capture")}>重建准备</button></div></div>
-    {tab === "viewer" && archive && !localModel && !sample && <div className="gaussian-upgrade-entry"><div><Camera size={20} /><span><strong>{siteName(site)} · 多视角重建资料</strong><small>现有资料为{archive.subjectType}影像；对应的多视角三维模型尚未建成。</small></span></div><button className="button primary" onClick={() => setTab("capture")}>整理重建原片 <ChevronRight size={14} /></button></div>}
+    <div className="reconstruction-context"><label><LandmarkLabel previewingSample={sample && tab === "viewer"} /><select aria-label="三维档案关联遗址" value={site?.id || ""} onChange={(e) => onSelectSite(e.target.value)}>{!site && <option value="" disabled>请选择遗址</option>}{sites.map((s) => <option key={s.id} value={s.id}>{siteName(s)}</option>)}</select></label><div className="tabs" role="tablist" aria-label="三维工作区"><button role="tab" aria-selected={tab === "viewer"} onClick={() => setTab("viewer")}>{concept && !localModel ? "高斯重建" : archive && !localModel ? "影像档案" : "模型档案"}</button>{concept && localModel && <button role="tab" aria-selected={tab === "concept"} onClick={() => { setShowSample(false); setTab("concept"); }}>复原构想</button>}{concept && archive && <button role="tab" aria-selected={tab === "imagery"} onClick={() => { setShowSample(false); setTab("imagery"); }}>遗址影像</button>}<button role="tab" aria-selected={tab === "capture"} onClick={() => setTab("capture")}>重建准备</button></div></div>
+    {tab === "viewer" && archive && !concept && !localModel && !sample && <div className="gaussian-upgrade-entry"><div><Camera size={20} /><span><strong>{siteName(site)} · 多视角重建资料</strong><small>现有资料为{archive.subjectType}影像；对应的多视角三维模型尚未建成。</small></span></div><button className="button primary" onClick={() => setTab("capture")}>整理重建原片 <ChevronRight size={14} /></button></div>}
     {notice && <div className="notice" role="status"><CircleAlert size={17} />{notice}</div>}
-    {tab === "viewer" && loaded && !model && !sample ? <><SiteModelEmpty site={site} onImport={() => modelInput.current?.click()} onCapture={() => setTab("capture")} onBrowse={() => setShowSample(true)} /><HeritageCaseGallery active={sample ? sampleMode : ""} onSelect={(id) => { setSampleMode(id); setShowSample(true); }} /></> : tab === "viewer" ? <ModelWorkspace model={model} loaded={loaded} sample={sample} realSample={realSample} heritageSample={heritageSample} sampleMode={sampleMode} setSampleMode={setSampleMode} site={site} onToggleSample={() => setShowSample(!showSample)} onCapture={() => setTab("capture")} onSelectCase={(id) => { setSampleMode(id); setShowSample(true); }} /> : <CaptureWorkspace site={site} />}
+    {(tab === "viewer" && !localModel || tab === "concept") && concept && !sample && loaded ? <ConceptGaussianWorkspace scene={concept} onShowImagery={() => setTab("imagery")} onCapture={() => setTab("capture")} /> : tab === "imagery" ? <ModelWorkspace model={archiveModel} loaded={loaded} sample={false} realSample={false} heritageSample={heritageSample} sampleMode={sampleMode} setSampleMode={setSampleMode} site={site} onToggleSample={() => { setShowSample(true); setTab("viewer"); }} onCapture={() => setTab("capture")} onSelectCase={(id) => { setSampleMode(id); setShowSample(true); setTab("viewer"); }} /> : tab === "viewer" && loaded && !model && !sample ? <><SiteModelEmpty site={site} onImport={() => modelInput.current?.click()} onCapture={() => setTab("capture")} onBrowse={() => setShowSample(true)} /><HeritageCaseGallery active={sample ? sampleMode : ""} onSelect={(id) => { setSampleMode(id); setShowSample(true); }} /></> : tab === "viewer" ? <ModelWorkspace model={model} loaded={loaded} sample={sample} realSample={realSample} heritageSample={heritageSample} sampleMode={sampleMode} setSampleMode={setSampleMode} site={site} onToggleSample={() => setShowSample(!showSample)} onCapture={() => setTab("capture")} onSelectCase={(id) => { setSampleMode(id); setShowSample(true); }} /> : <CaptureWorkspace site={site} hasConcept={Boolean(concept)} />}
     <details className="quality-project-link"><summary>本机训练检查记录</summary><p className="muted">托斯卡纳建筑的训练实验未通过画面检查，已与项目遗址分开保存。</p><button className="text-button" onClick={() => { window.location.hash = gaussianCaseRoute(localGaussianCase, site?.id); }}>查看问题记录与原片对照 <ChevronRight size={13} /></button></details>
   </div>;
 }

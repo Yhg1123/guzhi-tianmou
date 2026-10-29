@@ -1,0 +1,46 @@
+// Actual optimization of coherent locally generated views. No downloaded scene.
+import { spawn } from 'node:child_process';
+import { mkdir, readFile, readdir, writeFile, appendFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { resolve, join } from 'node:path';
+
+const root=resolve(import.meta.dirname,'..');
+const base=join(root,'qa/daming-concept');
+const dataset=join(base,'prepared'),output=join(base,'trained');
+const tool=join(root,'qa/training-tools/brush-v0.3.0/brush_app.exe');
+const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
+const prepBytes=await readFile(join(base,'preparation.json'));
+const prep=JSON.parse(prepBytes);
+if(prep.inputKind!=='locally-authored-multiview-renders'||prep.notCapturedPhotographs!==true||prep.notSurveyedRestoration!==true||prep.notImportedFinishedModel!==true||prep.views.length!==104)throw new Error('Unexpected concept inputs');
+if(sha(await readFile(join(dataset,'init.ply')))!==prep.seedSha256)throw new Error('Authored initialization changed');
+for(const view of prep.views)if(sha(await readFile(join(dataset,'images',view.name)))!==view.sha256)throw new Error('Generated view changed: '+view.name);
+const executableSha256=sha(await readFile(tool));
+if(executableSha256!=='37e46cbf808b9983dd15a5f9a25328dbe43e7e06d53c4f59fbeaeb10e3a5b34a')throw new Error('Unexpected trainer executable');
+await mkdir(output,{recursive:true});
+if((await readdir(output)).some(name=>/^model_\d+\.ply$/.test(name)))throw new Error('Preserve prior run before training again');
+const args=[dataset,'--total-steps','24000','--max-resolution','960','--max-splats','500000','--sh-degree','1','--lr-mean','0.00001','--lr-mean-end','0.0000005','--mean-noise-weight','10','--scale-loss-weight','0.0000001','--refine-every','128','--growth-stop-iter','16000','--export-every','2000','--eval-every','2000','--eval-save-to-disk','--export-path',output,'--export-name','model_{iter}.ply','--seed','734'];
+const run={schema:1,status:'running',inputKind:prep.inputKind,notCapturedPhotographs:true,notSurveyedRestoration:true,startedAt:new Date().toISOString(),tool:'Brush',version:'0.3.0',sourceRevision:'3edecbb2fe79d3e2c87eeab85b15e0b1dd10d486',executableSha256,args,generatedViewCount:prep.views.length,trainingViews:prep.views.filter(v=>v.split==='train').length,validationViews:prep.views.filter(v=>v.split==='validation').length,initialPoints:prep.seedPointCount,preparationSha256:sha(prepBytes),completedSteps:0};
+const logPath=join(output,'training.log'),recordPath=join(output,'run.json');
+await writeFile(recordPath,JSON.stringify(run,null,2));
+await writeFile(logPath,`Local concept training started ${run.startedAt}\nInputs are generated renders, not captured photographs.\n`);
+let logging=Promise.resolve();
+const log=bytes=>{logging=logging.then(()=>appendFile(logPath,bytes));for(const line of bytes.toString().split('\n'))if(/brush_cli|ERROR|panicked|out of memory/i.test(line))console.log(line.slice(0,700));};
+const child=spawn(tool,args,{cwd:root,windowsHide:true,stdio:['ignore','pipe','pipe'],env:{...process.env,RUST_LOG:'warn,brush_cli=info,brush_process=info,cubecl_wgpu::runtime=info'}});
+run.pid=child.pid;console.log('Local concept training PID',child.pid,'views',run.generatedViewCount,'authored surface seeds',run.initialPoints);
+child.stdout.on('data',log);child.stderr.on('data',log);
+const code=await new Promise((done,reject)=>{child.on('error',reject);child.on('close',done);});
+await logging;
+const text=await readFile(logPath,'utf8');
+run.validationHistory=Array.from(text.matchAll(/Eval iter (\d+): PSNR ([\d.eE+-]+), ssim ([\d.eE+-]+)/g),m=>({iteration:Number(m[1]),psnr:Number(m[2]),ssim:Number(m[3])}));
+run.completedSteps=run.validationHistory.at(-1)?.iteration||0;
+run.device=text.match(/Using adapter AdapterInfo \{ name: "([^"]+)"/)?.[1]||'unknown';
+run.endedAt=new Date().toISOString();run.exitCode=code;
+run.status=code===0&&run.completedSteps===24000&&/Done training!/.test(text)?'completed':'failed';
+run.checkpoints=[];
+for(const name of (await readdir(output)).filter(name=>/^model_\d+\.ply$/.test(name))){const bytes=await readFile(join(output,name));run.checkpoints.push({file:name,iteration:Number(name.match(/\d+/)[0]),bytes:bytes.length,sha256:sha(bytes)});}
+run.checkpoints.sort((a,b)=>a.iteration-b.iteration);
+if(run.status==='completed')run.outputSha256=run.checkpoints.find(c=>c.iteration===24000)?.sha256;
+await appendFile(logPath,`Finished ${run.status} ${run.endedAt}, exit ${code}\n`);run.trainingLogSha256=sha(await readFile(logPath));
+await writeFile(recordPath,JSON.stringify(run,null,2));
+console.log('Concept training',run.status,'steps',run.completedSteps,'device',run.device);
+if(run.status!=='completed')process.exitCode=1;

@@ -1,0 +1,1120 @@
+{
+  "schema": 1,
+  "status": "completed",
+  "inputKind": "locally-authored-multiview-renders",
+  "notCapturedPhotographs": true,
+  "notSurveyedRestoration": true,
+  "startedAt": "2026-10-29T18:22:15.653Z",
+  "tool": "Brush",
+  "version": "0.3.0",
+  "sourceRevision": "3edecbb2fe79d3e2c87eeab85b15e0b1dd10d486",
+  "executableSha256": "37e46cbf808b9983dd15a5f9a25328dbe43e7e06d53c4f59fbeaeb10e3a5b34a",
+  "args": [
+    "workspace\\qa\\daming-concept\\prepared",
+    "--total-steps",
+    "24000",
+    "--max-resolution",
+    "960",
+    "--max-splats",
+    "500000",
+    "--sh-degree",
+    "1",
+    "--lr-mean",
+    "0.00001",
+    "--lr-mean-end",
+    "0.0000005",
+    "--mean-noise-weight",
+    "10",
+    "--scale-loss-weight",
+    "0.0000001",
+    "--refine-every",
+    "128",
+    "--growth-stop-iter",
+    "16000",
+    "--export-every",
+    "2000",
+    "--eval-every",
+    "2000",
+    "--eval-save-to-disk",
+    "--export-path",
+    "workspace\\qa\\daming-concept\\trained",
+    "--export-name",
+    "model_{iter}.ply",
+    "--seed",
+    "734"
+  ],
+  "generatedViewCount": 104,
+  "trainingViews": 91,
+  "validationViews": 13,
+  "initialPoints": 180000,
+  "preparationSha256": "6efead6eaef527309ac5a96c9524460616abd285a40d4e7b594ff5c3bf91ffac",
+  "completedSteps": 24000,
+  "pid": 54564,
+  "validationHistory": [
+    {
+      "iteration": 2000,
+      "psnr": 37.74032,
+      "ssim": 0.97479403
+    },
+    {
+      "iteration": 4000,
+      "psnr": 39.00806,
+      "ssim": 0.9826692
+    },
+    {
+      "iteration": 6000,
+      "psnr": 39.630913,
+      "ssim": 0.985913
+    },
+    {
+      "iteration": 8000,
+      "psnr": 39.672337,
+      "ssim": 0.9875686
+    },
+    {
+      "iteration": 10000,
+      "psnr": 40.00602,
+      "ssim": 0.9884033
+    },
+    {
+      "iteration": 12000,
+      "psnr": 40.3947,
+      "ssim": 0.98915166
+    },
+    {
+      "iteration": 14000,
+      "psnr": 40.53127,
+      "ssim": 0.9895846
+    },
+    {
+      "iteration": 16000,
+      "psnr": 40.59034,
+      "ssim": 0.9898623
+    },
+    {
+      "iteration": 18000,
+      "psnr": 40.39125,
+      "ssim": 0.98989654
+    },
+    {
+      "iteration": 20000,
+      "psnr": 40.79826,
+      "ssim": 0.99009174
+    },
+    {
+      "iteration": 22000,
+      "psnr": 40.31097,
+      "ssim": 0.9900348
+    },
+    {
+      "iteration": 24000,
+      "psnr": 40.954227,
+      "ssim": 0.9904782
+    }
+  ],
+  "device": "NVIDIA GeForce RTX 3050 Laptop GPU",
+  "endedAt": "2026-10-29T18:37:02.272Z",
+  "exitCode": 0,
+  "checkpoints": [
+    {
+      "file": "model_02000.ply",
+      "iteration": 2000,
+      "bytes": 17843040,
+      "sha256": "eb2450e25a9fe13f335578491a648154fc7ca93fd4931433a2fa27f3c6700291"
+    },
+    {
+      "file": "model_04000.ply",
+      "iteration": 4000,
+      "bytes": 18402952,
+      "sha256": "87cf2b19279b3a999368f8f0aac8300b93a6a9df5839e1d62235bf7f50837477"
+    },
+    {
+      "file": "model_06000.ply",
+      "iteration": 6000,
+      "bytes": 18402952,
+      "sha256": "5785a1dde331e96314d63c1bc83676b38905dc511e4acada6f1f88c40d8bcb68"
+    },
+    {
+      "file": "model_08000.ply",
+      "iteration": 8000,
+      "bytes": 18402952,
+      "sha256": "4e447e2f6c587d1536094805cda2b033aeb8ed4eda09e6d16afb1e6b7487c898"
+    },
+    {
+      "file": "model_10000.ply",
+      "iteration": 10000,
+      "bytes": 18402952,
+      "sha256": "14879c31d870c4768f5d16b774d76baede29ffde507d0af9fa2b869851a3a1a8"
+    },
+    {
+      "file": "model_12000.ply",
+      "iteration": 12000,
+      "bytes": 18498816,
+      "sha256": "8a8f0bb19bd2fd7f50ebb1b452ab7acecc343755860564cf2ab1392425201ec8"
+    },
+    {
+      "file": "model_14000.ply",
+      "iteration": 14000,
+      "bytes": 18788800,
+      "sha256": "a076175c765a7a8670ae875f2f79b97b42333910955813f6d3a1ff8bc6b16143"
+    },
+    {
+      "file": "model_16000.ply",
+      "iteration": 16000,
+      "bytes": 19086420,
+      "sha256": "2a171f3fa16e5ef26feb5f9655a0326c3d2663698e5439c0b5c423611162973c"
+    },
+    {
+      "file": "model_18000.ply",
+      "iteration": 18000,
+      "bytes": 19086420,
+      "sha256": "76d87de302fc41b92472819bf10eb7b42de0c9415e559f5b7afbeed949ec6d7a"
+    },
+    {
+      "file": "model_20000.ply",
+      "iteration": 20000,
+      "bytes": 19086420,
+      "sha256": "6ecd764ae59ffc6e34d8e811d9b532e7e36e03e162982df2bb259a642902a5fe"
+    },
+    {
+      "file": "model_22000.ply",
+      "iteration": 22000,
+      "bytes": 19086420,
+      "sha256": "c7922a05af917280f111df993696c2835ec0f430008b8178cf48e1ea5d179ffe"
+    },
+    {
+      "file": "model_24000.ply",
+      "iteration": 24000,
+      "bytes": 19086420,
+      "sha256": "370cdca9a9ce46cab3ade441282bc42fe61ce881fe55154cfa205c92b244e1bf"
+    }
+  ],
+  "outputSha256": "370cdca9a9ce46cab3ade441282bc42fe61ce881fe55154cfa205c92b244e1bf",
+  "trainingLogSha256": "c6fc72e31ad87978f51cfd620a1f4134b31a1ea066faff34f094d70f115156ac",
+  "foregroundValidation": [
+    {
+      "iteration": 2000,
+      "psnr": 33.530482478312265,
+      "views": [
+        {
+          "name": "hanyuan_007.png",
+          "pixels": 143837,
+          "psnr": 31.268188682423617
+        },
+        {
+          "name": "hanyuan_015.png",
+          "pixels": 149148,
+          "psnr": 33.364141408417474
+        },
+        {
+          "name": "hanyuan_023.png",
+          "pixels": 153298,
+          "psnr": 31.738619074822605
+        },
+        {
+          "name": "hanyuan_031.png",
+          "pixels": 211202,
+          "psnr": 35.26898719750586
+        },
+        {
+          "name": "hanyuan_039.png",
+          "pixels": 205282,
+          "psnr": 35.71805905697136
+        },
+        {
+          "name": "hanyuan_047.png",
+          "pixels": 207535,
+          "psnr": 35.22691773881405
+        },
+        {
+          "name": "hanyuan_055.png",
+          "pixels": 243507,
+          "psnr": 36.82350242019263
+        },
+        {
+          "name": "hanyuan_063.png",
+          "pixels": 252334,
+          "psnr": 37.23035325701018
+        },
+        {
+          "name": "hanyuan_071.png",
+          "pixels": 254167,
+          "psnr": 37.27951049302213
+        },
+        {
+          "name": "hanyuan_079.png",
+          "pixels": 280730,
+          "psnr": 36.481891727042715
+        },
+        {
+          "name": "hanyuan_087.png",
+          "pixels": 95676,
+          "psnr": 21.514735944477255
+        },
+        {
+          "name": "hanyuan_095.png",
+          "pixels": 347048,
+          "psnr": 32.085780903079446
+        },
+        {
+          "name": "hanyuan_103.png",
+          "pixels": 355655,
+          "psnr": 31.89558431428006
+        }
+      ]
+    },
+    {
+      "iteration": 4000,
+      "psnr": 34.812680948378095,
+      "views": [
+        {
+          "name": "hanyuan_007.png",
+          "pixels": 143837,
+          "psnr": 33.03789052500845
+        },
+        {
+          "name": "hanyuan_015.png",
+          "pixels": 149148,
+          "psnr": 34.18773247002166
+        },
+        {
+          "name": "hanyuan_023.png",
+          "pixels": 153298,
+          "psnr": 33.209110667372435
+        },
+        {
+          "name": "hanyuan_031.png",
+          "pixels": 211202,
+          "psnr": 36.24601287794343
+        },
+        {
+          "name": "hanyuan_039.png",
+          "pixels": 205282,
+          "psnr": 36.8470361505304
+        },
+        {
+          "name": "hanyuan_047.png",
+          "pixels": 207535,
+          "psnr": 36.83450209051662
+        },
+        {
+          "name": "hanyuan_055.png",
+          "pixels": 243507,
+          "psnr": 38.019695905956446
+        },
+        {
+          "name": "hanyuan_063.png",
+          "pixels": 252334,
+          "psnr": 39.068835793426544
+        },
+        {
+          "name": "hanyuan_071.png",
+          "pixels": 254167,
+          "psnr": 38.122344686930134
+        },
+        {
+          "name": "hanyuan_079.png",
+          "pixels": 280730,
+          "psnr": 37.9229352212189
+        },
+        {
+          "name": "hanyuan_087.png",
+          "pixels": 95676,
+          "psnr": 23.115081118140242
+        },
+        {
+          "name": "hanyuan_095.png",
+          "pixels": 347048,
+          "psnr": 33.40940535927232
+        },
+        {
+          "name": "hanyuan_103.png",
+          "pixels": 355655,
+          "psnr": 32.54426946257765
+        }
+      ]
+    },
+    {
+      "iteration": 6000,
+      "psnr": 35.44292178169942,
+      "views": [
+        {
+          "name": "hanyuan_007.png",
+          "pixels": 143837,
+          "psnr": 33.57266840337095
+        },
+        {
+          "name": "hanyuan_015.png",
+          "pixels": 149148,
+          "psnr": 34.1633736712643
+        },
+        {
+          "name": "hanyuan_023.png",
+          "pixels": 153298,
+          "psnr": 34.22410032624438
+        },
+        {
+          "name": "hanyuan_031.png",
+          "pixels": 211202,
+          "psnr": 36.816233267944206
+        },
+        {
+          "name": "hanyuan_039.png",
+          "pixels": 205282,
+          "psnr": 37.030565675043746
+        },
+        {
+          "name": "hanyuan_047.png",
+          "pixels": 207535,
+          "psnr": 37.9005247925036
+        },
+        {
+          "name": "hanyuan_055.png",
+          "pixels": 243507,
+          "psnr": 38.698083572249196
+        },
+        {
+          "name": "hanyuan_063.png",
+          "pixels": 252334,
+          "psnr": 39.43112042018527
+        },
+        {
+          "name": "hanyuan_071.png",
+          "pixels": 254167,
+          "psnr": 39.106482932798
+        },
+        {
+          "name": "hanyuan_079.png",
+          "pixels": 280730,
+          "psnr": 38.98457906948263
+        },
+        {
+          "name": "hanyuan_087.png",
+          "pixels": 95676,
+          "psnr": 23.60758338971856
+        },
+        {
+          "name": "hanyuan_095.png",
+          "pixels": 347048,
+          "psnr": 34.20401339588183
+        },
+        {
+          "name": "hanyuan_103.png",
+          "pixels": 355655,
+          "psnr": 33.018654245405806
+        }
+      ]
+    },
+    {
+      "iteration": 8000,
+      "psnr": 35.59220285705748,
+      "views": [
+        {
+          "name": "hanyuan_007.png",
+          "pixels": 143837,
+          "psnr": 32.84839514520195
+        },
+        {
+          "name": "hanyuan_015.png",
+          "pixels": 149148,
+          "psnr": 34.360594005352475
+        },
+        {
+          "name": "hanyuan_023.png",
+          "pixels": 153298,
+          "psnr": 34.4732124080577
+        },
+        {
+          "name": "hanyuan_031.png",
+          "pixels": 211202,
+          "psnr": 36.471431796691306
+        },
+        {
+          "name": "hanyuan_039.png",
+          "pixels": 205282,
+          "psnr": 37.13857594235278
+        },
+        {
+          "name": "hanyuan_047.png",
+          "pixels": 207535,
+          "psnr": 37.575435022207614
+        },
+        {
+          "name": "hanyuan_055.png",
+          "pixels": 243507,
+          "psnr": 38.956503866566614
+        },
+        {
+          "name": "hanyuan_063.png",
+          "pixels": 252334,
+          "psnr": 40.14598993593735
+        },
+        {
+          "name": "hanyuan_071.png",
+          "pixels": 254167,
+          "psnr": 39.18017301610172
+        },
+        {
+          "name": "hanyuan_079.png",
+          "pixels": 280730,
+          "psnr": 39.205965335638325
+        },
+        {
+          "name": "hanyuan_087.png",
+          "pixels": 95676,
+          "psnr": 24.210802865577378
+        },
+        {
+          "name": "hanyuan_095.png",
+          "pixels": 347048,
+          "psnr": 34.51356986372046
+        },
+        {
+          "name": "hanyuan_103.png",
+          "pixels": 355655,
+          "psnr": 33.61798793834151
+        }
+      ]
+    },
+    {
+      "iteration": 10000,
+      "psnr": 35.991264391081295,
+      "views": [
+        {
+          "name": "hanyuan_007.png",
+          "pixels": 143837,
+          "psnr": 34.48020336926348
+        },
+        {
+          "name": "hanyuan_015.png",
+          "pixels": 149148,
+          "psnr": 35.00159027541879
+        },
+        {
+          "name": "hanyuan_023.png",
+          "pixels": 153298,
+          "psnr": 34.30598663653178
+        },
+        {
+          "name": "hanyuan_031.png",
+          "pixels": 211202,
+          "psnr": 38.19031854627747
+        },
+        {
+          "name": "hanyuan_039.png",
+          "pixels": 205282,
+          "psnr": 37.77112216402728
+        },
+        {
+          "name": "hanyuan_047.png",
+          "pixels": 207535,
+          "psnr": 37.6063111950838
+        },
+        {
+          "name": "hanyuan_055.png",
+          "pixels": 243507,
+          "psnr": 39.729950847072566
+        },
+        {
+          "name": "hanyuan_063.png",
+          "pixels": 252334,
+          "psnr": 40.25271055822089
+        },
+        {
+          "name": "hanyuan_071.png",
+          "pixels": 254167,
+          "psnr": 39.470724972673665
+        },
+        {
+          "name": "hanyuan_079.png",
+          "pixels": 280730,
+          "psnr": 39.26031594389986
+        },
+        {
+          "name": "hanyuan_087.png",
+          "pixels": 95676,
+          "psnr": 24.45440866862798
+        },
+        {
+          "name": "hanyuan_095.png",
+          "pixels": 347048,
+          "psnr": 33.499072327345935
+        },
+        {
+          "name": "hanyuan_103.png",
+          "pixels": 355655,
+          "psnr": 33.863721579613355
+        }
+      ]
+    },
+    {
+      "iteration": 12000,
+      "psnr": 36.240345591193126,
+      "views": [
+        {
+          "name": "hanyuan_007.png",
+          "pixels": 143837,
+          "psnr": 34.089352374900706
+        },
+        {
+          "name": "hanyuan_015.png",
+          "pixels": 149148,
+          "psnr": 34.788720461563116
+        },
+        {
+          "name": "hanyuan_023.png",
+          "pixels": 153298,
+          "psnr": 35.154199514104704
+        },
+        {
+          "name": "hanyuan_031.png",
+          "pixels": 211202,
+          "psnr": 38.033586840737485
+        },
+        {
+          "name": "hanyuan_039.png",
+          "pixels": 205282,
+          "psnr": 37.85915395770346
+        },
+        {
+          "name": "hanyuan_047.png",
+          "pixels": 207535,
+          "psnr": 38.43491788269982
+        },
+        {
+          "name": "hanyuan_055.png",
+          "pixels": 243507,
+          "psnr": 40.46115472783082
+        },
+        {
+          "name": "hanyuan_063.png",
+          "pixels": 252334,
+          "psnr": 40.611496447815085
+        },
+        {
+          "name": "hanyuan_071.png",
+          "pixels": 254167,
+          "psnr": 39.798675832354405
+        },
+        {
+          "name": "hanyuan_079.png",
+          "pixels": 280730,
+          "psnr": 40.09324598237033
+        },
+        {
+          "name": "hanyuan_087.png",
+          "pixels": 95676,
+          "psnr": 24.753948444569794
+        },
+        {
+          "name": "hanyuan_095.png",
+          "pixels": 347048,
+          "psnr": 33.488034132564
+        },
+        {
+          "name": "hanyuan_103.png",
+          "pixels": 355655,
+          "psnr": 33.558006086296935
+        }
+      ]
+    },
+    {
+      "iteration": 14000,
+      "psnr": 36.396773389985114,
+      "views": [
+        {
+          "name": "hanyuan_007.png",
+          "pixels": 143837,
+          "psnr": 34.52310145459537
+        },
+        {
+          "name": "hanyuan_015.png",
+          "pixels": 149148,
+          "psnr": 34.9677375122597
+        },
+        {
+          "name": "hanyuan_023.png",
+          "pixels": 153298,
+          "psnr": 35.18304617849806
+        },
+        {
+          "name": "hanyuan_031.png",
+          "pixels": 211202,
+          "psnr": 38.31089431857884
+        },
+        {
+          "name": "hanyuan_039.png",
+          "pixels": 205282,
+          "psnr": 37.89220604228771
+        },
+        {
+          "name": "hanyuan_047.png",
+          "pixels": 207535,
+          "psnr": 38.39633312626262
+        },
+        {
+          "name": "hanyuan_055.png",
+          "pixels": 243507,
+          "psnr": 40.72749289097083
+        },
+        {
+          "name": "hanyuan_063.png",
+          "pixels": 252334,
+          "psnr": 40.36849614945794
+        },
+        {
+          "name": "hanyuan_071.png",
+          "pixels": 254167,
+          "psnr": 40.00317088833793
+        },
+        {
+          "name": "hanyuan_079.png",
+          "pixels": 280730,
+          "psnr": 40.156377815190254
+        },
+        {
+          "name": "hanyuan_087.png",
+          "pixels": 95676,
+          "psnr": 24.90522305833906
+        },
+        {
+          "name": "hanyuan_095.png",
+          "pixels": 347048,
+          "psnr": 33.83644248623065
+        },
+        {
+          "name": "hanyuan_103.png",
+          "pixels": 355655,
+          "psnr": 33.88753214879753
+        }
+      ]
+    },
+    {
+      "iteration": 16000,
+      "psnr": 36.57548315485873,
+      "views": [
+        {
+          "name": "hanyuan_007.png",
+          "pixels": 143837,
+          "psnr": 34.53317792980953
+        },
+        {
+          "name": "hanyuan_015.png",
+          "pixels": 149148,
+          "psnr": 35.215966817631326
+        },
+        {
+          "name": "hanyuan_023.png",
+          "pixels": 153298,
+          "psnr": 35.04675140027784
+        },
+        {
+          "name": "hanyuan_031.png",
+          "pixels": 211202,
+          "psnr": 38.44433587870793
+        },
+        {
+          "name": "hanyuan_039.png",
+          "pixels": 205282,
+          "psnr": 38.44001949630418
+        },
+        {
+          "name": "hanyuan_047.png",
+          "pixels": 207535,
+          "psnr": 38.005327135094774
+        },
+        {
+          "name": "hanyuan_055.png",
+          "pixels": 243507,
+          "psnr": 40.95379179578177
+        },
+        {
+          "name": "hanyuan_063.png",
+          "pixels": 252334,
+          "psnr": 41.08494129859986
+        },
+        {
+          "name": "hanyuan_071.png",
+          "pixels": 254167,
+          "psnr": 39.89460913282802
+        },
+        {
+          "name": "hanyuan_079.png",
+          "pixels": 280730,
+          "psnr": 40.11394605072428
+        },
+        {
+          "name": "hanyuan_087.png",
+          "pixels": 95676,
+          "psnr": 25.109109356713265
+        },
+        {
+          "name": "hanyuan_095.png",
+          "pixels": 347048,
+          "psnr": 34.57381217004346
+        },
+        {
+          "name": "hanyuan_103.png",
+          "pixels": 355655,
+          "psnr": 34.065492550647335
+        }
+      ]
+    },
+    {
+      "iteration": 18000,
+      "psnr": 36.45198913968714,
+      "views": [
+        {
+          "name": "hanyuan_007.png",
+          "pixels": 143837,
+          "psnr": 34.32978920015862
+        },
+        {
+          "name": "hanyuan_015.png",
+          "pixels": 149148,
+          "psnr": 35.267032918244816
+        },
+        {
+          "name": "hanyuan_023.png",
+          "pixels": 153298,
+          "psnr": 34.96382291453057
+        },
+        {
+          "name": "hanyuan_031.png",
+          "pixels": 211202,
+          "psnr": 38.20864110787203
+        },
+        {
+          "name": "hanyuan_039.png",
+          "pixels": 205282,
+          "psnr": 38.392244663902375
+        },
+        {
+          "name": "hanyuan_047.png",
+          "pixels": 207535,
+          "psnr": 38.17165850921444
+        },
+        {
+          "name": "hanyuan_055.png",
+          "pixels": 243507,
+          "psnr": 40.64915859699502
+        },
+        {
+          "name": "hanyuan_063.png",
+          "pixels": 252334,
+          "psnr": 40.9890195666894
+        },
+        {
+          "name": "hanyuan_071.png",
+          "pixels": 254167,
+          "psnr": 39.94295179811027
+        },
+        {
+          "name": "hanyuan_079.png",
+          "pixels": 280730,
+          "psnr": 39.74488734425003
+        },
+        {
+          "name": "hanyuan_087.png",
+          "pixels": 95676,
+          "psnr": 25.04299011132431
+        },
+        {
+          "name": "hanyuan_095.png",
+          "pixels": 347048,
+          "psnr": 33.9205740380189
+        },
+        {
+          "name": "hanyuan_103.png",
+          "pixels": 355655,
+          "psnr": 34.25308804662207
+        }
+      ]
+    },
+    {
+      "iteration": 20000,
+      "psnr": 36.74325280766618,
+      "views": [
+        {
+          "name": "hanyuan_007.png",
+          "pixels": 143837,
+          "psnr": 34.37366459073911
+        },
+        {
+          "name": "hanyuan_015.png",
+          "pixels": 149148,
+          "psnr": 35.74543517680254
+        },
+        {
+          "name": "hanyuan_023.png",
+          "pixels": 153298,
+          "psnr": 35.43707891583435
+        },
+        {
+          "name": "hanyuan_031.png",
+          "pixels": 211202,
+          "psnr": 38.336545220887515
+        },
+        {
+          "name": "hanyuan_039.png",
+          "pixels": 205282,
+          "psnr": 38.62323974582749
+        },
+        {
+          "name": "hanyuan_047.png",
+          "pixels": 207535,
+          "psnr": 39.13503074261106
+        },
+        {
+          "name": "hanyuan_055.png",
+          "pixels": 243507,
+          "psnr": 40.98934129115187
+        },
+        {
+          "name": "hanyuan_063.png",
+          "pixels": 252334,
+          "psnr": 41.19849807122135
+        },
+        {
+          "name": "hanyuan_071.png",
+          "pixels": 254167,
+          "psnr": 40.749334885872514
+        },
+        {
+          "name": "hanyuan_079.png",
+          "pixels": 280730,
+          "psnr": 40.42557368194423
+        },
+        {
+          "name": "hanyuan_087.png",
+          "pixels": 95676,
+          "psnr": 25.26156648198695
+        },
+        {
+          "name": "hanyuan_095.png",
+          "pixels": 347048,
+          "psnr": 34.01407145662373
+        },
+        {
+          "name": "hanyuan_103.png",
+          "pixels": 355655,
+          "psnr": 33.3729062381577
+        }
+      ]
+    },
+    {
+      "iteration": 22000,
+      "psnr": 36.58884554625569,
+      "views": [
+        {
+          "name": "hanyuan_007.png",
+          "pixels": 143837,
+          "psnr": 34.493557297661035
+        },
+        {
+          "name": "hanyuan_015.png",
+          "pixels": 149148,
+          "psnr": 35.503150338792096
+        },
+        {
+          "name": "hanyuan_023.png",
+          "pixels": 153298,
+          "psnr": 35.409686067626865
+        },
+        {
+          "name": "hanyuan_031.png",
+          "pixels": 211202,
+          "psnr": 38.37664342991865
+        },
+        {
+          "name": "hanyuan_039.png",
+          "pixels": 205282,
+          "psnr": 38.599809161656495
+        },
+        {
+          "name": "hanyuan_047.png",
+          "pixels": 207535,
+          "psnr": 38.67047550797967
+        },
+        {
+          "name": "hanyuan_055.png",
+          "pixels": 243507,
+          "psnr": 40.344731704988575
+        },
+        {
+          "name": "hanyuan_063.png",
+          "pixels": 252334,
+          "psnr": 40.92488591354507
+        },
+        {
+          "name": "hanyuan_071.png",
+          "pixels": 254167,
+          "psnr": 40.23777600669136
+        },
+        {
+          "name": "hanyuan_079.png",
+          "pixels": 280730,
+          "psnr": 40.05040780715184
+        },
+        {
+          "name": "hanyuan_087.png",
+          "pixels": 95676,
+          "psnr": 25.25785572359778
+        },
+        {
+          "name": "hanyuan_095.png",
+          "pixels": 347048,
+          "psnr": 33.69135180893799
+        },
+        {
+          "name": "hanyuan_103.png",
+          "pixels": 355655,
+          "psnr": 34.094661332776546
+        }
+      ]
+    },
+    {
+      "iteration": 24000,
+      "psnr": 36.90633375671557,
+      "views": [
+        {
+          "name": "hanyuan_007.png",
+          "pixels": 143837,
+          "psnr": 34.834839638562926
+        },
+        {
+          "name": "hanyuan_015.png",
+          "pixels": 149148,
+          "psnr": 35.369633172246964
+        },
+        {
+          "name": "hanyuan_023.png",
+          "pixels": 153298,
+          "psnr": 35.621162314807066
+        },
+        {
+          "name": "hanyuan_031.png",
+          "pixels": 211202,
+          "psnr": 38.72745830488532
+        },
+        {
+          "name": "hanyuan_039.png",
+          "pixels": 205282,
+          "psnr": 38.78857976474566
+        },
+        {
+          "name": "hanyuan_047.png",
+          "pixels": 207535,
+          "psnr": 39.25339616375613
+        },
+        {
+          "name": "hanyuan_055.png",
+          "pixels": 243507,
+          "psnr": 40.97779231419309
+        },
+        {
+          "name": "hanyuan_063.png",
+          "pixels": 252334,
+          "psnr": 41.08033606445963
+        },
+        {
+          "name": "hanyuan_071.png",
+          "pixels": 254167,
+          "psnr": 40.66045362410078
+        },
+        {
+          "name": "hanyuan_079.png",
+          "pixels": 280730,
+          "psnr": 40.40271807957339
+        },
+        {
+          "name": "hanyuan_087.png",
+          "pixels": 95676,
+          "psnr": 25.129355750251975
+        },
+        {
+          "name": "hanyuan_095.png",
+          "pixels": 347048,
+          "psnr": 35.00870031110482
+        },
+        {
+          "name": "hanyuan_103.png",
+          "pixels": 355655,
+          "psnr": 33.92791333461455
+        }
+      ]
+    }
+  ],
+  "selectedCheckpoint": {
+    "iteration": 24000,
+    "psnr": 36.90633375671557,
+    "views": [
+      {
+        "name": "hanyuan_007.png",
+        "pixels": 143837,
+        "psnr": 34.834839638562926
+      },
+      {
+        "name": "hanyuan_015.png",
+        "pixels": 149148,
+        "psnr": 35.369633172246964
+      },
+      {
+        "name": "hanyuan_023.png",
+        "pixels": 153298,
+        "psnr": 35.621162314807066
+      },
+      {
+        "name": "hanyuan_031.png",
+        "pixels": 211202,
+        "psnr": 38.72745830488532
+      },
+      {
+        "name": "hanyuan_039.png",
+        "pixels": 205282,
+        "psnr": 38.78857976474566
+      },
+      {
+        "name": "hanyuan_047.png",
+        "pixels": 207535,
+        "psnr": 39.25339616375613
+      },
+      {
+        "name": "hanyuan_055.png",
+        "pixels": 243507,
+        "psnr": 40.97779231419309
+      },
+      {
+        "name": "hanyuan_063.png",
+        "pixels": 252334,
+        "psnr": 41.08033606445963
+      },
+      {
+        "name": "hanyuan_071.png",
+        "pixels": 254167,
+        "psnr": 40.66045362410078
+      },
+      {
+        "name": "hanyuan_079.png",
+        "pixels": 280730,
+        "psnr": 40.40271807957339
+      },
+      {
+        "name": "hanyuan_087.png",
+        "pixels": 95676,
+        "psnr": 25.129355750251975
+      },
+      {
+        "name": "hanyuan_095.png",
+        "pixels": 347048,
+        "psnr": 35.00870031110482
+      },
+      {
+        "name": "hanyuan_103.png",
+        "pixels": 355655,
+        "psnr": 33.92791333461455
+      }
+    ]
+  },
+  "validationCaveat": "Image reproduction of the locally authored concept; use input alpha >=250 and RGB MSE. Held-out renders are not used in image optimization, but all initial geometry comes from the authored scene. No archaeological or geometric survey accuracy is implied."
+}

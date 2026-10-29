@@ -1,0 +1,392 @@
+{
+  "schema": 1,
+  "id": "daming-hanyuan",
+  "kind": "gaussian",
+  "representation": "trained-3dgs",
+  "interpretation": "architectural-concept",
+  "inputKind": "locally-authored-multiview-renders",
+  "title": "含元殿 · 复原构想",
+  "subtitle": "大明宫 · 唐代宫殿建筑意象",
+  "site": {
+    "id": "demo-daming",
+    "name": "大明宫遗址",
+    "lng": 108.969,
+    "lat": 34.307
+  },
+  "url": "/generated/daming/model.ply",
+  "rawUrl": "/generated/daming/model.ply",
+  "previewUrl": "/generated/daming/views/hanyuan_001.png",
+  "rawSha256": "370cdca9a9ce46cab3ade441282bc42fe61ce881fe55154cfa205c92b244e1bf",
+  "sha256": "370cdca9a9ce46cab3ade441282bc42fe61ce881fe55154cfa205c92b244e1bf",
+  "rawBytes": 19086420,
+  "bytes": 19086420,
+  "rawPointCount": 207454,
+  "pointCount": 207454,
+  "shDegree": 1,
+  "trainedInThisApp": true,
+  "trainedByAuthor": false,
+  "metricScaleVerified": false,
+  "georeferenced": false,
+  "notCapturedPhotographs": true,
+  "notSurveyedRestoration": true,
+  "credit": "古址天眸 · 本机创作与训练",
+  "sourceManifest": "/generated/daming/source.json",
+  "trainingRecordUrl": "/generated/daming/training.json",
+  "trainingLogUrl": "/generated/daming/training.txt",
+  "visualReferenceUrl": "/generated/daming/visual-reference.png",
+  "visualReferenceSha256": "a1e3d6a4091471e55a9412b5cc1eca6deace417450d197b82383081b232bf8ca",
+  "visualReferenceRole": "AI-generated art direction only; not a training input or viewer capture",
+  "qualityReview": {
+    "sceneId": "daming-hanyuan",
+    "modelSha256": "370cdca9a9ce46cab3ade441282bc42fe61ce881fe55154cfa205c92b244e1bf",
+    "reviewedAt": "2026-10-29T18:52:33.983756+00:00",
+    "status": "accepted",
+    "scope": "Architectural-concept visual presentation only",
+    "notArchaeologicalValidation": true,
+    "checks": {
+      "structure": true,
+      "novelViews": true,
+      "floaters": true,
+      "subjectIdentity": true
+    },
+    "basis": "Final native PLY inspected directly in the application at front, back, left, right, full roof and main-hall closeup. The complete authored building group has coherent volumetric structure, readable columns, lattice, roofs and stairs, and no conspicuous loose splat masses. Subject identity is limited to the user-authorized Daming architectural concept. This does not verify archaeological geometry.",
+    "evidence": {
+      "result": "passed",
+      "mode": "inspection",
+      "checkedAt": "2026-10-29T18:47:12.482Z",
+      "modelSha256": "370cdca9a9ce46cab3ade441282bc42fe61ce881fe55154cfa205c92b244e1bf",
+      "errors": [],
+      "foreign": [],
+      "screenshots": [
+        {
+          "path": "qa/daming-concept/final-初始视角.png",
+          "sha256": "e0208275bdfcdbbcf15c20c7764bdc700c477cf6da77d90013c93cd75ee6f579"
+        },
+        {
+          "path": "qa/daming-concept/final-左侧.png",
+          "sha256": "e8c824f8e7c9b5376b4bbf642568cf5636dc5160752d52f4c20821900a78b5a6"
+        },
+        {
+          "path": "qa/daming-concept/final-背面.png",
+          "sha256": "d3644366953cece07c814f7365526c6510ab44e0a5322b4a739a1e728f93ba9d"
+        },
+        {
+          "path": "qa/daming-concept/final-右侧.png",
+          "sha256": "7618972e63476b3d27f2072e7e160aa55a5b13c7c091493a40a6c774a8759593"
+        },
+        {
+          "path": "qa/daming-concept/final-俯视.png",
+          "sha256": "dc5e0ef5306562a17cc6707f4a86c828b45f2a6e3bf144cab977f61f436ec2ce"
+        },
+        {
+          "path": "qa/daming-concept/focus-主殿细节.png",
+          "sha256": "6d894cf8eb9d55b71b75757a94d47942b4c47768793021723f6fb85c9e20e3c9"
+        },
+        {
+          "path": "qa/daming-concept/focus-东侧楼阁.png",
+          "sha256": "dc4bb97f5e69a1b4fff0a40b6a765175c0b5639b4c2a544d6a62ce29d8e396cb"
+        },
+        {
+          "path": "qa/daming-concept/focus-西侧楼阁.png",
+          "sha256": "5c25606ace103a105799be7ad273b4cba8315c42f43e3a002c14ad53cf9fd5ac"
+        },
+        {
+          "path": "qa/daming-concept/focus-台基与阶梯.png",
+          "sha256": "8ee0dddec629a79ffba6ca1d62745b65a1571c242952ba5766456f4755851f6b"
+        }
+      ],
+      "checks": [
+        "Actual local Gaussian PLY and WebGL canvas",
+        "Opposite spatial views",
+        "Roof structure",
+        "Four part closeups",
+        "Keyboard orbit/pan/zoom",
+        "Fullscreen Escape",
+        "390px layout"
+      ]
+    },
+    "limitations": [
+      "Generated coherent views, not site capture or surveyed restoration.",
+      "Materials, proportions and construction details are artistic.",
+      "Very close views have Gaussian softness; surface details do not establish historical accuracy."
+    ]
+  },
+  "views": [
+    {
+      "name": "hanyuan_001.png",
+      "label": "前侧",
+      "url": "/generated/daming/views/hanyuan_001.png",
+      "sha256": "8575c48254919279168dc181d2338da344ab0b6cbfb7353488c4299e87e2d56c",
+      "sourceKind": "locally-authored-multiview-renders",
+      "azimuth": 15,
+      "elevation": 18
+    },
+    {
+      "name": "hanyuan_006.png",
+      "label": "东侧",
+      "url": "/generated/daming/views/hanyuan_006.png",
+      "sha256": "e42d23dd8a2b6cb7e687f383a563dfa19b59b4795965052a1737d1aa117b49c1",
+      "sourceKind": "locally-authored-multiview-renders",
+      "azimuth": 90,
+      "elevation": 18
+    },
+    {
+      "name": "hanyuan_012.png",
+      "label": "背面",
+      "url": "/generated/daming/views/hanyuan_012.png",
+      "sha256": "9e8e560b504d222d49e3093679abad6a1c38d1ebc5e89b9cef49c2aea02273a1",
+      "sourceKind": "locally-authored-multiview-renders",
+      "azimuth": 180,
+      "elevation": 18
+    },
+    {
+      "name": "hanyuan_018.png",
+      "label": "西侧",
+      "url": "/generated/daming/views/hanyuan_018.png",
+      "sha256": "01bc6d164e739467b62156fca04f1aea66d71f10f972eb9fd0134de314c42cd3",
+      "sourceKind": "locally-authored-multiview-renders",
+      "azimuth": 270,
+      "elevation": 18
+    },
+    {
+      "name": "hanyuan_049.png",
+      "label": "屋顶",
+      "url": "/generated/daming/views/hanyuan_049.png",
+      "sha256": "ddb5aa2425b3048765dc347aef2618efc14594ea08da120b0f7913fbc6408c16",
+      "sourceKind": "locally-authored-multiview-renders",
+      "azimuth": 15,
+      "elevation": 55
+    },
+    {
+      "name": "hanyuan_088.png",
+      "label": "近景",
+      "url": "/generated/daming/views/hanyuan_088.png",
+      "sha256": "5306b902a59cae104b35f67482408987141f43cffe196036e041d17b9ebbe55c",
+      "sourceKind": "locally-authored-multiview-renders",
+      "azimuth": 0.0,
+      "elevation": 25
+    }
+  ],
+  "validation": [
+    {
+      "name": "hanyuan_007.png",
+      "inputUrl": "/generated/daming/validation/hanyuan_007-input.png",
+      "renderUrl": "/generated/daming/validation/hanyuan_007-render.png"
+    },
+    {
+      "name": "hanyuan_015.png",
+      "inputUrl": "/generated/daming/validation/hanyuan_015-input.png",
+      "renderUrl": "/generated/daming/validation/hanyuan_015-render.png"
+    },
+    {
+      "name": "hanyuan_023.png",
+      "inputUrl": "/generated/daming/validation/hanyuan_023-input.png",
+      "renderUrl": "/generated/daming/validation/hanyuan_023-render.png"
+    },
+    {
+      "name": "hanyuan_031.png",
+      "inputUrl": "/generated/daming/validation/hanyuan_031-input.png",
+      "renderUrl": "/generated/daming/validation/hanyuan_031-render.png"
+    },
+    {
+      "name": "hanyuan_039.png",
+      "inputUrl": "/generated/daming/validation/hanyuan_039-input.png",
+      "renderUrl": "/generated/daming/validation/hanyuan_039-render.png"
+    },
+    {
+      "name": "hanyuan_047.png",
+      "inputUrl": "/generated/daming/validation/hanyuan_047-input.png",
+      "renderUrl": "/generated/daming/validation/hanyuan_047-render.png"
+    }
+  ],
+  "camera": {
+    "position": [
+      55,
+      37,
+      78
+    ],
+    "target": [
+      0,
+      0,
+      0
+    ],
+    "fov": 38,
+    "fitMargin": 1.02
+  },
+  "viewpoints": {
+    "top": {
+      "position": [
+        0.02,
+        160,
+        0.02
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ],
+      "fov": 38
+    },
+    "hall": {
+      "position": [
+        31,
+        17,
+        48
+      ],
+      "target": [
+        0,
+        9,
+        0
+      ],
+      "fov": 40
+    },
+    "east": {
+      "position": [
+        53,
+        16,
+        28
+      ],
+      "target": [
+        34,
+        6,
+        3.8
+      ],
+      "fov": 42
+    },
+    "west": {
+      "position": [
+        -53,
+        16,
+        28
+      ],
+      "target": [
+        -34,
+        6,
+        3.8
+      ],
+      "fov": 42
+    },
+    "terrace": {
+      "position": [
+        24,
+        13,
+        38
+      ],
+      "target": [
+        0,
+        2,
+        12
+      ],
+      "fov": 45
+    }
+  },
+  "bounds": {
+    "min": [
+      -44.52456283569336,
+      -2.0419600009918213,
+      -22.54595375061035
+    ],
+    "max": [
+      45.31669616699219,
+      16.148239135742188,
+      22.54716682434082
+    ]
+  },
+  "references": [
+    {
+      "url": "https://www.mct.gov.cn/whzx/whyw/201112/t20111201_707767.htm",
+      "role": "Historical context and identity, not a geometric survey"
+    },
+    {
+      "url": "https://commons.wikimedia.org/wiki/Category:Daming_Palace",
+      "role": "Research/reference imagery only, no external finished geometry used"
+    }
+  ],
+  "geometryPolicy": "Locally authored coherent 3D scene, calibrated generated views and area-sampled authored initialization, then actual Gaussian optimization. Complete learned covariance, rotation, opacity and SH retained. No single-image depth or borrowed finished model. Site coordinates are an archive association, not a georeferenced model.",
+  "packagedAt": "2026-10-29T18:52:43.630860+00:00",
+  "training": {
+    "status": "completed",
+    "startedAt": "2026-10-29T18:22:15.653Z",
+    "tool": "Brush",
+    "version": "0.3.0",
+    "generatedViewCount": 104,
+    "trainingViews": 91,
+    "validationViews": 13,
+    "initialPoints": 180000,
+    "completedSteps": 24000,
+    "device": "NVIDIA GeForce RTX 3050 Laptop GPU",
+    "endedAt": "2026-10-29T18:37:02.272Z",
+    "selectedCheckpoint": {
+      "iteration": 24000,
+      "psnr": 36.90633375671557,
+      "views": [
+        {
+          "name": "hanyuan_007.png",
+          "pixels": 143837,
+          "psnr": 34.834839638562926
+        },
+        {
+          "name": "hanyuan_015.png",
+          "pixels": 149148,
+          "psnr": 35.369633172246964
+        },
+        {
+          "name": "hanyuan_023.png",
+          "pixels": 153298,
+          "psnr": 35.621162314807066
+        },
+        {
+          "name": "hanyuan_031.png",
+          "pixels": 211202,
+          "psnr": 38.72745830488532
+        },
+        {
+          "name": "hanyuan_039.png",
+          "pixels": 205282,
+          "psnr": 38.78857976474566
+        },
+        {
+          "name": "hanyuan_047.png",
+          "pixels": 207535,
+          "psnr": 39.25339616375613
+        },
+        {
+          "name": "hanyuan_055.png",
+          "pixels": 243507,
+          "psnr": 40.97779231419309
+        },
+        {
+          "name": "hanyuan_063.png",
+          "pixels": 252334,
+          "psnr": 41.08033606445963
+        },
+        {
+          "name": "hanyuan_071.png",
+          "pixels": 254167,
+          "psnr": 40.66045362410078
+        },
+        {
+          "name": "hanyuan_079.png",
+          "pixels": 280730,
+          "psnr": 40.40271807957339
+        },
+        {
+          "name": "hanyuan_087.png",
+          "pixels": 95676,
+          "psnr": 25.129355750251975
+        },
+        {
+          "name": "hanyuan_095.png",
+          "pixels": 347048,
+          "psnr": 35.00870031110482
+        },
+        {
+          "name": "hanyuan_103.png",
+          "pixels": 355655,
+          "psnr": 33.92791333461455
+        }
+      ]
+    },
+    "validationCaveat": "Image reproduction of the locally authored concept; use input alpha >=250 and RGB MSE. Held-out renders are not used in image optimization, but all initial geometry comes from the authored scene. No archaeological or geometric survey accuracy is implied."
+  }
+}

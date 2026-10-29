@@ -2,3 +2,6 @@
 public/generated/**/*.ply -text
 public/generated/**/*.bin -text
 public/generated/**/training.txt -text
+scripts/build-daming-concept.py text eol=lf
+scripts/train-daming-concept.mjs text eol=lf
+scripts/package-daming-concept.py text eol=lf

@@ -6,7 +6,7 @@ import { siteModelKey } from "./reconstruction.js";
 import { siteName } from "./presentation.js";
 import { CAPTURE_DIRECTIONS, captureCatalogKey, captureImageKey, validateCaptureFiles, inspectCapturePhoto, validCaptureCatalog, captureManifest, buildCaptureZip } from "./captureData.js";
 
-export default function CaptureWorkspace({ site }) {
+export default function CaptureWorkspace({ site, hasConcept = false }) {
   const [photos, setPhotos] = useState([]);
   const [checks, setChecks] = useState({ permission: false, coverage: false, scale: false });
   const [subject, setSubject] = useState("");
@@ -111,6 +111,7 @@ export default function CaptureWorkspace({ site }) {
     persist(photos, nextChecks, nextSubject).catch(() => {});
   }
   return <div className="capture-workspace">
+    {hasConcept && <p className="capture-limit-note muted">此处整理实拍原片，与已生成的建筑复原构想分别保存。下列状态仅对应本批实拍资料。</p>}
     <div className="capture-real-steps" aria-label="当前遗址的重建状态">{[["原片整理", photos.length ? `${photos.length} 张已保存` : "等待对应原片"], ["相机解算", "尚未开始"], ["高斯训练", "尚未开始"], ["画面验收", "尚未进行"]].map(([title, value], i) => <div key={title}><span>0{i+1}</span><strong>{title}</strong><small>{value}</small></div>)}</div>
     {notice && <div className="notice" role="status"><CircleAlert size={16} />{notice}</div>}
     <div className="capture-layout"><section><div className="section-heading"><div><h2>整理{site ? siteName(site) : "遗址"}的原片</h2><p className="muted">原图留在此设备。只收集同一主体，不用无关照片补齐模型。</p></div><span className="badge gray">{busy || (!ready ? "读取原片目录…" : saveError ? "保存失败 · 请导出备份" : saved ? "已保存到此设备" : "保存中…")}</span></div>
