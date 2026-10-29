@@ -16,7 +16,11 @@ export const trainedGaussianCases = [
 
 export function gaussianCaseId(hash) {
   const [page, query = ""] = String(hash).replace(/^#/, "").split("?");
-  return page === "reconstruction" ? new URLSearchParams(query).get("case") || "" : "";
+  if (page !== "reconstruction") return "";
+  const params = new URLSearchParams(query);
+  // The workspace entry opens a trained local scene. Explicit site links still
+  // open only that site's archive, even if it has no trained model yet.
+  return params.get("case") || (params.has("site") ? "" : "seem-church");
 }
 
 export function gaussianCaseRoute(id, siteId) {

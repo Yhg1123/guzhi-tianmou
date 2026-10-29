@@ -12,7 +12,7 @@ export default defineConfig({
     host: "0.0.0.0",
     allowedHosts: ["terminal.local"],
     watch: {
-      ignored: ["**/public/assets/archaeology-aerial.png"],
+      ignored: ["**/public/assets/archaeology-aerial.png", "**/qa/**"],
     },
     warmup: {
       clientFiles: ["./src/main.jsx"],

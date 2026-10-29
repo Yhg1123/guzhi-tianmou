@@ -4,6 +4,7 @@ import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { trainedGaussianCases, gaussianCaseRoute, gaussianCaseId } from "../src/trainedGaussians.js";
 import { workspaceRoute } from "../src/reconstruction.js";
+import { gaussianViewPose } from "../src/gaussianNavigation.js";
 
 test("independent Gaussian scene links preserve project-site identity without pretending to match it", () => {
   for (const id of ["seem-church", "lingyue", "a & b/#"]) {
@@ -12,9 +13,33 @@ test("independent Gaussian scene links preserve project-site identity without pr
     assert.deepEqual(workspaceRoute("#" + route), { page: "reconstruction", siteId: "遗址 & A" });
   }
   assert.equal(gaussianCaseId("#map?case=lingyue"), "");
+  assert.equal(gaussianCaseId("#reconstruction"), "seem-church");
+  assert.equal(gaussianCaseId("#reconstruction?site=unmatched-site"), "");
   assert.equal(gaussianCaseId("#reconstruction?site=demo-xianyang"), "");
   assert.equal(gaussianCaseId("#" + gaussianCaseRoute("lingyue")), "lingyue");
   assert.ok(trainedGaussianCases.every((scene) => !scene.site && !scene.siteId && scene.trainedInThisApp === false));
+});
+
+test("spatial presets orbit the trained camera through opposite sides without flattening or changing the target", () => {
+  const camera = trainedGaussianCases.find((scene) => scene.id === "seem-church").camera;
+  const offset = (pose) => pose.position.map((v, i) => v - camera.target[i]);
+  const originalDistance = Math.hypot(...camera.position.map((v, i) => v - camera.target[i]));
+  const front = offset(gaussianViewPose(camera, "capture"));
+  assert.ok(Math.abs(Math.hypot(...front) / originalDistance - 1.3) < 1e-10);
+  const back = offset(gaussianViewPose(camera, "back"));
+  const left = offset(gaussianViewPose(camera, "left"));
+  const right = offset(gaussianViewPose(camera, "right"));
+  assert.ok(Math.abs(front[0] + back[0]) < 1e-10 && Math.abs(front[2] + back[2]) < 1e-10);
+  assert.ok(Math.abs(left[0] + right[0]) < 1e-10 && Math.abs(left[2] + right[2]) < 1e-10);
+  assert.ok(Math.abs(left[0] * front[0] + left[2] * front[2]) < 1e-10);
+  for (const preset of ["capture", "left", "back", "right", "top"]) {
+    const pose = gaussianViewPose(camera, preset, 1.5);
+    assert.deepEqual(pose.target, camera.target);
+    assert.ok(Math.abs(Math.hypot(...offset(pose)) - Math.hypot(...front)) < 0.001);
+    const portrait = gaussianViewPose(camera, preset, 0.5);
+    assert.ok(Math.abs(Math.hypot(...offset(portrait)) / Math.hypot(...offset(pose)) - 3) < 1e-10);
+  }
+  assert.throws(() => gaussianViewPose(camera, "invalid"));
 });
 
 test("online Chinese heritage scene uses the publisher's public embed without redistributing a closed-download asset", () => {

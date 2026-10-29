@@ -5,7 +5,7 @@ import { trainedGaussianCases } from "./trainedGaussians.js";
 
 export default function TrainedGaussianView({ scene, onSelect, onBack }) {
   return <div className="reconstruction-page trained-gaussian-page">
-    <div className="page-title"><div><span className="eyebrow">3D GAUSSIAN SPLATTING</span><h1>实景 3D 高斯</h1></div><button className="button" onClick={onBack}><ArrowLeft size={15} />返回遗址档案</button></div>
+    <div className="page-title"><div><span className="eyebrow">3D GAUSSIAN SPLATTING</span><h1>实景 3D 高斯</h1></div><button className="button" onClick={onBack}><ArrowLeft size={15} />遗址影像与模型档案</button></div>
     <div className="trained-case-context"><label>选择场景<select aria-label="选择3D高斯场景" value={scene.id} onChange={(e) => onSelect(e.target.value)}>{trainedGaussianCases.map((c) => <option key={c.id} value={c.id}>{c.title} · {c.delivery === "online" ? "在线实景" : "本地模型"}</option>)}</select></label><span className="badge green">独立公开场景</span></div>
     <div className="reconstruction-grid trained-workspace-grid"><GaussianSceneStage key={scene.id} scene={scene} />
       <aside className="model-inspector"><div className="inspector-heading"><Box size={18} /><h2>三维场景信息</h2></div><span className="badge green">实景 3DGS</span><h3 className="model-name">{scene.title}</h3>

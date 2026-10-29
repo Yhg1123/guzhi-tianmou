@@ -5,6 +5,7 @@ import { RotateCcw, Play, Pause, Scan, CircleAlert, Plus, Minus } from "lucide-r
 import { createSampleSplat } from "./sampleSplat.js";
 import { heritageSample as defaultSample } from "./heritageSample.js";
 import { photoFraming } from "./splatFraming.js";
+import { gaussianViewPose } from "./gaussianNavigation.js";
 
 export function SplatViewer({ file, modelUrl, sourceAsset, name, isSample = false, sampleMode = "heritage", sampleData = defaultSample }) {
   const heritageSample = sampleData;
@@ -55,10 +56,11 @@ export function SplatViewer({ file, modelUrl, sourceAsset, name, isSample = fals
         const frame = (preset = viewRef.current) => {
           viewer.camera.aspect = Math.max(1, root.clientWidth) / Math.max(1, root.clientHeight);
           viewer.camera.zoom = 1;
-          if (trained && preset === "capture" && sampleData.camera) {
-            viewer.camera.position.fromArray(sampleData.camera.position);
-            viewer.controls.target.fromArray(sampleData.camera.target);
-            viewer.camera.fov = sampleData.camera.fov;
+          if (trained && preset !== "overview" && sampleData.camera) {
+            const pose = gaussianViewPose(sampleData.camera, preset, viewer.camera.aspect);
+            viewer.camera.position.fromArray(pose.position);
+            viewer.controls.target.fromArray(pose.target);
+            viewer.camera.fov = pose.fov;
             viewer.camera.near = 0.01; viewer.camera.far = 1000;
             viewer.camera.updateProjectionMatrix(); viewer.controls.update(); viewer.forceRenderNextFrame();
             return;
@@ -103,10 +105,32 @@ export function SplatViewer({ file, modelUrl, sourceAsset, name, isSample = fals
           viewer.camera.updateProjectionMatrix(); viewer.controls.target.copy(center); viewer.controls.update(); viewer.forceRenderNextFrame();
         };
         frameRef.current = frame; frame(); viewer.start();
+        if (trained) {
+          // Scope keyboard navigation to the focused scene instead of letting
+          // OrbitControls pan globally while the user operates other fields.
+          viewer.perspectiveControls?.stopListenToKeyEvents();
+          viewer.orthographicControls?.stopListenToKeyEvents();
+        }
+        viewer.controls.autoRotateSpeed = 0.65;
+        viewer.controls.addEventListener("start", () => {
+          setRotate(false);
+          if (!photoDepth) { viewRef.current = "custom"; setView("custom"); }
+        });
+        if (trained && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) setRotate(true);
         resizeObserver = new ResizeObserver(() => {
           if (!alive || !root.clientHeight) return;
+          const oldAspect = viewer.camera.aspect;
           viewer.camera.aspect = root.clientWidth / root.clientHeight;
-          viewer.camera.updateProjectionMatrix(); frame();
+          // Preserve the user's spatial viewpoint and zoom on resize. Only the
+          // source-photo projection needs to be refitted to its image frame.
+          if (photoDepth) frame();
+          else {
+            if (trained && oldAspect !== viewer.camera.aspect) {
+              const fitChange = Math.max(1, 1.5 / viewer.camera.aspect) / Math.max(1, 1.5 / oldAspect);
+              viewer.camera.position.sub(viewer.controls.target).multiplyScalar(fitChange).add(viewer.controls.target);
+            }
+            viewer.camera.updateProjectionMatrix(); viewer.controls.update(); viewer.forceRenderNextFrame();
+          }
         });
         resizeObserver.observe(root);
         setCount(n); setStatus("ready");
@@ -120,14 +144,39 @@ export function SplatViewer({ file, modelUrl, sourceAsset, name, isSample = fals
       if (viewer) Promise.resolve(viewer.dispose()).catch(() => {}).finally(() => root.remove()); else root.remove();
     };
   }, [file, modelUrl, sourceAsset, photoDepth, axis, retry, sampleMode, sampleData]);
-  useEffect(() => { if (viewerRef.current?.controls) viewerRef.current.controls.autoRotate = rotate; }, [rotate]);
+  useEffect(() => {
+    const sync = () => { if (viewerRef.current?.controls) viewerRef.current.controls.autoRotate = rotate && !document.hidden; };
+    sync(); document.addEventListener("visibilitychange", sync);
+    return () => document.removeEventListener("visibilitychange", sync);
+  }, [rotate, status]);
   const zoom = (scale) => {
     const viewer = viewerRef.current; if (!viewer?.controls) return;
+    setRotate(false);
     if (photoDepth) { viewer.camera.zoom = THREE.MathUtils.clamp(viewer.camera.zoom / scale, 0.6, 3); viewer.camera.updateProjectionMatrix(); setView(Math.abs(viewer.camera.zoom - 1) < 0.001 ? "overview" : "custom"); }
     else { viewer.camera.position.sub(viewer.controls.target).multiplyScalar(scale).add(viewer.controls.target); viewer.controls.update(); }
     viewer.forceRenderNextFrame();
   };
-  const fit = () => { viewRef.current = "overview"; setView("overview"); setRotate(false); frameRef.current?.("overview"); };
+  const fit = () => { const preset = trained ? "capture" : "overview"; viewRef.current = preset; setView(preset); setRotate(false); frameRef.current?.(preset); };
+  const navigateKeyboard = (event) => {
+    const viewer = viewerRef.current;
+    if (!trained || status !== "ready" || !viewer?.controls || event.altKey || event.ctrlKey || event.metaKey) return;
+    if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "+", "=", "-", "Home"].includes(event.key)) return;
+    event.preventDefault(); event.stopPropagation(); setRotate(false);
+    if (event.key === "Home") { fit(); return; }
+    if (["+", "=", "-"].includes(event.key)) { zoom(event.key === "-" ? 1.15 : 1 / 1.15); return; }
+    const horizontal = event.key === "ArrowLeft" || event.key === "ArrowRight";
+    const sign = event.key === "ArrowLeft" || event.key === "ArrowUp" ? 1 : -1;
+    const offset = viewer.camera.position.clone().sub(viewer.controls.target);
+    const right = new THREE.Vector3().crossVectors(offset, viewer.camera.up).normalize();
+    if (event.shiftKey) {
+      const move = (horizontal ? right : viewer.camera.up.clone()).multiplyScalar(offset.length() * 0.035 * sign);
+      viewer.camera.position.add(move); viewer.controls.target.add(move);
+    } else {
+      offset.applyAxisAngle(horizontal ? viewer.camera.up.clone().normalize() : right, sign * Math.PI / 18);
+      viewer.camera.position.copy(viewer.controls.target).add(offset);
+    }
+    viewRef.current = "custom"; setView("custom"); viewer.controls.update(); viewer.forceRenderNextFrame();
+  };
   useEffect(() => {
     const element = host.current;
     if (!photoDepth) return undefined;
@@ -141,17 +190,18 @@ export function SplatViewer({ file, modelUrl, sourceAsset, name, isSample = fals
   }, [photoDepth]);
   return <section className={`splat-stage ${background} ${photoDepth ? "photo-depth-stage" : trained ? "trained-gs-stage" : ""}`} aria-label={photoDepth ? "照片空间预览查看器" : photogrammetry ? "摄影测量点云查看器" : "三维高斯泼溅查看器"}>
     <div className="splat-chrome"><div className="splat-stage-label"><span className="badge dark-badge">{photoDepth ? "PHOTO · DEPTH" : photogrammetry ? "HERITAGE · PHOTOGRAMMETRY" : "3D GAUSSIAN SPLATTING"}</span><span>{photogrammetry ? `${heritageSample.title} · 公开摄影测量采样` : name}</span></div>
-      <div className="splat-toolbar"><button className="icon-button splat-fit" aria-label={photoDepth ? "显示全图" : "适应模型范围"} title="恢复完整取景" disabled={status !== "ready"} onClick={fit}><Scan size={18} />{photoDepth && <span>显示全图</span>}</button>
+      <div className="splat-toolbar"><button className="icon-button splat-fit" aria-label={photoDepth ? "显示全图" : trained ? "恢复初始视角" : "适应模型范围"} title={trained ? "恢复初始视角" : "恢复完整取景"} disabled={status !== "ready"} onClick={fit}><Scan size={18} />{photoDepth && <span>显示全图</span>}</button>
         {!photoDepth && <button className="icon-button" aria-label={rotate ? "暂停旋转" : "自动旋转"} disabled={status !== "ready"} onClick={() => setRotate(!rotate)}>{rotate ? <Pause size={18} /> : <Play size={18} />}</button>}
         <button className="icon-button" aria-label="放大模型" title="放大模型" disabled={status !== "ready"} onClick={() => zoom(0.8)}><Plus size={18} /></button><button className="icon-button" aria-label="缩小模型" title="缩小模型" disabled={status !== "ready"} onClick={() => zoom(1.25)}><Minus size={18} /></button>
-        {!photoDepth && <><span className="tool-divider" /><label className="axis-label">上轴<select aria-label="模型上轴" value={axis} onChange={(e) => setAxis(e.target.value)}><option value="y">Y+</option><option value="-y">Y−</option><option value="z">Z+</option></select></label></>}
+        {!photoDepth && !trained && <><span className="tool-divider" /><label className="axis-label">上轴<select aria-label="模型上轴" value={axis} onChange={(e) => setAxis(e.target.value)}><option value="y">Y+</option><option value="-y">Y−</option><option value="z">Z+</option></select></label></>}
         <button className={`background-swatch ${background}`} title="切换背景颜色" aria-label="切换背景颜色" onClick={() => setBackground(background === "dark" ? "light" : "dark")} />
       </div>
     </div>
-    <div ref={host} className="splat-host" />
+    <div ref={host} className="splat-host" tabIndex={trained ? 0 : undefined} role={trained ? "group" : undefined} aria-label={trained ? "三维场景操作区，方向键环绕，Shift加方向键平移，加减键缩放，Home复位" : undefined} onPointerDown={trained ? (e) => e.currentTarget.focus({ preventScroll: true }) : undefined} onKeyDown={navigateKeyboard} />
     {status === "loading" && <div className="splat-overlay" role="status"><span className="loader" />{photogrammetry ? "正在加载摄影测量点云…" : "正在解析高斯模型…"}</div>}
     {status === "error" && <div className="splat-overlay" role="alert"><CircleAlert size={28} /><strong>模型暂时无法显示</strong><p>{message}</p><button className="button" onClick={() => setRetry(retry + 1)}><RotateCcw size={15} />重试加载</button></div>}
-    <div className="splat-footer"><div className="splat-presets" role="group" aria-label="观察视角">{(photoDepth ? [["overview", "完整取景"], ["front", "向左微转"], ["top", "向右微转"], ["detail", "细节"]] : trained ? [["capture", "推荐视角"], ["overview", "整体"], ["front", "正面"], ["top", "俯视"]] : [["overview", "全景"], ["front", "正面"], ["top", "俯视"], ["detail", "细节"]]).map(([id, title]) => <button key={id} disabled={status !== "ready"} aria-pressed={view === id} onClick={() => { viewRef.current = id; setView(id); frameRef.current?.(id); }}>{title}</button>)}<span>{photoDepth ? "拖拽微转 · 滚轮缩放" : "拖拽旋转 · 滚轮缩放"}</span></div>
+    <div className="splat-footer"><div className="splat-presets" role="group" aria-label="观察视角">{(photoDepth ? [["overview", "完整取景"], ["front", "向左微转"], ["top", "向右微转"], ["detail", "细节"]] : trained ? [["capture", "初始视角"], ["left", "左侧"], ["back", "背面"], ["right", "右侧"], ["top", "俯视"], ["overview", "全场景"]] : [["overview", "全景"], ["front", "正面"], ["top", "俯视"], ["detail", "细节"]]).map(([id, title]) => <button key={id} disabled={status !== "ready"} aria-pressed={view === id} onClick={() => { setRotate(false); viewRef.current = id; setView(id); frameRef.current?.(id); }}>{title}</button>)}<span>{photoDepth ? "拖拽微转 · 滚轮缩放" : "拖拽环绕 · 右键平移 · 滚轮缩放"}</span></div>
+      {trained && <div className="splat-keyboard-hint">点击场景后：方向键环绕 · Shift + 方向键平移 · Home 复位</div>}
       <div className="splat-status"><span>{status === "ready" ? `${count.toLocaleString()} ${photogrammetry ? "个采样点" : "个高斯点"}` : status === "error" ? "加载失败" : "加载中"}</span><span>{photoDepth ? "单图深度推断 · 相对尺度" : photogrammetry ? "摄影测量点云 · 非训练 3DGS · 尺度未标定" : trained ? "实景训练 3DGS · 尺度未核验" : "局部坐标 · 尺度未经标定"}</span></div>
     </div>
   </section>;

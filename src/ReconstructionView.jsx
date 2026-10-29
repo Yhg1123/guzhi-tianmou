@@ -18,7 +18,7 @@ export default function ReconstructionView({ sites, selectedId, onSelectSite, on
   const site = sites.find((s) => s.id === selectedId) || (!selectedId ? sites[0] : null);
   const [caseId, setCaseId] = useState(() => gaussianCaseId(window.location.hash));
   useEffect(() => { const change = () => setCaseId(gaussianCaseId(window.location.hash)); window.addEventListener("hashchange", change); return () => window.removeEventListener("hashchange", change); }, []);
-  const onBack = () => { window.location.hash = site ? reconstructionRoute(site.id) : "reconstruction"; };
+  const onBack = () => { window.location.hash = site ? reconstructionRoute(site.id) : "map"; };
   if (caseId) {
     const scene = trainedGaussianCases.find((c) => c.id === caseId);
     return scene ? <TrainedGaussianView scene={scene} onSelect={(id) => { window.location.hash = gaussianCaseRoute(id, site?.id); }} onBack={onBack} /> : <div className="reconstruction-page"><h1>未找到三维场景</h1><button className="button" onClick={onBack}>返回遗址档案</button></div>;

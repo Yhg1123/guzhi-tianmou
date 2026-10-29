@@ -36,4 +36,6 @@ The user clarified that actual 3D Gaussian Splatting with freely explorable spat
 
 When implementing from a selected generated mock, treat that image as the source of truth for layout, component anatomy, density, spacing, color, typography, visible content, and hierarchy.
 
+On 2026-10-29 the user reiterated that the result still feels two-dimensional. The main sidebar's “三维实景” entry must open an actual trained local 3DGS scene by default, while explicit `site` links continue to open only the corresponding project archive. Keep single-photo depth previews in the site imagery flow; never pass them off as full 3D. Provide opposite-side camera presets, free orbit/pan/zoom, and keyboard navigation for local trained scenes. Default slow orbit respects reduced-motion preferences, pauses on manual input and hidden tabs, and resizing must preserve the user's viewpoint.
+
 Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts/prepare-sites-build.mjs`, and `tests/sites-worker.test.mjs` intact so the same local prototype can be handed to Sites. Before a Sites handoff, run `npm run build` and `npm run test:sites`; the build must leave `dist/client/index.html`, `dist/server/index.js`, and `dist/.openai/hosting.json`.
