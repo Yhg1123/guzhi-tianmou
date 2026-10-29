@@ -37,9 +37,13 @@ export function SplatViewer({ file, modelUrl, sourceAsset, name, isSample = fals
     viewRef.current = trained ? "capture" : "overview"; setView(viewRef.current);
     const up = photoDepth ? [0, 1, 0] : axis === "z" ? [0, 0, 1] : axis === "-y" ? [0, -1, 0] : [0, 1, 0];
     try {
-      viewer = new Viewer({ rootElement: root, cameraUp: up, initialCameraPosition: [7, 5, 9], initialCameraLookAt: [0, 1.4, 0], sharedMemoryForWorkers: false, gpuAcceleratedSort: false, enableSIMDInSort: true, sphericalHarmonicsDegree: 0, sceneRevealMode: SceneRevealMode.Instant, ignoreDevicePixelRatio: true });
+      viewer = new Viewer({ rootElement: root, cameraUp: up, initialCameraPosition: [7, 5, 9], initialCameraLookAt: [0, 1.4, 0], sharedMemoryForWorkers: false, gpuAcceleratedSort: false, enableSIMDInSort: true, sphericalHarmonicsDegree: trained ? (sampleData.shDegree || 0) : 0, sceneRevealMode: SceneRevealMode.Instant, ignoreDevicePixelRatio: true });
       viewerRef.current = viewer;
-      const ext = file?.name?.split(".").pop().toLowerCase() || "splat";
+      // A single click focuses this workspace's keyboard controls. The library's
+      // automatic ray-picked pivot can hit a large background Gaussian and turn
+      // the camera away from the building, so retain our documented orbit pivot.
+      if (trained) viewer.onMouseClick = () => {};
+      const ext = (file?.name || modelUrl?.split(/[?#]/)[0])?.split(".").pop().toLowerCase() || "splat";
       const format = { splat: SceneFormat.Splat, ply: SceneFormat.Ply, ksplat: SceneFormat.KSplat }[ext];
       viewer.addSplatScene(url, { format, showLoadingUI: false, progressiveLoad: false, splatAlphaRemovalThreshold: 5 }).then(() => {
         if (!alive) return;

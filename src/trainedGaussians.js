@@ -1,26 +1,16 @@
-import seem from "./trainedGaussianCatalog.json" with { type: "json" };
+import generated from "./localGaussianCatalog.json" with { type: "json" };
 
-export const trainedGaussianCases = [
-  {
-    id: "lingyue", kind: "gaussian", representation: "trained-3dgs", delivery: "online",
-    title: "北京灵岳寺", subtitle: "中国 · 北京门头沟 · 古寺实景",
-    credit: "roblinka / SuperSplat", sourceUrl: "https://superspl.at/scene/073bac93",
-    embedUrl: "https://superspl.at/s?id=073bac93", pointCountLabel: "约 660 万",
-    bytes: 75673627, license: "来源平台公开浏览；文件未开放下载",
-    heritageSourceUrl: "https://wwj.beijing.gov.cn/bjww/362771/362779/dqpqgzdwwbhdw/523508/index.html",
-    description: "灵岳寺古建筑与院落的三维高斯实景，由作者使用 XGRIDS L2 Pro 采集并发布。通过来源平台提供的嵌入查看器浏览，模型文件未复制到本站。",
-    captureDate: null, trainedInThisApp: false, metricScaleVerified: false, georeferenced: false,
-  },
-  { ...seem, camera: { ...seem.camera, fov: 75 }, delivery: "local", pointCountLabel: seem.pointCount.toLocaleString("en-US") },
-];
+// Only outputs of this workspace's completed photo-training runs belong here.
+export const trainedGaussianCases = generated?.trainedInThisApp === true
+  ? [{ ...generated, pointCountLabel: generated.pointCount.toLocaleString("en-US") }]
+  : [];
+export const localGaussianCase = "local-cb";
 
 export function gaussianCaseId(hash) {
   const [page, query = ""] = String(hash).replace(/^#/, "").split("?");
   if (page !== "reconstruction") return "";
   const params = new URLSearchParams(query);
-  // The workspace entry opens a trained local scene. Explicit site links still
-  // open only that site's archive, even if it has no trained model yet.
-  return params.get("case") || (params.has("site") ? "" : "seem-church");
+  return params.get("case") || (params.has("site") ? "" : localGaussianCase);
 }
 
 export function gaussianCaseRoute(id, siteId) {

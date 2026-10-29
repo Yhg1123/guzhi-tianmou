@@ -13,19 +13,19 @@ test("independent Gaussian scene links preserve project-site identity without pr
     assert.deepEqual(workspaceRoute("#" + route), { page: "reconstruction", siteId: "遗址 & A" });
   }
   assert.equal(gaussianCaseId("#map?case=lingyue"), "");
-  assert.equal(gaussianCaseId("#reconstruction"), "seem-church");
+  assert.equal(gaussianCaseId("#reconstruction"), "local-cb");
   assert.equal(gaussianCaseId("#reconstruction?site=unmatched-site"), "");
   assert.equal(gaussianCaseId("#reconstruction?site=demo-xianyang"), "");
   assert.equal(gaussianCaseId("#" + gaussianCaseRoute("lingyue")), "lingyue");
-  assert.ok(trainedGaussianCases.every((scene) => !scene.site && !scene.siteId && scene.trainedInThisApp === false));
+  assert.ok(trainedGaussianCases.every((scene) => !scene.site && !scene.siteId && scene.trainedInThisApp === true));
 });
 
 test("spatial presets orbit the trained camera through opposite sides without flattening or changing the target", () => {
-  const camera = trainedGaussianCases.find((scene) => scene.id === "seem-church").camera;
+  const camera = trainedGaussianCases.find((scene) => scene.id === "local-cb").camera;
   const offset = (pose) => pose.position.map((v, i) => v - camera.target[i]);
   const originalDistance = Math.hypot(...camera.position.map((v, i) => v - camera.target[i]));
   const front = offset(gaussianViewPose(camera, "capture"));
-  assert.ok(Math.abs(Math.hypot(...front) / originalDistance - 1.3) < 1e-10);
+  assert.ok(Math.abs(Math.hypot(...front) / originalDistance - (camera.fitMargin || 1.3)) < 1e-10);
   const back = offset(gaussianViewPose(camera, "back"));
   const left = offset(gaussianViewPose(camera, "left"));
   const right = offset(gaussianViewPose(camera, "right"));
@@ -42,17 +42,14 @@ test("spatial presets orbit the trained camera through opposite sides without fl
   assert.throws(() => gaussianViewPose(camera, "invalid"));
 });
 
-test("online Chinese heritage scene uses the publisher's public embed without redistributing a closed-download asset", () => {
-  const scene = trainedGaussianCases.find((scene) => scene.id === "lingyue");
-  assert.equal(scene.delivery, "online");
-  assert.equal(scene.embedUrl, "https://superspl.at/s?id=073bac93");
-  assert.equal(scene.url, undefined);
-  assert.match(scene.license, /文件未开放下载/);
-  assert.match(scene.heritageSourceUrl, /^https:\/\/wwj\.beijing\.gov\.cn\//);
+test("finished third-party scenes and external embeds are retired from the normal workspace", () => {
+  assert.ok(trainedGaussianCases.length > 0);
+  assert.ok(trainedGaussianCases.every(scene => scene.delivery === "local" && scene.trainedInThisApp && !scene.embedUrl));
+  assert.ok(trainedGaussianCases.every(scene => !["lingyue","seem-church"].includes(scene.id)));
 });
 
-test("local scene retains trained 3D Gaussian covariance, rotation and alpha across a full spatial volume", async () => {
-  const scene = trainedGaussianCases.find((scene) => scene.id === "seem-church");
+test("the archived third-party asset retains its original authorship and Gaussian parameters", async () => {
+  const scene = JSON.parse(await readFile(new URL("../src/trainedGaussianCatalog.json", import.meta.url), "utf8"));
   const manifest = JSON.parse(await readFile(new URL("../public" + scene.sourceManifest, import.meta.url), "utf8"));
   const bytes = await readFile(new URL("../public" + scene.url, import.meta.url));
   assert.equal(manifest.representation, "trained-3dgs");

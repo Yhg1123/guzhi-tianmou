@@ -1,0 +1,334 @@
+{
+  "schema": 1,
+  "id": "local-cb",
+  "kind": "gaussian",
+  "representation": "trained-3dgs",
+  "delivery": "local",
+  "title": "托斯卡纳穹顶建筑",
+  "subtitle": "意大利 · 托斯卡纳 · 原始影像场景 5_CB",
+  "url": "/generated/cb/model.ply",
+  "rawUrl": "/generated/cb/raw-model.ply",
+  "rawPointCount": 400000,
+  "rawBytes": 36800652,
+  "rawSha256": "8b592e225381155c2394b204a21e58c5b8dcde91da28187cf9003e8ff54afe1c",
+  "displayFilter": {
+    "rawCount": 400000,
+    "keptCount": 366072,
+    "minimumOpacity": 0.015,
+    "maximumOneSigmaScale": 0.7686448020810283,
+    "referenceSeedRadius": 7.686448020810282,
+    "rule": "Keep trained records with opacity >=0.015 and largest one-sigma scale <=0.1 times the navigation reference radius. Conservative presentation cleanup only; no points added or parameters changed.",
+    "indicesUrl": "/generated/cb/kept-indices.bin",
+    "indicesSha256": "149a0402dd164447ec475ce9e630387585e67c60d03164b94c1b29026ccab419"
+  },
+  "previewUrl": "/generated/cb/photos/5_CB_013.jpg",
+  "pointCount": 366072,
+  "bytes": 33679351,
+  "sha256": "99540de3944c7a8bd4a29c7eba7a0b805e39c212b0f722cc940264f40d453aa3",
+  "shDegree": 1,
+  "credit": "古址天眸 · 本机训练 / 原始摄影：Pellis 等",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "sourceUrl": "https://zenodo.org/records/14626611",
+  "sourceManifest": "/generated/cb/source.json",
+  "trainingRecordUrl": "/generated/cb/training.json",
+  "trainingLogUrl": "/generated/cb/training.txt",
+  "trainedInThisApp": true,
+  "trainedByAuthor": false,
+  "metricScaleVerified": false,
+  "georeferenced": false,
+  "description": "由本机对公开许可的历史建筑多视角照片重新训练生成。使用来源相机参数和建筑标注，本机完成特征匹配、三角化初始化与高斯优化；没有下载成品高斯模型，也没有使用单图深度表面替代。展示版仅过滤低透明度与超大浮点，完整训练文件另外保留。",
+  "photographs": [
+    {
+      "name": "5_CB_001.png",
+      "previewUrl": "/generated/cb/photos/5_CB_001.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/heig-vd-geo/ImagesAndPointCloudsCulturalHeritageDataset/resolve/0a15cffbf0c0ab505b4844f88bdbbfcc494e17d9/5_CB/1_Images/1_RGB/5_CB_001.png",
+      "originalSha256": "d4fdc1d13e644fe5945c3e146d862abe4bfcfaa662a5ad674f9ce83386c37944",
+      "previewSha256": "9e318bc96e7613e4156e68d5a0053f1016b558d79254aa129e67b3c8aad5bc24",
+      "use": "train"
+    },
+    {
+      "name": "5_CB_013.png",
+      "previewUrl": "/generated/cb/photos/5_CB_013.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/heig-vd-geo/ImagesAndPointCloudsCulturalHeritageDataset/resolve/0a15cffbf0c0ab505b4844f88bdbbfcc494e17d9/5_CB/1_Images/1_RGB/5_CB_013.png",
+      "originalSha256": "4423d2d12364c2686a72c3cfed5e978186e33555447bbaae91ca55a494bd148d",
+      "previewSha256": "a6e412524c6fa8d198a284bf21243f37d33c0bf90435cf7950eb1b46330b68d8",
+      "use": "train"
+    },
+    {
+      "name": "5_CB_025.png",
+      "previewUrl": "/generated/cb/photos/5_CB_025.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/heig-vd-geo/ImagesAndPointCloudsCulturalHeritageDataset/resolve/0a15cffbf0c0ab505b4844f88bdbbfcc494e17d9/5_CB/1_Images/1_RGB/5_CB_025.png",
+      "originalSha256": "b6d42014ea8ccc38cd72fcbf4f1f42f44bbb94eee5c7cefeab4760b387fa3c92",
+      "previewSha256": "d9bef87a5fc8f33ccb05772e17f6331178bd7ebd45d6bff8b7a6322abb0514c5",
+      "use": "train"
+    },
+    {
+      "name": "5_CB_037.png",
+      "previewUrl": "/generated/cb/photos/5_CB_037.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/heig-vd-geo/ImagesAndPointCloudsCulturalHeritageDataset/resolve/0a15cffbf0c0ab505b4844f88bdbbfcc494e17d9/5_CB/1_Images/1_RGB/5_CB_037.png",
+      "originalSha256": "bfb52ee7dae8ac9dd74849dbbe0596c8cddf36ed815807d543a9c97529497bda",
+      "previewSha256": "cc2ee2f8b38cf7e4b235f64ef16988dc75ada14e770006301405dd4d15f79850",
+      "use": "train"
+    },
+    {
+      "name": "5_CB_049.png",
+      "previewUrl": "/generated/cb/photos/5_CB_049.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/heig-vd-geo/ImagesAndPointCloudsCulturalHeritageDataset/resolve/0a15cffbf0c0ab505b4844f88bdbbfcc494e17d9/5_CB/1_Images/1_RGB/5_CB_049.png",
+      "originalSha256": "db537a2a3e69f6cd4492cb028aeee70e89e69485313ed574831d892e8c23966c",
+      "previewSha256": "ddf3e989d7fec6e74483f7c581b0820c8ea0d6369a61736148498676810b38c4",
+      "use": "train"
+    },
+    {
+      "name": "5_CB_061.png",
+      "previewUrl": "/generated/cb/photos/5_CB_061.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/heig-vd-geo/ImagesAndPointCloudsCulturalHeritageDataset/resolve/0a15cffbf0c0ab505b4844f88bdbbfcc494e17d9/5_CB/1_Images/1_RGB/5_CB_061.png",
+      "originalSha256": "690438657f935c80c828c8f948b7f0a7d5092b4f4344777f385a2a29487677e6",
+      "previewSha256": "7d4797c36713e3e0c81458d38339d6b15a4b655b39e3519af772f40f3eafb71d",
+      "use": "train"
+    },
+    {
+      "name": "5_CB_073.png",
+      "previewUrl": "/generated/cb/photos/5_CB_073.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/heig-vd-geo/ImagesAndPointCloudsCulturalHeritageDataset/resolve/0a15cffbf0c0ab505b4844f88bdbbfcc494e17d9/5_CB/1_Images/1_RGB/5_CB_073.png",
+      "originalSha256": "4b5f5216ba5d73ea04bfbf22edd0149cd67d9204d15f724e97bf861836681f75",
+      "previewSha256": "12fb8db18e6cfb85259ff36fcfeac333523c9a42c92b19d21c9c6789c4c09333",
+      "use": "train"
+    },
+    {
+      "name": "5_CB_085.png",
+      "previewUrl": "/generated/cb/photos/5_CB_085.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/heig-vd-geo/ImagesAndPointCloudsCulturalHeritageDataset/resolve/0a15cffbf0c0ab505b4844f88bdbbfcc494e17d9/5_CB/1_Images/1_RGB/5_CB_085.png",
+      "originalSha256": "324dbdc29706e7e74d80beee239ee6375e425baf7708f39ef8afceea57a5f4c4",
+      "previewSha256": "d43bfd402dd0051680d3e3b3c5942f6d2ea5578a23d17193d0a4dd62588b3d49",
+      "use": "train"
+    },
+    {
+      "name": "5_CB_097.png",
+      "previewUrl": "/generated/cb/photos/5_CB_097.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/heig-vd-geo/ImagesAndPointCloudsCulturalHeritageDataset/resolve/0a15cffbf0c0ab505b4844f88bdbbfcc494e17d9/5_CB/1_Images/1_RGB/5_CB_097.png",
+      "originalSha256": "55856ab1549668d6b903ac36e726f47637cad97326dcecb05d5e51b7da60c467",
+      "previewSha256": "b3dafba9391fb2430694c453f2339b8d9247fe6d3b641b1f8faa50868d768269",
+      "use": "train"
+    },
+    {
+      "name": "5_CB_109.png",
+      "previewUrl": "/generated/cb/photos/5_CB_109.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/heig-vd-geo/ImagesAndPointCloudsCulturalHeritageDataset/resolve/0a15cffbf0c0ab505b4844f88bdbbfcc494e17d9/5_CB/1_Images/1_RGB/5_CB_109.png",
+      "originalSha256": "33bf7cc3bcbec24d9af2eef52544a5bf9756e931e80f70ac566ff6eee0b9aeb7",
+      "previewSha256": "79756dfc6e181bfbbfb7b3c4ea89a46ae8f27483f9cb38a553926ced70521733",
+      "use": "train"
+    },
+    {
+      "name": "5_CB_121.png",
+      "previewUrl": "/generated/cb/photos/5_CB_121.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/heig-vd-geo/ImagesAndPointCloudsCulturalHeritageDataset/resolve/0a15cffbf0c0ab505b4844f88bdbbfcc494e17d9/5_CB/1_Images/1_RGB/5_CB_121.png",
+      "originalSha256": "c63a9b52482b468ef6a1a5043fb727893aabc03430beae2b5ca49c8014232e5f",
+      "previewSha256": "260a8705a101c84c49d1d8363d5c9e87148b400818ba6eca79a8ce1fe2321c99",
+      "use": "train"
+    },
+    {
+      "name": "5_CB_133.png",
+      "previewUrl": "/generated/cb/photos/5_CB_133.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/heig-vd-geo/ImagesAndPointCloudsCulturalHeritageDataset/resolve/0a15cffbf0c0ab505b4844f88bdbbfcc494e17d9/5_CB/1_Images/1_RGB/5_CB_133.png",
+      "originalSha256": "8bf6981914a3ace789b9b5014e8036483e223d36fd4c13b0619e5f68bfdd6cf1",
+      "previewSha256": "5dffe89e6722be65f22088f3907ec37aa718736b8ea63542412c9dc48b072dbe",
+      "use": "train"
+    },
+    {
+      "name": "5_CB_145.png",
+      "previewUrl": "/generated/cb/photos/5_CB_145.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/heig-vd-geo/ImagesAndPointCloudsCulturalHeritageDataset/resolve/0a15cffbf0c0ab505b4844f88bdbbfcc494e17d9/5_CB/1_Images/1_RGB/5_CB_145.png",
+      "originalSha256": "548a9b34aa8a5daeddc2095cff6755eb208cf0b26ef90524c9dcff7a28439ae9",
+      "previewSha256": "33212cb942d64cce9cff60c1aff70703651abcb18bde894c704e30da5e369168",
+      "use": "train"
+    },
+    {
+      "name": "5_CB_157.png",
+      "previewUrl": "/generated/cb/photos/5_CB_157.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/heig-vd-geo/ImagesAndPointCloudsCulturalHeritageDataset/resolve/0a15cffbf0c0ab505b4844f88bdbbfcc494e17d9/5_CB/1_Images/1_RGB/5_CB_157.png",
+      "originalSha256": "5d45720513b3c64129d7a8abe348de1a1cc84062cf014f6ab117d3f7b6bd3c89",
+      "previewSha256": "15f59c6b278f5e647c31adc18794d4999924b896d058dcdea8c3172522b713f6",
+      "use": "train"
+    },
+    {
+      "name": "5_CB_166.png",
+      "previewUrl": "/generated/cb/photos/5_CB_166.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/heig-vd-geo/ImagesAndPointCloudsCulturalHeritageDataset/resolve/0a15cffbf0c0ab505b4844f88bdbbfcc494e17d9/5_CB/1_Images/1_RGB/5_CB_166.png",
+      "originalSha256": "fa876a06028a6eb6b647c598e6d8eed31a364b3c1236b4f6c7b89c41f79bd302",
+      "previewSha256": "57dd9fdaf101cdac92cbe0697fce10c3b228c5ec477f4f8fc0dd34e7ed7f4620",
+      "use": "train"
+    }
+  ],
+  "validation": [
+    {
+      "name": "5_CB_008.png",
+      "inputUrl": "/generated/cb/validation/5_CB_008-input.png",
+      "renderUrl": "/generated/cb/validation/5_CB_008-render.png"
+    },
+    {
+      "name": "5_CB_048.png",
+      "inputUrl": "/generated/cb/validation/5_CB_048-input.png",
+      "renderUrl": "/generated/cb/validation/5_CB_048-render.png"
+    },
+    {
+      "name": "5_CB_088.png",
+      "inputUrl": "/generated/cb/validation/5_CB_088-input.png",
+      "renderUrl": "/generated/cb/validation/5_CB_088-render.png"
+    },
+    {
+      "name": "5_CB_128.png",
+      "inputUrl": "/generated/cb/validation/5_CB_128-input.png",
+      "renderUrl": "/generated/cb/validation/5_CB_128-render.png"
+    }
+  ],
+  "camera": {
+    "position": [
+      10.228458603231804,
+      -2.15495422091824,
+      -25.40230204770741
+    ],
+    "target": [
+      2.966319694831773,
+      0.1571227754963952,
+      -10.423527858474506
+    ],
+    "fov": 55,
+    "fitMargin": 1.08,
+    "framing": "Wide exterior camera-ray least-squares focus and 95th-percentile independently triangulated seed radius, keeping source camera height; navigation framing only, not a surveyed position"
+  },
+  "bounds": {
+    "min": [
+      -10.829179763793945,
+      -12.986076354980469,
+      -21.189054489135742
+    ],
+    "max": [
+      22.648273468017578,
+      10.066811561584473,
+      6.975620746612549
+    ]
+  },
+  "packagedAt": "2026-10-29T16:32:36.618984+00:00",
+  "geometryPolicy": "Source camera coordinates retained. Every learned Gaussian/SH field retained in complete raw PLY; exact unmodified records retained by display filter, no new geometry. Only photographed regions optimized; unseen portions not manufactured.",
+  "training": {
+    "status": "completed",
+    "startedAt": "2026-10-29T15:18:13.767Z",
+    "tool": "Brush",
+    "version": "0.3.0",
+    "photoCount": 166,
+    "trainingImages": 146,
+    "validationImages": 20,
+    "initialPoints": 17441,
+    "endedAt": "2026-10-29T15:24:04.555Z",
+    "device": "NVIDIA GeForce RTX 3050 Laptop GPU",
+    "selectedCheckpoint": {
+      "iteration": 10000,
+      "psnr": 18.276677536213313,
+      "views": [
+        {
+          "name": "5_CB_008.png",
+          "pixels": 198755,
+          "psnr": 20.044153088877465
+        },
+        {
+          "name": "5_CB_016.png",
+          "pixels": 163253,
+          "psnr": 19.307917814703675
+        },
+        {
+          "name": "5_CB_024.png",
+          "pixels": 223784,
+          "psnr": 19.371722380676374
+        },
+        {
+          "name": "5_CB_032.png",
+          "pixels": 182994,
+          "psnr": 21.113324061883173
+        },
+        {
+          "name": "5_CB_040.png",
+          "pixels": 201654,
+          "psnr": 22.142420277290316
+        },
+        {
+          "name": "5_CB_048.png",
+          "pixels": 253798,
+          "psnr": 14.977575408704464
+        },
+        {
+          "name": "5_CB_056.png",
+          "pixels": 301592,
+          "psnr": 13.260424214402303
+        },
+        {
+          "name": "5_CB_064.png",
+          "pixels": 229511,
+          "psnr": 18.52808525521117
+        },
+        {
+          "name": "5_CB_072.png",
+          "pixels": 351061,
+          "psnr": 15.337383514600692
+        },
+        {
+          "name": "5_CB_080.png",
+          "pixels": 360493,
+          "psnr": 13.882263606941407
+        },
+        {
+          "name": "5_CB_088.png",
+          "pixels": 230360,
+          "psnr": 20.39087411913838
+        },
+        {
+          "name": "5_CB_096.png",
+          "pixels": 327044,
+          "psnr": 14.509417157373552
+        },
+        {
+          "name": "5_CB_104.png",
+          "pixels": 262256,
+          "psnr": 21.756551932281937
+        },
+        {
+          "name": "5_CB_112.png",
+          "pixels": 239546,
+          "psnr": 22.727043551620305
+        },
+        {
+          "name": "5_CB_120.png",
+          "pixels": 275864,
+          "psnr": 19.75187645787042
+        },
+        {
+          "name": "5_CB_128.png",
+          "pixels": 315109,
+          "psnr": 13.733056634713794
+        },
+        {
+          "name": "5_CB_136.png",
+          "pixels": 258492,
+          "psnr": 21.381865545649262
+        },
+        {
+          "name": "5_CB_144.png",
+          "pixels": 388910,
+          "psnr": 17.10434807065693
+        },
+        {
+          "name": "5_CB_152.png",
+          "pixels": 369787,
+          "psnr": 17.08247435055742
+        },
+        {
+          "name": "5_CB_160.png",
+          "pixels": 295158,
+          "psnr": 19.13077328111326
+        }
+      ]
+    },
+    "validationCaveat": "Architecture-region PSNR: resize prepared RGB and mask to exported render size with Pillow bilinear; use source mask >=254; RGB MSE on valid pixels, PSNR averaged over 20 withheld views. Native Brush whole-image metrics include untrained background and are retained separately. No geometric accuracy is implied. Best checkpoint selected by architecture-region validation PSNR.",
+    "completedSteps": 12000
+  }
+}

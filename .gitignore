@@ -25,6 +25,7 @@ design-qa.md
 !public/samples/star-of-india.splat
 !public/site-archives/*.splat
 !public/gaussians/*.splat
+!public/generated/**/*.ply
 
 # Editor and operating-system files
 .vscode/

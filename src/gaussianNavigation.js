@@ -5,7 +5,7 @@ export function gaussianViewPose(camera, preset, aspect = 1.5) {
   const angle = { capture: 0, left: -Math.PI / 2, back: Math.PI, right: Math.PI / 2 }[preset];
   const distance = Math.hypot(...offset);
   // Leave room for the long building when seen end-on from either side.
-  const fit = 1.3 * Math.max(1, 1.5 / Math.max(0.25, aspect));
+  const fit = (camera.fitMargin || 1.3) * Math.max(1, 1.5 / Math.max(0.25, aspect));
   const direction = preset === "top"
     ? [offset[0] * 0.001, distance, offset[2] * 0.001]
     : [offset[0] * Math.cos(angle) + offset[2] * Math.sin(angle), offset[1], -offset[0] * Math.sin(angle) + offset[2] * Math.cos(angle)];

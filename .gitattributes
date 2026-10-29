@@ -1,0 +1,4 @@
+# Generated evidence is byte-verified; never rewrite its line endings on checkout.
+public/generated/**/*.ply -text
+public/generated/**/*.bin -text
+public/generated/**/training.txt -text

@@ -20,7 +20,7 @@ const NAV = [
   { id: "research", name: "选址研究", icon: ChartNoAxesCombined },
   { id: "protection", name: "保护评估", icon: ShieldCheck, group: "保护与记录" },
   { id: "environment", name: "环境总览", icon: Thermometer },
-  { id: "reconstruction", name: "三维实景", icon: Box },
+  { id: "reconstruction", name: "三维重建", icon: Box },
   { id: "community", name: "公众共建", icon: Users, group: "参与与探访" },
   { id: "data", name: "数据中心", icon: Database, group: "项目" },
 ];
